@@ -13,6 +13,7 @@ public class Principal {
 	
     private RegistrarUsuario creUsrInternalFrame;
     private AltaOfertaLaboral creAltOLInternalFrame;
+    private CrearPaqueteTiposPublicacionOfertasLaborales crePaqTipPubOLInternalFrame;
 
 	private JFrame frmAdmTrabajo;
 
@@ -44,8 +45,12 @@ public class Principal {
 		creAltOLInternalFrame = new AltaOfertaLaboral();
 		creAltOLInternalFrame.setVisible(false);
 		
+		crePaqTipPubOLInternalFrame = new CrearPaqueteTiposPublicacionOfertasLaborales();
+		crePaqTipPubOLInternalFrame.setVisible(false);
+		
 		frmAdmTrabajo.getContentPane().add(creUsrInternalFrame);
 		frmAdmTrabajo.getContentPane().add(creAltOLInternalFrame);
+		frmAdmTrabajo.getContentPane().add(crePaqTipPubOLInternalFrame);
 	}
 
 	/**
@@ -147,6 +152,7 @@ public class Principal {
 		itemCrearPaquete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// VENTANA PARA CREAR PAQUETE
+				crePaqTipPubOLInternalFrame.setVisible(true);
 			}
 		});
 		menuPaquete.add(itemCrearPaquete);
