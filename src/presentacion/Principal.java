@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 public class Principal {
 	
     private RegistrarUsuario creUsrInternalFrame;
+    private AltaOfertaLaboral creAltOLInternalFrame;
 
 	private JFrame frmAdmTrabajo;
 
@@ -39,7 +40,12 @@ public class Principal {
 		
 		creUsrInternalFrame = new RegistrarUsuario();
 		creUsrInternalFrame.setVisible(false);
+		
+		creAltOLInternalFrame = new AltaOfertaLaboral();
+		creAltOLInternalFrame.setVisible(false);
+		
 		frmAdmTrabajo.getContentPane().add(creUsrInternalFrame);
+		frmAdmTrabajo.getContentPane().add(creAltOLInternalFrame);
 	}
 
 	/**
@@ -48,7 +54,7 @@ public class Principal {
 	private void initialize() {
 		frmAdmTrabajo = new JFrame();
 		frmAdmTrabajo.setTitle("Administrador Trabajo.uy");
-		frmAdmTrabajo.setBounds(100, 100, 450, 300);
+		frmAdmTrabajo.setBounds(100, 100, 650, 600);
 		frmAdmTrabajo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JMenuBar mainMenu = new JMenuBar();
@@ -98,10 +104,11 @@ public class Principal {
 		JMenu menuTrabajo = new JMenu("Trabajos");
 		mainMenu.add(menuTrabajo);
 		
-		JMenuItem itemRegistrarOF = new JMenuItem("Registrar oferta laboral");
+		JMenuItem itemRegistrarOF = new JMenuItem("Alta de oferta laboral");
 		itemRegistrarOF.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// VENTANA PARA REGISTRAR OFERTA LABORAL
+				creAltOLInternalFrame.setVisible(true);
 			}
 		});
 		menuTrabajo.add(itemRegistrarOF);
