@@ -4,6 +4,7 @@ import javax.swing.JInternalFrame;
 
 //import excepciones.UsuarioRepetidoException;
 //import logica.IControladorUsuario;
+import logica.Empresa;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -25,12 +26,15 @@ import java.awt.Font;
 
 @SuppressWarnings("serial")
 public class AltaOfertaLaboral extends JInternalFrame {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
+	private JTextField textFieldNombre;
+	private JTextField textFieldDescripcion;
+	private JTextField textFieldHorario;
+	private JTextField textFieldRemuneracion;
+	private JTextField textFieldCiudad;
+	private JTextField textFieldDepartamento;
+	private JComboBox<Empresa> comboBoxEmpresas;
+	private JComboBox comboBoxTipPubOL;
+	private JComboBox comboBoxKey;
 	
 	
 	
@@ -69,14 +73,14 @@ public class AltaOfertaLaboral extends JInternalFrame {
         gbc_lblNewLabel.gridy = 1;
         getContentPane().add(lblNewLabel, gbc_lblNewLabel);
         
-        JComboBox comboBox = new JComboBox();
-        GridBagConstraints gbc_comboBox = new GridBagConstraints();
-        gbc_comboBox.gridwidth = 4;
-        gbc_comboBox.insets = new Insets(0, 0, 8, 0);
-        gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
-        gbc_comboBox.gridx = 0;
-        gbc_comboBox.gridy = 2;
-        getContentPane().add(comboBox, gbc_comboBox);
+        comboBoxEmpresas = new JComboBox<Empresa>();
+        GridBagConstraints gbc_comboBoxEmpresas = new GridBagConstraints();
+        gbc_comboBoxEmpresas.gridwidth = 4;
+        gbc_comboBoxEmpresas.insets = new Insets(0, 0, 8, 0);
+        gbc_comboBoxEmpresas.fill = GridBagConstraints.HORIZONTAL;
+        gbc_comboBoxEmpresas.gridx = 0;
+        gbc_comboBoxEmpresas.gridy = 2;
+        getContentPane().add(comboBoxEmpresas, gbc_comboBoxEmpresas);
         
         JLabel lblNewLabel_1 = new JLabel("Tipos de Publicaciones de Ofertas Laborales: ");
         lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -87,14 +91,14 @@ public class AltaOfertaLaboral extends JInternalFrame {
         gbc_lblNewLabel_1.gridy = 3;
         getContentPane().add(lblNewLabel_1, gbc_lblNewLabel_1);
         
-        JComboBox comboBox_1 = new JComboBox();
-        GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
-        gbc_comboBox_1.gridwidth = 4;
-        gbc_comboBox_1.insets = new Insets(0, 0, 8, 0);
-        gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;
-        gbc_comboBox_1.gridx = 0;
-        gbc_comboBox_1.gridy = 4;
-        getContentPane().add(comboBox_1, gbc_comboBox_1);
+        comboBoxTipPubOL = new JComboBox();
+        GridBagConstraints gbc_comboBoxTipPubOL = new GridBagConstraints();
+        gbc_comboBoxTipPubOL.gridwidth = 4;
+        gbc_comboBoxTipPubOL.insets = new Insets(0, 0, 8, 0);
+        gbc_comboBoxTipPubOL.fill = GridBagConstraints.HORIZONTAL;
+        gbc_comboBoxTipPubOL.gridx = 0;
+        gbc_comboBoxTipPubOL.gridy = 4;
+        getContentPane().add(comboBoxTipPubOL, gbc_comboBoxTipPubOL);
         
         JLabel lblNewLabel_2 = new JLabel("Keywords");
         lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -105,14 +109,14 @@ public class AltaOfertaLaboral extends JInternalFrame {
         gbc_lblNewLabel_2.gridy = 5;
         getContentPane().add(lblNewLabel_2, gbc_lblNewLabel_2);
         
-        JComboBox comboBox_2 = new JComboBox();
-        GridBagConstraints gbc_comboBox_2 = new GridBagConstraints();
-        gbc_comboBox_2.gridwidth = 4;
-        gbc_comboBox_2.insets = new Insets(0, 0, 8, 0);
-        gbc_comboBox_2.fill = GridBagConstraints.HORIZONTAL;
-        gbc_comboBox_2.gridx = 0;
-        gbc_comboBox_2.gridy = 6;
-        getContentPane().add(comboBox_2, gbc_comboBox_2);
+        comboBoxKey = new JComboBox();
+        GridBagConstraints gbc_comboBoxKey = new GridBagConstraints();
+        gbc_comboBoxKey.gridwidth = 4;
+        gbc_comboBoxKey.insets = new Insets(0, 0, 8, 0);
+        gbc_comboBoxKey.fill = GridBagConstraints.HORIZONTAL;
+        gbc_comboBoxKey.gridx = 0;
+        gbc_comboBoxKey.gridy = 6;
+        getContentPane().add(comboBoxKey, gbc_comboBoxKey);
         
         JLabel lblNewLabel_4 = new JLabel("Nombre: ");
         lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -123,15 +127,15 @@ public class AltaOfertaLaboral extends JInternalFrame {
         gbc_lblNewLabel_4.gridy = 8;
         getContentPane().add(lblNewLabel_4, gbc_lblNewLabel_4);
         
-        textField = new JTextField();
-        GridBagConstraints gbc_textField = new GridBagConstraints();
-        gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-        gbc_textField.gridwidth = 3;
-        gbc_textField.insets = new Insets(0, 0, 5, 0);
-        gbc_textField.gridx = 1;
-        gbc_textField.gridy = 8;
-        getContentPane().add(textField, gbc_textField);
-        textField.setColumns(10);
+        textFieldNombre = new JTextField();
+        GridBagConstraints gbc_textFieldNombre = new GridBagConstraints();
+        gbc_textFieldNombre.fill = GridBagConstraints.HORIZONTAL;
+        gbc_textFieldNombre.gridwidth = 3;
+        gbc_textFieldNombre.insets = new Insets(0, 0, 5, 0);
+        gbc_textFieldNombre.gridx = 1;
+        gbc_textFieldNombre.gridy = 8;
+        getContentPane().add(textFieldNombre, gbc_textFieldNombre);
+        textFieldNombre.setColumns(10);
         
         JLabel lblNewLabel_5 = new JLabel("Descripción: ");
         lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -142,15 +146,15 @@ public class AltaOfertaLaboral extends JInternalFrame {
         gbc_lblNewLabel_5.gridy = 9;
         getContentPane().add(lblNewLabel_5, gbc_lblNewLabel_5);
         
-        textField_1 = new JTextField();
-        GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-        gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-        gbc_textField_1.gridwidth = 3;
-        gbc_textField_1.insets = new Insets(5, 0, 5, 0);
-        gbc_textField_1.gridx = 1;
-        gbc_textField_1.gridy = 9;
-        getContentPane().add(textField_1, gbc_textField_1);
-        textField_1.setColumns(10);
+        textFieldDescripcion = new JTextField();
+        GridBagConstraints gbc_textFieldDescripcion = new GridBagConstraints();
+        gbc_textFieldDescripcion.fill = GridBagConstraints.HORIZONTAL;
+        gbc_textFieldDescripcion.gridwidth = 3;
+        gbc_textFieldDescripcion.insets = new Insets(0, 0, 5, 0);
+        gbc_textFieldDescripcion.gridx = 1;
+        gbc_textFieldDescripcion.gridy = 9;
+        getContentPane().add(textFieldDescripcion, gbc_textFieldDescripcion);
+        textFieldDescripcion.setColumns(10);
         
         JLabel lblNewLabel_9 = new JLabel("Horario:");
         lblNewLabel_9.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -161,15 +165,15 @@ public class AltaOfertaLaboral extends JInternalFrame {
         gbc_lblNewLabel_9.gridy = 10;
         getContentPane().add(lblNewLabel_9, gbc_lblNewLabel_9);
         
-        textField_5 = new JTextField();
-        GridBagConstraints gbc_textField_5 = new GridBagConstraints();
-        gbc_textField_5.fill = GridBagConstraints.HORIZONTAL;
-        gbc_textField_5.gridwidth = 3;
-        gbc_textField_5.insets = new Insets(0, 0, 5, 0);
-        gbc_textField_5.gridx = 1;
-        gbc_textField_5.gridy = 10;
-        getContentPane().add(textField_5, gbc_textField_5);
-        textField_5.setColumns(10);
+        textFieldHorario = new JTextField();
+        GridBagConstraints gbc_textFieldHorario = new GridBagConstraints();
+        gbc_textFieldHorario.fill = GridBagConstraints.HORIZONTAL;
+        gbc_textFieldHorario.gridwidth = 3;
+        gbc_textFieldHorario.insets = new Insets(0, 0, 5, 0);
+        gbc_textFieldHorario.gridx = 1;
+        gbc_textFieldHorario.gridy = 10;
+        getContentPane().add(textFieldHorario, gbc_textFieldHorario);
+        textFieldHorario.setColumns(10);
         
         JLabel lblNewLabel_6 = new JLabel("Remuneración: ");
         lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -180,15 +184,15 @@ public class AltaOfertaLaboral extends JInternalFrame {
         gbc_lblNewLabel_6.gridy = 11;
         getContentPane().add(lblNewLabel_6, gbc_lblNewLabel_6);
         
-        textField_2 = new JTextField();
-        GridBagConstraints gbc_textField_2 = new GridBagConstraints();
-        gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
-        gbc_textField_2.gridwidth = 3;
-        gbc_textField_2.insets = new Insets(5, 0, 5, 0);
-        gbc_textField_2.gridx = 1;
-        gbc_textField_2.gridy = 11;
-        getContentPane().add(textField_2, gbc_textField_2);
-        textField_2.setColumns(10);
+        textFieldRemuneracion = new JTextField();
+        GridBagConstraints gbc_textFieldRemuneracion = new GridBagConstraints();
+        gbc_textFieldRemuneracion.fill = GridBagConstraints.HORIZONTAL;
+        gbc_textFieldRemuneracion.gridwidth = 3;
+        gbc_textFieldRemuneracion.insets = new Insets(0, 0, 5, 0);
+        gbc_textFieldRemuneracion.gridx = 1;
+        gbc_textFieldRemuneracion.gridy = 11;
+        getContentPane().add(textFieldRemuneracion, gbc_textFieldRemuneracion);
+        textFieldRemuneracion.setColumns(10);
         
         JLabel lblNewLabel_7 = new JLabel("Ciudad: ");
         lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -199,15 +203,15 @@ public class AltaOfertaLaboral extends JInternalFrame {
         gbc_lblNewLabel_7.gridy = 12;
         getContentPane().add(lblNewLabel_7, gbc_lblNewLabel_7);
         
-        textField_3 = new JTextField();
-        GridBagConstraints gbc_textField_3 = new GridBagConstraints();
-        gbc_textField_3.fill = GridBagConstraints.HORIZONTAL;
-        gbc_textField_3.gridwidth = 3;
-        gbc_textField_3.insets = new Insets(5, 0, 5, 0);
-        gbc_textField_3.gridx = 1;
-        gbc_textField_3.gridy = 12;
-        getContentPane().add(textField_3, gbc_textField_3);
-        textField_3.setColumns(10);
+        textFieldCiudad = new JTextField();
+        GridBagConstraints gbc_textFieldCiudad = new GridBagConstraints();
+        gbc_textFieldCiudad.fill = GridBagConstraints.HORIZONTAL;
+        gbc_textFieldCiudad.gridwidth = 3;
+        gbc_textFieldCiudad.insets = new Insets(0, 0, 5, 0);
+        gbc_textFieldCiudad.gridx = 1;
+        gbc_textFieldCiudad.gridy = 12;
+        getContentPane().add(textFieldCiudad, gbc_textFieldCiudad);
+        textFieldCiudad.setColumns(10);
         
         JLabel lblNewLabel_8 = new JLabel("Departamento:");
         lblNewLabel_8.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -218,32 +222,121 @@ public class AltaOfertaLaboral extends JInternalFrame {
         gbc_lblNewLabel_8.gridy = 13;
         getContentPane().add(lblNewLabel_8, gbc_lblNewLabel_8);
         
-        textField_4 = new JTextField();
-        GridBagConstraints gbc_textField_4 = new GridBagConstraints();
-        gbc_textField_4.fill = GridBagConstraints.HORIZONTAL;
-        gbc_textField_4.gridwidth = 3;
-        gbc_textField_4.insets = new Insets(5, 0, 5, 0);
-        gbc_textField_4.gridx = 1;
-        gbc_textField_4.gridy = 13;
-        getContentPane().add(textField_4, gbc_textField_4);
-        textField_4.setColumns(10);
+        textFieldDepartamento = new JTextField();
+        GridBagConstraints gbc_textFieldDepartamento = new GridBagConstraints();
+        gbc_textFieldDepartamento.fill = GridBagConstraints.HORIZONTAL;
+        gbc_textFieldDepartamento.gridwidth = 3;
+        gbc_textFieldDepartamento.insets = new Insets(0, 0, 5, 0);
+        gbc_textFieldDepartamento.gridx = 1;
+        gbc_textFieldDepartamento.gridy = 13;
+        getContentPane().add(textFieldDepartamento, gbc_textFieldDepartamento);
+        textFieldDepartamento.setColumns(10);
         
-        JButton btnNewButton = new JButton("Cancelar");
-        btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
-        GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-        gbc_btnNewButton.anchor = GridBagConstraints.WEST;
-        gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
-        gbc_btnNewButton.gridx = 1;
-        gbc_btnNewButton.gridy = 15;
-        getContentPane().add(btnNewButton, gbc_btnNewButton);
+        JButton btnCancelar = new JButton("Cancelar");
+        btnCancelar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		limpiarFormulario();
+        		setVisible(false);
+        	}
+        });
         
-        JButton btnNewButton_1 = new JButton("Aceptar");
-        btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-        GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-        gbc_btnNewButton_1.anchor = GridBagConstraints.WEST;
-        gbc_btnNewButton_1.insets = new Insets(0, 0, 0, 5);
-        gbc_btnNewButton_1.gridx = 2;
-        gbc_btnNewButton_1.gridy = 15;
-        getContentPane().add(btnNewButton_1, gbc_btnNewButton_1);
+        btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 11));
+        GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
+        gbc_btnCancelar.anchor = GridBagConstraints.WEST;
+        gbc_btnCancelar.insets = new Insets(0, 0, 0, 5);
+        gbc_btnCancelar.gridx = 1;
+        gbc_btnCancelar.gridy = 15;
+        getContentPane().add(btnCancelar, gbc_btnCancelar);
+        
+        JButton btnAceptar = new JButton("Aceptar");
+        btnAceptar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		cmdAltaOfertaLaboralActionPerformed(arg0);
+        	}
+            });
+        
+        btnAceptar.setFont(new Font("Tahoma", Font.BOLD, 11));
+        GridBagConstraints gbc_btnAceptar = new GridBagConstraints();
+        gbc_btnAceptar.anchor = GridBagConstraints.WEST;
+        gbc_btnAceptar.insets = new Insets(0, 0, 0, 5);
+        gbc_btnAceptar.gridx = 2;
+        gbc_btnAceptar.gridy = 15;
+        getContentPane().add(btnAceptar, gbc_btnAceptar);
+	}
+	
+	protected void cmdAltaOfertaLaboralActionPerformed(ActionEvent arg0) {
+		
+		String nombreU = this.textFieldNombre.getText();
+		String descripcionU = this.textFieldDescripcion.getText();
+		String horarioU = this.textFieldHorario.getText();
+		String remuneracionU = this.textFieldRemuneracion.getText();
+		String ciudadU = this.textFieldCiudad.getText();
+		String departamentoU = this.textFieldDepartamento.getText();
+		
+		if(checkForm()) {
+			limpiarFormulario();
+			setVisible(false);
+		}
+		
+	}
+	
+	private boolean checkForm() {
+		
+		String nombreU = this.textFieldNombre.getText();
+		String descripcionU = this.textFieldDescripcion.getText();
+		String horarioU = this.textFieldHorario.getText();
+		String remuneracionU = this.textFieldRemuneracion.getText();
+		String ciudadU = this.textFieldCiudad.getText();
+		String departamentoU = this.textFieldDepartamento.getText();
+		//Empresa empresaU = (Empresa) this.comboBoxEmpresas.getSelectedItem();
+		
+		/*if (empresaU == null) {
+			JOptionPane.showMessageDialog(this, "Se debe elegir una empresa", "Alta de Oferta Laboral", 
+					JOptionPane.ERROR_MESSAGE);
+		}*/
+		
+		if (nombreU.isEmpty() || descripcionU.isEmpty() || horarioU.isEmpty() || 
+			remuneracionU.isEmpty() || ciudadU.isEmpty() || departamentoU.isEmpty()) {
+			JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "Alta de Oferta Laboral",
+					JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		
+		try {
+			Integer.parseInt(remuneracionU);
+		} catch(NumberFormatException e) {
+			JOptionPane.showMessageDialog(this, "La remuneración debe ser un numero", "Alta de Oferta Laboral",
+					JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		
+		if (this.contieneNumeros(nombreU) || this.contieneNumeros(ciudadU) || this.contieneNumeros(departamentoU)) {
+			JOptionPane.showMessageDialog(this, "No debe haber numeros en nombre, ciudad o departamento",
+					"Alta de Oferta Laboral", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		
+		return true;
+	}
+	
+	private boolean contieneNumeros(String cadena) {
+        for (char c : cadena.toCharArray()) {
+            if (Character.isDigit(c)) {
+                return true;
+            }
+        }
+        return false;
+    }
+	
+	private void limpiarFormulario() {
+		textFieldNombre.setText("");
+		textFieldDescripcion.setText("");
+		textFieldHorario.setText("");
+		textFieldCiudad.setText("");
+		textFieldDepartamento.setText("");
+		textFieldRemuneracion.setText("");
+		comboBoxEmpresas.removeAllItems();
+		comboBoxKey.removeAllItems();
+		comboBoxTipPubOL.removeAllItems();
 	}
 }
