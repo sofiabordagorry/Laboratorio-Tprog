@@ -4,7 +4,7 @@ import javax.swing.JInternalFrame;
 
 //import excepciones.UsuarioRepetidoException;
 //import logica.IControladorUsuario;
-import logica.Empresa;
+//import logica.Empresa;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -18,7 +18,7 @@ import javax.swing.JFrame;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
-import net.miginfocom.swing.MigLayout;
+//import net.miginfocom.swing.MigLayout;
 import java.awt.GridLayout;
 import javax.swing.JRadioButton;
 import javax.swing.JCheckBox;
@@ -32,7 +32,7 @@ public class AltaOfertaLaboral extends JInternalFrame {
 	private JTextField textFieldRemuneracion;
 	private JTextField textFieldCiudad;
 	private JTextField textFieldDepartamento;
-	private JComboBox<Empresa> comboBoxEmpresas;
+	private JComboBox comboBoxEmpresas;
 	private JComboBox comboBoxTipPubOL;
 	private JComboBox comboBoxKey;
 	
@@ -73,7 +73,7 @@ public class AltaOfertaLaboral extends JInternalFrame {
         gbc_lblNewLabel.gridy = 1;
         getContentPane().add(lblNewLabel, gbc_lblNewLabel);
         
-        comboBoxEmpresas = new JComboBox<Empresa>();
+        comboBoxEmpresas = new JComboBox();
         GridBagConstraints gbc_comboBoxEmpresas = new GridBagConstraints();
         gbc_comboBoxEmpresas.gridwidth = 4;
         gbc_comboBoxEmpresas.insets = new Insets(0, 0, 8, 0);

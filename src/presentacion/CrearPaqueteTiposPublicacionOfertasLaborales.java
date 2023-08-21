@@ -17,7 +17,7 @@ import javax.swing.JFrame;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
-import net.miginfocom.swing.MigLayout;
+//import net.miginfocom.swing.MigLayout;
 import java.awt.GridLayout;
 import javax.swing.JRadioButton;
 import javax.swing.JCheckBox;

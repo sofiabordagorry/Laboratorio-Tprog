@@ -40,13 +40,17 @@ public class Principal {
 		initialize();
 		
 		creUsrInternalFrame = new RegistrarUsuario();
+		creUsrInternalFrame.setBounds(20, 27, 360, 150);
 		creUsrInternalFrame.setVisible(false);
 		
 		creAltOLInternalFrame = new AltaOfertaLaboral();
+		creAltOLInternalFrame.setBounds(20, 23, 567, 562);
 		creAltOLInternalFrame.setVisible(false);
 		
 		crePaqTipPubOLInternalFrame = new CrearPaqueteTiposPublicacionOfertasLaborales();
+		crePaqTipPubOLInternalFrame.setBounds(20, 22, 659, 260);
 		crePaqTipPubOLInternalFrame.setVisible(false);
+		frmAdmTrabajo.getContentPane().setLayout(null);
 		
 		frmAdmTrabajo.getContentPane().add(creUsrInternalFrame);
 		frmAdmTrabajo.getContentPane().add(creAltOLInternalFrame);
@@ -59,7 +63,7 @@ public class Principal {
 	private void initialize() {
 		frmAdmTrabajo = new JFrame();
 		frmAdmTrabajo.setTitle("Administrador Trabajo.uy");
-		frmAdmTrabajo.setBounds(100, 100, 650, 600);
+		frmAdmTrabajo.setBounds(100, 100, 754, 710);
 		frmAdmTrabajo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JMenuBar mainMenu = new JMenuBar();
