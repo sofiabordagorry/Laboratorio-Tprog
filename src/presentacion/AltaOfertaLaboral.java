@@ -8,7 +8,6 @@ import javax.swing.JInternalFrame;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.GridBagLayout;
@@ -19,9 +18,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 //import net.miginfocom.swing.MigLayout;
-import java.awt.GridLayout;
-import javax.swing.JRadioButton;
-import javax.swing.JCheckBox;
 import java.awt.Font;
 
 @SuppressWarnings("serial")
@@ -32,11 +28,9 @@ public class AltaOfertaLaboral extends JInternalFrame {
 	private JTextField textFieldRemuneracion;
 	private JTextField textFieldCiudad;
 	private JTextField textFieldDepartamento;
-	private JComboBox comboBoxEmpresas;
-	private JComboBox comboBoxTipPubOL;
-	private JComboBox comboBoxKey;
-	
-	
+	private JComboBox<?> comboBoxEmpresas;
+	private JComboBox<?> comboBoxTipPubOL;
+	private JComboBox<?> comboBoxKey;
 	
 	public AltaOfertaLaboral() {
 		
@@ -73,7 +67,7 @@ public class AltaOfertaLaboral extends JInternalFrame {
         gbc_lblNewLabel.gridy = 1;
         getContentPane().add(lblNewLabel, gbc_lblNewLabel);
         
-        comboBoxEmpresas = new JComboBox();
+        comboBoxEmpresas = new JComboBox<Object>();
         GridBagConstraints gbc_comboBoxEmpresas = new GridBagConstraints();
         gbc_comboBoxEmpresas.gridwidth = 4;
         gbc_comboBoxEmpresas.insets = new Insets(0, 0, 8, 0);
@@ -91,7 +85,7 @@ public class AltaOfertaLaboral extends JInternalFrame {
         gbc_lblNewLabel_1.gridy = 3;
         getContentPane().add(lblNewLabel_1, gbc_lblNewLabel_1);
         
-        comboBoxTipPubOL = new JComboBox();
+        comboBoxTipPubOL = new JComboBox<Object>();
         GridBagConstraints gbc_comboBoxTipPubOL = new GridBagConstraints();
         gbc_comboBoxTipPubOL.gridwidth = 4;
         gbc_comboBoxTipPubOL.insets = new Insets(0, 0, 8, 0);
@@ -109,7 +103,7 @@ public class AltaOfertaLaboral extends JInternalFrame {
         gbc_lblNewLabel_2.gridy = 5;
         getContentPane().add(lblNewLabel_2, gbc_lblNewLabel_2);
         
-        comboBoxKey = new JComboBox();
+        comboBoxKey = new JComboBox<Object>();
         GridBagConstraints gbc_comboBoxKey = new GridBagConstraints();
         gbc_comboBoxKey.gridwidth = 4;
         gbc_comboBoxKey.insets = new Insets(0, 0, 8, 0);
