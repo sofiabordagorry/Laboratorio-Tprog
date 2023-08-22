@@ -8,13 +8,23 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Component;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class Principal {
 	
     private RegistrarUsuario creUsrInternalFrame;
+    
+    private AltaTipoPublicacionOfertaLaboral altTipOLInternalFrame;
+    
+    private AltaDeKeywords altKWInternalFrame;
+    
+    private AgregarTipoPublicaciónOfertaLaboralPaquete agrTPPaqInternalFrame;
 
 	private JFrame frmAdmTrabajo;
-
+	
 	/**
 	 * Launch the application.
 	 */
@@ -38,8 +48,41 @@ public class Principal {
 		initialize();
 		
 		creUsrInternalFrame = new RegistrarUsuario();
+		creUsrInternalFrame.setResizable(false);
+		creUsrInternalFrame.setMaximizable(false);
+		creUsrInternalFrame.setBounds(62, 50, 240, 204);
 		creUsrInternalFrame.setVisible(false);
+		
+		altTipOLInternalFrame = new AltaTipoPublicacionOfertaLaboral();
+		altTipOLInternalFrame.setResizable(false);
+		altTipOLInternalFrame.setBounds(62, 50, 444, 314);
+		altTipOLInternalFrame.setMaximizable(false);
+		altTipOLInternalFrame.setAlignmentX(Component.LEFT_ALIGNMENT);
+		altTipOLInternalFrame.setVisible(false);
+		
+		
+		
+		
+		agrTPPaqInternalFrame = new AgregarTipoPublicaciónOfertaLaboralPaquete();
+		agrTPPaqInternalFrame.setVisible(false);
+		agrTPPaqInternalFrame.setResizable(false);
+		agrTPPaqInternalFrame.setBounds(62, 50, 468, 283);
+		agrTPPaqInternalFrame.setMaximizable(false);
+		
+		altKWInternalFrame = new AltaDeKeywords();
+		altKWInternalFrame.setVisible(false);
+		altKWInternalFrame.setResizable(false);
+		altKWInternalFrame.setBounds(62, 50, 444, 204);
+		altKWInternalFrame.setMaximizable(false);
+		
+		
+		
+		frmAdmTrabajo.getContentPane().setLayout(null);
 		frmAdmTrabajo.getContentPane().add(creUsrInternalFrame);
+		frmAdmTrabajo.getContentPane().add(altTipOLInternalFrame);
+		frmAdmTrabajo.getContentPane().add(altKWInternalFrame);
+		frmAdmTrabajo.getContentPane().add(agrTPPaqInternalFrame);
+		
 	}
 
 	/**
@@ -48,7 +91,7 @@ public class Principal {
 	private void initialize() {
 		frmAdmTrabajo = new JFrame();
 		frmAdmTrabajo.setTitle("Administrador Trabajo.uy");
-		frmAdmTrabajo.setBounds(100, 100, 450, 300);
+		frmAdmTrabajo.setBounds(100, 100, 572, 476);
 		frmAdmTrabajo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JMenuBar mainMenu = new JMenuBar();
@@ -118,6 +161,8 @@ public class Principal {
 		itemAltaTipoOF.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// VENTANA PARA AGREGAR TIPO DE OFERTA LABORAL
+				
+				altTipOLInternalFrame.setVisible(true);
 			}
 		});
 		menuTrabajo.add(itemAltaTipoOF);
@@ -126,6 +171,7 @@ public class Principal {
 		itemAltaKeyword.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// VENTANA PARA AGREGAR KEYWORD
+				altKWInternalFrame.setVisible(true);
 			}
 		});
 		menuTrabajo.add(itemAltaKeyword);
@@ -156,9 +202,9 @@ public class Principal {
 		itemAgregarTipoPaq.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// VENTANA PARA AGREGAR TIPO DE PAQUETE
+				agrTPPaqInternalFrame.setVisible(true);
 			}
 		});
 		menuPaquete.add(itemAgregarTipoPaq);
 	}
-
 }

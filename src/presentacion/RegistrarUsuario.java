@@ -4,6 +4,11 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
+import java.awt.GridBagLayout;
+import javax.swing.JTextField;
+import java.awt.GridBagConstraints;
+import javax.swing.JButton;
+import java.awt.Insets;
 
 @SuppressWarnings("serial")
 public class RegistrarUsuario extends JInternalFrame {
@@ -34,7 +39,7 @@ public class RegistrarUsuario extends JInternalFrame {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setClosable(true);
         setTitle("Registrar un Usuario");
-        setBounds(10, 40, 360, 150);
+        setBounds(10, 40, 240, 204);
 	}
 
 }
