@@ -1,5 +1,6 @@
 package logica;
 
+import excepciones.OfertaLaboralRepetidaException;
 import java.util.*;
 
 public interface IUsuario {
@@ -12,5 +13,5 @@ public interface IUsuario {
 	 * @param keywords Lista de las Keywords asociadas a la oferta laboral
 	 * @return true si la oferta se pudo registrar y false si no
 	 */
-	public abstract boolean ingresarDatosOL(String empresa, String tipoOL, DTOfertaLaboral datosOL, LinkedList<String> keywords);
+	public abstract void ingresarDatosOL(String empresa, String tipoOL, DTOfertaLaboral datosOL, LinkedList<String> keywords) throws OfertaLaboralRepetidaException;
 }

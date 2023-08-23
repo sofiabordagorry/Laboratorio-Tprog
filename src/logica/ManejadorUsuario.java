@@ -30,11 +30,11 @@ public class ManejadorUsuario {
 		return this.postulantes;
 	}
 	
-	public Empresa buscarEmpresa(String nickname) {	
+	public Empresa getEmpresa(String nickname) {	
 		return this.empresas.get(nickname);
 	}
 	
-	public Postulante buscarPostulante(String nickname) {	
+	public Postulante getPostulante(String nickname) {	
 		return this.postulantes.get(nickname);
 	}
 	
@@ -46,11 +46,11 @@ public class ManejadorUsuario {
 		return this.postulantes.containsKey(nickname);
 	}
 	
-	public void agregarEmpresa(Empresa emp) {
+	public void addEmpresa(Empresa emp) {
 		this.empresas.put(emp.getNickname(), emp);
 	}
 	
-	public void agregarPostulante(Postulante post) {
+	public void addPostulante(Postulante post) {
 		this.postulantes.put(post.getNickname(), post);
 	}
 	
