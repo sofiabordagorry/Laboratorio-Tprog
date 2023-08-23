@@ -15,9 +15,10 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JFrame;
 import java.awt.event.ActionListener;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
-//import net.miginfocom.swing.MigLayout;
 import java.awt.GridLayout;
 import javax.swing.JRadioButton;
 import javax.swing.JCheckBox;
@@ -38,12 +39,12 @@ public class CrearPaqueteTiposPublicacionOfertasLaborales extends JInternalFrame
         setMaximizable(false);
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setClosable(true);
-        setTitle("Crear Paquetes de Tipos de Publicacion de Ofertas Laborales");
+        setTitle("Crear Paquete de Tipo de Publicacion de Oferta Laborale");
         setBounds(10, 40, 464, 246);
         GridBagLayout gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[]{100, 150, 150};
         gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
-        gridBagLayout.columnWeights = new double[]{0, 1.0, 0};
+        gridBagLayout.columnWeights = new double[]{0, 0.0, 1.0};
         gridBagLayout.rowWeights = new double[]{0, 0, 0, 0, 0, 0, 0.0, Double.MIN_VALUE};
         getContentPane().setLayout(gridBagLayout);
         
@@ -161,6 +162,7 @@ public class CrearPaqueteTiposPublicacionOfertasLaborales extends JInternalFrame
         
         btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 12));
         GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
+        gbc_btnCancelar.anchor = GridBagConstraints.WEST;
         gbc_btnCancelar.insets = new Insets(0, 0, 0, 20);
         gbc_btnCancelar.gridx = 1;
         gbc_btnCancelar.gridy = 6;
@@ -175,7 +177,7 @@ public class CrearPaqueteTiposPublicacionOfertasLaborales extends JInternalFrame
         
         btnAceptar.setFont(new Font("Tahoma", Font.BOLD, 12));
         GridBagConstraints gbc_btnAceptar = new GridBagConstraints();
-        gbc_btnAceptar.insets = new Insets(0, 0, 0, 20);
+        gbc_btnAceptar.insets = new Insets(0, 0, 0, 30);
         gbc_btnAceptar.anchor = GridBagConstraints.WEST;
         gbc_btnAceptar.gridx = 2;
         gbc_btnAceptar.gridy = 6;
@@ -209,17 +211,33 @@ public class CrearPaqueteTiposPublicacionOfertasLaborales extends JInternalFrame
 				return false;
 		}
 		
+		if(!this.validar(nombreU)) {
+			JOptionPane.showMessageDialog(this, "El Nombre debe ser solo letras", 
+					"Crear Paquetes de Tipos de Publicacion de Ofertas Laborales",
+					JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		
 		try {
 			Integer.parseInt(periodoValidezU);
 			Integer.parseInt(costoAsociadoU);
 			Integer.parseInt(descuentoU);
 		} catch(NumberFormatException e) {
-			JOptionPane.showMessageDialog(this, "El descuento, el Periodo de validez y el Costo asociado deben esr numeros", "Crear Paquetes de Tipos de Publicacion de Ofertas Laborales",
+			JOptionPane.showMessageDialog(this, "El descuento, el Periodo de validez y el Costo asociado deben ser numeros", 
+					"Crear Paquetes de Tipos de Publicacion de Ofertas Laborales",
 					JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		return true;
 	}
+	
+	private boolean validar(String s) {
+        // Expresión regular que permite letras, espacios, la letra 'ñ' y caracteres acentuados
+        String regex = "^[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]*$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(s);
+        return matcher.matches();
+    }
 	
 	private void limpiarFormulario() {
 		textFieldNombre.setText("");
