@@ -8,16 +8,25 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Component;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class Principal {
 	
     private RegistrarUsuario creUsrInternalFrame;
+    private AltaTipoPublicacionOfertaLaboral altTipOLInternalFrame;
+    
+    private AltaDeKeywords altKWInternalFrame;
+    
+    private AgregarTipoPublicaciónOfertaLaboralPaquete agrTPPaqInternalFrame;
     private AltaOfertaLaboral creAltOLInternalFrame;
     private CrearPaqueteTiposPublicacionOfertasLaborales crePaqTipPubOLInternalFrame;
     private ConsultaPaqueteDeTiposDeOfertaLaboral consPaqueteTipoInternalFrame;
 
 	private JFrame frmAdmTrabajo;
-
+	
 	/**
 	 * Launch the application.
 	 */
@@ -41,23 +50,56 @@ public class Principal {
 		initialize();
 		
 		creUsrInternalFrame = new RegistrarUsuario();
+<<<<<<< HEAD
 		creUsrInternalFrame.setBounds(20, 23, 500, 400);
+=======
+		creUsrInternalFrame.setResizable(false);
+		creUsrInternalFrame.setMaximizable(false);
+		creUsrInternalFrame.setBounds(62, 50, 240, 204);
+>>>>>>> 98847bae1d2a1261cde13ef1b51f29df9f4e6eb3
 		creUsrInternalFrame.setVisible(false);
 		
+		altTipOLInternalFrame = new AltaTipoPublicacionOfertaLaboral();
+		altTipOLInternalFrame.setResizable(false);
+		altTipOLInternalFrame.setBounds(62, 50, 444, 314);
+		altTipOLInternalFrame.setMaximizable(false);
+		altTipOLInternalFrame.setAlignmentX(Component.LEFT_ALIGNMENT);
+		altTipOLInternalFrame.setVisible(false);
+		
+		
+		agrTPPaqInternalFrame = new AgregarTipoPublicaciónOfertaLaboralPaquete();
+		agrTPPaqInternalFrame.setVisible(false);
+		agrTPPaqInternalFrame.setResizable(false);
+		agrTPPaqInternalFrame.setBounds(62, 50, 468, 283);
+		agrTPPaqInternalFrame.setMaximizable(false);
+		
+		altKWInternalFrame = new AltaDeKeywords();
+		altKWInternalFrame.setVisible(false);
+		altKWInternalFrame.setResizable(false);
+		altKWInternalFrame.setBounds(62, 50, 444, 204);
+		altKWInternalFrame.setMaximizable(false);
+		
 		creAltOLInternalFrame = new AltaOfertaLaboral();
-		creAltOLInternalFrame.setBounds(20, 23, 567, 562);
+
+		creAltOLInternalFrame.setBounds(72, 23, 566, 621);
 		creAltOLInternalFrame.setVisible(false);
 		
 		crePaqTipPubOLInternalFrame = new CrearPaqueteTiposPublicacionOfertasLaborales();
-		crePaqTipPubOLInternalFrame.setBounds(20, 22, 659, 260);
+		crePaqTipPubOLInternalFrame.setBounds(51, 23, 660, 341);
 		crePaqTipPubOLInternalFrame.setVisible(false);
 		
+<<<<<<< HEAD
 		consPaqueteTipoInternalFrame = new ConsultaPaqueteDeTiposDeOfertaLaboral();
 		consPaqueteTipoInternalFrame.setBounds(20, 22, 500, 400);
 		consPaqueteTipoInternalFrame.setVisible(false);
 		
+=======
+>>>>>>> 98847bae1d2a1261cde13ef1b51f29df9f4e6eb3
 		frmAdmTrabajo.getContentPane().setLayout(null);
 		frmAdmTrabajo.getContentPane().add(creUsrInternalFrame);
+		frmAdmTrabajo.getContentPane().add(altTipOLInternalFrame);
+		frmAdmTrabajo.getContentPane().add(altKWInternalFrame);
+		frmAdmTrabajo.getContentPane().add(agrTPPaqInternalFrame);
 		frmAdmTrabajo.getContentPane().add(creAltOLInternalFrame);
 		frmAdmTrabajo.getContentPane().add(crePaqTipPubOLInternalFrame);
 		frmAdmTrabajo.getContentPane().add(consPaqueteTipoInternalFrame);
@@ -69,6 +111,7 @@ public class Principal {
 	private void initialize() {
 		frmAdmTrabajo = new JFrame();
 		frmAdmTrabajo.setTitle("Administrador Trabajo.uy");
+
 		frmAdmTrabajo.setBounds(100, 100, 754, 710);
 		frmAdmTrabajo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -140,6 +183,8 @@ public class Principal {
 		itemAltaTipoOF.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// VENTANA PARA AGREGAR TIPO DE OFERTA LABORAL
+				
+				altTipOLInternalFrame.setVisible(true);
 			}
 		});
 		menuTrabajo.add(itemAltaTipoOF);
@@ -148,6 +193,7 @@ public class Principal {
 		itemAltaKeyword.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// VENTANA PARA AGREGAR KEYWORD
+				altKWInternalFrame.setVisible(true);
 			}
 		});
 		menuTrabajo.add(itemAltaKeyword);
@@ -180,9 +226,10 @@ public class Principal {
 		itemAgregarTipoPaq.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// VENTANA PARA AGREGAR TIPO DE PAQUETE
+				agrTPPaqInternalFrame.setVisible(true);
 			}
 		});
 		menuPaquete.add(itemAgregarTipoPaq);
 	}
-
 }
+

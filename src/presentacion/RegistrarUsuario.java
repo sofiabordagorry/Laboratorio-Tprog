@@ -2,6 +2,7 @@ package presentacion;
 
 import javax.swing.*;
 
+<<<<<<< HEAD
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +11,15 @@ import java.awt.event.ItemListener;
 import java.util.Date;
 
 import com.toedter.calendar.JDateChooser;
+=======
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
+import java.awt.GridBagLayout;
+import javax.swing.JTextField;
+import java.awt.GridBagConstraints;
+import javax.swing.JButton;
+import java.awt.Insets;
+>>>>>>> 98847bae1d2a1261cde13ef1b51f29df9f4e6eb3
 
 @SuppressWarnings("serial")
 public class RegistrarUsuario extends JInternalFrame {
@@ -55,6 +65,7 @@ public class RegistrarUsuario extends JInternalFrame {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setClosable(true);
         setTitle("Registrar un Usuario");
+<<<<<<< HEAD
         setBounds(10, 10, 600, 600);
 
         GridBagLayout gridBagLayout = new GridBagLayout();
@@ -391,6 +402,9 @@ public class RegistrarUsuario extends JInternalFrame {
 		}
 	
 		return true;
+=======
+        setBounds(10, 40, 240, 204);
+>>>>>>> 98847bae1d2a1261cde13ef1b51f29df9f4e6eb3
 	}
 
     // Permite borrar el contenido de un formulario antes de cerrarlo.
