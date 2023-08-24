@@ -8,7 +8,7 @@ public class ControladorUsuario implements IUsuario {
 	public ControladorUsuario() {
 	}
 	
-	public void ingresarDatosOL(String empresa, String tipoOL, DTOfertaLaboral datosOL, LinkedList<String> keywords) throws OfertaLaboralRepetidaException {
+	/*public void ingresarDatosOL(String empresa, String tipoOL, DTOfertaLaboral datosOL, LinkedList<String> keywords) throws OfertaLaboralRepetidaException {
 		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
 		OfertaLaboral ol = mol.getOfertaLaboral(datosOL.getNombre());
 		if (ol != null)
@@ -19,7 +19,7 @@ public class ControladorUsuario implements IUsuario {
 		Map<String, Keyword> keys = new HashMap<>();
 		for(String k : keywords)
 			keys.put(mol.getKeyword(k).getNombre(),mol.getKeyword(k));
-		
+		*/
 		
 		
 	}

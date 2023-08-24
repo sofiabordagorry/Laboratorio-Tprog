@@ -79,7 +79,7 @@ public class Principal {
 		creAltOLInternalFrame.setVisible(false);
 		
 		crePaqTipPubOLInternalFrame = new CrearPaqueteTiposPublicacionOfertasLaborales();
-		crePaqTipPubOLInternalFrame.setBounds(20, 22, 659, 260);
+		crePaqTipPubOLInternalFrame.setBounds(51, 23, 660, 341);
 		crePaqTipPubOLInternalFrame.setVisible(false);
 		frmAdmTrabajo.getContentPane().setLayout(null);
 		

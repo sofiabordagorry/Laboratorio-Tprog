@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.util.List;
 
+import javax.swing.text.PlainDocument;
 import javax.swing.*;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -28,6 +29,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import java.awt.Font;
 import javax.swing.JList;
+import com.toedter.calendar.JDateChooser;
 
 @SuppressWarnings("serial")
 public class AltaOfertaLaboral extends JInternalFrame {
@@ -35,7 +37,7 @@ public class AltaOfertaLaboral extends JInternalFrame {
 	private IUsuario cu;
 	
 	private JTextField textFieldNombre;
-	private JTextField textFieldDescripcion;
+	private JTextArea textAreaDescripcion;
 	private JTextField textFieldHorario;
 	private JTextField textFieldRemuneracion;
 	private JTextField textFieldCiudad;
@@ -55,13 +57,13 @@ public class AltaOfertaLaboral extends JInternalFrame {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setClosable(true);
         setTitle("Alta de Oferta Laboral");
-        setBounds(10, 10, 561, 519);
+        setBounds(10, 10, 574, 539);
         
         GridBagLayout gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[]{100, 150, 150, 100};
-        gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-        gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0};
-        gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+        gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 50, 0, 0, 70, 0, 0, 0, 0, 0, 0, 0};
+        gridBagLayout.columnWeights = new double[]{0.0, 1.0, 1.0, 0.0};
+        gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
         getContentPane().setLayout(gridBagLayout);
         
         JLabel lblNewLabel_3 = new JLabel("Elija e ingrese los siguientes datos: ");
@@ -165,7 +167,7 @@ public class AltaOfertaLaboral extends JInternalFrame {
         GridBagConstraints gbc_textFieldNombre = new GridBagConstraints();
         gbc_textFieldNombre.fill = GridBagConstraints.HORIZONTAL;
         gbc_textFieldNombre.gridwidth = 3;
-        gbc_textFieldNombre.insets = new Insets(0, 0, 5, 20);
+        gbc_textFieldNombre.insets = new Insets(0, 0, 5, 40);
         gbc_textFieldNombre.gridx = 1;
         gbc_textFieldNombre.gridy = 8;
         getContentPane().add(textFieldNombre, gbc_textFieldNombre);
@@ -180,15 +182,20 @@ public class AltaOfertaLaboral extends JInternalFrame {
         gbc_lblNewLabel_5.gridy = 9;
         getContentPane().add(lblNewLabel_5, gbc_lblNewLabel_5);
         
-        textFieldDescripcion = new JTextField();
-        GridBagConstraints gbc_textFieldDescripcion = new GridBagConstraints();
-        gbc_textFieldDescripcion.fill = GridBagConstraints.HORIZONTAL;
-        gbc_textFieldDescripcion.gridwidth = 3;
-        gbc_textFieldDescripcion.insets = new Insets(0, 0, 5, 20);
-        gbc_textFieldDescripcion.gridx = 1;
-        gbc_textFieldDescripcion.gridy = 9;
-        getContentPane().add(textFieldDescripcion, gbc_textFieldDescripcion);
-        textFieldDescripcion.setColumns(10);
+        JScrollPane scrollPane_1 = new JScrollPane();
+        GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
+        gbc_scrollPane_1.gridwidth = 3;
+        gbc_scrollPane_1.insets = new Insets(0, 0, 5, 40);
+        gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
+        gbc_scrollPane_1.gridx = 1;
+        gbc_scrollPane_1.gridy = 9;
+        getContentPane().add(scrollPane_1, gbc_scrollPane_1);
+        
+        textAreaDescripcion = new JTextArea();
+        textAreaDescripcion.setWrapStyleWord(true); // Ajuste de palabras
+        textAreaDescripcion.setLineWrap(true); // Ajuste de líneas
+        textAreaDescripcion.setEditable(true);
+        scrollPane_1.setViewportView(textAreaDescripcion);
         
         JLabel lblNewLabel_9 = new JLabel("Horario:");
         lblNewLabel_9.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -203,7 +210,7 @@ public class AltaOfertaLaboral extends JInternalFrame {
         GridBagConstraints gbc_textFieldHorario = new GridBagConstraints();
         gbc_textFieldHorario.fill = GridBagConstraints.HORIZONTAL;
         gbc_textFieldHorario.gridwidth = 3;
-        gbc_textFieldHorario.insets = new Insets(0, 0, 5, 20);
+        gbc_textFieldHorario.insets = new Insets(0, 0, 5, 40);
         gbc_textFieldHorario.gridx = 1;
         gbc_textFieldHorario.gridy = 10;
         getContentPane().add(textFieldHorario, gbc_textFieldHorario);
@@ -222,7 +229,7 @@ public class AltaOfertaLaboral extends JInternalFrame {
         GridBagConstraints gbc_textFieldRemuneracion = new GridBagConstraints();
         gbc_textFieldRemuneracion.fill = GridBagConstraints.HORIZONTAL;
         gbc_textFieldRemuneracion.gridwidth = 3;
-        gbc_textFieldRemuneracion.insets = new Insets(0, 0, 5, 20);
+        gbc_textFieldRemuneracion.insets = new Insets(0, 0, 5, 40);
         gbc_textFieldRemuneracion.gridx = 1;
         gbc_textFieldRemuneracion.gridy = 11;
         getContentPane().add(textFieldRemuneracion, gbc_textFieldRemuneracion);
@@ -241,7 +248,7 @@ public class AltaOfertaLaboral extends JInternalFrame {
         GridBagConstraints gbc_textFieldCiudad = new GridBagConstraints();
         gbc_textFieldCiudad.fill = GridBagConstraints.HORIZONTAL;
         gbc_textFieldCiudad.gridwidth = 3;
-        gbc_textFieldCiudad.insets = new Insets(0, 0, 5, 20);
+        gbc_textFieldCiudad.insets = new Insets(0, 0, 5, 40);
         gbc_textFieldCiudad.gridx = 1;
         gbc_textFieldCiudad.gridy = 12;
         getContentPane().add(textFieldCiudad, gbc_textFieldCiudad);
@@ -260,7 +267,7 @@ public class AltaOfertaLaboral extends JInternalFrame {
         GridBagConstraints gbc_textFieldDepartamento = new GridBagConstraints();
         gbc_textFieldDepartamento.fill = GridBagConstraints.HORIZONTAL;
         gbc_textFieldDepartamento.gridwidth = 3;
-        gbc_textFieldDepartamento.insets = new Insets(0, 0, 5, 20);
+        gbc_textFieldDepartamento.insets = new Insets(0, 0, 5, 40);
         gbc_textFieldDepartamento.gridx = 1;
         gbc_textFieldDepartamento.gridy = 13;
         getContentPane().add(textFieldDepartamento, gbc_textFieldDepartamento);
@@ -273,6 +280,24 @@ public class AltaOfertaLaboral extends JInternalFrame {
         		setVisible(false);
         	}
         });
+        
+        JLabel lblNewLabel_10 = new JLabel("Fecha de Alta:");
+        lblNewLabel_10.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        GridBagConstraints gbc_lblNewLabel_10 = new GridBagConstraints();
+        gbc_lblNewLabel_10.anchor = GridBagConstraints.EAST;
+        gbc_lblNewLabel_10.insets = new Insets(0, 0, 5, 5);
+        gbc_lblNewLabel_10.gridx = 0;
+        gbc_lblNewLabel_10.gridy = 14;
+        getContentPane().add(lblNewLabel_10, gbc_lblNewLabel_10);
+        
+        JDateChooser dateChooser = new JDateChooser();
+        GridBagConstraints gbc_dateChooser = new GridBagConstraints();
+        gbc_dateChooser.gridwidth = 3;
+        gbc_dateChooser.insets = new Insets(0, 0, 5, 40);
+        gbc_dateChooser.fill = GridBagConstraints.BOTH;
+        gbc_dateChooser.gridx = 1;
+        gbc_dateChooser.gridy = 14;
+        getContentPane().add(dateChooser, gbc_dateChooser);
         
         btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 11));
         GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
@@ -301,7 +326,7 @@ public class AltaOfertaLaboral extends JInternalFrame {
 	protected void cmdAltaOfertaLaboralActionPerformed(ActionEvent arg0) {
 		
 		String nombreU = this.textFieldNombre.getText();
-		String descripcionU = this.textFieldDescripcion.getText();
+		
 		String horarioU = this.textFieldHorario.getText();
 		String remuneracionU = this.textFieldRemuneracion.getText();
 		String ciudadU = this.textFieldCiudad.getText();
@@ -329,7 +354,7 @@ public class AltaOfertaLaboral extends JInternalFrame {
 	private boolean checkForm() {
 		
 		String nombreU = this.textFieldNombre.getText();
-		String descripcionU = this.textFieldDescripcion.getText();
+		String descripcionU = this.textAreaDescripcion.getText();
 		String horarioU = this.textFieldHorario.getText();
 		String remuneracionU = this.textFieldRemuneracion.getText();
 		String ciudadU = this.textFieldCiudad.getText();
@@ -350,7 +375,7 @@ public class AltaOfertaLaboral extends JInternalFrame {
 			return false;
 		}
 		
-		if (nombreU.isEmpty() || descripcionU.isEmpty() || horarioU.isEmpty() || 
+		if (nombreU.isEmpty() || horarioU.isEmpty() || descripcionU.isEmpty() ||
 			remuneracionU.isEmpty() || ciudadU.isEmpty() || departamentoU.isEmpty()) {
 			JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "Alta de Oferta Laboral",
 					JOptionPane.ERROR_MESSAGE);
@@ -399,7 +424,7 @@ public class AltaOfertaLaboral extends JInternalFrame {
 	
 	private void limpiarFormulario() {
 		textFieldNombre.setText("");
-		textFieldDescripcion.setText("");
+		textAreaDescripcion.setText("");
 		textFieldHorario.setText("");
 		textFieldCiudad.setText("");
 		textFieldDepartamento.setText("");
