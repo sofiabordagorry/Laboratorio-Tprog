@@ -75,11 +75,12 @@ public class Principal {
 		altKWInternalFrame.setMaximizable(false);
 		
 		creAltOLInternalFrame = new AltaOfertaLaboral();
-		creAltOLInternalFrame.setBounds(20, 23, 567, 562);
+
+		creAltOLInternalFrame.setBounds(72, 23, 566, 621);
 		creAltOLInternalFrame.setVisible(false);
 		
 		crePaqTipPubOLInternalFrame = new CrearPaqueteTiposPublicacionOfertasLaborales();
-		crePaqTipPubOLInternalFrame.setBounds(20, 22, 659, 260);
+		crePaqTipPubOLInternalFrame.setBounds(51, 23, 660, 341);
 		crePaqTipPubOLInternalFrame.setVisible(false);
 		frmAdmTrabajo.getContentPane().setLayout(null);
 		

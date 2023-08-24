@@ -14,9 +14,9 @@ public class Usuario {
 		this.correo = correo;
 	}
 	
-	/*public String getNickname() {
+	public String getNickname() {
 		return this.nickname;
-	}*/
+	}
 	
 	public String getNombre() {
 		return this.nombre;
@@ -26,9 +26,9 @@ public class Usuario {
 		return this.apellido;
 	}
 	
-	/*public String getCorreo() {
+	public String getCorreo() {
 		return this.correo;
-	}*/
+	}
 	
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
