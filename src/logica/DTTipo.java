@@ -31,7 +31,7 @@ public class DTTipo {
 		return this.exposicion;
 	}
 	
-	public int getDuracino() {
+	public int getDuracion() {
 		return this.duracion;
 	}
 	
