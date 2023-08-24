@@ -75,7 +75,7 @@ public class Principal {
 		altKWInternalFrame.setMaximizable(false);
 		
 		creAltOLInternalFrame = new AltaOfertaLaboral();
-		creAltOLInternalFrame.setBounds(20, 23, 567, 562);
+		creAltOLInternalFrame.setBounds(72, 23, 566, 621);
 		creAltOLInternalFrame.setVisible(false);
 		
 		crePaqTipPubOLInternalFrame = new CrearPaqueteTiposPublicacionOfertasLaborales();

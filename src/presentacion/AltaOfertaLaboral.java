@@ -7,14 +7,13 @@ import javax.swing.JInternalFrame;
 import logica.DTTipo;
 import logica.DTKeyword;
 import logica.IUsuario;
-import logica.ControladorUsuario;
-import logica.DTOfertaLaboral;
 
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.util.Date;
 import java.util.List;
+import com.toedter.calendar.JDateChooser;
 
-import javax.swing.text.PlainDocument;
 import javax.swing.*;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -29,7 +28,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import java.awt.Font;
 import javax.swing.JList;
-import com.toedter.calendar.JDateChooser;
 
 @SuppressWarnings("serial")
 public class AltaOfertaLaboral extends JInternalFrame {
@@ -46,6 +44,7 @@ public class AltaOfertaLaboral extends JInternalFrame {
 	private JComboBox<DTTipo> comboBoxTipPubOL;
 	private JList<String> listKeys;
 	private DefaultListModel<String> listModel;
+	private JDateChooser dateChooserFechaDeAlta;
 	
 	public AltaOfertaLaboral() {
 		
@@ -61,7 +60,7 @@ public class AltaOfertaLaboral extends JInternalFrame {
         
         GridBagLayout gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[]{100, 150, 150, 100};
-        gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 50, 0, 0, 70, 0, 0, 0, 0, 0, 0, 0};
+        gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 100, 0, 0, 70, 0, 0, 0, 0, 0, 0, 0};
         gridBagLayout.columnWeights = new double[]{0.0, 1.0, 1.0, 0.0};
         gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
         getContentPane().setLayout(gridBagLayout);
@@ -290,14 +289,14 @@ public class AltaOfertaLaboral extends JInternalFrame {
         gbc_lblNewLabel_10.gridy = 14;
         getContentPane().add(lblNewLabel_10, gbc_lblNewLabel_10);
         
-        JDateChooser dateChooser = new JDateChooser();
+        dateChooserFechaDeAlta = new JDateChooser();
         GridBagConstraints gbc_dateChooser = new GridBagConstraints();
         gbc_dateChooser.gridwidth = 3;
         gbc_dateChooser.insets = new Insets(0, 0, 5, 40);
         gbc_dateChooser.fill = GridBagConstraints.BOTH;
         gbc_dateChooser.gridx = 1;
         gbc_dateChooser.gridy = 14;
-        getContentPane().add(dateChooser, gbc_dateChooser);
+        getContentPane().add(dateChooserFechaDeAlta, gbc_dateChooser);
         
         btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 11));
         GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
@@ -340,7 +339,7 @@ public class AltaOfertaLaboral extends JInternalFrame {
 			/*DTOfertaLaboral datosOL = new DTOfertaLaboral(nombreU, descripcionU, ciudadU, departamentoU, horarioU, Integer.parseInt(remuneracionU));
 			
 			try {
-				boolean datos = cu.ingresarDatosOL(ciudadU, departamentoU, null, null)
+				cu.ingresarDatosOL(ciudadU, departamentoU, null, null)
 			} catch(OfertaRepetidaException e) {
 				JOptionPane.showMessageDialog(this, e.getMessage(), "Alta de Oferta Laboral", 
 					JOptionPane.ERROR_MESSAGE);
@@ -362,9 +361,21 @@ public class AltaOfertaLaboral extends JInternalFrame {
 		//DTEmpresa empresaU = (DTEmpresa) this.comboBoxEmpresas.getSelectedItem();
 		DTTipo tipPubOLU = (DTTipo) this.comboBoxTipPubOL.getSelectedItem();
 		List<String> keysSeleccionadas = listKeys.getSelectedValuesList(); 
+		Date fechaAltaU = dateChooserFechaDeAlta.getDate();
+		//long milisegundosDesdeEnero1900 = -2208988800000L; // Milisegundos desde la época para el 1 de enero de 1900
+        long milisegundosDesdeEnero2000 = 946684800000L;
+        Date fechaAntigua = new Date(milisegundosDesdeEnero2000);
+		Date fechaDia = new Date();
 		
-		/*if (tipPubOLU == null || empresaU == null) {
-			JOptionPane.showMessageDialog(this, "Se debe elegir una Empresa y un Tipo de Publicacion", "Alta de Oferta Laboral", 
+		
+		/*if(empresaU == null) {
+			JOptionPane.showMessageDialog(this, "Se debe elegir una Empresa", "Alta de Oferta Laboral", 
+					JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		
+		if (tipPubOLU == null) {
+			JOptionPane.showMessageDialog(this, "Se debe elegir un Tipo de Publicacion", "Alta de Oferta Laboral", 
 					JOptionPane.ERROR_MESSAGE);
 			return false;
 		}*/
@@ -382,37 +393,61 @@ public class AltaOfertaLaboral extends JInternalFrame {
 			return false;
 		}
 		
-		if (!this.validar(nombreU) || !this.validar(ciudadU) || !this.validar(departamentoU)) {
-			JOptionPane.showMessageDialog(this, "Debe ser un Nombre, Ciudad o Departamento valido, no usar numeros, signos, etc",
-					"Alta de Oferta Laboral", JOptionPane.ERROR_MESSAGE);
+		if (fechaAltaU == null ) {
+			JOptionPane.showMessageDialog(this, "Se debe elegir una Fecha de Alta", "Alta de Oferta Laboral",
+					JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		
-		if (this.contieneNumeros(nombreU) || this.contieneNumeros(ciudadU) || this.contieneNumeros(departamentoU)) {
-			JOptionPane.showMessageDialog(this, "No debe haber numeros en nombre, ciudad o departamento",
+		if (!this.validar(nombreU)) {
+			JOptionPane.showMessageDialog(this, "Debe ser un Nombre válido",
 					"Alta de Oferta Laboral", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		
 		try {
-			Integer.parseInt(remuneracionU);
+			Float.parseFloat(remuneracionU);
 		} catch(NumberFormatException e) {
 			JOptionPane.showMessageDialog(this, "La remuneración debe ser un numero", "Alta de Oferta Laboral",
 					JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		
+		if (Float.parseFloat(remuneracionU) <= 0) {
+			JOptionPane.showMessageDialog(this, "La remuneración debe ser mayror a cero", "Alta de Oferta Laboral",
+					JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		
+		
+		if (!this.validar(ciudadU)) {
+			JOptionPane.showMessageDialog(this, "Debe ser una Ciudad válida",
+					"Alta de Oferta Laboral", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		
+		if (!this.validar(departamentoU)) {
+			JOptionPane.showMessageDialog(this, "Debe ser un Departamento válido",
+					"Alta de Oferta Laboral", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		
+		if (fechaAltaU.compareTo(fechaDia) > 0) {
+			JOptionPane.showMessageDialog(this, "La Fecha de Alta no puede ser posterior a la fecha actual", 
+					"Alta de Oferta Laboral",
+					JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		
+		if(fechaAltaU.compareTo(fechaAntigua) < 0) {
+			JOptionPane.showMessageDialog(this, "La Fecha de Alta deber ser posteriror al 2000", 
+					"Alta de Oferta Laboral",
+					JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		
 		return true;
 	}
-	
-	private boolean contieneNumeros(String cadena) {
-        for (char c : cadena.toCharArray()) {
-            if (Character.isDigit(c)) {
-                return true;
-            }
-        }
-        return false;
-    }
 	
 	private boolean validar(String s) {
         // Expresión regular que permite letras, espacios, la letra 'ñ' y caracteres acentuados

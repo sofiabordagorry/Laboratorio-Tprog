@@ -7,7 +7,6 @@ import javax.swing.JInternalFrame;
 
 
 import java.util.Date;	
-import java.util.Calendar;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -237,8 +236,14 @@ public class CrearPaqueteTiposPublicacionOfertasLaborales extends JInternalFrame
 		Date fechaDia = new Date();
 		
 		if (nombreU.isEmpty() || descripcionU.isEmpty() || periodoValidezU.isEmpty() || 
-				descuentoU.isEmpty() || costoAsociadoU.isEmpty() || fechaAltaU == null) {
+				descuentoU.isEmpty() || costoAsociadoU.isEmpty()) {
 				JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "Crear Paquetes de Tipos de Publicacion de Ofertas Laborales",
+						JOptionPane.ERROR_MESSAGE);
+				return false;
+		}
+		
+		if(fechaAltaU == null) {
+				JOptionPane.showMessageDialog(this, "Se debe elegir una Fecha de Alta", "Crear Paquetes de Tipos de Publicacion de Ofertas Laborales",
 						JOptionPane.ERROR_MESSAGE);
 				return false;
 		}
