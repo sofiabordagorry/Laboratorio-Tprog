@@ -14,6 +14,7 @@ public class Principal {
     private RegistrarUsuario creUsrInternalFrame;
     private AltaOfertaLaboral creAltOLInternalFrame;
     private CrearPaqueteTiposPublicacionOfertasLaborales crePaqTipPubOLInternalFrame;
+    private ConsultaPaqueteDeTiposDeOfertaLaboral consPaqueteTipoInternalFrame;
 
 	private JFrame frmAdmTrabajo;
 
@@ -40,7 +41,7 @@ public class Principal {
 		initialize();
 		
 		creUsrInternalFrame = new RegistrarUsuario();
-		creUsrInternalFrame.setBounds(20, 27, 360, 150);
+		creUsrInternalFrame.setBounds(20, 23, 500, 400);
 		creUsrInternalFrame.setVisible(false);
 		
 		creAltOLInternalFrame = new AltaOfertaLaboral();
@@ -50,11 +51,16 @@ public class Principal {
 		crePaqTipPubOLInternalFrame = new CrearPaqueteTiposPublicacionOfertasLaborales();
 		crePaqTipPubOLInternalFrame.setBounds(20, 22, 659, 260);
 		crePaqTipPubOLInternalFrame.setVisible(false);
-		frmAdmTrabajo.getContentPane().setLayout(null);
 		
+		consPaqueteTipoInternalFrame = new ConsultaPaqueteDeTiposDeOfertaLaboral();
+		consPaqueteTipoInternalFrame.setBounds(20, 22, 500, 400);
+		consPaqueteTipoInternalFrame.setVisible(false);
+		
+		frmAdmTrabajo.getContentPane().setLayout(null);
 		frmAdmTrabajo.getContentPane().add(creUsrInternalFrame);
 		frmAdmTrabajo.getContentPane().add(creAltOLInternalFrame);
 		frmAdmTrabajo.getContentPane().add(crePaqTipPubOLInternalFrame);
+		frmAdmTrabajo.getContentPane().add(consPaqueteTipoInternalFrame);
 	}
 
 	/**
@@ -165,6 +171,7 @@ public class Principal {
 		itemConsultarPaquete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// VENTANA PARA CONSULTAR PAQUETE
+				consPaqueteTipoInternalFrame.setVisible(true);
 			}
 		});
 		menuPaquete.add(itemConsultarPaquete);
