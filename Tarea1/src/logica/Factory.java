@@ -19,7 +19,7 @@ public class Factory {
 		return new ControladorUsuario();
 	}
 	
-	public ITipo getITipo() {
-		return new ControladorTipo();
+	public ITipo getIOfertaLaboral() {
+		return new ControladorOfertaLaboral();
 	}
 }
