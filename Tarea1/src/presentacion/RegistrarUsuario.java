@@ -11,6 +11,8 @@ import java.util.Date;
 
 import com.toedter.calendar.JDateChooser;
 
+import logica.ControladorUsuario;
+
 @SuppressWarnings("serial")
 public class RegistrarUsuario extends JInternalFrame {
 
@@ -40,13 +42,15 @@ public class RegistrarUsuario extends JInternalFrame {
     
     private boolean esPostulante;
     private JTextPane textPane;
+    // private ControladorUsuario cont;
 
     /**
      * Create the frame.
      */
     public RegistrarUsuario() {
         // Se inicializa con el controlador de usuarios
-
+    	//cont = ControladorUsuario();
+    	
         // Propiedades del JInternalFrame como dimensión, posición dentro del frame,
         // etc.
         setResizable(true);
@@ -56,6 +60,7 @@ public class RegistrarUsuario extends JInternalFrame {
         setClosable(true);
         setTitle("Registrar un Usuario");
         setBounds(10, 10, 600, 600);
+        esPostulante = true;
 
         GridBagLayout gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[] { 100, 120, 0, 120, 0 };
@@ -363,14 +368,27 @@ public class RegistrarUsuario extends JInternalFrame {
     // Tanto en caso de que haya un error (de verificación o de registro) o no, se despliega
     // un mensaje utilizando un panel de mensaje (JOptionPane).
     protected void cmdRegistroUsuarioActionPerformed(ActionEvent arg0) {
-        // TODO Auto-generated method stub
-
         if(checkForm()) {
+        	/*String nicknameU = textField.getText();
+    		String nombreU = textFieldNombre.getText();
+    		String apellidoU = textFieldApellido.getText();
+    		String mailU = textFieldMail.getText();
+        	if (esPostulante) {
+        		String nacionalidadU = textFieldNacionalidad.getText();
+        		Date dateU = dateChooser.getDate();
+        		DTPostulante post = DTPostulante(nicknameU, nombreU, apellidoU, mailU, null, dateU, nacionalidadU);
+        		cont.ingresarDatosPostulante(post);
+        	} else {
+        		String descripcionU = textPane.getText();
+        		String sitioWebU = textField_2.getText();
+        		DTEmpresa emp = DTEmpresa(nicknameU, nombreU, apellidoU, mailU, null, nombreDeEmpresaU, descripcionU, linkU);
+        	}*/
         	limpiarFormulario();
         }
     }
     
     private boolean checkForm() {
+    	String nicknameU = textField.getText();
 		String nombreU = textFieldNombre.getText();
 		String apellidoU = textFieldApellido.getText();
 		String mailU = textFieldMail.getText();
@@ -379,15 +397,26 @@ public class RegistrarUsuario extends JInternalFrame {
 		String descripcionU = textPane.getText();
 		
 		
-		if (esPostulante && (nombreU.isEmpty() || apellidoU.isEmpty() || mailU.isEmpty() || 
-				nacionalidadU.isEmpty() )) {
+		if (esPostulante) {
+			if (nicknameU.isEmpty() || nombreU.isEmpty() || apellidoU.isEmpty() || mailU.isEmpty() || 
+				nacionalidadU.isEmpty()) {
 				JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "Registrar Usuario",
 						JOptionPane.ERROR_MESSAGE);
 				return false;
-		} else if (!esPostulante && (nombreU.isEmpty() || apellidoU.isEmpty() || mailU.isEmpty() || descripcionU.isEmpty())) {
-				JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "Registrar Usuario",
-					JOptionPane.ERROR_MESSAGE);
+			}
+			if (dateU == null) {
+				JOptionPane.showMessageDialog(this, "Se debe elegir una fecha de nacimiento", "Registrar Usuario",
+						JOptionPane.ERROR_MESSAGE);
 				return false;
+			}
+		}
+		
+		if (!esPostulante) {
+			if (nicknameU.isEmpty() || nombreU.isEmpty() || apellidoU.isEmpty() || mailU.isEmpty() || descripcionU.isEmpty()) {
+				JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "Registrar Usuario",
+						JOptionPane.ERROR_MESSAGE);
+					return false;
+			}
 		}
 	
 		return true;
@@ -398,10 +427,13 @@ public class RegistrarUsuario extends JInternalFrame {
     // se ocultan, por lo que conviene borrar la información para que 
     // no aparezca al mostrarlas nuevamente.
     private void limpiarFormulario() {
+    	textField.setText("");
         textFieldNombre.setText("");
         textFieldApellido.setText("");
         textFieldMail.setText("");
         textFieldNacionalidad.setText("");
         textPane.setText("");
+        dateChooser.setDate(null);
+        textField_2.setText("");
     }
 }

@@ -73,7 +73,7 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         gbc_lblPaquetes.gridy = 1;
         getContentPane().add(lblPaquetes, gbc_lblPaquetes);
         
-        JComboBox comboBox = new JComboBox();
+        JComboBox<String> comboBox = new JComboBox<String>();
         GridBagConstraints gbc_comboBox = new GridBagConstraints();
         gbc_comboBox.gridwidth = 2;
         gbc_comboBox.insets = new Insets(0, 0, 5, 0);
