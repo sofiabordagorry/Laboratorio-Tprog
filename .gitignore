@@ -1,0 +1,47 @@
+#Ignorar archivos de configuración de Eclipse
+.project
+.classpath
+
+#Ignorar archivos generados por Maven y Gradle
+target/
+build/
+.gradle/
+!.gradle/*.kts
+
+#Ignorar archivos y carpetas de compilación binaria
+bin/
+bin/**/
+*.class
+
+#Ignorar archivos de configuración de IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+
+#Ignorar archivos de configuración de NetBeans
+nbproject/private/
+
+#Ignorar archivos de configuración de Visual Studio Code
+.vscode/
+.settings/
+*.launch
+
+#Ignorar archivos de caché y temporales
+*.log
+.log.
+logs/
+*.tmp
+*.swp
+*.bak
+
+#Ignorar archivos de caché de Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+#Ignorar archivos de caché de macOS
+.DS_Store
+
+#Ignorar archivos de caché de Linux
+*.cache
