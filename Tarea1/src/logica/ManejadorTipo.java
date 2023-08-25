@@ -7,11 +7,11 @@ public class ManejadorTipo {
 	private Map<String, Tipo> mapTipos;//Hay que cambiarle el nombre
 	private Map<String, Paquete> mapPaquetes;//a este tambien
 	
-	public ManejadorTipo() {
+	public ManejadorTipo() {//CONSTRUCTOR
 		mapTipos = new HashMap<>();
 	}
 	
-	public ManejadorTipo getInstancia() {
+	public ManejadorTipo getInstancia() {//OBTENER INSTANCIA 
 		if(instancia == null) {
 			instancia = new ManejadorTipo();
 		}
@@ -20,6 +20,10 @@ public class ManejadorTipo {
 	
 	public void agregarTipo(Tipo t) {//AGREGAR UN TIPO A LA COLECCION
 		mapTipos.put(t.getNombre(), t);
+	}
+	
+	public void agregarPaquete(Paquete p) {//AGREAGR UN PAQUETE A LA COLECCION
+		mapPaquetes.put(p.getNombre(), p);
 	}
 	
 	public Map<String, Tipo> getTipos(){//OBTENER COLEECION DE TIPOS
@@ -40,8 +44,20 @@ public class ManejadorTipo {
 		return p;
 	}
 	
-	public boolean existeTipo(String nombre) {
-		return mapTipo.containsKey(nombre);
+	public boolean existeTipo(String nombre) {//VERIFICAR EXISTENCIA DE TIPO
+		return mapTipos.containsKey(nombre);
+	}
+	
+	public boolean existePaquete(String nombre) {//VERIFICAR EXISTENCIA DE PAQUETE
+		return mapPaquetes.containsKey(nombre);
+	}
+	
+	public void eliminarPaquete(String nombre) {//ELIMINAR PAQUETE DE LA COLECCION
+		mapPaquetes.remove(nombre);
+	}
+	
+	public void eliminarTipo(String nombre) {//ELIMINAR TIPO DE LA COLECCION
+		mapTipos.remove(nombre);
 	}
 	
 }
