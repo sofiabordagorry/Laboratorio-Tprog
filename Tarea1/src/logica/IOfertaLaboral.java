@@ -1,5 +1,5 @@
 package logica;
 
-public interface ITipo {
+public interface IOfertaLaboral {
 
 }
