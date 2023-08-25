@@ -7,9 +7,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.time.ZoneId;
 import java.util.Date;
 
 import com.toedter.calendar.JDateChooser;
+
+import logica.DTEmpresa;
+import logica.DTPostulante;
+import logica.Factory;
+import logica.IUsuario;
 
 @SuppressWarnings("serial")
 public class RegistrarUsuario extends JInternalFrame {
@@ -40,13 +46,18 @@ public class RegistrarUsuario extends JInternalFrame {
     
     private boolean esPostulante;
     private JTextPane textPane;
+    private IUsuario iUsuario;
+    private JLabel lblNombreEmpresa;
+    private JTextField textFieldNombreEmpresa;
 
     /**
      * Create the frame.
      */
     public RegistrarUsuario() {
-        // Se inicializa con el controlador de usuarios
-
+        // Se inicializa con la interfaz de usuarios
+    	Factory fact = Factory.getInstance();
+    	iUsuario = fact.getIUsuario();
+    	
         // Propiedades del JInternalFrame como dimensión, posición dentro del frame,
         // etc.
         setResizable(true);
@@ -59,10 +70,12 @@ public class RegistrarUsuario extends JInternalFrame {
 
         GridBagLayout gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[] { 100, 120, 0, 120, 0 };
-        gridBagLayout.rowHeights = new int[] { 0, 0, 0, 30, 30, 30, 0, 0, 0, 0, 0, 0, 0 };
+        gridBagLayout.rowHeights = new int[] { 0, 0, 0, 30, 30, 30, 0, 0, 0, 0, 0, 0, 0, 0 };
         gridBagLayout.columnWeights = new double[] { 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE };
-        gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+        gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
         getContentPane().setLayout(gridBagLayout);
+        
+        esPostulante = true;
         
         buttonGroup = new ButtonGroup();
                                 
@@ -136,6 +149,8 @@ public class RegistrarUsuario extends JInternalFrame {
                         		    textField_2.setVisible(true);
                         		    textPane.setVisible(true);
                                     textScrollPane.setVisible(true);
+                                    lblNombreEmpresa.setVisible(true);
+                                    textFieldNombreEmpresa.setVisible(true);
                         		    esPostulante = false;
                         		} else {
                         		    descripcionLabel.setVisible(false);
@@ -143,6 +158,8 @@ public class RegistrarUsuario extends JInternalFrame {
                         		    textField_2.setVisible(false);
                         		    textPane.setVisible(false);
                                     textScrollPane.setVisible(false);
+                                    lblNombreEmpresa.setVisible(false);
+                                    textFieldNombreEmpresa.setVisible(false);
                         		    esPostulante = true;
                         		}
                         	}
@@ -279,6 +296,26 @@ public class RegistrarUsuario extends JInternalFrame {
                         
                 // EMPRESA
                         
+                lblNombreEmpresa = new JLabel("Nombre de Empresa");
+                lblNombreEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 12));
+                GridBagConstraints gbc_lblNombreEmpresa = new GridBagConstraints();
+                gbc_lblNombreEmpresa.anchor = GridBagConstraints.EAST;
+                gbc_lblNombreEmpresa.insets = new Insets(0, 0, 5, 5);
+                gbc_lblNombreEmpresa.gridx = 0;
+                gbc_lblNombreEmpresa.gridy = 8;
+                getContentPane().add(lblNombreEmpresa, gbc_lblNombreEmpresa);
+                lblNombreEmpresa.setVisible(false);
+                
+                textFieldNombreEmpresa = new JTextField();
+                GridBagConstraints gbc_textFieldNombreEmpresa = new GridBagConstraints();
+                gbc_textFieldNombreEmpresa.gridwidth = 3;
+                gbc_textFieldNombreEmpresa.insets = new Insets(0, 0, 5, 0);
+                gbc_textFieldNombreEmpresa.fill = GridBagConstraints.HORIZONTAL;
+                gbc_textFieldNombreEmpresa.gridx = 1;
+                gbc_textFieldNombreEmpresa.gridy = 8;
+                getContentPane().add(textFieldNombreEmpresa, gbc_textFieldNombreEmpresa);
+                textFieldNombreEmpresa.setColumns(10);
+                textFieldNombreEmpresa.setVisible(false);
                         
                 descripcionLabel = new JLabel("Descripción general");
                 descripcionLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -286,7 +323,7 @@ public class RegistrarUsuario extends JInternalFrame {
                 gbc_descripcionLabel.anchor = GridBagConstraints.EAST;
                 gbc_descripcionLabel.insets = new Insets(0, 0, 5, 5);
                 gbc_descripcionLabel.gridx = 0;
-                gbc_descripcionLabel.gridy = 8;
+                gbc_descripcionLabel.gridy = 9;
                 getContentPane().add(descripcionLabel, gbc_descripcionLabel);
                 descripcionLabel.setVisible(false);
                 
@@ -297,18 +334,18 @@ public class RegistrarUsuario extends JInternalFrame {
                 gbc_textScrollPane.insets = new Insets(0, 0, 5, 0);
                 gbc_textScrollPane.fill = GridBagConstraints.BOTH;
                 gbc_textScrollPane.gridx = 1;
-                gbc_textScrollPane.gridy = 8;
+                gbc_textScrollPane.gridy = 9;
                 getContentPane().add(textScrollPane, gbc_textScrollPane);
                 textPane.setVisible(false);
                 textScrollPane.setVisible(false);
                 
-                linkLabel = new JLabel("Página web");
+                linkLabel = new JLabel("Página web (opcional)");
                 linkLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
                 GridBagConstraints gbc_linkLabel = new GridBagConstraints();
                 gbc_linkLabel.anchor = GridBagConstraints.EAST;
                 gbc_linkLabel.insets = new Insets(0, 0, 5, 5);
                 gbc_linkLabel.gridx = 0;
-                gbc_linkLabel.gridy = 9;
+                gbc_linkLabel.gridy = 10;
                 getContentPane().add(linkLabel, gbc_linkLabel);
                 linkLabel.setVisible(false);
                 
@@ -318,7 +355,7 @@ public class RegistrarUsuario extends JInternalFrame {
                 gbc_textField_2.insets = new Insets(0, 0, 5, 0);
                 gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
                 gbc_textField_2.gridx = 1;
-                gbc_textField_2.gridy = 9;
+                gbc_textField_2.gridy = 10;
                 getContentPane().add(textField_2, gbc_textField_2);
                 textField_2.setColumns(10);
                 textField_2.setVisible(false);
@@ -335,7 +372,7 @@ public class RegistrarUsuario extends JInternalFrame {
                                                     gbc_btnAceptar.fill = GridBagConstraints.VERTICAL;
                                                     gbc_btnAceptar.insets = new Insets(0, 0, 5, 5);
                                                     gbc_btnAceptar.gridx = 1;
-                                                    gbc_btnAceptar.gridy = 10;
+                                                    gbc_btnAceptar.gridy = 11;
                                                     getContentPane().add(btnAceptar, gbc_btnAceptar);
                                     
                                             // Un botón (JButton) con un evento asociado que permite cerrar el formulario (solo ocultarlo).
@@ -352,7 +389,7 @@ public class RegistrarUsuario extends JInternalFrame {
                                             gbc_btnCancelar.gridwidth = 2;
                                             gbc_btnCancelar.fill = GridBagConstraints.VERTICAL;
                                             gbc_btnCancelar.gridx = 2;
-                                            gbc_btnCancelar.gridy = 10;
+                                            gbc_btnCancelar.gridy = 11;
                                             getContentPane().add(btnCancelar, gbc_btnCancelar);
 }
 
@@ -366,29 +403,54 @@ public class RegistrarUsuario extends JInternalFrame {
         // TODO Auto-generated method stub
 
         if(checkForm()) {
+        	if (esPostulante) {
+        		DTPostulante postInfo = new DTPostulante(textField.getText(), textFieldNombre.getText(), textFieldApellido.getText(), textFieldMail.getText(), null, dateChooser.getDate().toInstant()
+        			      .atZone(ZoneId.systemDefault())
+        			      .toLocalDate(), textFieldNacionalidad.getText());
+        		iUsuario.ingresarDatosPostulante(postInfo);
+        	} else {
+        		DTEmpresa empInfo = new DTEmpresa(textField.getText(), textFieldNombre.getText(), textFieldApellido.getText(), textFieldMail.getText(), null, lblNombreEmpresa.getText(), textPane.getText(), textField_2.getText());
+        		iUsuario.ingresarDatosEmpresa(empInfo);
+        	}
         	limpiarFormulario();
         }
     }
     
     private boolean checkForm() {
+    	String nicknameU = textField.getText();
 		String nombreU = textFieldNombre.getText();
 		String apellidoU = textFieldApellido.getText();
 		String mailU = textFieldMail.getText();
 		String nacionalidadU = textFieldNacionalidad.getText();
 		Date dateU = dateChooser.getDate();
+		String nombreEmpresaU = lblNombreEmpresa.getText();
 		String descripcionU = textPane.getText();
 		
 		
-		if (esPostulante && (nombreU.isEmpty() || apellidoU.isEmpty() || mailU.isEmpty() || 
-				nacionalidadU.isEmpty() )) {
+		if (esPostulante) {
+			if (nicknameU.isEmpty() || nombreU.isEmpty() || apellidoU.isEmpty() || mailU.isEmpty() || 
+				nacionalidadU.isEmpty()) {
 				JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "Registrar Usuario",
 						JOptionPane.ERROR_MESSAGE);
 				return false;
-		} else if (!esPostulante && (nombreU.isEmpty() || apellidoU.isEmpty() || mailU.isEmpty() || descripcionU.isEmpty())) {
+			}
+			if (dateU == null) {
+				JOptionPane.showMessageDialog(this, "Se debe seleccionar una fecha de nacimiento", "Registrar Usuario",
+						JOptionPane.ERROR_MESSAGE);
+				return false;
+			}
+		}
+				
+		if (!esPostulante) {
+			if (nombreU.isEmpty() || apellidoU.isEmpty() || mailU.isEmpty() || descripcionU.isEmpty() || nombreEmpresaU.isEmpty()) {
 				JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "Registrar Usuario",
 					JOptionPane.ERROR_MESSAGE);
 				return false;
+			}
 		}
+		
+		JOptionPane.showMessageDialog(this, "Usuario registrado con éxito", "Registrar Usuario",
+				JOptionPane.INFORMATION_MESSAGE);
 	
 		return true;
 	}
@@ -398,10 +460,14 @@ public class RegistrarUsuario extends JInternalFrame {
     // se ocultan, por lo que conviene borrar la información para que 
     // no aparezca al mostrarlas nuevamente.
     private void limpiarFormulario() {
+    	textField.setText("");
         textFieldNombre.setText("");
         textFieldApellido.setText("");
         textFieldMail.setText("");
         textFieldNacionalidad.setText("");
         textPane.setText("");
+        textField_2.setText("");
+        textFieldNombreEmpresa.setText("");
+        dateChooser.setDate(null);
     }
 }

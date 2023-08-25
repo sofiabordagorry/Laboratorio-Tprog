@@ -12,7 +12,7 @@ public class ManejadorUsuario {
 		mapPostulantes = new HashMap<>();
 	}
 	
-	public ManejadorUsuario getInstancia() {//OBTENER INSTANCIA
+	public static ManejadorUsuario getInstancia() {//OBTENER INSTANCIA
 		if(instancia == null) {
 			instancia = new ManejadorUsuario();
 		}
