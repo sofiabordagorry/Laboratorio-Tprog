@@ -19,11 +19,11 @@ public class ManejadorUsuario {
 		return instancia;
 	}
 	
-	public void ingresarEmpresa(Empresa e) {//AGREAR UNA EMPRESA A LA COLECCION
+	public void agregarEmpresa(Empresa e) {//AGREAR UNA EMPRESA A LA COLECCION
 		mapEmpresas.put(e.getNickname(), e);
 	}
 	
-	public void ingresarPostulante(Postulante p) {//AGREGAR UN POSTULANTE A LA COLECCION
+	public void agregarPostulante(Postulante p) {//AGREGAR UN POSTULANTE A LA COLECCION
 		mapPostulantes.put(p.getNickname(), p);
 	}
 	
@@ -44,13 +44,12 @@ public class ManejadorUsuario {
 		return u;
 	}
 	
-	public Empresa buscarNombreEmpresa(String nomEmpresa) {//quizas esta operacion no vaya
-		for (Empresa e : mapEmpresas.values()) {
-			if(e.getNombreEmpresa().equals(nomEmpresa)) {
-				return e;
-			}
-		}
-		return null;
+	public boolean existeEmpresa(String nickname) {//VERIFICAR EXISTENCIA DE EMPRESA
+		return mapEmpresas.containsKey(nickname);
+	}
+	
+	public void existePostulante(String nickname) {//VERIFICAR EXISTENCIA DE POSTULANTE
+		mapPostulantes.remove(nickname);
 	}
 	
 	public Postulante buscarPostulante(String nickname) {//BUSCAR POSTULANTE
@@ -61,5 +60,13 @@ public class ManejadorUsuario {
 	public Empresa buscarEmpresa(String nickname) {//BUSCAR EMPRESA
 		Empresa e = mapEmpresas.get(nickname);
 		return e;
+	}
+	
+	public void eliminarEmpresa(String nickname) {//ELIMINAR EMPRESA DE LA COLECION
+		mapEmpresas.remove(nickname);
+	}
+	
+	public void eliminarPostulante(String nickname) {//ELIMINAR POSTULANTE DE LA COLECCCION
+		mapPostulantes.remove(nickname);
 	}
 }
