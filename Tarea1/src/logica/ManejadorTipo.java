@@ -30,7 +30,7 @@ public class ManejadorTipo {
 		return mapTipos;
 	}
 	
-	public Map<String, Paqute> getPaquetes(){//OBTENER COLECCION DE PAQUETES
+	public Map<String, Paquete> getPaquetes(){//OBTENER COLECCION DE PAQUETES
 		return mapPaquetes;
 	}
 	

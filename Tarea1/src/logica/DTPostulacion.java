@@ -2,14 +2,14 @@ package logica;
 
 import java.time.LocalDate;
 
-public class Postulacion {
+public class DTPostulacion {
 	private LocalDate fecha;
 	private String CVReducido;
 	private String descripcion;
 	private DTPostulante postulante;
 	private DTOfertaLaboral ofertaLaboral;
 	
-	public Postulacion(LocalDate fecha, String CVReducido, String descripcion, DTPostulante postulante, DTOfertaLaboral ofertaLaboral) {
+	public DTPostulacion(LocalDate fecha, String CVReducido, String descripcion, DTPostulante postulante, DTOfertaLaboral ofertaLaboral) {
 		this.fecha = fecha;
 		this.CVReducido = CVReducido;
 		this.descripcion = descripcion;
@@ -37,3 +37,4 @@ public class Postulacion {
 		return this.ofertaLaboral;
 	}
 	
+}

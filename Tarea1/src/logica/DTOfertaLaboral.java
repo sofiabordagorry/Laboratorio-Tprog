@@ -2,6 +2,7 @@ package logica;
 
 import java.time.LocalDate;
 import java.util.Map;
+import java.util.List;
 
 public class DTOfertaLaboral {
 	
@@ -95,6 +96,6 @@ public class DTOfertaLaboral {
 		return this.dataEmpresa;
 	}
 	public DTCompra getDTCompra() {
-		return this.dataCompra();
+		return this.dataCompra;
 	}
 }
