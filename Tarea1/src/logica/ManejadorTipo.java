@@ -9,9 +9,10 @@ public class ManejadorTipo {
 	
 	public ManejadorTipo() {//CONSTRUCTOR
 		mapTipos = new HashMap<>();
+		mapPaquetes = new HashMap<>();
 	}
 	
-	public ManejadorTipo getInstancia() {//OBTENER INSTANCIA 
+	public static ManejadorTipo getInstancia() {//OBTENER INSTANCIA 
 		if(instancia == null) {
 			instancia = new ManejadorTipo();
 		}

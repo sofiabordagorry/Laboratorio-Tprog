@@ -43,12 +43,12 @@ public class RegistrarUsuario extends JInternalFrame {
     private JTextField textField_2;
     private JDateChooser dateChooser;
     private JScrollPane textScrollPane;
-    
-    private boolean esPostulante;
     private JTextPane textPane;
     private IUsuario iUsuario;
     private JLabel lblNombreEmpresa;
     private JTextField textFieldNombreEmpresa;
+    
+    private boolean esPostulante;
 
     /**
      * Create the frame.
@@ -66,7 +66,7 @@ public class RegistrarUsuario extends JInternalFrame {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setClosable(true);
         setTitle("Registrar un Usuario");
-        setBounds(10, 10, 600, 600);
+        setBounds(10, 10, 422, 400);
 
         GridBagLayout gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[] { 100, 120, 0, 120, 0 };
@@ -359,38 +359,39 @@ public class RegistrarUsuario extends JInternalFrame {
                 getContentPane().add(textField_2, gbc_textField_2);
                 textField_2.setColumns(10);
                 textField_2.setVisible(false);
-                                    
-                                            btnAceptar = new JButton("Aceptar");
-                                            btnAceptar.addActionListener(new ActionListener() {
-                                                public void actionPerformed(ActionEvent arg0) {
-                                                    cmdRegistroUsuarioActionPerformed(arg0);
-                                                }
-                                            });
-                                            
-                                                    GridBagConstraints gbc_btnAceptar = new GridBagConstraints();
-                                                    gbc_btnAceptar.anchor = GridBagConstraints.EAST;
-                                                    gbc_btnAceptar.fill = GridBagConstraints.VERTICAL;
-                                                    gbc_btnAceptar.insets = new Insets(0, 0, 5, 5);
-                                                    gbc_btnAceptar.gridx = 1;
-                                                    gbc_btnAceptar.gridy = 11;
-                                                    getContentPane().add(btnAceptar, gbc_btnAceptar);
-                                    
-                                            // Un botón (JButton) con un evento asociado que permite cerrar el formulario (solo ocultarlo).
-                                            // Dado que antes de cerrar se limpia el formulario, se invoca un método reutilizable para ello. 
-                                            btnCancelar = new JButton("Cancelar");
-                                            btnCancelar.addActionListener(new ActionListener() {
-                                                public void actionPerformed(ActionEvent e) {
-                                                    limpiarFormulario();
-                                                    setVisible(false);
-                                                }
-                                            });
-                                            GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
-                                            gbc_btnCancelar.insets = new Insets(0, 0, 5, 0);
-                                            gbc_btnCancelar.gridwidth = 2;
-                                            gbc_btnCancelar.fill = GridBagConstraints.VERTICAL;
-                                            gbc_btnCancelar.gridx = 2;
-                                            gbc_btnCancelar.gridy = 11;
-                                            getContentPane().add(btnCancelar, gbc_btnCancelar);
+                                                    
+                                                            btnAceptar = new JButton("Aceptar");
+                                                            btnAceptar.addActionListener(new ActionListener() {
+                                                                public void actionPerformed(ActionEvent arg0) {
+                                                                    cmdRegistroUsuarioActionPerformed(arg0);
+                                                                }
+                                                            });
+                                                                    
+                                                                            // Un botón (JButton) con un evento asociado que permite cerrar el formulario (solo ocultarlo).
+                                                                            // Dado que antes de cerrar se limpia el formulario, se invoca un método reutilizable para ello. 
+                                                                            btnCancelar = new JButton("Cancelar");
+                                                                            btnCancelar.addActionListener(new ActionListener() {
+                                                                                public void actionPerformed(ActionEvent e) {
+                                                                                    limpiarFormulario();
+                                                                                    setVisible(false);
+                                                                                }
+                                                                            });
+                                                                            GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
+                                                                            gbc_btnCancelar.anchor = GridBagConstraints.EAST;
+                                                                            gbc_btnCancelar.insets = new Insets(0, 0, 5, 5);
+                                                                            gbc_btnCancelar.gridwidth = 2;
+                                                                            gbc_btnCancelar.fill = GridBagConstraints.VERTICAL;
+                                                                            gbc_btnCancelar.gridx = 1;
+                                                                            gbc_btnCancelar.gridy = 11;
+                                                                            getContentPane().add(btnCancelar, gbc_btnCancelar);
+                                                            
+                                                                    GridBagConstraints gbc_btnAceptar = new GridBagConstraints();
+                                                                    gbc_btnAceptar.anchor = GridBagConstraints.WEST;
+                                                                    gbc_btnAceptar.fill = GridBagConstraints.VERTICAL;
+                                                                    gbc_btnAceptar.insets = new Insets(0, 0, 5, 0);
+                                                                    gbc_btnAceptar.gridx = 3;
+                                                                    gbc_btnAceptar.gridy = 11;
+                                                                    getContentPane().add(btnAceptar, gbc_btnAceptar);
 }
 
     // Este método es invocado al querer registrar un usuario, funcionalidad

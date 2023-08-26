@@ -8,6 +8,12 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+
+import logica.ManejadorTipo;
+import logica.Paquete;
+import logica.PaqueteTipo;
+import logica.Tipo;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -80,8 +86,6 @@ public class Principal {
 		creUsrInternalFrame.setLocation(25, 25);
 		creUsrInternalFrame.setVisible(false);
 		
-
-		
 		creConUsuInternalFrame = new ConsultaUsuario();
 		creConUsuInternalFrame.setSize(441, 500);
 		creConUsuInternalFrame.setLocation(25,25);
@@ -121,6 +125,14 @@ public class Principal {
 		frmAdmTrabajo.setTitle("Administrador Trabajo.uy");
 		frmAdmTrabajo.setBounds(100, 100, 754, 710);
 		frmAdmTrabajo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		Paquete paqueteTest = new Paquete("nombreTest", "descripcionTest", 5, 0.5f, 500.0f);
+		ManejadorTipo m = ManejadorTipo.getInstancia();
+		m.agregarPaquete(paqueteTest);
+		
+		Tipo tipoTest = new Tipo("Nombretipo", "Descripciontipo", 5, 5, 5.0f, null);
+		PaqueteTipo pqtTest = new PaqueteTipo(5, tipoTest);
+		paqueteTest.agregarPaqueteTipo(pqtTest);
 		
 		JMenuBar mainMenu = new JMenuBar();
 		frmAdmTrabajo.setJMenuBar(mainMenu);
