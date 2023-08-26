@@ -1,5 +1,7 @@
 package logica;
 
-public interface IUsuario {
+import excepciones.EmpresasNoExistenException;
 
+public interface IUsuario {
+	public abstract DTEmpresa[] listarEmpresasAOL() throws EmpresasNoExistenException;
 }

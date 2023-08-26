@@ -1,19 +1,21 @@
 package logica;
 
 import java.util.Map;
+import java.util.HashMap;
 
 public class Empresa extends Usuario {
 	
 	private String nombreEmpresa;
 	private String descripcion;
 	private String link;
-	//private Map<String, OfertaLaboral> ofertasLaborales;
+	private Map<String, OfertaLaboral> ofertasLaborales;
 	
 	public Empresa(String nickname, String nombre, String apellido, String correo, String nombreEmpresa, String descripcion, String link) {
 		super(nickname, nombre, apellido, correo);
 		this.nombreEmpresa = nombreEmpresa;
 		this.descripcion = descripcion;
 		this.link = link;
+		this.ofertasLaborales = new HashMap<>();
 	}
 	
 	public String getNombreEmpresa() {
@@ -40,9 +42,10 @@ public class Empresa extends Usuario {
 		this.link = link;
 	}
 	
-	/*public void agregarOfertaLaboral(OfertaLaboral ol) {
+	public void agregarOfertaLaboral(OfertaLaboral ol) {
+		this.ofertasLaborales.put(ol.getNombre(), ol);
 	}
 	
-	public DTEmpresa getDataEmpresa() {
-	}*/
+//	public DTEmpresa getDataEmpresa() {
+//	}
 }

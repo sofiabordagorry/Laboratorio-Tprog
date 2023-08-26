@@ -19,6 +19,10 @@ public class DTTipo {
 		this.fechaDeAlta = fechaDeAlta;
 	}
 	
+	public String toString() {
+		return this.nombre + this.exposicion;
+	}
+	
 	public String getNombre() {
 		return this.nombre;
 	}
