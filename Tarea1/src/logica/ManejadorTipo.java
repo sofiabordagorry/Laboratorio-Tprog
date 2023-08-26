@@ -3,7 +3,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class ManejadorTipo {
-	private static ManejadorTipo instancia;
+	private static ManejadorTipo instancia=null;
 	private Map<String, Tipo> mapTipos;//Hay que cambiarle el nombre
 	private Map<String, Paquete> mapPaquetes;//a este tambien
 	
@@ -11,7 +11,7 @@ public class ManejadorTipo {
 		mapTipos = new HashMap<>();
 	}
 	
-	public ManejadorTipo getInstancia() {//OBTENER INSTANCIA 
+	public static ManejadorTipo getInstancia() {//OBTENER INSTANCIA 
 		if(instancia == null) {
 			instancia = new ManejadorTipo();
 		}

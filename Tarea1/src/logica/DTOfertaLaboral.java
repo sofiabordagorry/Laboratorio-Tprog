@@ -36,14 +36,14 @@ public class DTOfertaLaboral {
 		this.dataCompra = dataCompra;
 	}
 	
-	public DTOfertaLaboral(String nombre, String descripcion, String ciudad, String departamento, String horario, float remuneracion) {
+	public DTOfertaLaboral(String nombre, String descripcion, String ciudad, String departamento, String horario, float remuneracion, LocalDate fechaDeAlta) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.ciudad = ciudad;
 		this.departamento = departamento;
 		this.horario = horario;
 		this.remuneracion = remuneracion;
-		this.fechaDeAlta = LocalDate.now();
+		this.fechaDeAlta = fechaDeAlta;
 		this.dataTipo = null;
 		this.dataKeywords = null;
 	}
@@ -97,5 +97,9 @@ public class DTOfertaLaboral {
 	}
 	public DTCompra getDTCompra() {
 		return this.dataCompra;
+	}
+	
+	public String toString() {
+		return this.nombre;
 	}
 }

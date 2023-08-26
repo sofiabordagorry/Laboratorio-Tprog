@@ -43,4 +43,8 @@ public class Tipo {
     public LocalDate getFechaDeAlta() {
         return this.fechaDeAlta;
     }
+    
+    public LocalDate calcularVencimiento(LocalDate fecha) {
+    	return fecha.plusDays(this.duracion);
+    }
 }

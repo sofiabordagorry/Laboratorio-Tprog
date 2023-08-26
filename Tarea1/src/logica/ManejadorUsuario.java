@@ -1,9 +1,10 @@
 package logica;
 import java.util.Map;
+import java.util.Collection;
 import java.util.HashMap;
 
 public class ManejadorUsuario {
-	private static ManejadorUsuario instancia;
+	private static ManejadorUsuario instancia = null;
 	private Map<String, Empresa> mapEmpresas;
 	private Map<String, Postulante> mapPostulantes;
 	
@@ -12,7 +13,7 @@ public class ManejadorUsuario {
 		mapPostulantes = new HashMap<>();
 	}
 	
-	public ManejadorUsuario getInstancia() {//OBTENER INSTANCIA
+	public static ManejadorUsuario getInstancia() {//OBTENER INSTANCIA
 		if(instancia == null) {
 			instancia = new ManejadorUsuario();
 		}
@@ -27,13 +28,35 @@ public class ManejadorUsuario {
 		mapPostulantes.put(p.getNickname(), p);
 	}
 	
-	public Map<String, Empresa> getEmpresas(){//OBTENER COLECCIONES DE EMPRESAS
-		return mapEmpresas;
+	public Empresa[] getEmpresas() {
+	    if (this.mapEmpresas.isEmpty()) {
+	        return null;
+	    } else {
+	        Collection<Empresa> emps = this.mapEmpresas.values();
+	        Object[] o = emps.toArray();
+	        Empresa[] empresas = new Empresa[o.length];
+	        for (int i = 0; i < o.length; i++) {
+	            empresas[i] = (Empresa) o[i];
+	        }
+	        return empresas;
+	    }
 	}
+
 	
-	public Map<String, Postulante> getPostulantes(){//OBTENER COLECCION DE POSTULANTES
-		return mapPostulantes;
+	public Postulante[] getPostulantes() {
+	    if (this.mapPostulantes.isEmpty()) {
+	        return null;
+	    } else {
+	        Collection<Postulante> postus = this.mapPostulantes.values();
+	        Object[] o = postus.toArray();
+	        Postulante[] postulantes = new Postulante[o.length];
+	        for (int i = 0; i < o.length; i++) {
+	        	postulantes[i] = (Postulante) o[i];
+	        }
+	        return postulantes;
+	    }
 	}
+
 	
 	public Usuario buscarUsuario(String nickname) {//BUSCAR UN USUARIO
 		Usuario u = mapEmpresas.get(nickname);

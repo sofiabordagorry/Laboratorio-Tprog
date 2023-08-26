@@ -7,7 +7,7 @@ public class Postulante extends Usuario {
 	
 	private LocalDate fechaNacimiento;
 	private String nacionalidad;
-	//private LinkedList<Postulacion> postulaciones;
+	private LinkedList<Postulacion> postulaciones;
 
 	public Postulante(String nickname, String nombre, String apellido, String correo, LocalDate fechaNacimiento, String nacionalidad) {
 		super(nickname, nombre, apellido, correo);
@@ -21,5 +21,18 @@ public class Postulante extends Usuario {
 	
 	public String getNacionalidad() {
 		return this.nacionalidad;
+	}
+	
+	public Boolean existePostulacion(String oferta) {
+		LinkedList<Postulacion> postulaciones = this.postulaciones;
+		Boolean existe=false;
+        for (int i = 0; i < postulaciones.size(); i++) {
+        	existe=postulaciones.get(i).verificarOfertaLaboral(oferta);
+        }
+        return existe;
+	}
+	
+	public void agregarPostulacion(Postulacion postulacion) {
+		this.postulaciones.add(postulacion);
 	}
 }

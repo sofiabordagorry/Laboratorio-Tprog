@@ -5,14 +5,14 @@ import java.time.LocalDate;
 public class DTPostulacion {
 	private LocalDate fecha;
 	private String CVReducido;
-	private String descripcion;
+	private String motivacion;
 	private DTPostulante postulante;
 	private DTOfertaLaboral ofertaLaboral;
 	
-	public DTPostulacion(LocalDate fecha, String CVReducido, String descripcion, DTPostulante postulante, DTOfertaLaboral ofertaLaboral) {
+	public DTPostulacion(LocalDate fecha, String CVReducido, String motivacion, DTPostulante postulante, DTOfertaLaboral ofertaLaboral) {
 		this.fecha = fecha;
 		this.CVReducido = CVReducido;
-		this.descripcion = descripcion;
+		this.motivacion = motivacion;
 		this.postulante = postulante;
 		this.ofertaLaboral = ofertaLaboral;
 	}
@@ -25,8 +25,8 @@ public class DTPostulacion {
 		return this.CVReducido;
 	}
 	
-	public String getDescripcion() {
-		return this.descripcion;
+	public String getMotivacion() {
+		return this.motivacion;
 	}
 	
 	public DTPostulante getPostulante() {

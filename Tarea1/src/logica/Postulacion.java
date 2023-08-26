@@ -5,14 +5,14 @@ import java.time.LocalDate;
 public class Postulacion {
 	private LocalDate fecha;
 	private String CVReducido;
-	private String descripcion;
+	private String motivacion;
 	private Postulante postulante;
 	private OfertaLaboral ofertaLaboral;
 	
-	public Postulacion(LocalDate fecha, String CVReducido, String descripcion, Postulante postulante, OfertaLaboral ofertaLaboral) {
+	public Postulacion(LocalDate fecha, String CVReducido, String motivacion, Postulante postulante, OfertaLaboral ofertaLaboral) {
 		this.fecha = fecha;
 		this.CVReducido = CVReducido;
-		this.descripcion = descripcion;
+		this.motivacion = motivacion;
 		this.postulante = postulante;
 		this.ofertaLaboral = ofertaLaboral;
 	}
@@ -25,8 +25,8 @@ public class Postulacion {
 		return this.CVReducido;
 	}
 	
-	public String getDescripcion() {
-		return this.descripcion;
+	public String getMotivacion() {
+		return this.motivacion;
 	}
 	
 	public Postulante getPostulante() {
@@ -45,8 +45,8 @@ public class Postulacion {
 		this.CVReducido = CVReducido;
 	}
 	
-	public void setDescripcion(String Descripcion) {
-		this.descripcion = descripcion;
+	public void setMotivacion(String motivacion) {
+		this.motivacion = motivacion;
 	}
 	
 	public void setPostulante(Postulante postulante) {
@@ -55,5 +55,10 @@ public class Postulacion {
 	
 	public void setOfertaLaboral(OfertaLaboral ofertaLaboral) {
 		this.ofertaLaboral = ofertaLaboral;
+	}
+	
+	public Boolean verificarOfertaLaboral(String oferta) {
+		String nombre = this.ofertaLaboral.getNombre();
+		return oferta==nombre;
 	}
 }
