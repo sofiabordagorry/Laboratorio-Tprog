@@ -46,7 +46,7 @@ public class Postulacion {
 	}
 	
 	public void setDescripcion(String Descripcion) {
-		this.descripcion = descripcion;
+		this.descripcion = Descripcion;
 	}
 	
 	public void setPostulante(Postulante postulante) {
@@ -55,5 +55,10 @@ public class Postulacion {
 	
 	public void setOfertaLaboral(OfertaLaboral ofertaLaboral) {
 		this.ofertaLaboral = ofertaLaboral;
+	}
+	
+	public DTPostulacion getDataPostulacion() {
+		DTPostulacion dtP = new DTPostulacion(this.getFecha(), this.getCVReducido(), this.getDescripcion(), this.getPostulante().getDataPostulante(), this.getOfertaLaboral().getDataOfertaLaboral());
+		return dtP;
 	}
 }

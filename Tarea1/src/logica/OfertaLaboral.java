@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
 
 public class OfertaLaboral {
 	private String nombre;
@@ -17,6 +19,8 @@ public class OfertaLaboral {
 	private Tipo tipoOL;
 	private List<Postulacion> postulaciones;
 	private Map<String, Keyword> keywords;
+	
+	private Empresa empresaCreadora;//nuevo atributo agregado
 	
 	
 	public OfertaLaboral(String nombre, String descripcion, String ciudad, String departamento, String horario,
@@ -85,5 +89,26 @@ public class OfertaLaboral {
 	
 	public void agregarPostulacion(Postulacion postulacion) {
 		this.postulaciones.add(postulacion);
+	}
+	
+	public String getEmpresaCreadora(){
+		return this.empresaCreadora.getNombreEmpresa();
+	}
+	
+	public DTOfertaLaboral getDataOfertaLaboral() {
+		DTTipo dataTipoOL = this.getTipoOL().getDataTipo();
+		Map<String, DTKeyword> dataKeyWords = new HashMap<>();
+		
+		for (Map.Entry<String, Keyword> entry : this.getKeywords().entrySet()) {
+			dataKeyWords.put(entry.getKey(), entry.getValue().getDataKeyWord());
+		}
+		
+		List<DTPostulacion> dataPostulaciones = new LinkedList<>();
+		for(Postulacion p : this.getPostulaciones()) {
+			dataPostulaciones.add(p.getDataPostulacion());
+		}
+		
+		DTOfertaLaboral dtOL = new DTOfertaLaboral(this.getNombre(),this.getDescripcion(),this.getCiudad(),this.getDepartamento(),this.getHorario(),this.getRemuneracion(),this.getFechaDeAlta(),this.getCostoAsociado(),dataTipoOL, dataKeyWords, dataPostulaciones,this.getEmpresaCreadora());
+		return dtOL;
 	}
 }

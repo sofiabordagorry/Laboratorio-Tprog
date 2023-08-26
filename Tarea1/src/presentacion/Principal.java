@@ -3,15 +3,27 @@ package presentacion;
 import java.awt.EventQueue;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.time.LocalDate;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+
+import logica.Empresa;
+import logica.Factory;
+import logica.IOfertaLaboral;
+import logica.IUsuario;
+import logica.ManejadorUsuario;
+import logica.Postulante;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class Principal {
+	
+	private IUsuario IU;
+	private IOfertaLaboral IOL;
 	
     private AltaOfertaLaboral creAltOLInternalFrame;
     private CrearPaqueteTiposPublicacionOfertasLaborales crePaqTipPubOLInternalFrame;
@@ -52,6 +64,17 @@ public class Principal {
 	public Principal() {
 		initialize();
 		
+		Factory fab = Factory.getInstance();
+		IU = fab.getIUsuario();
+		IOL = fab.getIOfertaLaboral();
+		
+		 ManejadorUsuario iMU =  ManejadorUsuario.getInstancia();
+		 Empresa u1 = new Empresa("nickname", "nombre", "apellido", "correo", "NombreEmpresa", "descripcion", "link");
+		 LocalDate d = LocalDate.now();
+		 Postulante u2 = new Postulante("nickname2", "nombre2", "apellido2", "correo2", d,"nacionalidad");
+		 iMU.agregarPostulante(u2);
+		 iMU.agregarEmpresa(u1);
+		
 		creConPaqTipOLInternalFrame = new ConsultaPaqueteDeTiposDeOfertaLaboral();
 		creConPaqTipOLInternalFrame.setLocation(25,25);
 		creConPaqTipOLInternalFrame.setVisible(false);
@@ -82,16 +105,16 @@ public class Principal {
 		
 
 		
-		creConUsuInternalFrame = new ConsultaUsuario();
+		creConUsuInternalFrame = new ConsultaUsuario(IU,IOL);
 		creConUsuInternalFrame.setSize(441, 500);
 		creConUsuInternalFrame.setLocation(25,25);
 		creConUsuInternalFrame.setVisible(false);
 		
-		creConOfLabInternalFrame = new ConsultaOfertaLaboral();
+		creConOfLabInternalFrame = new ConsultaOfertaLaboral(IU, IOL);
 		creConOfLabInternalFrame.setLocation(25, 25);
 		creConOfLabInternalFrame.setVisible(false);
 		
-		creModUsuInternalFrame = new ModificarDatosUsuario();
+		creModUsuInternalFrame = new ModificarDatosUsuario(IU);
 		creModUsuInternalFrame.setLocation(25,25);
 		creModUsuInternalFrame.setVisible(false);
 		
@@ -145,6 +168,7 @@ public class Principal {
 			public void actionPerformed(ActionEvent e) {
 				// VENTANA PARA CONSULTAR USUARIO
 				creConUsuInternalFrame.setVisible(true);
+				creConUsuInternalFrame.cargarUsuarios();
 			}
 		});
 		userMenu.add(itemConsultaUsuario);
@@ -154,6 +178,7 @@ public class Principal {
 			public void actionPerformed(ActionEvent e) {
 				// VENTANA PARA MODIFICAR DATOS DE USUARIO
 				creModUsuInternalFrame.setVisible(true);
+				creModUsuInternalFrame.cargarUsuarios();
 			}
 		});
 		userMenu.add(itemModifUsuario);
@@ -186,6 +211,7 @@ public class Principal {
 			public void actionPerformed(ActionEvent e) {
 				// VENTANA PARA CONSULTAR OFERTA LABORAL
 				creConOfLabInternalFrame.setVisible(true);
+				creConOfLabInternalFrame.cargarEmpresas();
 			}
 		});
 		menuTrabajo.add(itemConsultaOF);

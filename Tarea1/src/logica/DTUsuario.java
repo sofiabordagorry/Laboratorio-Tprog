@@ -37,4 +37,7 @@ public class DTUsuario {
 		return this.ofertasLaborales;
 	}
 	
+	public String toString() {
+		return this.nickname;
+	}
 }
