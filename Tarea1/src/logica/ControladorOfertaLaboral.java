@@ -3,6 +3,7 @@ package logica;
 import excepciones.KeywordsNoExistenException;
 import excepciones.TipoPubNoExistenException;
 import excepciones.OfertaLaboralRepetidaException;
+import excepciones.PaqueteRepetidoException;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -68,5 +69,18 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 		ManejadorUsuario mu = ManejadorUsuario.getInstancia();
 		Empresa e = mu.buscarEmpresa(empresa);
 		e.agregarOfertaLaboral(olNueva);
+	}
+	
+	public void ingresarDatosPaquete(DTPaquete datosPaquete) throws PaqueteRepetidoException {
+		ManejadorTipo mt = ManejadorTipo.getInstancia();
+		Paquete p = mt.buscarPaquete(datosPaquete.getNombre());
+		
+		if(p != null)
+			throw new PaqueteRepetidoException("Ya existe el Paquete %s".formatted(datosPaquete.getNombre()));
+		
+		Paquete nuevoPaquete = new Paquete(datosPaquete.getNombre(), datosPaquete.getDescripcion(), datosPaquete.getPeriodoDeValidez(), 
+														datosPaquete.getDescuento(), datosPaquete.getCostoAsociado());
+		
+		mt.agregarPaquete(nuevoPaquete);
 	}
 }

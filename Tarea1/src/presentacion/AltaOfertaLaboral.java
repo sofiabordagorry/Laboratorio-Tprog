@@ -346,12 +346,12 @@ public class AltaOfertaLaboral extends JInternalFrame {
 				
 				JOptionPane.showMessageDialog(this, "La Oferta Laboral se ha creado con éxito", "Alta de Oferta Laboral",
                         JOptionPane.INFORMATION_MESSAGE);
+				limpiarFormulario();
+				setVisible(false);
 			} catch(OfertaLaboralRepetidaException e) {
 				JOptionPane.showMessageDialog(this, e.getMessage(), "Alta de Oferta Laboral", 
 					JOptionPane.ERROR_MESSAGE);
 			}
-			limpiarFormulario();
-			setVisible(false);
 		}
 		
 	}
@@ -532,5 +532,6 @@ public class AltaOfertaLaboral extends JInternalFrame {
 		comboBoxEmpresas.setSelectedIndex(-1);
 		comboBoxTipPubOL.setSelectedIndex(-1);
 		listKeys.clearSelection();
+		dateChooserFechaDeAlta.setDate(null);
 	}
 }

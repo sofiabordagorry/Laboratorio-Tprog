@@ -63,6 +63,8 @@ public class Principal {
 		Factory fac = Factory.getInstance();
 		IOL = fac.getIOfertaLaboral();
 		IU = fac.getIUsuario();
+		
+		//PRUEBAS
 		ManejadorUsuario mu = ManejadorUsuario.getInstancia();
 		Empresa emp = new Empresa("nickEmp1", "nom", "ap", "Jokin@gmail.com", "nomEmp", "desc", "Hola.com");
 		Empresa emp1 = new Empresa("nickEmp2", "nom", "ap", "Jokin2@gmail.com", "nomEmp", "desc", "Hola.com");
@@ -106,7 +108,7 @@ public class Principal {
 		creAltOLInternalFrame.setLocation(25, 25);
 		creAltOLInternalFrame.setVisible(false);
 		
-		crePaqTipPubOLInternalFrame = new CrearPaqueteTiposPublicacionOfertasLaborales();
+		crePaqTipPubOLInternalFrame = new CrearPaqueteTiposPublicacionOfertasLaborales(IOL);
 		crePaqTipPubOLInternalFrame.setLocation(25, 25);
 		crePaqTipPubOLInternalFrame.setVisible(false);
 		

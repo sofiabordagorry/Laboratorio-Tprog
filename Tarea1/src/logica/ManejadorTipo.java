@@ -10,6 +10,7 @@ public class ManejadorTipo {
 	
 	private ManejadorTipo() {//CONSTRUCTOR
 		mapTipos = new HashMap<>();
+		mapPaquetes = new HashMap<>();
 	}
 	
 	public static ManejadorTipo getInstancia() {//OBTENER INSTANCIA 
@@ -51,8 +52,8 @@ public class ManejadorTipo {
 		return t;
 	}
 	
-	public Tipo buscarPaquete(String paquete) {//BUSCAR PAQUETE
-		Tipo p = mapTipos.get(paquete);
+	public Paquete buscarPaquete(String paquete) {//BUSCAR PAQUETE
+		Paquete p = mapPaquetes.get(paquete);
 		return p;
 	}
 	
