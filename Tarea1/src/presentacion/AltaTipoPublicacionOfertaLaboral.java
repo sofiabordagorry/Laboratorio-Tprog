@@ -339,9 +339,4 @@ public class AltaTipoPublicacionOfertaLaboral extends JInternalFrame {
         Matcher matcher = pattern.matcher(s);
         return matcher.matches();
     }
-
-
-	
-	
-	
 }
