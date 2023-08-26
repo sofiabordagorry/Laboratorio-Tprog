@@ -167,7 +167,8 @@ public class Principal {
 		frmAdmTrabajo.setBounds(100, 100, 754, 710);
 		frmAdmTrabajo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		Paquete paqueteTest = new Paquete("nombreTest", "descripcionTest", 5, 0.5f, 500.0f);
+		LocalDate d = LocalDate.of(1900, 1, 1);
+		Paquete paqueteTest = new Paquete("nombreTest", "descripcionTest", 5, 0.5f, 500.0f, d);
 		ManejadorTipo m = ManejadorTipo.getInstancia();
 		m.agregarPaquete(paqueteTest);
 		

@@ -117,7 +117,7 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 			throw new PaqueteRepetidoException("Ya existe el Paquete %s".formatted(datosPaquete.getNombre()));
 		
 		Paquete nuevoPaquete = new Paquete(datosPaquete.getNombre(), datosPaquete.getDescripcion(), datosPaquete.getPeriodoDeValidez(), 
-														datosPaquete.getDescuento(), datosPaquete.getCostoAsociado());
+														datosPaquete.getDescuento(), datosPaquete.getCostoAsociado(), datosPaquete.getFechaDeAlta());
 		
 		mt.agregarPaquete(nuevoPaquete);
 	}

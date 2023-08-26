@@ -1,7 +1,6 @@
 package logica;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
 
 public class DTPaquete {
 	private String nombre;
@@ -10,14 +9,17 @@ public class DTPaquete {
 	private float descuento;
 	private float costoAsociado;
 	private DTPaqueteTipo[] paquetesTipos;
+	private LocalDate fechaDeAlta;
 	
-	public DTPaquete(String nombre, String descripcion, int periodoDeValidez, float descuento, float costoAsociado, DTPaqueteTipo[] dtpaq) {
+	
+	public DTPaquete(String nombre, String descripcion, int periodoDeValidez, float descuento, float costoAsociado, DTPaqueteTipo[] dtpaq, LocalDate fechaDeAlta) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.periodoDeValidez = periodoDeValidez;
 		this.descuento = descuento;
 		this.costoAsociado = costoAsociado;
 		this.paquetesTipos = dtpaq;
+		this.fechaDeAlta = fechaDeAlta;
 
 	}
 	
@@ -47,6 +49,10 @@ public class DTPaquete {
 	
 	public DTPaqueteTipo[] getPaqueteTipos() {
 		return this.paquetesTipos;
+	}
+	
+	public LocalDate getFechaDeAlta() {
+		return this.fechaDeAlta;
 	}
 }
 
