@@ -21,8 +21,7 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 			
 			for(int i = 0; i <tipos.length; i++) {
 				tipo = tipos[i];
-				dt[i] = new DTTipo(tipo.getNombre(), tipo.getDescripcion(), tipo.getExposicion(), 
-										tipo.getDuracion(), tipo.getCosto(), tipo.getFechaDeAlta());
+				dt[i] = tipo.getDataTipo();
 			}
 			
 			return dt;

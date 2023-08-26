@@ -46,6 +46,9 @@ public class Empresa extends Usuario {
 		this.ofertasLaborales.put(ol.getNombre(), ol);
 	}
 	
-//	public DTEmpresa getDataEmpresa() {
-//	}
+	public DTEmpresa getDataEmpresaALO() {
+		return new DTEmpresa(this.getNickname(), this.getNombre(), this.getApellido(),
+				this.getCorreo(), this.getNombreEmpresa(),this.getDescripcion(), 
+				this.getLink());
+	}
 }

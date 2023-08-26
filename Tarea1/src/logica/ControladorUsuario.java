@@ -1,6 +1,5 @@
 package logica;
 
-import java.util.Map;
 import excepciones.EmpresasNoExistenException;
 
 public class ControladorUsuario implements IUsuario {
@@ -17,9 +16,7 @@ public class ControladorUsuario implements IUsuario {
 			
 			for(int i = 0; i < empresas.length; i++) {
 				empresa = empresas[i];
-				de[i] = new DTEmpresa(empresa.getNickname(), empresa.getNombre(), empresa.getApellido(),
-											empresa.getCorreo(), empresa.getNombreEmpresa(),empresa.getDescripcion(), 
-											empresa.getLink());
+				de[i] = empresa.getDataEmpresaALO();
 			}
 			
 			return de;

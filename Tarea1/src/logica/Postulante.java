@@ -7,12 +7,13 @@ public class Postulante extends Usuario {
 	
 	private LocalDate fechaNacimiento;
 	private String nacionalidad;
-	//private LinkedList<Postulacion> postulaciones;
+	private LinkedList<Postulacion> postulaciones;
 
 	public Postulante(String nickname, String nombre, String apellido, String correo, LocalDate fechaNacimiento, String nacionalidad) {
 		super(nickname, nombre, apellido, correo);
 		this.fechaNacimiento = fechaNacimiento;
 		this.nacionalidad = nacionalidad;
+		//this.postulaciones = new Linkedlist<>();
 	}
 	
 	public LocalDate getFechaNacimiento() {
