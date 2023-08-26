@@ -6,6 +6,8 @@ import java.util.Map;
 import excepciones.NoHayPaquetesException;
 import excepciones.NoHayTiposException;
 import excepciones.TipoRepetidoException;
+import excepciones.TipoYaAgragadoException;
+
 import java.time.LocalDate;
 import java.time.ZoneId;
 
@@ -63,5 +65,14 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 		return dt;
 	}
 	
+	
+	public void agregarTipoAPaquete(int cantidad, String tipPaquete, String tipTipo) throws TipoYaAgragadoException{
+		ManejadorTipo mt = ManejadorTipo.getInstancia();
+		Tipo t = mt.buscarTipo(tipTipo);
+		Paquete p = mt.buscarPaquete(tipPaquete);
+		if(p.agregarTipo(cantidad, t))
+			throw new TipoYaAgragadoException("Ya se habia agregado el tipo " + tipTipo + " al paquete " + tipPaquete);
+	}
 		
 }
+
