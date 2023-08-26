@@ -209,7 +209,8 @@ public class AgregarTipoPublicacionOfertaLaboralPaquete extends JInternalFrame {
             model = new DefaultComboBoxModel<String>(IOL.listarNomPaquetes());
             comboBoxPaquete.setModel(model);
         } catch (NoHayPaquetesException e) {
-            // No se imprime mensaje de error sino que simplemente no se muestra ningún elemento
+        	JOptionPane.showMessageDialog(this, e.getMessage(), "Alta de Tipo de Publicacion de Oferta Laboral",
+                    JOptionPane.ERROR_MESSAGE);
         	return false;
         }
         return true;
@@ -220,9 +221,10 @@ public class AgregarTipoPublicacionOfertaLaboralPaquete extends JInternalFrame {
         DefaultComboBoxModel<String> model;
         try {
             model = new DefaultComboBoxModel<String>(IOL.listarNomTipos());
-            comboBoxPaquete.setModel(model);
+            comboBoxTipo.setModel(model);
         } catch (NoHayTiposException e) {
-            // No se imprime mensaje de error sino que simplemente no se muestra ningún elemento
+        	JOptionPane.showMessageDialog(this, e.getMessage(), "Alta de Tipo de Publicacion de Oferta Laboral",
+                    JOptionPane.ERROR_MESSAGE);
         	return false;
     }
         return true;

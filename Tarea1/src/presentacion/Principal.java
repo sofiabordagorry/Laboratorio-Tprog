@@ -242,9 +242,11 @@ public class Principal {
 		itemAgregarTipoPaq.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// VENTANA PARA AGREGAR TIPO DE PAQUETE\
+			if(creAltTipPubOLPaqInternalFrame.cargarTipos()) 
 				if(creAltTipPubOLPaqInternalFrame.cargarPaquetes())
-					if(creAltTipPubOLPaqInternalFrame.cargarTipos())
+					//if(creAltTipPubOLPaqInternalFrame.cargarTipos())
 						creAltTipPubOLPaqInternalFrame.setVisible(true);
+				
 			}
 		});
 		menuPaquete.add(itemAgregarTipoPaq);
