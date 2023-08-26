@@ -282,6 +282,7 @@ public class Principal {
 		itemConsultarPaquete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// VENTANA PARA CONSULTAR PAQUETE
+				creConPaqTipOLInternalFrame.updateComboBox();
 				creConPaqTipOLInternalFrame.setVisible(true);
 			}
 		});

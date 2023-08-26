@@ -40,6 +40,7 @@ import excepciones.NoExistenPaquetesException;
 public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
 
 	private IOfertaLaboral col;
+	JComboBox<ComboBoxItem> comboBox;
 
 	/**
 	 * Create the frame.
@@ -88,7 +89,7 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         
 
         DTPaquete[] listaPaq = iOL.listarPaquetes();
-        JComboBox<ComboBoxItem> comboBox = new JComboBox<>(new ComboBoxModel(listaPaq));
+        comboBox = new JComboBox<>(new ComboBoxModel(listaPaq));
         GridBagConstraints gbc_comboBox = new GridBagConstraints();
         gbc_comboBox.gridwidth = 2;
         gbc_comboBox.insets = new Insets(0, 0, 5, 0);
@@ -229,5 +230,10 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
 				addElement(item);
 			}
 		}
+	}
+	
+	public void updateComboBox() {
+		DTPaquete[] listaPaq = col.listarPaquetes();
+		comboBox.setModel(new ComboBoxModel(listaPaq));
 	}
 }
