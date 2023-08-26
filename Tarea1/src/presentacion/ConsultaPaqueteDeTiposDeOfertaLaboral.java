@@ -21,6 +21,8 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 
 import logica.DTPaquete;
+import logica.DTPaqueteTipo;
+import logica.DTTipo;
 import logica.Factory;
 import logica.IOfertaLaboral;
 import logica.ManejadorTipo;
@@ -32,35 +34,22 @@ import javax.swing.JTextArea;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import excepciones.NoExistenPaquetesException;
+
 @SuppressWarnings("serial")
 public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
-	
-	private IOfertaLaboral iOL;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ConsultaPaqueteDeTiposDeOfertaLaboral frame = new ConsultaPaqueteDeTiposDeOfertaLaboral();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private IOfertaLaboral col;
 
 	/**
 	 * Create the frame.
+	 * @throws NoExistenPaquetesException 
 	 */
-	public ConsultaPaqueteDeTiposDeOfertaLaboral() {
-		// Interfaz OL
-    	Factory fact = Factory.getInstance();
-    	iOL = fact.getIOfertaLaboral();
+	public ConsultaPaqueteDeTiposDeOfertaLaboral(IOfertaLaboral iOL) {
     	
+		// Interfaz Oferta Laboral
+		col = iOL;
+		
     	// ManejadorTipo
     	ManejadorTipo m = ManejadorTipo.getInstancia();
     	
@@ -97,7 +86,9 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         gbc_lblPaquetes.gridy = 1;
         getContentPane().add(lblPaquetes, gbc_lblPaquetes);
         
-        JComboBox<ComboBoxItem> comboBox = new JComboBox<>(new ComboBoxModel(m.getPaquetes()));
+
+        DTPaquete[] listaPaq = iOL.listarPaquetes();
+        JComboBox<ComboBoxItem> comboBox = new JComboBox<>(new ComboBoxModel(listaPaq));
         GridBagConstraints gbc_comboBox = new GridBagConstraints();
         gbc_comboBox.gridwidth = 2;
         gbc_comboBox.insets = new Insets(0, 0, 5, 0);
@@ -107,7 +98,7 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         getContentPane().add(comboBox, gbc_comboBox);
         
         JTextArea areaDatos = new JTextArea();
-        JList<PaqueteTipo> list = new JList<>();
+        JList<DTPaqueteTipo> list = new JList<>();
         comboBox.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -115,13 +106,12 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         		ComboBoxItem selectedItem = (ComboBoxItem)source.getSelectedItem();
         		
         		if (selectedItem != null) {
-        			Paquete p = selectedItem.getPaquete();
-        			//getDatosPaquete
-        			String datos = "Nombre: " + p.getNombre() + "\nDescripcion: " + p.getDescripcion() + "\nPeriodo de validez: " + p.getPeriodoDeValidez() + "\nDescuento: " + p.getDescuento() + "\nCosto: " + p.getCostoAsociado();
+        			DTPaquete p = selectedItem.getPaquete();
+        			String datos = iOL.DatosPaqueteAMostrar(p);
         			areaDatos.setText(datos);
         			
-        			List<PaqueteTipo> pqt = p.getPaquetesTipos();
-        			list.setListData(pqt.toArray(new PaqueteTipo[0]));
+        			DTPaqueteTipo[] pqt = p.getPaqueteTipos();
+        			list.setListData(pqt);
         		}
         	}
         });
@@ -186,12 +176,12 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         	@Override
         	public void valueChanged(ListSelectionEvent e) {
         		if(!e.getValueIsAdjusting()) {
-        			JList<PaqueteTipo> source = (JList<PaqueteTipo>) e.getSource();
-                    PaqueteTipo selectedItem = source.getSelectedValue();
+        			JList<DTPaqueteTipo> source = (JList<DTPaqueteTipo>) e.getSource();
+                    DTPaqueteTipo selectedItem = source.getSelectedValue();
                     
                     if (selectedItem != null) {
-                    	Tipo tipoAsociado = selectedItem.getTipo();
-                    	String datosTipo = "Nombre: " + tipoAsociado.getNombre() + "\nDescripcion: " + tipoAsociado.getDescripcion() + "\nExposicion:" + tipoAsociado.getExposicion() + "\nDuracion: " + tipoAsociado.getDuracion() + "\nCosto: " + tipoAsociado.getCosto() + "\n Fecha de alta: " + tipoAsociado.getFechaDeAlta().toString();
+                    	DTTipo tipoAsociado = selectedItem.getTipo();
+                    	String datosTipo = "Nombre: " + tipoAsociado.getNombre() + "\nDescripcion: " + tipoAsociado.getDescripcion() + "\nExposicion: " + tipoAsociado.getExposicion() + "\nDuracion: " + tipoAsociado.getDuracion() + "\nCosto: $" + tipoAsociado.getCosto() + "\n Fecha de alta: " + tipoAsociado.getFechaDeAlta().toString();
                     	areaDatosTipo.setText(datosTipo);
                     }
         		}
@@ -216,34 +206,26 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
 	}
 	
 	class ComboBoxItem {
-		private String key;
-		private Paquete instancia;
+		private DTPaquete instancia;
 		
-		public ComboBoxItem(String key, Paquete instancia) {
-			this.key = key;
+		public ComboBoxItem(DTPaquete instancia) {
 			this.instancia = instancia;
 		}
 		
-		public String getKey() {
-			return key;
-		}
-		
-		public Paquete getPaquete() {
+		public DTPaquete getPaquete() {
 			return instancia;
 		}
 		
 		@Override
 		public String toString() {
-			return key;
+			return instancia.getNombre();
 		}
 	}
 	
 	class ComboBoxModel extends DefaultComboBoxModel<ComboBoxItem> {
-		public ComboBoxModel(Map<String, Paquete> map) {
-			for (Map.Entry<String, Paquete> entry : map.entrySet()) {
-				String key = entry.getKey();
-				Paquete paquete = entry.getValue();
-				ComboBoxItem item = new ComboBoxItem(key, paquete);
+		public ComboBoxModel(DTPaquete[] paqlist) {
+			for (DTPaquete paquete : paqlist) {
+				ComboBoxItem item = new ComboBoxItem(paquete);
 				addElement(item);
 			}
 		}

@@ -1,13 +1,14 @@
 package logica;
 import java.util.Map;
+import java.util.Collection;
 import java.util.HashMap;
 
 public class ManejadorTipo {
-	private static ManejadorTipo instancia;
+	private static ManejadorTipo instancia = null;
 	private Map<String, Tipo> mapTipos;//Hay que cambiarle el nombre
 	private Map<String, Paquete> mapPaquetes;//a este tambien
 	
-	public ManejadorTipo() {//CONSTRUCTOR
+	private ManejadorTipo() {//CONSTRUCTOR
 		mapTipos = new HashMap<>();
 		mapPaquetes = new HashMap<>();
 	}
@@ -27,12 +28,34 @@ public class ManejadorTipo {
 		mapPaquetes.put(p.getNombre(), p);
 	}
 	
-	public Map<String, Tipo> getTipos(){//OBTENER COLEECION DE TIPOS
-		return mapTipos;
+	public Tipo[] getTipos(){//OBTENER COLEECION DE TIPOS
+		if (this.mapTipos.isEmpty())
+            return null;
+        else {
+            Collection<Tipo> tips = this.mapTipos.values();
+            Object[] o = tips.toArray();
+            Tipo[] tipos = new Tipo[o.length];
+            for (int i = 0; i < o.length; i++) {
+                tipos[i] = (Tipo) o[i];
+            }
+
+            return tipos;
+        }
 	}
 	
-	public Map<String, Paquete> getPaquetes(){//OBTENER COLECCION DE PAQUETES
-		return mapPaquetes;
+	public Paquete[] getPaquetes(){//OBTENER COLECCION DE PAQUETES
+		if (this.mapPaquetes.isEmpty())
+            return null;
+        else {
+            Collection<Paquete> paquetes = this.mapPaquetes.values();
+            Object[] o = paquetes.toArray();
+            Paquete[] paq = new Paquete[o.length];
+            for (int i = 0; i < o.length; i++) {
+                paq[i] = (Paquete) o[i];
+            }
+
+            return paq;
+        }
 	}
 	
 	public Tipo buscarTipo(String tipo) {//BUSCAR TIPO

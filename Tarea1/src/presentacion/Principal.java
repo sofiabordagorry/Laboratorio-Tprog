@@ -10,6 +10,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
+import logica.Factory;
+import logica.IOfertaLaboral;
+import logica.IUsuario;
 import logica.ManejadorTipo;
 import logica.Paquete;
 import logica.PaqueteTipo;
@@ -19,6 +22,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class Principal {
+	
+	private IOfertaLaboral IOL;
+	private IUsuario IU;
 	
     private AltaOfertaLaboral creAltOLInternalFrame;
     private CrearPaqueteTiposPublicacionOfertasLaborales crePaqTipPubOLInternalFrame;
@@ -31,9 +37,6 @@ public class Principal {
 	private ConsultaUsuario creConUsuInternalFrame;
 	private ConsultaOfertaLaboral creConOfLabInternalFrame;
 	private ModificarDatosUsuario creModUsuInternalFrame;
-
-
-
 
 	private JFrame frmAdmTrabajo;
 
@@ -58,8 +61,11 @@ public class Principal {
 	 */
 	public Principal() {
 		initialize();
+		Factory fac = Factory.getInstance();
+		IOL = fac.getIOfertaLaboral();
+		IU = fac.getIUsuario();
 		
-		creConPaqTipOLInternalFrame = new ConsultaPaqueteDeTiposDeOfertaLaboral();
+		creConPaqTipOLInternalFrame = new ConsultaPaqueteDeTiposDeOfertaLaboral(IOL);
 		creConPaqTipOLInternalFrame.setLocation(25,25);
 		creConPaqTipOLInternalFrame.setVisible(false);
 		

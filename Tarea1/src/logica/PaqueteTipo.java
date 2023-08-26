@@ -17,7 +17,7 @@ public class PaqueteTipo {
 		return this.tipo;
 	}
 	
-	public String toString() {
-		return "Nombre tipo: " + this.tipo.getNombre() + " | Cantidad: " + this.cantidad;
+	public DTPaqueteTipo getDTPaqueteTipo() {
+		return new DTPaqueteTipo(this.cantidad, this.tipo.getDataTipo());
 	}
 }

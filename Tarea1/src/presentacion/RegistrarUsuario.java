@@ -12,6 +12,7 @@ import java.util.Date;
 
 import com.toedter.calendar.JDateChooser;
 
+import excepciones.ExisteUnUsuarioYaRegistradoException;
 import logica.DTEmpresa;
 import logica.DTPostulante;
 import logica.Factory;
@@ -408,10 +409,24 @@ public class RegistrarUsuario extends JInternalFrame {
         		DTPostulante postInfo = new DTPostulante(textField.getText(), textFieldNombre.getText(), textFieldApellido.getText(), textFieldMail.getText(), null, dateChooser.getDate().toInstant()
         			      .atZone(ZoneId.systemDefault())
         			      .toLocalDate(), textFieldNacionalidad.getText());
-        		iUsuario.ingresarDatosPostulante(postInfo);
+        		try {
+            		iUsuario.ingresarDatosPostulante(postInfo);
+            		JOptionPane.showMessageDialog(this, "Usuario registrado con éxito", "Registrar Usuario",
+            				JOptionPane.INFORMATION_MESSAGE);
+        		} catch(ExisteUnUsuarioYaRegistradoException e) {
+        			JOptionPane.showMessageDialog(this, e.getMessage(), "Registrar Usuario",
+        					JOptionPane.ERROR_MESSAGE);
+        		}
         	} else {
         		DTEmpresa empInfo = new DTEmpresa(textField.getText(), textFieldNombre.getText(), textFieldApellido.getText(), textFieldMail.getText(), null, lblNombreEmpresa.getText(), textPane.getText(), textField_2.getText());
-        		iUsuario.ingresarDatosEmpresa(empInfo);
+        		try {
+        			iUsuario.ingresarDatosEmpresa(empInfo);
+            		JOptionPane.showMessageDialog(this, "Usuario registrado con éxito", "Registrar Usuario",
+            				JOptionPane.INFORMATION_MESSAGE);
+        		} catch(ExisteUnUsuarioYaRegistradoException e) {
+        			JOptionPane.showMessageDialog(this, e.getMessage(), "Registrar Usuario",
+        					JOptionPane.ERROR_MESSAGE);
+        		}
         	}
         	limpiarFormulario();
         }
@@ -449,9 +464,6 @@ public class RegistrarUsuario extends JInternalFrame {
 				return false;
 			}
 		}
-		
-		JOptionPane.showMessageDialog(this, "Usuario registrado con éxito", "Registrar Usuario",
-				JOptionPane.INFORMATION_MESSAGE);
 	
 		return true;
 	}
