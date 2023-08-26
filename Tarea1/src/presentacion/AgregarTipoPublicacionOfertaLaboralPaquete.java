@@ -6,6 +6,12 @@ import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import logica.IOfertaLaboral;
+import excepciones.NoHayPaquetesException;
+import excepciones.NoHayTiposException;
+import logica.DTTipo;
+import logica.DTPaquete;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
@@ -15,20 +21,26 @@ import java.util.regex.Pattern;
 
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+
+
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.Font;
-import logica.DTTipo;
-import logica.DTPaquete;
 
 @SuppressWarnings("serial")
 public class AgregarTipoPublicacionOfertaLaboralPaquete extends JInternalFrame {
 	
+	private IOfertaLaboral IOL;
+	
 	private JTextField textFieldCantidad;
-	private JComboBox<DTPaquete> comboBoxPaquete;
-	private JComboBox<DTTipo> comboBoxTipo;
+	private JComboBox<String> comboBoxPaquete;
+	private JComboBox<String> comboBoxTipo;
 	
 	
-	public AgregarTipoPublicacionOfertaLaboralPaquete() {
+	public AgregarTipoPublicacionOfertaLaboralPaquete(IOfertaLaboral iol) {
+		
+		IOL = iol;
+		
 		getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
 		 setResizable(true);
@@ -54,7 +66,7 @@ public class AgregarTipoPublicacionOfertaLaboralPaquete extends JInternalFrame {
 		gbc_lblNewLabel.gridy = 0;
 		getContentPane().add(lblNewLabel, gbc_lblNewLabel);
 		
-		comboBoxPaquete = new JComboBox<DTPaquete>();
+		comboBoxPaquete = new JComboBox<String>();
 		GridBagConstraints gbc_comboBoxPaquete = new GridBagConstraints();
 		gbc_comboBoxPaquete.gridwidth = 3;
 		gbc_comboBoxPaquete.insets = new Insets(0, 0, 5, 5);
@@ -72,7 +84,7 @@ public class AgregarTipoPublicacionOfertaLaboralPaquete extends JInternalFrame {
 		gbc_lblNewLabel_1.gridy = 2;
 		getContentPane().add(lblNewLabel_1, gbc_lblNewLabel_1);
 		
-		comboBoxTipo = new JComboBox<DTTipo>();
+		comboBoxTipo = new JComboBox<String>();
 		GridBagConstraints gbc_comboBoxTipo = new GridBagConstraints();
 		gbc_comboBoxTipo.gridwidth = 3;
 		gbc_comboBoxTipo.insets = new Insets(0, 0, 5, 5);
@@ -134,7 +146,7 @@ public class AgregarTipoPublicacionOfertaLaboralPaquete extends JInternalFrame {
 		
 		if(checkFormulario()) {
 			//try {
-               // controlTipo.registrarUsuario(nombreU, apellidoU, ciU);
+               // IOL.registrarUsuario(nombreU, apellidoU, ciU);
 
                 // Muestro éxito de la operación
                 //JOptionPane.showMessageDialog(this, "El Tipo de Publicacion se ha agregado con éxito", "Alta de Tipo de Publicacion de Oferta Laboral",
@@ -191,5 +203,29 @@ public class AgregarTipoPublicacionOfertaLaboralPaquete extends JInternalFrame {
         return true;
 }
 
+	public boolean cargarPaquetes() {
+        DefaultComboBoxModel<String> model;
+        try {
+            model = new DefaultComboBoxModel<String>(IOL.listarNomPaquetes());
+            comboBoxPaquete.setModel(model);
+        } catch (NoHayPaquetesException e) {
+            // No se imprime mensaje de error sino que simplemente no se muestra ningún elemento
+        	return false;
+        }
+        return true;
+
+    }
+	
+	public boolean cargarTipos() {
+        DefaultComboBoxModel<String> model;
+        try {
+            model = new DefaultComboBoxModel<String>(IOL.listarNomTipos());
+            comboBoxPaquete.setModel(model);
+        } catch (NoHayTiposException e) {
+            // No se imprime mensaje de error sino que simplemente no se muestra ningún elemento
+        	return false;
+    }
+        return true;
+	}
 
 }

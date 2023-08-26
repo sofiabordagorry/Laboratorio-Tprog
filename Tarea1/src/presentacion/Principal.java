@@ -4,6 +4,9 @@ import java.awt.EventQueue;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
+import logica.Factory;
+import logica.IOfertaLaboral;
+
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -20,12 +23,12 @@ public class Principal {
 	private PostularAOfertaLaboral crePosAOLInternalFrame;
     private RegistrarUsuario creUsrInternalFrame;
     private ConsultaPaqueteDeTiposDeOfertaLaboral creConPaqTipOLInternalFrame;
+    
+    private IOfertaLaboral IOL;
 	
 	private ConsultaUsuario creConUsuInternalFrame;
 	private ConsultaOfertaLaboral creConOfLabInternalFrame;
 	private ModificarDatosUsuario creModUsuInternalFrame;
-
-
 
 
 	private JFrame frmAdmTrabajo;
@@ -52,6 +55,10 @@ public class Principal {
 	public Principal() {
 		initialize();
 		
+		// Inicialización
+        Factory fabrica = Factory.getInstance();
+        IOL = fabrica.getIOfertaLaboral();
+		
 		creConPaqTipOLInternalFrame = new ConsultaPaqueteDeTiposDeOfertaLaboral();
 		creConPaqTipOLInternalFrame.setLocation(25,25);
 		creConPaqTipOLInternalFrame.setVisible(false);
@@ -68,11 +75,11 @@ public class Principal {
 		crePaqTipPubOLInternalFrame.setLocation(25, 25);
 		crePaqTipPubOLInternalFrame.setVisible(false);
 		
-		creAltTipPubOLInternalFrame = new AltaTipoPublicacionOfertaLaboral();
+		creAltTipPubOLInternalFrame = new AltaTipoPublicacionOfertaLaboral(IOL);
 		creAltTipPubOLInternalFrame.setLocation(25,25);
 		creAltTipPubOLInternalFrame.setVisible(false);
 		
-		creAltTipPubOLPaqInternalFrame = new AgregarTipoPublicacionOfertaLaboralPaquete();
+		creAltTipPubOLPaqInternalFrame = new AgregarTipoPublicacionOfertaLaboralPaquete(IOL);
 		creAltTipPubOLPaqInternalFrame.setLocation(25,25);
 		creAltTipPubOLPaqInternalFrame.setVisible(false);
 		
@@ -234,8 +241,10 @@ public class Principal {
 		JMenuItem itemAgregarTipoPaq = new JMenuItem("Agregar tipo a paquete");
 		itemAgregarTipoPaq.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// VENTANA PARA AGREGAR TIPO DE PAQUETE
-				creAltTipPubOLPaqInternalFrame.setVisible(true);
+				// VENTANA PARA AGREGAR TIPO DE PAQUETE\
+				if(creAltTipPubOLPaqInternalFrame.cargarPaquetes())
+					if(creAltTipPubOLPaqInternalFrame.cargarTipos())
+						creAltTipPubOLPaqInternalFrame.setVisible(true);
 			}
 		});
 		menuPaquete.add(itemAgregarTipoPaq);
