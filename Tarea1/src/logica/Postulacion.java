@@ -45,7 +45,7 @@ public class Postulacion {
 		this.CVReducido = CVReducido;
 	}
 	
-	public void setDescripcion(String Descripcion) {
+	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
 	

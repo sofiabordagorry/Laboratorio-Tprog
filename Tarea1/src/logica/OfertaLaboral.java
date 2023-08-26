@@ -64,7 +64,7 @@ public class OfertaLaboral {
 	}
 	
 	public float getCostoAsociado() {
-		return this.tipoOL.getCosto();
+		return this.costoAsociado;
 	}
 	
 	public Tipo getTipoOL() {

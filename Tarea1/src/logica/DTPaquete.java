@@ -18,6 +18,7 @@ public class DTPaquete {
 		this.descuento = descuento;
 		this.costoAsociado = costoAsociado;
 		this.paquetesTipos = dtpaq;
+
 	}
 	
 	public String getNombre() {
@@ -48,3 +49,4 @@ public class DTPaquete {
 		return this.paquetesTipos;
 	}
 }
+

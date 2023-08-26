@@ -1,9 +1,10 @@
 package logica;
 import java.util.Map;
+import java.util.Collection;
 import java.util.HashMap;
 
 public class ManejadorUsuario {
-	private static ManejadorUsuario instancia;
+	private static ManejadorUsuario instancia = null;
 	private Map<String, Empresa> mapEmpresas;
 	private Map<String, Postulante> mapPostulantes;
 	
@@ -27,8 +28,19 @@ public class ManejadorUsuario {
 		mapPostulantes.put(p.getNickname(), p);
 	}
 	
-	public Map<String, Empresa> getEmpresas(){//OBTENER COLECCIONES DE EMPRESAS
-		return mapEmpresas;
+	public Empresa[] getEmpresas(){//OBTENER COLECCIONES DE EMPRESAS
+		 if (this.mapEmpresas.isEmpty())
+	            return null;
+	        else {
+	            Collection<Empresa> emps = this.mapEmpresas.values();
+	            Object[] o = emps.toArray();
+	            Empresa[] empresas = new Empresa[o.length];
+	            for (int i = 0; i < o.length; i++) {
+	                empresas[i] = (Empresa) o[i];
+	            }
+
+	            return empresas;
+	        }
 	}
 	
 	public Map<String, Postulante> getPostulantes(){//OBTENER COLECCION DE POSTULANTES

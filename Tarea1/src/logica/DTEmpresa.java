@@ -14,6 +14,17 @@ public class DTEmpresa extends DTUsuario {
 		this.link = link;
 	}
 	
+	public DTEmpresa(String nickname, String nombre, String apellido, String correo, String nombreDeEmpresa, String descripcion, String link) {
+		super(nickname, nombre, apellido, correo);
+		this.nombreDeEmpresa = nombreDeEmpresa;
+		this.descripcion = descripcion;
+		this.link = link;
+	}
+	
+	public String toString() {
+		return this.nombreDeEmpresa + "(" + this.getCorreo() + ")";
+	}
+	
 	public String getNombreDeEmpresa() {
 		return this.nombreDeEmpresa;
 	}

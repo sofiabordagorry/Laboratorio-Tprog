@@ -48,5 +48,4 @@ public class Tipo {
     	return new DTTipo(this.getNombre(), this.getDescripcion(), this.getExposicion(), 
 										this.getDuracion(), this.getCosto(), this.getFechaDeAlta());
     } 
-
 }
