@@ -115,6 +115,7 @@ public class ModificarDatosUsuario extends JInternalFrame {
 		getContentPane().add(lblNombre, gbc_lblNombre);
 		
 		textNombre = new JTextField();
+		textNombre.setEditable(false);
 		GridBagConstraints gbc_textNombre = new GridBagConstraints();
 		gbc_textNombre.insets = new Insets(5, 0, 5, 50);
 		gbc_textNombre.fill = GridBagConstraints.HORIZONTAL;
@@ -134,6 +135,7 @@ public class ModificarDatosUsuario extends JInternalFrame {
 		getContentPane().add(lblApellido, gbc_lblApellido);
 		
 		textApellido = new JTextField();
+		textApellido.setEditable(false);
 		GridBagConstraints gbc_textApellido = new GridBagConstraints();
 		gbc_textApellido.insets = new Insets(5, 0, 5, 50);
 		gbc_textApellido.fill = GridBagConstraints.HORIZONTAL;
@@ -173,6 +175,7 @@ public class ModificarDatosUsuario extends JInternalFrame {
 		getContentPane().add(lblFechaNomEmp, gbc_lblFechaNomEmp);
 		
 		textFechaNomEmp = new JTextField();
+		textFechaNomEmp.setEditable(false);
 		GridBagConstraints gbc_textFechaNomEmp = new GridBagConstraints();
 		gbc_textFechaNomEmp.insets = new Insets(5, 0, 5, 50);
 		gbc_textFechaNomEmp.fill = GridBagConstraints.HORIZONTAL;
@@ -182,6 +185,7 @@ public class ModificarDatosUsuario extends JInternalFrame {
 		textFechaNomEmp.setColumns(10);
 		
 		dateChooser = new JDateChooser();
+		dateChooser.setEnabled(false);
         GridBagConstraints gbc_dateChooser = new GridBagConstraints();
         gbc_dateChooser.insets = new Insets(0, 0, 5, 50);
         gbc_dateChooser.fill = GridBagConstraints.HORIZONTAL;
@@ -201,6 +205,7 @@ public class ModificarDatosUsuario extends JInternalFrame {
 		getContentPane().add(lblNacLink, gbc_lblNacLink);
 		
 		textNacLink = new JTextField();
+		textNacLink.setEditable(false);
 		GridBagConstraints gbc_textNacLink = new GridBagConstraints();
 		gbc_textNacLink.insets = new Insets(5, 0, 5, 50);
 		gbc_textNacLink.fill = GridBagConstraints.HORIZONTAL;
@@ -286,10 +291,11 @@ public class ModificarDatosUsuario extends JInternalFrame {
 		textNombre.setText(u.getNombre());
 		textApellido.setText(u.getApellido());
 		textCorreo.setText(u.getCorreo());
+		textNombre.setEditable(true);
+		textApellido.setEditable(true);
 		
         if(u instanceof DTPostulante) {
         	scrollPaneDescripcion.setVisible(false);
-        	textAreaDescripcion.setVisible(false);
         	lblDescripcion.setVisible(false);
         	lblFechaNomEmp.setText("Fecha de Nacimiento:");
         	lblNacLink.setText("Nacionalidad:");
@@ -299,19 +305,24 @@ public class ModificarDatosUsuario extends JInternalFrame {
         	dateChooser.setVisible(true);
         	Date date = Date.from(selectedPost.getFechaDeNacimiento().atStartOfDay(ZoneId.systemDefault()).toInstant());
         	dateChooser.setDate(date);
+        	dateChooser.setEnabled(true);
         	//textFechaNomEmp.setText(selectedPost.getFechaDeNacimiento().toString());
         	textNacLink.setText(selectedPost.getNacionalidad());
+        	textNacLink.setEditable(true);
         }else if(u instanceof DTEmpresa) {
         	scrollPaneDescripcion.setVisible(true);
         	textAreaDescripcion.setVisible(true);
+        	textAreaDescripcion.setEditable(true);
         	lblDescripcion.setVisible(true);
         	dateChooser.setVisible(false);
         	textFechaNomEmp.setVisible(true);
+        	textFechaNomEmp.setEditable(true);
         	lblFechaNomEmp.setText("Nombre de Empresa:");
         	lblNacLink.setText("Link:");
         	DTEmpresa selectedEmp = (DTEmpresa) u;
         	textFechaNomEmp.setText(selectedEmp.getNombreDeEmpresa());
         	textNacLink.setText(selectedEmp.getLink());
+        	textNacLink.setEditable(true);
         	textAreaDescripcion.setText(selectedEmp.getDescripcion());
         	textAreaDescripcion.setEnabled(true);
         	textAreaDescripcion.setEditable(true);
