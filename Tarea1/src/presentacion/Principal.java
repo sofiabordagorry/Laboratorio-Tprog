@@ -3,14 +3,14 @@ package presentacion;
 import java.awt.EventQueue;
 import java.time.LocalDate;
 
+import logica.Factory;
+import logica.IOfertaLaboral;
+
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-import logica.Factory;
-
-import logica.IOfertaLaboral;
 import logica.IUsuario;
 import logica.ManejadorTipo;
 import logica.Paquete;
@@ -64,6 +64,7 @@ public class Principal {
 		IOL = fac.getIOfertaLaboral();
 		IU = fac.getIUsuario();
 		
+
 		//PRUEBAS
 //		ManejadorUsuario mu = ManejadorUsuario.getInstancia();
 //		Empresa emp = new Empresa("nickEmp1", "nom", "ap", "Jokin@gmail.com", "nomEmp", "desc", "Hola.com");
@@ -97,6 +98,8 @@ public class Principal {
 //	
 		
 		creConPaqTipOLInternalFrame = new ConsultaPaqueteDeTiposDeOfertaLaboral(IOL);
+
+		
 		creConPaqTipOLInternalFrame.setLocation(25,25);
 		creConPaqTipOLInternalFrame.setVisible(false);
 		
@@ -112,11 +115,11 @@ public class Principal {
 		crePaqTipPubOLInternalFrame.setLocation(25, 25);
 		crePaqTipPubOLInternalFrame.setVisible(false);
 		
-		creAltTipPubOLInternalFrame = new AltaTipoPublicacionOfertaLaboral();
+		creAltTipPubOLInternalFrame = new AltaTipoPublicacionOfertaLaboral(IOL);
 		creAltTipPubOLInternalFrame.setLocation(25,25);
 		creAltTipPubOLInternalFrame.setVisible(false);
 		
-		creAltTipPubOLPaqInternalFrame = new AgregarTipoPublicacionOfertaLaboralPaquete();
+		creAltTipPubOLPaqInternalFrame = new AgregarTipoPublicacionOfertaLaboralPaquete(IOL);
 		creAltTipPubOLPaqInternalFrame.setLocation(25,25);
 		creAltTipPubOLPaqInternalFrame.setVisible(false);
 		
@@ -287,8 +290,11 @@ public class Principal {
 		JMenuItem itemAgregarTipoPaq = new JMenuItem("Agregar tipo a paquete");
 		itemAgregarTipoPaq.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// VENTANA PARA AGREGAR TIPO DE PAQUETE
-				creAltTipPubOLPaqInternalFrame.setVisible(true);
+				// VENTANA PARA AGREGAR TIPO DE PAQUETE\
+				if(creAltTipPubOLPaqInternalFrame.cargarPaquetes())
+					if(creAltTipPubOLPaqInternalFrame.cargarTipos()) 
+						creAltTipPubOLPaqInternalFrame.setVisible(true);
+				
 			}
 		});
 		menuPaquete.add(itemAgregarTipoPaq);

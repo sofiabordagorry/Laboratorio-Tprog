@@ -49,6 +49,7 @@ public class Paquete {
     	this.paquetesTipos.add(paqueteTipo);
     }
     
+
     public DTPaquete getDataPaquete() {
     	PaqueteTipo paq;
     	PaqueteTipo[] paqarr = this.paquetesTipos.toArray(new PaqueteTipo[0]);
@@ -59,6 +60,21 @@ public class Paquete {
 		}
     	return new DTPaquete(this.getNombre(), this.getDescripcion(), this.getPeriodoDeValidez(), 
 				this.getDescuento(), this.getCostoAsociado(), dtpaq);
+    } 	
 
+
+    
+    public boolean agregarTipo(int cantidad, Tipo t) {
+    	List<PaqueteTipo> paqT = this.getPaquetesTipos();
+    	PaqueteTipo pt;
+    	for (int i = 0; i < paqT.size(); i++) {
+    		pt = paqT.get(i);
+    		if(pt.getTipo().getNombre() == t.getNombre())
+    			return false;
+    	}
+    	//No hay link entre Paquete y Tipo
+    	pt = new PaqueteTipo(cantidad, t);
+    	this.agregarPaqueteTipo(pt);
+    	return true;
     }
 }

@@ -1,4 +1,5 @@
 package logica;
+
 import java.util.Map;
 import java.util.Collection;
 import java.util.HashMap;
@@ -41,6 +42,14 @@ public class ManejadorTipo {
 
             return tipos;
         }
+	}
+	
+	public Map<String, Tipo> getMapTipo(){
+		return this.mapTipos;
+	}
+	
+	public Map<String, Paquete> getMapPaquete(){
+		return this.mapPaquetes;
 	}
 	
 	public Paquete[] getPaquetes(){//OBTENER COLECCION DE PAQUETES
