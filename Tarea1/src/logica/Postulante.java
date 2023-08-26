@@ -65,4 +65,8 @@ public class Postulante extends Usuario {
 		this.setFechaNacimiento(fechaNac);
 		this.setNacionalidad(nacionalidad);
 	}
+	
+	public void agregarPostulacion(Postulacion p) {
+		this.postulaciones.add(p);
+	}
 }

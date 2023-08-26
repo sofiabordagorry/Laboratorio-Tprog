@@ -10,4 +10,8 @@ public class DTKeyword {
 	public String getNombre() {
 		return this.nombre;
 	}
+	
+	public String toString() {
+		return this.nombre;
+	}
 }

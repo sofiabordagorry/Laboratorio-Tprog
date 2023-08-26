@@ -47,8 +47,10 @@ public class Empresa extends Usuario {
 	public Map<String, OfertaLaboral> getOfertasLaborales(){
 		return this.ofertasLaborales;
 	}
-	/*public void agregarOfertaLaboral(OfertaLaboral ol) {
-	}*/
+	
+	public void agregarOfertaLaboral(OfertaLaboral ol) {
+		this.ofertasLaborales.put(ol.getNombre(), ol);
+	}
 	
 	public DTEmpresa getDataEmpresa() {
 		Map<String, DTOfertaLaboral> ofertasLab = new HashMap<>();

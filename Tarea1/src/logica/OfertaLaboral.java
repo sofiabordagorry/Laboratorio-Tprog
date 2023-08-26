@@ -24,7 +24,7 @@ public class OfertaLaboral {
 	
 	
 	public OfertaLaboral(String nombre, String descripcion, String ciudad, String departamento, String horario,
-								float remuneracion, LocalDate fechaDeAlta, float costoAsociado, Tipo tipoOL, Map<String, Keyword> keywords) {
+								float remuneracion, LocalDate fechaDeAlta, float costoAsociado, Tipo tipoOL, Map<String, Keyword> keywords, Empresa empCreadora) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.ciudad = ciudad;
@@ -36,6 +36,8 @@ public class OfertaLaboral {
 		this.tipoOL = tipoOL;
 		this.postulaciones = new ArrayList<>();
 		this.keywords = keywords;
+		
+		this.empresaCreadora = empCreadora;
 	}
 	
 	//Getters

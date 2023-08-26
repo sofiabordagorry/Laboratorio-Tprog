@@ -3,29 +3,33 @@ package logica;
 import java.time.LocalDate;
 import java.util.Map;
 
+import excepciones.EmpresasNoExistenException;
+import excepciones.NoExistenEmpresasOfertasLaboralesException;
+import excepciones.OfertasLaboralesNoExistenException;
+import excepciones.UsuariosNoExistenException;
+
 public class ControladorUsuario implements IUsuario {
 	public ControladorUsuario() {
 	}
-	public DTUsuario[] listarUsuarios(){
+	public DTUsuario[] listarUsuarios() throws UsuariosNoExistenException{
 		 ManejadorUsuario iMU =  ManejadorUsuario.getInstancia();
-//		 Empresa u1 = new Empresa("nickname", "nombre", "apellido", "correo", "NombreEmpresa", "descripcion", "link");
-//		 LocalDate d = LocalDate.now();
-//		 Postulante u2 = new Postulante("nickname2", "nombre2", "apellido2", "correo2", d,"nacionalidad");
-//		 iMU.agregarPostulante(u2);
-//		 iMU.agregarEmpresa(u1);
 		 Empresa[] empresas = iMU.getEmpresas();
 		 Postulante[] postulantes = iMU.getPostulantes();
-		 DTUsuario[] arrUsu = new DTUsuario[empresas.length + postulantes.length];
-		 
-		 for(int i = 0; i < empresas.length; i++) {
-			 arrUsu[i] = empresas[i].getDataEmpresa();
+		 if(empresas != null && postulantes != null) {
+			 DTUsuario[] arrUsu = new DTUsuario[empresas.length + postulantes.length];
+			 
+			 for(int i = 0; i < empresas.length; i++) {
+				 arrUsu[i] = empresas[i].getDataEmpresa();
+			 }
+			 
+			 for(int j = 0; j < postulantes.length; j++) {
+				 arrUsu[empresas.length + j] = postulantes[j].getDataPostulante();
+			 }
+	
+			 return arrUsu;
+		 }else{
+			 throw new UsuariosNoExistenException("No existen Usuarios registradas");
 		 }
-		 
-		 for(int j = 0; j < postulantes.length; j++) {
-			 arrUsu[empresas.length + j] = postulantes[j].getDataPostulante();
-		 }
-
-		 return arrUsu;
 	}
 
 	public DTUsuario mostrarInformacionUsuario(String nickname) {
@@ -35,22 +39,31 @@ public class ControladorUsuario implements IUsuario {
 		return dtU;
 	}
 	
-	public DTEmpresa[] listarEmpresas() {
+	public DTEmpresa[] listarEmpresas() throws EmpresasNoExistenException,NoExistenEmpresasOfertasLaboralesException {
+
 		 ManejadorUsuario iMU =  ManejadorUsuario.getInstancia();
-		 Empresa u1 = new Empresa("nickname", "nombre", "apellido", "correo", "NombreEmpresa", "descripcion", "link");
-		 LocalDate d = LocalDate.now();
-		 Postulante u2 = new Postulante("nickname2", "nombre2", "apellido2", "correo2", d,"nacionalidad");
-		 iMU.agregarPostulante(u2);
-		 iMU.agregarEmpresa(u1);
 		 Empresa[] empresas = iMU.getEmpresas();
-		 DTEmpresa[] arrEmp = new DTEmpresa[empresas.length];
+		 boolean hayOL = false;
 		 for(int i = 0; i < empresas.length; i++) {
-			 arrEmp[i] = empresas[i].getDataEmpresa();
+			 hayOL = hayOL || (empresas[i].getOfertasLaborales().size() != 0);
 		 }
-		 return arrEmp;
+		 if (empresas != null ) {
+			 if(hayOL) {
+				 DTEmpresa[] arrEmp = new DTEmpresa[empresas.length];
+				 for(int i = 0; i < empresas.length; i++) {
+					 arrEmp[i] = empresas[i].getDataEmpresa();
+				 }
+				return arrEmp;
+			 }else {
+				 throw new NoExistenEmpresasOfertasLaboralesException("No hay empresas con Ofertas Laborales");
+			 }
+		 } else {
+			 throw new EmpresasNoExistenException("No existen Empresas registradas");
+		 }
+
 	}
 
-	public DTOfertaLaboral[] listarOfertasLaborales(String nomEmpresa) {
+	public DTOfertaLaboral[] listarOfertasLaborales(String nomEmpresa) throws OfertasLaboralesNoExistenException {
 		ManejadorUsuario iMU = ManejadorUsuario.getInstancia();
 		Empresa[] empresas = iMU.getEmpresas();
 		int i = 0;
@@ -59,16 +72,21 @@ public class ControladorUsuario implements IUsuario {
 		}
 		Empresa e = empresas[i];
 		Map<String, OfertaLaboral> ofLab = e.getOfertasLaborales();
-		DTOfertaLaboral[] ofertasRes = new DTOfertaLaboral[ofLab.size()];
 		if(ofLab.size() != 0) {
-			int j = 0;
-			for(Map.Entry<String, OfertaLaboral> entry : ofLab.entrySet()) {
-				ofertasRes[j] = entry.getValue().getDataOfertaLaboral();
-				j++;
+			DTOfertaLaboral[] ofertasRes = new DTOfertaLaboral[ofLab.size()];
+			if(ofLab.size() != 0) {
+				int j = 0;
+				for(Map.Entry<String, OfertaLaboral> entry : ofLab.entrySet()) {
+					ofertasRes[j] = entry.getValue().getDataOfertaLaboral();
+					j++;
+				}
 			}
+			return ofertasRes;
+		}else {
+			throw new OfertasLaboralesNoExistenException("La empresa seleccionada no tiene Ofertas Laborales");
 		}
 		
-		return ofertasRes;
+
 	}
 
 	public DTOfertaLaboral mostrarDatosOfertaLaboral(String OfertaLaboral) {

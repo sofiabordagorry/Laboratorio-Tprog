@@ -25,4 +25,8 @@ public class DTEmpresa extends DTUsuario {
 	public String getLink() {
 		return this.link;
 	}
+	
+	public String toString() {
+		return this.nombreDeEmpresa;
+	}
 }

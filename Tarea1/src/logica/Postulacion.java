@@ -58,7 +58,7 @@ public class Postulacion {
 	}
 	
 	public DTPostulacion getDataPostulacion() {
-		DTPostulacion dtP = new DTPostulacion(this.getFecha(), this.getCVReducido(), this.getDescripcion(), this.getPostulante().getDataPostulante(), this.getOfertaLaboral().getDataOfertaLaboral());
+		DTPostulacion dtP = new DTPostulacion(this.getFecha(), this.getCVReducido(), this.getDescripcion(), this.getPostulante().getNombre() + " " + this.getPostulante().getApellido());
 		return dtP;
 	}
 }

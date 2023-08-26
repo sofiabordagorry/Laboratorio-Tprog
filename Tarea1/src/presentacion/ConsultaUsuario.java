@@ -26,6 +26,7 @@ import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 
+import excepciones.UsuariosNoExistenException;
 import logica.DTEmpresa;
 import logica.DTOfertaLaboral;
 import logica.DTPostulante;
@@ -42,33 +43,15 @@ public class ConsultaUsuario extends JInternalFrame {
 	private JTextField textFechaNomEmp;
 	private JTextField textNacLink;
 	private IUsuario contUsuario;
-	private JComboBox<DTUsuario> comboBoxUsuarios;
+	private JComboBox<String> comboBoxUsuarios;
 	private JComboBox<DTOfertaLaboral> comboBoxOL;
 	private JScrollPane scrollPaneDescripcion;
 	private JTextArea textAreaDescripcion;
 	private JLabel lblDescripcion;
 	private JLabel lblFechaNomEmp;
 	private JLabel lblNacLink;
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					ConsultaUsuario frame = new ConsultaUsuario();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 
-	/**
-	 * Create the frame.
-	 */
-	public ConsultaUsuario(IUsuario iu, IOfertaLaboral iol) {
+	public ConsultaUsuario(IUsuario iu, IOfertaLaboral iol, JFrame frmAdmTrabajo) {
         contUsuario = iu;
 		
 		setTitle("Consulta de Usuario");
@@ -90,11 +73,11 @@ public class ConsultaUsuario extends JInternalFrame {
 		getContentPane().add(lblSeleccioneUnUsuario, gbc_lblSeleccioneUnUsuario);
 		
 		
-		comboBoxUsuarios = new JComboBox<DTUsuario>();
+		comboBoxUsuarios = new JComboBox<String>();
 	    comboBoxUsuarios.addActionListener(new ActionListener() {
 	    	 public void actionPerformed(ActionEvent e) {
-	                DTUsuario selectedItem = (DTUsuario) comboBoxUsuarios.getSelectedItem();
-	                cargarDatos(selectedItem.getNickname());
+	                String selectedItem = (String) comboBoxUsuarios.getSelectedItem();
+	                cargarDatos(selectedItem);
 	            }
 	    });
 	    
@@ -245,16 +228,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		textAreaDescripcion.setWrapStyleWord(true); 
         textAreaDescripcion.setLineWrap(true);
         textAreaDescripcion.setEditable(false);
-		textAreaDescripcion.setEditable(false);
-		scrollPaneDescripcion.setViewportView(textAreaDescripcion);
-		
-		
-//		Desaparecer la descripcion y se reajuste la pantalla
-//		lblNewLabel.setVisible(false);
-//		scrollPane.setVisible(false);
-//		textArea.setVisible(false);
-//		pack();
-		
+		scrollPaneDescripcion.setViewportView(textAreaDescripcion);	
 		
 		JLabel lblNewLabel_4 = new JLabel("Ofertas Laborales");
 		lblNewLabel_4.setFont(new Font("Dialog", Font.PLAIN, 12));
@@ -268,7 +242,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		comboBoxOL = new JComboBox<DTOfertaLaboral>();
 	    comboBoxOL.addActionListener(new ActionListener() {
 	    	 public void actionPerformed(ActionEvent e) {
-	    		 consultaOfertaLaboral(iu, iol);
+	    		 consultaOfertaLaboral(iu, iol, frmAdmTrabajo);
 	            }
 	    });
 		GridBagConstraints gbc_comboBoxOL = new GridBagConstraints();
@@ -337,37 +311,43 @@ public class ConsultaUsuario extends JInternalFrame {
         }
 	}
 	
-    public void cargarUsuarios() {
-        DTUsuario[] us = contUsuario.listarUsuarios();
-        DefaultComboBoxModel<DTUsuario> model = new DefaultComboBoxModel<DTUsuario>(us);
-        if(us.length > 0) {
-//	        for(DTUsuario u : us) {
-//	        	model.addElement(u);
-//	        }
+    public boolean cargarUsuarios() {
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>();
+        try {
+        	DTUsuario[] us = contUsuario.listarUsuarios();
+	        for(DTUsuario u : us) {
+	        	model.addElement(u.getNickname());
+	        }
 	        comboBoxUsuarios.setModel(model);
-        }else if(us.length == 0) {
-        	JOptionPane.showMessageDialog(this, "Actualmente noo existen Usuarios en el Sistema", "Consultar Usuario", JOptionPane.INFORMATION_MESSAGE);
+        }catch(UsuariosNoExistenException e) {
+        	JOptionPane.showMessageDialog(this, e.getMessage(), 
+					"Consulta de Usuario",
+					JOptionPane.ERROR_MESSAGE);
+        	return false;
         }
+       return true;
     }
     
-    public void consultaOfertaLaboral(IUsuario iu, IOfertaLaboral iol) {
+    public void consultaOfertaLaboral(IUsuario iu, IOfertaLaboral iol, JFrame frmAdmTrabajo) {
     	DTOfertaLaboral dtselectedOL = (DTOfertaLaboral) comboBoxOL.getSelectedItem();
     	setVisible(false);
     	limpiarFormulario();
     	ConsultaOfertaLaboral creConOfLabInternalFrame = new ConsultaOfertaLaboral(iu, iol);
     	creConOfLabInternalFrame.setLocation(25,25);
+    	//System.out.println("LLEGUE");
+		frmAdmTrabajo.getContentPane().add(creConOfLabInternalFrame);
     	creConOfLabInternalFrame.referenceConsultaUsuario(dtselectedOL.getNombre(), dtselectedOL.getDTEmpresa());
     	creConOfLabInternalFrame.setVisible(true);
     }
     
     public void limpiarFormulario() {
     	textNombre.setText("");
-    	textNickname.setText("");;
-    	textApellido.setText("");;
-    	textCorreo.setText("");;
-    	textFechaNomEmp.setText("");;
-    	textNacLink.setText("");;
-    	textAreaDescripcion.setText("");;
+    	textNickname.setText("");
+    	textApellido.setText("");
+    	textCorreo.setText("");
+    	textFechaNomEmp.setText("");
+    	textNacLink.setText("");
+    	textAreaDescripcion.setText("");
     }
 
  }

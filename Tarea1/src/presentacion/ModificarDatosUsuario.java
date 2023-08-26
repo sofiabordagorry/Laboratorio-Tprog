@@ -21,6 +21,7 @@ import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
+import excepciones.UsuariosNoExistenException;
 import logica.DTEmpresa;
 import logica.DTOfertaLaboral;
 import logica.DTPostulante;
@@ -32,7 +33,7 @@ import javax.swing.JButton;
 
 public class ModificarDatosUsuario extends JInternalFrame {
 	private IUsuario contUsuario;
-	private JComboBox<DTUsuario> comboBoxUsuarios;
+	private JComboBox<String> comboBoxUsuarios;
 	private JLabel lblDescripcion;
 	private JLabel lblFechaNomEmp;
 	private JLabel lblNacLink;
@@ -46,25 +47,6 @@ public class ModificarDatosUsuario extends JInternalFrame {
 	private JTextField textNacLink;
 	private JDateChooser dateChooser;
 	
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					ModificarDatosUsuario frame = new ModificarDatosUsuario();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
-	/**
-	 * Create the frame.
-	 */
 	public ModificarDatosUsuario(IUsuario IU) {
 		contUsuario = IU;
 		
@@ -87,11 +69,11 @@ public class ModificarDatosUsuario extends JInternalFrame {
 		gbc_lblSeleccioneUnUsuario.gridy = 0;
 		getContentPane().add(lblSeleccioneUnUsuario, gbc_lblSeleccioneUnUsuario);
 		
-		comboBoxUsuarios = new JComboBox<DTUsuario>();
+		comboBoxUsuarios = new JComboBox<String>();
 	    comboBoxUsuarios.addActionListener(new ActionListener() {
 	    	 public void actionPerformed(ActionEvent e) {
-	                DTUsuario selectedItem = (DTUsuario) comboBoxUsuarios.getSelectedItem();
-	                cargarDatos(selectedItem.getNickname());
+	                String selectedItem = (String) comboBoxUsuarios.getSelectedItem();
+	                cargarDatos(selectedItem);
 	            }
 	    });
 		GridBagConstraints gbc_comboBoxUsuarios = new GridBagConstraints();
@@ -279,19 +261,24 @@ public class ModificarDatosUsuario extends JInternalFrame {
         gbc_btnAceptar.gridy = 9;
         getContentPane().add(btnAceptar, gbc_btnAceptar);
         
-		
-//		Desaparecer la descripcion y se reajuste la pantalla
-//		lblNewLabel_3.setVisible(false);
-//		scrollPane.setVisible(false);
-//		textArea.setVisible(false);
-//		pack();
 
 	}
 	
-	public void cargarUsuarios() {
-        DefaultComboBoxModel<DTUsuario> model = new DefaultComboBoxModel<DTUsuario>(contUsuario.listarUsuarios());
-        comboBoxUsuarios.setModel(model);
-	}
+    public void cargarUsuarios() {
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>();
+        try {
+        DTUsuario[] us = contUsuario.listarUsuarios();
+	        for(DTUsuario u : us) {
+	        	model.addElement(u.getNickname());
+	        }
+	        comboBoxUsuarios.setModel(model);
+        }catch(UsuariosNoExistenException e) {
+        	JOptionPane.showMessageDialog(this, e.getMessage(), 
+					"Consulta de Usuario",
+					JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
 	public void cargarDatos(String selectedItem) {
 		DTUsuario u = contUsuario.mostrarInformacionUsuario(selectedItem);
 		
@@ -308,6 +295,7 @@ public class ModificarDatosUsuario extends JInternalFrame {
         	lblNacLink.setText("Nacionalidad:");
         	DTPostulante selectedPost = (DTPostulante) u;
         	textFechaNomEmp.setVisible(false);
+        	textFechaNomEmp.setText(".");
         	dateChooser.setVisible(true);
         	Date date = Date.from(selectedPost.getFechaDeNacimiento().atStartOfDay(ZoneId.systemDefault()).toInstant());
         	dateChooser.setDate(date);
@@ -332,8 +320,8 @@ public class ModificarDatosUsuario extends JInternalFrame {
 	
 	public void modificarDatos() {
 		if(CheckForm()) {
-			DTUsuario selectedUser = (DTUsuario) comboBoxUsuarios.getSelectedItem();
-			DTUsuario u = contUsuario.mostrarInformacionUsuario(selectedUser.getNickname());
+			String selectedUser = (String) comboBoxUsuarios.getSelectedItem();
+			DTUsuario u = contUsuario.mostrarInformacionUsuario(selectedUser);
 			if(u instanceof DTEmpresa) {
 				contUsuario.modificarEmpresa(textNickname.getText(),textNombre.getText(), textApellido.getText(), textFechaNomEmp.getText(),textAreaDescripcion.getText(),textNacLink.getText());
 			}else if (u instanceof DTPostulante) {
@@ -357,7 +345,7 @@ public class ModificarDatosUsuario extends JInternalFrame {
 				JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "Modificar Datos de Usuario", JOptionPane.ERROR_MESSAGE);
 				return false;
 			}
-		}else {
+		}else if (comboBoxUsuarios.getSelectedItem() instanceof DTPostulante){
 			if(nombre.isEmpty() || apellido.isEmpty() || NacionalidadLink.isEmpty()) {
 				JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "Modificar Datos de Usuario", JOptionPane.ERROR_MESSAGE);
 				return false;
@@ -376,7 +364,6 @@ public class ModificarDatosUsuario extends JInternalFrame {
 	}
 	
 	public void limpiarFormulario() {
-
 		textAreaDescripcion.setText("");
 		textNombre.setText("");;
 		textNickname.setText("");;

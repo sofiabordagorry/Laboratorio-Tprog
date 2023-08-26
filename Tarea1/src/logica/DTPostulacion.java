@@ -6,15 +6,14 @@ public class DTPostulacion {
 	private LocalDate fecha;
 	private String CVReducido;
 	private String descripcion;
-	private DTPostulante postulante;
-	private DTOfertaLaboral ofertaLaboral;
+	private String postulante;
+
 	
-	public DTPostulacion(LocalDate fecha, String CVReducido, String descripcion, DTPostulante postulante, DTOfertaLaboral ofertaLaboral) {
+	public DTPostulacion(LocalDate fecha, String CVReducido, String descripcion, String postulante) {
 		this.fecha = fecha;
 		this.CVReducido = CVReducido;
 		this.descripcion = descripcion;
 		this.postulante = postulante;
-		this.ofertaLaboral = ofertaLaboral;
 	}
 	
 	public LocalDate getFecha() {
@@ -29,12 +28,8 @@ public class DTPostulacion {
 		return this.descripcion;
 	}
 	
-	public DTPostulante getPostulante() {
+	public String getPostulante() {
 		return this.postulante;
-	}
-	
-	public DTOfertaLaboral getOfertaLaboral() {
-		return this.ofertaLaboral;
 	}
 	
 }
