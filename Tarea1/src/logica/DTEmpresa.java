@@ -13,7 +13,7 @@ public class DTEmpresa extends DTUsuario {
 		this.descripcion = descripcion;
 		this.link = link;
 	}
-	
+
 	public DTEmpresa(String nickname, String nombre, String apellido, String correo, String nombreDeEmpresa, String descripcion, String link) {
 		super(nickname, nombre, apellido, correo);
 		this.nombreDeEmpresa = nombreDeEmpresa;
@@ -36,4 +36,6 @@ public class DTEmpresa extends DTUsuario {
 	public String getLink() {
 		return this.link;
 	}
+
+
 }

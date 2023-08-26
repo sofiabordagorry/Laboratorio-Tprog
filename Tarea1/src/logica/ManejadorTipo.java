@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 public class ManejadorTipo {
 	private static ManejadorTipo instancia = null;
+
 	private Map<String, Tipo> mapTipos;//Hay que cambiarle el nombre
 	private Map<String, Paquete> mapPaquetes;//a este tambien
 	

@@ -86,4 +86,9 @@ public class OfertaLaboral {
 	public void agregarPostulacion(Postulacion postulacion) {
 		this.postulaciones.add(postulacion);
 	}
+	
+	public Boolean estaVigente() {
+		LocalDate venc = this.tipoOL.calcularVencimiento(this.fechaDeAlta);
+		return  (venc.isAfter(LocalDate.now()));
+	}
 }

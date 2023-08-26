@@ -6,3 +6,4 @@ public class EmpresasNoExistenException extends Exception{
 		super(string);
 	}
 }
+

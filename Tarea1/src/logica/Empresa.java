@@ -1,5 +1,7 @@
 package logica;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -26,6 +28,10 @@ public class Empresa extends Usuario {
 		return this.descripcion;
 	}
 	
+	public Map<String, OfertaLaboral> getOfertasLaborales() {
+		return this.ofertasLaborales;
+	}
+	
 	public String getLink() {
 		return this.link;
 	}
@@ -50,5 +56,30 @@ public class Empresa extends Usuario {
 		return new DTEmpresa(this.getNickname(), this.getNombre(), this.getApellido(),
 				this.getCorreo(), this.getNombreEmpresa(),this.getDescripcion(), 
 				this.getLink());
+//	public DTEmpresa getDataEmpresa() 
+	}
+	
+	public ArrayList<DTOfertaLaboral> obtenerOfertasVigentes() {
+        ArrayList<DTOfertaLaboral> dof = new ArrayList<>();
+		Map<String, OfertaLaboral> ofertasLaborales = this.ofertasLaborales;
+	    if (ofertasLaborales.isEmpty()) { //consigo el array
+	        dof= null;
+	    } else {
+	        Collection<OfertaLaboral> ofs = ofertasLaborales.values();
+	        Object[] o = ofs.toArray();
+	        OfertaLaboral oferta;
+	        
+	        for (int i = 0; i < o.length; i++) {
+	        	oferta = (OfertaLaboral) o[i];
+	        	if(oferta.estaVigente()) {
+                dof.add(new DTOfertaLaboral(oferta.getNombre(), oferta.getDescripcion(), oferta.getCiudad(), oferta.getDepartamento(), oferta.getHorario(), oferta.getRemuneracion(), oferta.getFechaDeAlta()));
+	        	}
+	        }
+	    }
+	    return dof;
+	}
+	
+	public OfertaLaboral buscarOferta(String oferta) {
+		return this.ofertasLaborales.get(oferta);
 	}
 }
