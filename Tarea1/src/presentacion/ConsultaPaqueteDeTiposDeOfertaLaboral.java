@@ -64,7 +64,7 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
     	// ManejadorTipo
     	ManejadorTipo m = ManejadorTipo.getInstancia();
     	
-        setBounds(10, 40, 487, 246);
+        setBounds(10, 40, 531, 441);
         setResizable(true);
         setIconifiable(true);
         setMaximizable(true);
@@ -135,6 +135,7 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         gbc_lblDatos.gridy = 2;
         getContentPane().add(lblDatos, gbc_lblDatos);
         
+        areaDatos.setMargin(new Insets(15,15,15,15));
         areaDatos.setEditable(false);
         GridBagConstraints gbc_areaDatos = new GridBagConstraints();
         gbc_areaDatos.gridwidth = 2;
@@ -171,6 +172,7 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         getContentPane().add(lblNewLabel, gbc_lblNewLabel);
         
         JTextArea areaDatosTipo = new JTextArea();
+        areaDatosTipo.setMargin(new Insets(15,15,15,15));
         areaDatosTipo.setEditable(false);
         GridBagConstraints gbc_areaDatosTipo = new GridBagConstraints();
         gbc_areaDatosTipo.gridwidth = 2;
@@ -189,7 +191,7 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
                     
                     if (selectedItem != null) {
                     	Tipo tipoAsociado = selectedItem.getTipo();
-                    	String datosTipo = "Nombre: " + tipoAsociado.getNombre() + "\nDescripcion: " + tipoAsociado.getDescripcion() + "\nExposicion:" + tipoAsociado.getExposicion() + "\nDuracion: " + tipoAsociado.getDuracion() + "\nCosto" + tipoAsociado.getCosto() + "\n Fecha de alta: " + "aca va la fecha";
+                    	String datosTipo = "Nombre: " + tipoAsociado.getNombre() + "\nDescripcion: " + tipoAsociado.getDescripcion() + "\nExposicion:" + tipoAsociado.getExposicion() + "\nDuracion: " + tipoAsociado.getDuracion() + "\nCosto: " + tipoAsociado.getCosto() + "\n Fecha de alta: " + tipoAsociado.getFechaDeAlta().toString();
                     	areaDatosTipo.setText(datosTipo);
                     }
         		}

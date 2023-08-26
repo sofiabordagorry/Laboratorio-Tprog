@@ -3,6 +3,7 @@ package presentacion;
 import java.awt.EventQueue;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.time.LocalDate;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
@@ -130,7 +131,7 @@ public class Principal {
 		ManejadorTipo m = ManejadorTipo.getInstancia();
 		m.agregarPaquete(paqueteTest);
 		
-		Tipo tipoTest = new Tipo("Nombretipo", "Descripciontipo", 5, 5, 5.0f, null);
+		Tipo tipoTest = new Tipo("Nombretipo", "Descripciontipo", 5, 5, 5.0f, LocalDate.now());
 		PaqueteTipo pqtTest = new PaqueteTipo(5, tipoTest);
 		paqueteTest.agregarPaqueteTipo(pqtTest);
 		
