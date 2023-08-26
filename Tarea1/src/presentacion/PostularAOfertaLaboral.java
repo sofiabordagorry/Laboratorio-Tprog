@@ -24,7 +24,11 @@ import java.util.Date;
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 
+import excepciones.EmpresaSinOfertasException;
+import excepciones.EmpresasNoExistenException;
+import excepciones.PostulantesNoExistenException;
 import excepciones.UsuarioNoExisteException;
+import excepciones.YaSePostuloException;
 import logica.DTEmpresa;
 import logica.IUsuario;
 import logica.DTPostulante;
@@ -231,10 +235,14 @@ import logica.DTPostulacion;
 			if(checkForm()) {
 				LocalDate fechaDeAltaU = this.convertirDateALocalDate(fechaAltaU);
 				
+				try {
 					controlUsr.ingresarPostulacion(CVReducidoU, motivacionU, fechaDeAltaU, empresaU.getNickname(), ofertaLaboralU.getNombre(), postulanteU.getNickname());
 					
 					JOptionPane.showMessageDialog(this, "El postulante se ha postulado con éxito", "Postular a Oferta Laboral",
-	                        JOptionPane.INFORMATION_MESSAGE);
+	                        JOptionPane.INFORMATION_MESSAGE);} 
+				catch(YaSePostuloException e) {	JOptionPane.showMessageDialog(this, e.getMessage(), 
+						"Postular A Oferta Laboral",
+						JOptionPane.ERROR_MESSAGE);}
 				
 				limpiarFormulario();
 				setVisible(false);
@@ -288,40 +296,48 @@ import logica.DTPostulacion;
 		}
 		
 
-		public void cargarEmpresas() {
+		public boolean cargarEmpresas() {
 			DefaultComboBoxModel<DTEmpresa> model;
-			//try {
+			try {
 				model = new DefaultComboBoxModel<DTEmpresa>(controlUsr.listarEmpresas());
 				this.comboBoxEmpresas.setModel(model);
-			/*} catch(EmpresasNoExistenException e) {
+			} catch(EmpresasNoExistenException e) {
 				JOptionPane.showMessageDialog(this, e.getMessage(), 
 						"Postular A Oferta Laboral",
 						JOptionPane.ERROR_MESSAGE);
-			}*/
+				return false;
+			}
+			return true;
 		}
-		
-   public void cargarOfertasLaborales() {
-				DTEmpresa empresaU = (DTEmpresa) this.comboBoxOfertaLaboral.getSelectedItem();
-				DefaultComboBoxModel<DTOfertaLaboral> model;
-				//try {
-		            model = new DefaultComboBoxModel<DTOfertaLaboral>(controlUsr.listarOfertasLaboralesVigentes(empresaU.getNickname()));
-		            this.comboBoxOfertaLaboral.setModel(model);
-		       /*} catch (UsuarioNoExisteException e) {
-		            // No se imprime mensaje de error sino que simplemente no se muestra ningún elemento
-		        }*/
 
-		    }
+		
+   public boolean  cargarOfertasLaborales() {
+		DTEmpresa empresaU = (DTEmpresa) this.comboBoxOfertaLaboral.getSelectedItem();
+		DefaultComboBoxModel<DTOfertaLaboral> model;
+		try {
+			model= new DefaultComboBoxModel<DTOfertaLaboral>(controlUsr.listarOfertasLaboralesVigentes(empresaU.getNickname()));
+			this.comboBoxOfertaLaboral.setModel(model);
+			} catch (EmpresaSinOfertasException e){
+				JOptionPane.showMessageDialog(this, e.getMessage(), 
+						"Postular A Oferta Laboral", JOptionPane.ERROR_MESSAGE);
+				return false;
+			}
+		return true;
+		
+}
 
 		   
-		   public void cargarPostulantes() {
+		   public boolean cargarPostulantes() {
 		        DefaultComboBoxModel<DTPostulante> model;
-		        //try {
+		        try {
 		            model = new DefaultComboBoxModel<DTPostulante>(controlUsr.listarPostulantes());
 		            this.comboBoxPostulante.setModel(model);
-		        /*} catch (UsuarioNoExisteException e) {
-		            // No se imprime mensaje de error sino que simplemente no se muestra ningún elemento
-		        }*/
-
+		        }
+		         catch (PostulantesNoExistenException e) {
+						JOptionPane.showMessageDialog(this, e.getMessage(), 
+								"Postular A Oferta Laboral", JOptionPane.ERROR_MESSAGE);
+						return false;		        }
+		        return true;
 		    }
 		   
 		   
@@ -343,7 +359,6 @@ import logica.DTPostulacion;
 		private void limpiarFormulario() {
 			textAreaCV.setText("");
 			textAreaMotivacion.setText("");
-			//.setText("");
 			comboBoxEmpresas.removeAllItems();
 			comboBoxOfertaLaboral.removeAllItems();
 			comboBoxPostulante.removeAllItems();

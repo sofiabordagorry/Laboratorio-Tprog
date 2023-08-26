@@ -7,9 +7,9 @@ package excepciones;
  *
  */
 @SuppressWarnings("serial")
-public class UsuarioNoExisteException extends Exception {
+public class YaSePostuloException extends Exception {
 
-    public UsuarioNoExisteException(String string) {
+    public YaSePostuloException(String string) {
         super(string);
     }
 }
