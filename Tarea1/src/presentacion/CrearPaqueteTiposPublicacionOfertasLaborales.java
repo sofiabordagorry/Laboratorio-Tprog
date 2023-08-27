@@ -230,14 +230,9 @@ public class CrearPaqueteTiposPublicacionOfertasLaborales extends JInternalFrame
 		Date fechaDeAltaU = dateChooserFechaDeAlta.getDate();
 		
 		if(checkForm()) {
-<<<<<<< HEAD
-			DTPaquete datosPaquete = new DTPaquete(nombreU, descripcionU, Integer.parseInt(periodoValidezU), Float.parseFloat(descuentoU), LocalDate.parse("20/05/1950"),
-																	Float.parseFloat(costoAsociadoU), null);
-=======
 			LocalDate fechaDeAlta = this.convertirDateALocalDate(fechaDeAltaU);
 			DTPaquete datosPaquete = new DTPaquete(nombreU, descripcionU, Integer.parseInt(periodoValidezU), Float.parseFloat(descuentoU), 
 																	Float.parseFloat(costoAsociadoU), null, fechaDeAlta);
->>>>>>> e78087b83662bbeb95d2c0ae60c881d0e88bfd47
 			
 			try {
 				col.ingresarDatosPaquete(datosPaquete);

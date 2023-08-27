@@ -31,7 +31,7 @@ public class CargarDatos {
 				}
 				
 				String[] parts = line.split(";");
-				Paquete paq = new Paquete(parts[1], parts[2], Integer.parseInt(parts[3]), Float.parseFloat(parts[4]), LocalDate.parse(parts[5], formatter), 0);
+				Paquete paq = new Paquete(parts[1], parts[2], Integer.parseInt(parts[3]), Float.parseFloat(parts[4]), 0, LocalDate.parse(parts[5], formatter));
 				m.agregarPaquete(paq);
 			}
 		} catch (IOException e) {
@@ -234,7 +234,7 @@ public class CargarDatos {
 				Tipo[] tipos = m.getTipos();
 				Map<String, Keyword> keywords = new HashMap<>();
 				
-				OfertaLaboral of = new OfertaLaboral(parts[1], parts[2], parts[4], parts[3], parts[5], Float.parseFloat(parts[6]), LocalDate.parse(parts[9], formatter), 0, tipos[Integer.parseInt(parts[8])], keywords);
+				OfertaLaboral of = new OfertaLaboral(parts[1], parts[2], parts[4], parts[3], parts[5], Float.parseFloat(parts[6]), LocalDate.parse(parts[9], formatter), 0, tipos[Integer.parseInt(parts[8])], keywords, empresas[Integer.parseInt(parts[7]) - 10]);
 				mof.agregarOfertaLaboral(of);
 				empresas[Integer.parseInt(parts[7]) - 10].agregarOfertaLaboral(of);
 			}

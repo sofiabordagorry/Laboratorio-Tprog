@@ -6,11 +6,8 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
-<<<<<<< HEAD
 import logica.CargarDatos;
-=======
 import logica.Empresa;
->>>>>>> e78087b83662bbeb95d2c0ae60c881d0e88bfd47
 import logica.Factory;
 import logica.IOfertaLaboral;
 import javax.swing.JFrame;
@@ -211,9 +208,6 @@ public class Principal {
 		frmAdmTrabajo.setTitle("Administrador Trabajo.uy");
 		frmAdmTrabajo.setBounds(100, 100, 754, 710);
 		frmAdmTrabajo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-<<<<<<< HEAD
-
-=======
 		
 		LocalDate d = LocalDate.of(1900, 1, 1);
 		Paquete paqueteTest = new Paquete("nombreTest", "descripcionTest", 5, 0.5f, 500.0f, d);
@@ -223,7 +217,6 @@ public class Principal {
 		Tipo tipoTest = new Tipo("Nombretipo", "Descripciontipo", 5, 5, 5.0f, LocalDate.now());
 		PaqueteTipo pqtTest = new PaqueteTipo(5, tipoTest);
 		paqueteTest.agregarPaqueteTipo(pqtTest);
->>>>>>> e78087b83662bbeb95d2c0ae60c881d0e88bfd47
 		
 		JMenuBar mainMenu = new JMenuBar();
 		frmAdmTrabajo.setJMenuBar(mainMenu);

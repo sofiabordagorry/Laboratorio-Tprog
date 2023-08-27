@@ -73,11 +73,7 @@ public class Paquete {
 			dtpaq[i] = paq.getDTPaqueteTipo();
 		}
     	return new DTPaquete(this.getNombre(), this.getDescripcion(), this.getPeriodoDeValidez(), 
-<<<<<<< HEAD
-				this.getDescuento(), this.getFecha(), this.getCostoAsociado(), dtpaq);
-=======
 				this.getDescuento(), this.getCostoAsociado(), dtpaq, this.fechaDeAlta);
->>>>>>> e78087b83662bbeb95d2c0ae60c881d0e88bfd47
     } 	
 
 
