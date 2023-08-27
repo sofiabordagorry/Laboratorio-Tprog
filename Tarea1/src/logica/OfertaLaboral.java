@@ -107,10 +107,12 @@ public class OfertaLaboral {
 		DTTipo dataTipoOL = this.getTipoOL().getDataTipo();
 		Map<String, DTKeyword> dataKeyWords = new HashMap<>();
 		
+		
+		if (this.getKeywords().isEmpty()) {
 		for (Map.Entry<String, Keyword> entry : this.getKeywords().entrySet()) {
 			dataKeyWords.put(entry.getKey(), entry.getValue().getDataKeyWord());
 		}
-		
+		}
 		List<DTPostulacion> dataPostulaciones = new LinkedList<>();
 		for(Postulacion p : this.getPostulaciones()) {
 			dataPostulaciones.add(p.getDataPostulacion());

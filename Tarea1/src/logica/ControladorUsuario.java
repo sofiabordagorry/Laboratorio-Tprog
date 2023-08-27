@@ -175,7 +175,7 @@ public class ControladorUsuario implements IUsuario {
 		ManejadorUsuario iMU = ManejadorUsuario.getInstancia();
 		Empresa[] empresas = iMU.getEmpresas();
 		int i = 0;
-		while(empresas[i].getNombreEmpresa() != nomEmpresa) {
+		while(empresas[i].getNickname() != nomEmpresa) {
 			i++;
 		}
 		Empresa e = empresas[i];
