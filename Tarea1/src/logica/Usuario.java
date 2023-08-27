@@ -45,4 +45,8 @@ public class Usuario {
 	public void setCorreo(String correo) {
 		this.correo = correo;
 	}
+	
+	public DTUsuario getDataUsuario() {
+		return null;
+	}
 }

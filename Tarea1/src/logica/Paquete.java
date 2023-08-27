@@ -3,6 +3,7 @@ package logica;
 import java.util.List;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class Paquete {
 	private String nombre;
@@ -12,8 +13,9 @@ public class Paquete {
 	private LocalDate fecha;
 	private float costoAsociado;
 	private List<PaqueteTipo> paquetesTipos;
+	private LocalDate fechaDeAlta;
 	
-	public Paquete(String nombre, String descripcion, int periodoDeValidez, float descuento, LocalDate fecha, float costoAsociado) {
+	public Paquete(String nombre, String descripcion, int periodoDeValidez, float descuento, float costoAsociado, LocalDate fechaDeAlta) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.periodoDeValidez = periodoDeValidez;
@@ -21,6 +23,7 @@ public class Paquete {
 		this.fecha = fecha;
 		this.costoAsociado = costoAsociado;
 		this.paquetesTipos = new ArrayList<>();
+		this.fechaDeAlta = fechaDeAlta;
 	}
 	
     // Getters
@@ -51,6 +54,10 @@ public class Paquete {
     public List<PaqueteTipo> getPaquetesTipos() {
         return this.paquetesTipos;
     }
+    
+    public LocalDate getFechaDeAlta() {
+    	return this.fechaDeAlta;
+    }
 
     public void agregarPaqueteTipo(PaqueteTipo paqueteTipo) {
     	this.paquetesTipos.add(paqueteTipo);
@@ -66,7 +73,11 @@ public class Paquete {
 			dtpaq[i] = paq.getDTPaqueteTipo();
 		}
     	return new DTPaquete(this.getNombre(), this.getDescripcion(), this.getPeriodoDeValidez(), 
+<<<<<<< HEAD
 				this.getDescuento(), this.getFecha(), this.getCostoAsociado(), dtpaq);
+=======
+				this.getDescuento(), this.getCostoAsociado(), dtpaq, this.fechaDeAlta);
+>>>>>>> e78087b83662bbeb95d2c0ae60c881d0e88bfd47
     } 	
 
 

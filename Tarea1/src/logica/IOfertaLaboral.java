@@ -1,6 +1,5 @@
 package logica;
 
-
 import excepciones.TipoPubNoExistenException;
 import excepciones.KeywordsNoExistenException;
 import excepciones.OfertaLaboralRepetidaException;
@@ -30,4 +29,6 @@ public interface IOfertaLaboral {
 	public abstract String[] listarNomTipos() throws NoHayTiposException;
 	
 	public abstract void agregarTipoAPaquete(int cantidad, String tipPaquete, String tipTipo) throws TipoYaAgragadoException;
+	public abstract DTOfertaLaboral mostrarDatosOfertaLaboral(String OfertaLaboral);
+
 }

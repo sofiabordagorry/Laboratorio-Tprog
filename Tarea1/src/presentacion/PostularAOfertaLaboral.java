@@ -1,18 +1,10 @@
 package presentacion;
 
-import javax.swing.JInternalFrame;
 import java.awt.GridBagLayout;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.Dimension; 
 import java.awt.GridBagConstraints;
-import javax.swing.JTextField;
 import java.awt.Insets;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JTextArea;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -22,22 +14,45 @@ import java.awt.BorderLayout;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
+
+
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
+
+import excepciones.EmpresaSinOfertasException;
+import excepciones.EmpresasNoExistenException;
+import excepciones.PostulantesNoExistenException;
+import excepciones.UsuarioNoExisteException;
+import excepciones.YaSePostuloException;
+import logica.DTEmpresa;
+import logica.IUsuario;
+import logica.DTPostulante;
+import logica.DTOfertaLaboral;
+import logica.DTPostulacion;
 
 
 	@SuppressWarnings("serial")
 	public class PostularAOfertaLaboral  extends JInternalFrame {
 		private JTextArea textAreaCV;
 		private JTextArea textAreaMotivacion;
-		private JComboBox<?> comboBoxEmpresas;
-		private JComboBox<?> comboBoxOfertaLaboral;
-		private JComboBox<?> comboBoxPostulante;
+		private JComboBox<DTEmpresa> comboBoxEmpresas;
+		private JComboBox<DTOfertaLaboral> comboBoxOfertaLaboral;
+		private JComboBox<DTPostulante> comboBoxPostulante;
+		private JDateChooser dateChooser;
 		/**
 		 * @wbp.nonvisual location=571,9
 		 */
 		
-		public PostularAOfertaLaboral() {
+	    private IUsuario controlUsr;
+
+		
+		public PostularAOfertaLaboral(IUsuario iu) {
+			controlUsr = iu;
 			
 			setResizable(true);
 	        setIconifiable(true);
@@ -72,7 +87,13 @@ import com.toedter.calendar.JDateChooser;
 	        gbc_lblNewLabel.gridy = 1;
 	        getContentPane().add(lblNewLabel, gbc_lblNewLabel);
 	        
-	        comboBoxEmpresas = new JComboBox<Object>();
+	        comboBoxEmpresas = new JComboBox<DTEmpresa>();
+	        comboBoxEmpresas.addActionListener(new ActionListener() {
+		    	 public void actionPerformed(ActionEvent e) {
+		    		 if(comboBoxEmpresas.getSelectedIndex() != -1)
+		                cargarOfertasLaborales();
+		            }
+		    });
 	        GridBagConstraints gbc_comboBoxEmpresas = new GridBagConstraints();
 	        gbc_comboBoxEmpresas.gridwidth = 4;
 	        gbc_comboBoxEmpresas.insets = new Insets(5, 5, 8, 5);
@@ -90,7 +111,7 @@ import com.toedter.calendar.JDateChooser;
 	        gbc_lblNewLabel_1.gridy = 3;
 	        getContentPane().add(lblNewLabel_1, gbc_lblNewLabel_1);
 	        
-	        comboBoxOfertaLaboral = new JComboBox<Object>();
+	        comboBoxOfertaLaboral = new JComboBox<DTOfertaLaboral>();
 	        GridBagConstraints gbc_comboBoxOfertaLaboral = new GridBagConstraints();
 	        gbc_comboBoxOfertaLaboral.gridwidth = 4;
 	        gbc_comboBoxOfertaLaboral.insets = new Insets(5, 5, 8, 5);
@@ -108,7 +129,7 @@ import com.toedter.calendar.JDateChooser;
 	        gbc_lblNewLabel_2.gridy = 5;
 	        getContentPane().add(lblNewLabel_2, gbc_lblNewLabel_2);
 	        
-	        comboBoxPostulante = new JComboBox<Object>();
+	        comboBoxPostulante = new JComboBox<DTPostulante>();
 	        GridBagConstraints gbc_comboBoxPostulante = new GridBagConstraints();
 	        gbc_comboBoxPostulante.gridwidth = 4;
 	        gbc_comboBoxPostulante.insets = new Insets(5, 5, 8, 5);
@@ -168,7 +189,7 @@ import com.toedter.calendar.JDateChooser;
 	        gbc_lblNewLabel_9.gridy = 11;
 	        getContentPane().add(lblNewLabel_9, gbc_lblNewLabel_9);
 	        
-	        JDateChooser dateChooser = new JDateChooser();
+	        dateChooser = new JDateChooser();
 	        GridBagConstraints gbc_dateChooser = new GridBagConstraints();
 	        gbc_dateChooser.insets = new Insets(0, 0, 5, 5);
 	        gbc_dateChooser.fill = GridBagConstraints.BOTH;
@@ -210,26 +231,69 @@ import com.toedter.calendar.JDateChooser;
 		
 		protected void cmdPostularAOfertaLaboralActionPerformed(ActionEvent arg0) {
 			
-			String cvU = this.textAreaCV.getText();
+			String CVReducidoU = this.textAreaCV.getText();
 			String motivacionU = this.textAreaMotivacion.getText();
-			//String fechaU = this.textFieldFecha.getText();
+			Date fechaAltaU = this.dateChooser.getDate();
+			DTEmpresa empresaU = (DTEmpresa) this.comboBoxEmpresas.getSelectedItem();
+			DTPostulante postulanteU = (DTPostulante) this.comboBoxPostulante.getSelectedItem();
+			DTOfertaLaboral ofertaLaboralU = (DTOfertaLaboral) this.comboBoxOfertaLaboral.getSelectedItem(); 
+			
 			
 			if(checkForm()) {
-				limpiarFormulario();
-				setVisible(false);
+				LocalDate fechaDeAltaU = this.convertirDateALocalDate(fechaAltaU);
+				
+				try {
+					controlUsr.ingresarPostulacion(CVReducidoU, motivacionU, fechaDeAltaU, empresaU.getNickname(), ofertaLaboralU.getNombre(), postulanteU.getNickname());
+					
+					JOptionPane.showMessageDialog(this, "El postulante se ha postulado con éxito", "Postular a Oferta Laboral",
+	                        JOptionPane.INFORMATION_MESSAGE);
+					limpiarFormulario();
+					setVisible(false);
+				} catch (YaSePostuloException e) {	JOptionPane.showMessageDialog(this, e.getMessage(), 
+					"Postular A Oferta Laboral",
+					JOptionPane.ERROR_MESSAGE);}
 			}
 			
 		}
+
 		
 		private boolean checkForm() {
 			
 			String cvU = this.textAreaCV.getText();
 			String motivacionU = this.textAreaMotivacion.getText();
-			//String fechaU = this.textFieldFecha.getText();
+			Date fechaAltaU = this.dateChooser.getDate();
+			DTEmpresa empresaU = (DTEmpresa) this.comboBoxEmpresas.getSelectedItem();
+			DTPostulante postulanteU = (DTPostulante) this.comboBoxPostulante.getSelectedItem();
+			DTOfertaLaboral ofertaLaboralU = (DTOfertaLaboral) this.comboBoxOfertaLaboral.getSelectedItem(); ;
 	
 			
-			if (cvU.isEmpty() || motivacionU.isEmpty() /*|| fechaU.isEmpty()*/ ) {
+			if (cvU.isEmpty() || motivacionU.isEmpty() ) {
 				JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "Postular A Oferta Laboral",
+						JOptionPane.ERROR_MESSAGE);
+				return false;
+			}
+			
+			if (fechaAltaU == null ) {
+				JOptionPane.showMessageDialog(this, "Se debe elegir una Fecha de Alta",  "Postular A Oferta Laboral",
+						JOptionPane.ERROR_MESSAGE);
+				return false;
+			}
+			
+
+			if(empresaU == null) {
+				JOptionPane.showMessageDialog(this, "Se debe elegir una Empresa", "Postular A Oferta Laboral", 
+						JOptionPane.ERROR_MESSAGE);
+				return false;
+			}
+
+			if(postulanteU == null) {
+				JOptionPane.showMessageDialog(this, "Se debe elegir un Postulante", "Postular A Oferta Laboral", 
+						JOptionPane.ERROR_MESSAGE);
+				return false;
+			}
+			
+			if(ofertaLaboralU == null) {
+				JOptionPane.showMessageDialog(this, "Se debe elegir una Oferta Laboral", "Postular A Oferta Laboral", 
 						JOptionPane.ERROR_MESSAGE);
 				return false;
 			}
@@ -238,12 +302,72 @@ import com.toedter.calendar.JDateChooser;
 		}
 		
 
+		public boolean cargarEmpresas() {
+			DefaultComboBoxModel<DTEmpresa> model;
+			try {
+				model = new DefaultComboBoxModel<DTEmpresa>(controlUsr.listarEmpresasAOL());
+				this.comboBoxEmpresas.setModel(model);
+			} catch(EmpresasNoExistenException e) {
+				JOptionPane.showMessageDialog(this, e.getMessage(), 
+						"Postular A Oferta Laboral",
+						JOptionPane.ERROR_MESSAGE);
+				return false;
+			}
+			return true;
+		}
+
+		
+   public boolean  cargarOfertasLaborales() {
+		DTEmpresa empresaU = (DTEmpresa) this.comboBoxEmpresas.getSelectedItem();
+		DefaultComboBoxModel<DTOfertaLaboral> model;
+		try {
+			model= new DefaultComboBoxModel<DTOfertaLaboral>(controlUsr.listarOfertasLaboralesVigentes(empresaU.getNickname()));
+			this.comboBoxOfertaLaboral.setModel(model);
+			} catch (EmpresaSinOfertasException e){
+				JOptionPane.showMessageDialog(this, e.getMessage(), 
+						"Postular A Oferta Laboral", JOptionPane.ERROR_MESSAGE);
+				return false;
+			}
+		return true;
+		
+}
+
+		   
+		   public boolean cargarPostulantes() {
+		        DefaultComboBoxModel<DTPostulante> model;
+		        try {
+		            model = new DefaultComboBoxModel<DTPostulante>(controlUsr.listarPostulantes());
+		            this.comboBoxPostulante.setModel(model);
+		        }
+		         catch (PostulantesNoExistenException e) {
+						JOptionPane.showMessageDialog(this, e.getMessage(), 
+								"Postular A Oferta Laboral", JOptionPane.ERROR_MESSAGE);
+						return false;		        }
+		        return true;
+		    }
+		   
+		   
+		   
+		   private LocalDate convertirDateALocalDate(Date date) {
+		        // Convertir Date a Instant
+		        Instant instant = date.toInstant();
+
+		        // Obtener ZoneId (Zona horaria)
+		        ZoneId defaultZoneId = ZoneId.systemDefault();
+
+		        // Crear LocalDate a partir de Instant y ZoneId
+		        LocalDate localDate = instant.atZone(defaultZoneId).toLocalDate();
+
+		        return localDate;
+		    }
+
+		
 		private void limpiarFormulario() {
 			textAreaCV.setText("");
 			textAreaMotivacion.setText("");
-			//.setText("");
-			comboBoxEmpresas.removeAllItems();
-			comboBoxOfertaLaboral.removeAllItems();
-			comboBoxPostulante.removeAllItems();
+			dateChooser.setDate(null);
+			comboBoxEmpresas.setSelectedIndex(-1);
+			comboBoxOfertaLaboral.setSelectedIndex(-1);
+			comboBoxPostulante.setSelectedIndex(-1);
 		}
 	}

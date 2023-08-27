@@ -29,23 +29,35 @@ public class ManejadorUsuario {
 	}
 	
 	public Empresa[] getEmpresas(){//OBTENER COLECCIONES DE EMPRESAS
-		 if (this.mapEmpresas.isEmpty())
-	            return null;
-	        else {
-	            Collection<Empresa> emps = this.mapEmpresas.values();
-	            Object[] o = emps.toArray();
-	            Empresa[] empresas = new Empresa[o.length];
-	            for (int i = 0; i < o.length; i++) {
-	                empresas[i] = (Empresa) o[i];
-	            }
+        if (this.mapEmpresas.isEmpty())
+            return null;
+        else {
+            Collection<Empresa> emps = this.mapEmpresas.values();
+            Object[] o = emps.toArray();
+            Empresa[] empresas = new Empresa[o.length];
+            for (int i = 0; i < o.length; i++) {
+                empresas[i] = (Empresa) o[i];
+            }
 
-	            return empresas;
-	        }
+            return empresas;
+        }
 	}
-	
-	public Map<String, Postulante> getPostulantes(){//OBTENER COLECCION DE POSTULANTES
-		return mapPostulantes;
+
+	public Postulante[] getPostulantes(){//OBTENER COLECCION DE POSTULANTES
+        if (this.mapPostulantes.isEmpty())
+            return null;
+        else {
+            Collection<Postulante> post = this.mapPostulantes.values();
+            Object[] o = post.toArray();
+            Postulante[] postulantes = new Postulante[o.length];
+            for (int i = 0; i < o.length; i++) {
+                postulantes[i] = (Postulante) o[i];
+            }
+
+            return postulantes;
+        }
 	}
+
 	
 	public Usuario buscarUsuario(String nickname) {//BUSCAR UN USUARIO
 		Usuario u = mapEmpresas.get(nickname);
