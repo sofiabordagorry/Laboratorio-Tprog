@@ -93,6 +93,7 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         getContentPane().add(lblPaquetes, gbc_lblPaquetes);
         
         try {
+<<<<<<< HEAD
             DTPaquete[] listaPaq = iOL.listarPaquetes();
             comboBox = new JComboBox<>(new ComboBoxModel(listaPaq));
             GridBagConstraints gbc_comboBox = new GridBagConstraints();
@@ -122,6 +123,17 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
             });
         } catch (NoHayPaquetesException e) {
         	fail(e.getMessage());
+=======
+	        DTPaquete[] listaPaq = iOL.listarPaquetes();
+	        comboBox = new JComboBox<>(new ComboBoxModel(listaPaq));
+	        GridBagConstraints gbc_comboBox = new GridBagConstraints();
+	        gbc_comboBox.gridwidth = 2;
+	        gbc_comboBox.insets = new Insets(0, 0, 5, 0);
+	        gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
+	        gbc_comboBox.gridx = 1;
+	        gbc_comboBox.gridy = 1;
+	        getContentPane().add(comboBox, gbc_comboBox);
+>>>>>>> 0f883148c68fcc48f1af1c93826b1e23364feb63
         }
         
         JLabel lblDatos = new JLabel("Datos:");

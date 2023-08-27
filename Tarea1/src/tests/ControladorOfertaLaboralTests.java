@@ -52,6 +52,7 @@ import logica.DTKeyword;
 import logica.ManejadorOfertaLaboral;
 import logica.ManejadorTipo;
 import logica.ManejadorUsuario;
+import logica.Empresa;
 
 class ControladorOfertaLaboralTests{
 
