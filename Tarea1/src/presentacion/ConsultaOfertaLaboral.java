@@ -88,7 +88,7 @@ public class ConsultaOfertaLaboral extends JInternalFrame {
 	    	 public void actionPerformed(ActionEvent e) {
 	                if(comboBoxEmpresas.getSelectedIndex() != -1) {
 	                	DTEmpresa selectedItem = (DTEmpresa) comboBoxEmpresas.getSelectedItem();
-	                	cargarOfertasLaborales(selectedItem.getNombreDeEmpresa());
+	                	cargarOfertasLaborales(selectedItem.getNickname());
 	                }
 	            }
 	    });

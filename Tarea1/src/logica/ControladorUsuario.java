@@ -172,14 +172,15 @@ public class ControladorUsuario implements IUsuario {
 
 	}
 
-	public DTOfertaLaboral[] listarOfertasLaborales(String nomEmpresa) throws OfertasLaboralesNoExistenException {
+	public DTOfertaLaboral[] listarOfertasLaborales(String nickEmpresa) throws OfertasLaboralesNoExistenException {
 		ManejadorUsuario iMU = ManejadorUsuario.getInstancia();
 		Empresa[] empresas = iMU.getEmpresas();
-		int i = 0;
-		while(empresas[i].getNombreEmpresa() != nomEmpresa) {
-			i++;
-		}
-		Empresa e = empresas[i];
+//		int i = 0;
+//		while(empresas[i].getNombreEmpresa() != nomEmpresa) {
+//			i++;
+//		}
+//		Empresa e = empresas[i];
+		Empresa e = iMU.buscarEmpresa(nickEmpresa);
 		Map<String, OfertaLaboral> ofLab = e.getOfertasLaborales();
 		if(ofLab.size() != 0) {
 			DTOfertaLaboral[] ofertasRes = new DTOfertaLaboral[ofLab.size()];
