@@ -17,7 +17,7 @@ public class CargarDatos {
 	
 	public static void ingresarPaquetes() {
 		ManejadorTipo m = ManejadorTipo.getInstancia();
-		String csvFilePath = "./Tarea1/src/CSV/Paquetes.csv";
+		String csvFilePath = "./src/CSV/Paquetes.csv";
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yy");
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
@@ -41,7 +41,7 @@ public class CargarDatos {
 	
 	public static void ingresarTipos() {
 		ManejadorTipo m = ManejadorTipo.getInstancia();
-		String csvFilePath = "./Tarea1/src/CSV/TipoPublicacion.csv";
+		String csvFilePath = "./src/CSV/TipoPublicacion.csv";
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
@@ -65,7 +65,7 @@ public class CargarDatos {
 	
 	public static void ingresarPaqueteTipos() {
 		ManejadorTipo m = ManejadorTipo.getInstancia();
-		String csvFilePath = "./Tarea1/src/CSV/TiposPublicacionPaquetes.csv";
+		String csvFilePath = "./src/CSV/TiposPublicacionPaquetes.csv";
 		
 		Map<String, Paquete> paqs = m.getMapPaquete();
 		Map<String, Tipo> tipos = m.getMapTipo();
@@ -89,7 +89,7 @@ public class CargarDatos {
 	}
 	
 	public static List<Usuario> cargarUsuarios() {
-		String csvFilePath = "./Tarea1/src/CSV/Usuarios.csv";
+		String csvFilePath = "./src/CSV/Usuarios.csv";
 		List<Usuario> usuarios = new ArrayList<>();
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
@@ -114,7 +114,7 @@ public class CargarDatos {
 	}
 	
 	public static List<Postulante> cargarPostulantes() {
-		String csvFilePath = "./Tarea1/src/CSV/Usuarios-Postulantes.csv";
+		String csvFilePath = "./src/CSV/Usuarios-Postulantes.csv";
 		List<Postulante> postulantes = new ArrayList<>();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
 		
@@ -145,7 +145,7 @@ public class CargarDatos {
 	}
 	
 	public static List<Empresa> cargarEmpresas() {
-		String csvFilePath = "./Tarea1/src/CSV/Usuarios-Empresas.csv";
+		String csvFilePath = "./src/CSV/Usuarios-Empresas.csv";
 		List<Empresa> empresas = new ArrayList<>();
 		
 		List<Usuario> users = cargarUsuarios();
@@ -190,7 +190,7 @@ public class CargarDatos {
 	
 	public static void ingresarKeywords() {
 		ManejadorOfertaLaboral m = ManejadorOfertaLaboral.getInstance();
-		String csvFilePath = "./Tarea1/src/CSV/Keywords.csv";
+		String csvFilePath = "./src/CSV/Keywords.csv";
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
 			String line;
@@ -217,7 +217,7 @@ public class CargarDatos {
 		ManejadorUsuario mu = ManejadorUsuario.getInstancia();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yy");
 		
-		String csvFilePath = "./Tarea1/src/CSV/OfertasLaborales.csv";
+		String csvFilePath = "./src/CSV/OfertasLaborales.csv";
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
 			String line;
@@ -263,14 +263,12 @@ public class CargarDatos {
 		ofertasLaborales.get("Soporte Técnico").agregarKeyword(keywords[0]);
 	}
 	
-	/* Falta esto porque no tenía postulaciones
 	public static void ingresarPostulaciones() {
-		ManejadorTipo m = ManejadorTipo.getInstancia();
 		ManejadorOfertaLaboral mof = ManejadorOfertaLaboral.getInstance();
 		ManejadorUsuario mu = ManejadorUsuario.getInstancia();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yy");
 		
-		String csvFilePath = "./Tarea1/src/CSV/OfertasLaborales.csv";
+		String csvFilePath = "./src/CSV/Postulaciones.csv";
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
 			String line;
@@ -283,13 +281,15 @@ public class CargarDatos {
 				}
 				
 				String[] parts = line.split(";");
-				Map<String, Postulante> mapPostulantes = mu.getPostulantes();
-				Map<String,OfertaLaboral> ofertasLaborales = mof.getOfertasLaborales();
+				OfertaLaboral lof = mof.buscarOfertaLaboral(parts[5]);
+				Postulante upost = mu.buscarPostulante(parts[1]);
 				
-				mapPostulantes.get(parts[1]).
+				Postulacion post = new Postulacion(LocalDate.parse(parts[4], formatter), parts[2], parts[3], upost, lof);
+				upost.agregarPostulacion(post);
+				lof.agregarPostulacion(post);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}*/
+	}
 }

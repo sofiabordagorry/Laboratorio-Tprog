@@ -152,10 +152,11 @@ public class ControladorUsuario implements IUsuario {
 		 ManejadorUsuario iMU =  ManejadorUsuario.getInstancia();
 		 Empresa[] empresas = iMU.getEmpresas();
 		 boolean hayOL = false;
-		 for(int i = 0; i < empresas.length; i++) {
-			 hayOL = hayOL || (empresas[i].getOfertasLaborales().size() != 0);
-		 }
+
 		 if (empresas != null ) {
+			 for(int i = 0; i < empresas.length; i++) {
+				 hayOL = hayOL || (empresas[i].getOfertasLaborales().size() != 0);
+			 }
 			 if(hayOL) {
 				 DTEmpresa[] arrEmp = new DTEmpresa[empresas.length];
 				 for(int i = 0; i < empresas.length; i++) {
@@ -197,11 +198,11 @@ public class ControladorUsuario implements IUsuario {
 
 	}
 
-	public DTOfertaLaboral mostrarDatosOfertaLaboral(String OfertaLaboral) {
-		ManejadorOfertaLaboral contOfertaLaboral = ManejadorOfertaLaboral.getInstance();
-		DTOfertaLaboral ofLabRes= contOfertaLaboral.buscarOfertaLaboral(OfertaLaboral).getDataOfertaLaboral();
-		return ofLabRes;
-	}
+//	public DTOfertaLaboral mostrarDatosOfertaLaboral(String OfertaLaboral) {
+//		ManejadorOfertaLaboral contOfertaLaboral = ManejadorOfertaLaboral.getInstance();
+//		DTOfertaLaboral ofLabRes= contOfertaLaboral.buscarOfertaLaboral(OfertaLaboral).getDataOfertaLaboral();
+//		return ofLabRes;
+//	}
 
 	public void modificarEmpresa(String nick, String nom, String ap, String nomE, String desc, String l) {
 		ManejadorUsuario iMU = ManejadorUsuario.getInstancia();
@@ -214,6 +215,4 @@ public class ControladorUsuario implements IUsuario {
 		Postulante e = iMU.buscarPostulante(nick);
 		e.modificarDatos(nom, ap, f, nac);
 	}
-	
-
 }

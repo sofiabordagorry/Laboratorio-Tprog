@@ -73,4 +73,12 @@ public class ManejadorOfertaLaboral {
 	public boolean existeKeyword(String nombre) {
 		return this.keywords.containsKey(nombre);
 	}
+	
+	public void borrarOfertasLaborales() {
+		this.ofertasLaborales.clear();
+	}
+	
+	public void borrarKeywords() {
+		this.keywords.clear();
+	}
 }
