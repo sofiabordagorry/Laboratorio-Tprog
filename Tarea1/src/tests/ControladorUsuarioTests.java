@@ -56,8 +56,8 @@ class ControladorUsuarioTests {
 		mol = ManejadorOfertaLaboral.getInstance();
 		tp = ManejadorTipo.getInstancia();
 		mu.borrarUsuarios();
-		mol.borrarOfertasYKeywords();
-		tp.borrarTodo();
+		mol.limpiar();
+		tp.limpiar();
 	}
 	
 	@Test

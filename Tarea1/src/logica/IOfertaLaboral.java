@@ -13,7 +13,7 @@ import excepciones.TipoYaAgragadoException;
 
 
 public interface IOfertaLaboral {
-	public abstract DTPaquete[] listarPaquetes();
+	public abstract DTPaquete[] listarPaquetes() throws NoHayPaquetesException;
 	public abstract String DatosPaqueteAMostrar(DTPaquete p);
 	public abstract DTTipo[] listarTipoPublicacionOfertaLaboral() throws TipoPubNoExistenException;
 	public abstract String[] listarKeywords() throws KeywordsNoExistenException;
