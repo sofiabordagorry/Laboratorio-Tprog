@@ -137,13 +137,14 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 	
 	public void ingresarKeyword(String nombre){
 		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
-        //Keyword k = mol.buscarKeyword(nombre);
-        //if (t != null)
+        Keyword k = mol.buscarKeyword(nombre);
+        if (k == null) {
         //    throw new TipoRepetidoException("El Tipo " + nombre + " ya esta registrado");
 
-        Keyword k = new Keyword(nombre);
+        k = new Keyword(nombre);
         mol.agregarKeyword(k);
-		}
+        }
+}
 	
 	public String[] listarNomPaquetes() throws NoHayPaquetesException{
 		ManejadorTipo mt = ManejadorTipo.getInstancia();
