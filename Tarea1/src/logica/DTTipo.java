@@ -19,6 +19,10 @@ public class DTTipo {
 		this.fechaDeAlta = fechaDeAlta;
 	}
 	
+	public String toString() {
+		return this.nombre + this.exposicion;
+	}
+	
 	public String getNombre() {
 		return this.nombre;
 	}
@@ -31,7 +35,7 @@ public class DTTipo {
 		return this.exposicion;
 	}
 	
-	public int getDuracino() {
+	public int getDuracion() {
 		return this.duracion;
 	}
 	

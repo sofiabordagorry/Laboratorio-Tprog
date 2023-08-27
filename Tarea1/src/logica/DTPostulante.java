@@ -1,23 +1,26 @@
 package logica;
 
-import java.util.Date;
-import java.util.Map;
+import java.time.LocalDate;
 
 public class DTPostulante extends DTUsuario {
-	private Date fechaDeNacimiento;
+	private LocalDate fechaDeNacimiento;
 	private String nacionalidad;
 	
-	public DTPostulante(String nickname, String nombre, String apellido, String correo, Map<String, DTOfertaLaboral> ofertasLaborales, Date fechaDeNacimiento, String nacionalidad) {
-		super(nickname, nombre, apellido, correo, ofertasLaborales);
+	public DTPostulante(String nickname, String nombre, String apellido, String correo, LocalDate fechaDeNacimiento, String nacionalidad) {
+		super(nickname, nombre, apellido, correo);
 		this.fechaDeNacimiento = fechaDeNacimiento;
 		this.nacionalidad = nacionalidad;
 	}
-	
-	public Date getFechaDeNacimiento() {
+
+	public LocalDate getFechaDeNacimiento() {
 		return this.fechaDeNacimiento;
 	}
 	
 	public String getNacionalidad() {
 		return this.nacionalidad;
+	}
+	
+	public String toString() {
+		return this.getNombre() + "(" + this.getCorreo() + ")";
 	}
 }

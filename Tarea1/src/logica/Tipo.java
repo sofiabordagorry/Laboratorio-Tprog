@@ -43,4 +43,13 @@ public class Tipo {
     public LocalDate getFechaDeAlta() {
         return this.fechaDeAlta;
     }
+    
+    public DTTipo getDataTipo() {
+    	return new DTTipo(this.getNombre(), this.getDescripcion(), this.getExposicion(), 
+										this.getDuracion(), this.getCosto(), this.getFechaDeAlta());
+    } 
+    
+    public LocalDate calcularVencimiento(LocalDate fecha) {
+    	return fecha.plusDays(this.duracion);
+    }
 }

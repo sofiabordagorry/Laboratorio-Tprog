@@ -16,4 +16,8 @@ public class PaqueteTipo {
 	public Tipo getTipo() {
 		return this.tipo;
 	}
+	
+	public DTPaqueteTipo getDTPaqueteTipo() {
+		return new DTPaqueteTipo(this.cantidad, this.tipo.getDataTipo());
+	}
 }

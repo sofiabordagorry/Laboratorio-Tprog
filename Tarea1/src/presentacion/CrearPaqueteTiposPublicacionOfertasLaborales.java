@@ -2,11 +2,15 @@ package presentacion;
 
 import javax.swing.JInternalFrame;
 
-//import excepciones.UsuarioRepetidoException;
-//import logica.IControladorUsuario;
+import excepciones.PaqueteRepetidoException;
 
+import logica.IOfertaLaboral;
+import logica.DTPaquete;
 
-import java.util.Date;	
+import java.util.Date;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -17,35 +21,42 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JFrame;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.JScrollPane;
-import com.toedter.calendar.JDateChooser;
 import javax.swing.JTextArea;
+import com.toedter.calendar.JDateChooser;
 
 
 @SuppressWarnings("serial")
 public class CrearPaqueteTiposPublicacionOfertasLaborales extends JInternalFrame {
+	
+	private IOfertaLaboral col;
+	
 	private JTextField textFieldNombre;
 	private JTextField textFieldPeriodoValidez;
 	private JTextField textFieldDescuento;
 	private JTextField textFieldCostoAsociado;
 	private JTextArea textAreaDescripcion;
-	private JDateChooser dateChooserFechaAlta;
+	private JDateChooser dateChooserFechaDeAlta;
 	
-	public CrearPaqueteTiposPublicacionOfertasLaborales() {
+	public CrearPaqueteTiposPublicacionOfertasLaborales(IOfertaLaboral IOL) {
+		
+		col = IOL;
+		
 		setResizable(false);
         setIconifiable(true);
         setMaximizable(false);
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setClosable(true);
         setTitle("Crear Paquete de Tipo de Publicacion de Oferta Laborale");
-        setBounds(10, 40, 464, 307);
+        setBounds(10, 40, 465, 291);
         GridBagLayout gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[]{100, 150, 150};
-        gridBagLayout.rowHeights = new int[]{0, 0, 100, 0, 0, 0, 44, 0, 0};
+        gridBagLayout.rowHeights = new int[]{0, 0, 100, 0, 0, 0, 0, 0, 0};
         gridBagLayout.columnWeights = new double[]{0, 1.0, 1.0};
         gridBagLayout.rowWeights = new double[]{0, 0, 1.0, 0, 0, 0, 0.0, 0.0, Double.MIN_VALUE};
         getContentPane().setLayout(gridBagLayout);
@@ -168,7 +179,7 @@ public class CrearPaqueteTiposPublicacionOfertasLaborales extends JInternalFrame
         	}
         });
         
-        JLabel lblNewLabel_6 = new JLabel("Fecha de Alta:");
+        JLabel lblNewLabel_6 = new JLabel("Fecha de Alta: ");
         lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 12));
         GridBagConstraints gbc_lblNewLabel_6 = new GridBagConstraints();
         gbc_lblNewLabel_6.anchor = GridBagConstraints.EAST;
@@ -177,19 +188,19 @@ public class CrearPaqueteTiposPublicacionOfertasLaborales extends JInternalFrame
         gbc_lblNewLabel_6.gridy = 6;
         getContentPane().add(lblNewLabel_6, gbc_lblNewLabel_6);
         
-        dateChooserFechaAlta = new JDateChooser();
-        GridBagConstraints gbc_dateChooserFechaAlta = new GridBagConstraints();
-        gbc_dateChooserFechaAlta.gridwidth = 2;
-        gbc_dateChooserFechaAlta.insets = new Insets(0, 0, 5, 40);
-        gbc_dateChooserFechaAlta.fill = GridBagConstraints.BOTH;
-        gbc_dateChooserFechaAlta.gridx = 1;
-        gbc_dateChooserFechaAlta.gridy = 6;
-        getContentPane().add(dateChooserFechaAlta, gbc_dateChooserFechaAlta);
+        dateChooserFechaDeAlta = new JDateChooser();
+        GridBagConstraints gbc_dateChooserFechaDeAlta = new GridBagConstraints();
+        gbc_dateChooserFechaDeAlta.gridwidth = 2;
+        gbc_dateChooserFechaDeAlta.insets = new Insets(0, 0, 5, 40);
+        gbc_dateChooserFechaDeAlta.fill = GridBagConstraints.BOTH;
+        gbc_dateChooserFechaDeAlta.gridx = 1;
+        gbc_dateChooserFechaDeAlta.gridy = 6;
+        getContentPane().add(dateChooserFechaDeAlta, gbc_dateChooserFechaDeAlta);
         
         btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 12));
         GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
         gbc_btnCancelar.anchor = GridBagConstraints.WEST;
-        gbc_btnCancelar.insets = new Insets(0, 0, 5, 20);
+        gbc_btnCancelar.insets = new Insets(0, 0, 10, 20);
         gbc_btnCancelar.gridx = 1;
         gbc_btnCancelar.gridy = 7;
         getContentPane().add(btnCancelar, gbc_btnCancelar);
@@ -203,7 +214,7 @@ public class CrearPaqueteTiposPublicacionOfertasLaborales extends JInternalFrame
         
         btnAceptar.setFont(new Font("Tahoma", Font.BOLD, 12));
         GridBagConstraints gbc_btnAceptar = new GridBagConstraints();
-        gbc_btnAceptar.insets = new Insets(0, 0, 5, 30);
+        gbc_btnAceptar.insets = new Insets(0, 0, 10, 30);
         gbc_btnAceptar.anchor = GridBagConstraints.WEST;
         gbc_btnAceptar.gridx = 2;
         gbc_btnAceptar.gridy = 7;
@@ -216,10 +227,25 @@ public class CrearPaqueteTiposPublicacionOfertasLaborales extends JInternalFrame
 		String periodoValidezU = textFieldPeriodoValidez.getText();
 		String descuentoU = textFieldDescuento.getText();
 		String costoAsociadoU = textFieldCostoAsociado.getText();
+		Date fechaDeAltaU = dateChooserFechaDeAlta.getDate();
 		
 		if(checkForm()) {
-			limpiarFormulario();
-			setVisible(false);
+			LocalDate fechaDeAlta = this.convertirDateALocalDate(fechaDeAltaU);
+			DTPaquete datosPaquete = new DTPaquete(nombreU, descripcionU, Integer.parseInt(periodoValidezU), Float.parseFloat(descuentoU), 
+																	Float.parseFloat(costoAsociadoU), null, fechaDeAlta);
+			
+			try {
+				col.ingresarDatosPaquete(datosPaquete);
+				
+				JOptionPane.showMessageDialog(this, "El Paquete se ha creado con éxito ", "Crear Paquetes de Tipos de Publicacion de Ofertas Laborales",
+                        JOptionPane.INFORMATION_MESSAGE);
+				
+				limpiarFormulario();
+				setVisible(false);
+			} catch (PaqueteRepetidoException e) {
+				JOptionPane.showMessageDialog(this, e.getMessage(), "Crear Paquetes de Tipos de Publicacion de Ofertas Laborales",
+                        JOptionPane.ERROR_MESSAGE);
+			}
 		}
 	}
 	
@@ -229,10 +255,9 @@ public class CrearPaqueteTiposPublicacionOfertasLaborales extends JInternalFrame
 		String periodoValidezU = textFieldPeriodoValidez.getText();
 		String descuentoU = textFieldDescuento.getText();
 		String costoAsociadoU = textFieldCostoAsociado.getText();
-		Date fechaAltaU = dateChooserFechaAlta.getDate();
-		long milisegundosDesdeEnero1900 = -2208988800000L; // Milisegundos desde la época para el 1 de enero de 1900
-        long milisegundosDesdeEnero2000 = 946684800000L;
-        Date fechaAntigua = new Date(milisegundosDesdeEnero2000);
+		Date fechaDeAltaU = dateChooserFechaDeAlta.getDate();
+		long milisegundosDesdeEnero2000 = 946684800000L;
+	    Date fechaAntigua = new Date(milisegundosDesdeEnero2000);
 		Date fechaDia = new Date();
 		
 		if (nombreU.isEmpty() || descripcionU.isEmpty() || periodoValidezU.isEmpty() || 
@@ -242,10 +267,11 @@ public class CrearPaqueteTiposPublicacionOfertasLaborales extends JInternalFrame
 				return false;
 		}
 		
-		if(fechaAltaU == null) {
-				JOptionPane.showMessageDialog(this, "Se debe elegir una Fecha de Alta", "Crear Paquetes de Tipos de Publicacion de Ofertas Laborales",
-						JOptionPane.ERROR_MESSAGE);
-				return false;
+		if (fechaDeAltaU == null) {
+			JOptionPane.showMessageDialog(this, "Se debe elegir una fecha", 
+					"Crear Paquetes de Tipos de Publicacion de Ofertas Laborales",
+					JOptionPane.ERROR_MESSAGE);
+			return false;
 		}
 		
 		if(!this.validar(nombreU)) {
@@ -310,23 +336,35 @@ public class CrearPaqueteTiposPublicacionOfertasLaborales extends JInternalFrame
 			return false;
 		}
 		
-		if (fechaAltaU.compareTo(fechaDia) > 0) {
+		if (fechaDeAltaU.compareTo(fechaDia) > 0) {
 			JOptionPane.showMessageDialog(this, "La Fecha de Alta no puede ser posterior a la fecha actual", 
 					"Crear Paquetes de Tipos de Publicacion de Ofertas Laborales",
 					JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		
-		if(fechaAltaU.compareTo(fechaAntigua) < 0) {
+		if(fechaDeAltaU.compareTo(fechaAntigua) < 0) {
 			JOptionPane.showMessageDialog(this, "La Fecha de Alta deber ser posteriror al 2000", 
 					"Crear Paquetes de Tipos de Publicacion de Ofertas Laborales",
 					JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
-			
 
 		return true;
 	}
+	
+	private LocalDate convertirDateALocalDate(Date date) {
+        // Convertir Date a Instant
+        Instant instant = date.toInstant();
+
+        // Obtener ZoneId (Zona horaria)
+        ZoneId defaultZoneId = ZoneId.systemDefault();
+
+        // Crear LocalDate a partir de Instant y ZoneId
+        LocalDate localDate = instant.atZone(defaultZoneId).toLocalDate();
+
+        return localDate;
+    }
 	
 	private boolean validar(String s) {
         // Expresión regular que permite letras, espacios, la letra 'ñ' y caracteres acentuados
@@ -342,5 +380,6 @@ public class CrearPaqueteTiposPublicacionOfertasLaborales extends JInternalFrame
 		textFieldPeriodoValidez.setText("");
 		textFieldCostoAsociado.setText("");
 		textFieldDescuento.setText("");
+		dateChooserFechaDeAlta.setDate(null);
 	}
 }

@@ -15,4 +15,9 @@ public class Keyword {
 	/*public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}*/
+	
+	public DTKeyword getDataKeyWord() {
+		DTKeyword dtKW = new DTKeyword(this.getNombre());
+		return dtKW;
+	}
 }

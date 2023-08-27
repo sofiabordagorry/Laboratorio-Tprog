@@ -1,23 +1,29 @@
 package logica;
 
 import java.util.List;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class Paquete {
 	private String nombre;
 	private String descripcion;
 	private int periodoDeValidez;
 	private float descuento;
+	private LocalDate fecha;
 	private float costoAsociado;
 	private List<PaqueteTipo> paquetesTipos;
+	private LocalDate fechaDeAlta;
 	
-	public Paquete(String nombre, String descripcion, int periodoDeValidez, float descuento, float costoAsociado) {
+	public Paquete(String nombre, String descripcion, int periodoDeValidez, float descuento, float costoAsociado, LocalDate fechaDeAlta) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.periodoDeValidez = periodoDeValidez;
 		this.descuento = descuento;
+		this.fecha = fecha;
 		this.costoAsociado = costoAsociado;
 		this.paquetesTipos = new ArrayList<>();
+		this.fechaDeAlta = fechaDeAlta;
 	}
 	
     // Getters
@@ -37,6 +43,10 @@ public class Paquete {
         return this.descuento;
     }
     
+    public LocalDate getFecha() {
+    	return this.fecha;
+    }
+    
     public float getCostoAsociado() {
         return this.costoAsociado;
     }
@@ -44,11 +54,29 @@ public class Paquete {
     public List<PaqueteTipo> getPaquetesTipos() {
         return this.paquetesTipos;
     }
+    
+    public LocalDate getFechaDeAlta() {
+    	return this.fechaDeAlta;
+    }
 
     public void agregarPaqueteTipo(PaqueteTipo paqueteTipo) {
     	this.paquetesTipos.add(paqueteTipo);
     }
     
+
+    public DTPaquete getDataPaquete() {
+    	PaqueteTipo paq;
+    	PaqueteTipo[] paqarr = this.paquetesTipos.toArray(new PaqueteTipo[0]);
+    	DTPaqueteTipo[] dtpaq = new DTPaqueteTipo[this.paquetesTipos.size()];
+    	for(int i = 0; i < this.paquetesTipos.size(); i++) {
+			paq = paqarr[i];
+			dtpaq[i] = paq.getDTPaqueteTipo();
+		}
+    	return new DTPaquete(this.getNombre(), this.getDescripcion(), this.getPeriodoDeValidez(), 
+				this.getDescuento(), this.getCostoAsociado(), dtpaq, this.fechaDeAlta);
+    } 	
+
+
     
     public boolean agregarTipo(int cantidad, Tipo t) {
     	List<PaqueteTipo> paqT = this.getPaquetesTipos();
