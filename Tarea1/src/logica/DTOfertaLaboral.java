@@ -70,7 +70,7 @@ public class DTOfertaLaboral {
 		return this.ciudad;
 	}
 
-	public String getDepartamente() {
+	public String getDepartamento() {
 		return this.departamento;
 	}
 	

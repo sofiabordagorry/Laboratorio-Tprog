@@ -20,7 +20,6 @@ public class Paquete {
 		this.descripcion = descripcion;
 		this.periodoDeValidez = periodoDeValidez;
 		this.descuento = descuento;
-		this.fecha = fecha;
 		this.costoAsociado = costoAsociado;
 		this.paquetesTipos = new ArrayList<>();
 		this.fechaDeAlta = fechaDeAlta;

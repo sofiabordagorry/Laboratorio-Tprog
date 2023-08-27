@@ -23,6 +23,11 @@ public class ManejadorOfertaLaboral {
         return instance;
 	}
 	
+	public void limpiar() {
+        this.ofertasLaborales.clear();
+        this.keywords.clear();
+    }
+	
 	public OfertaLaboral buscarOfertaLaboral(String nombre) {
 		return this.ofertasLaborales.get(nombre);
 	}
