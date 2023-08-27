@@ -57,6 +57,10 @@ public class ManejadorUsuario {
             return postulantes;
         }
 	}
+	
+	public Map<String, Postulante> getMapPostulantes() {
+		return this.mapPostulantes;
+	}
 
 	
 	public Usuario buscarUsuario(String nickname) {//BUSCAR UN USUARIO

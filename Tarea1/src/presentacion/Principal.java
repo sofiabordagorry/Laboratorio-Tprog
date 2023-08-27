@@ -367,6 +367,7 @@ public class Principal {
 				CargarDatos.ingresarKeywords();
 				CargarDatos.ingresarOfertasLaborales();
 				CargarDatos.ingresarKeywordsOfertas();
+				CargarDatos.ingresarPostulaciones();
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem);

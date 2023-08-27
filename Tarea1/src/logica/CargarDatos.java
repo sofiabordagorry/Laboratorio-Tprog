@@ -263,14 +263,12 @@ public class CargarDatos {
 		ofertasLaborales.get("Soporte Técnico").agregarKeyword(keywords[0]);
 	}
 	
-	/* Falta esto porque no tenía postulaciones
 	public static void ingresarPostulaciones() {
-		ManejadorTipo m = ManejadorTipo.getInstancia();
 		ManejadorOfertaLaboral mof = ManejadorOfertaLaboral.getInstance();
 		ManejadorUsuario mu = ManejadorUsuario.getInstancia();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yy");
 		
-		String csvFilePath = "./Tarea1/src/CSV/OfertasLaborales.csv";
+		String csvFilePath = "./Tarea1/src/CSV/Postulaciones.csv";
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
 			String line;
@@ -283,13 +281,15 @@ public class CargarDatos {
 				}
 				
 				String[] parts = line.split(";");
-				Map<String, Postulante> mapPostulantes = mu.getPostulantes();
-				Map<String,OfertaLaboral> ofertasLaborales = mof.getOfertasLaborales();
+				OfertaLaboral lof = mof.buscarOfertaLaboral(parts[5]);
+				Postulante upost = mu.buscarPostulante(parts[1]);
 				
-				mapPostulantes.get(parts[1]).
+				Postulacion post = new Postulacion(LocalDate.parse(parts[4], formatter), parts[2], parts[3], upost, lof);
+				upost.agregarPostulacion(post);
+				lof.agregarPostulacion(post);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}*/
+	}
 }
