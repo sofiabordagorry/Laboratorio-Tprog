@@ -97,4 +97,9 @@ public class ManejadorUsuario {
 	public void eliminarPostulante(String nickname) {//ELIMINAR POSTULANTE DE LA COLECCCION
 		mapPostulantes.remove(nickname);
 	}
+	
+	public void borrarUsuarios() {
+		this.mapEmpresas.clear();
+		this.mapPostulantes.clear();
+	}
 }
