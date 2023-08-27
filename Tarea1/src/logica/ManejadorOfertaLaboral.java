@@ -2,6 +2,8 @@ package logica;
 
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Collection;
+
 
 public class ManejadorOfertaLaboral {
 	
@@ -34,9 +36,21 @@ public class ManejadorOfertaLaboral {
 		return this.ofertasLaborales;
 	}
 	
-	public Map<String, Keyword> getKeywords() {
-		return this.keywords;
+	public Keyword[] getKeywords() {
+		if (this.keywords.isEmpty())
+            return null;
+        else {
+            Collection<Keyword> key = this.keywords.values();
+            Object[] o = key.toArray();
+            Keyword[] keys = new Keyword[o.length];
+            for (int i = 0; i < o.length; i++) {
+                keys[i] = (Keyword) o[i];
+            }
+
+            return keys;
+        }
 	}
+
 	
 	public void agregarOfertaLaboral(OfertaLaboral ol) {
 		this.ofertasLaborales.put(ol.getNombre(), ol);
