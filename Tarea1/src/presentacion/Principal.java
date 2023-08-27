@@ -3,6 +3,7 @@ package presentacion;
 import java.awt.EventQueue;
 import java.time.LocalDate;
 
+import logica.CargarDatos;
 import logica.Factory;
 import logica.IOfertaLaboral;
 
@@ -166,14 +167,7 @@ public class Principal {
 		frmAdmTrabajo.setTitle("Administrador Trabajo.uy");
 		frmAdmTrabajo.setBounds(100, 100, 754, 710);
 		frmAdmTrabajo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		Paquete paqueteTest = new Paquete("nombreTest", "descripcionTest", 5, 0.5f, 500.0f);
-		ManejadorTipo m = ManejadorTipo.getInstancia();
-		m.agregarPaquete(paqueteTest);
-		
-		Tipo tipoTest = new Tipo("Nombretipo", "Descripciontipo", 5, 5, 5.0f, LocalDate.now());
-		PaqueteTipo pqtTest = new PaqueteTipo(5, tipoTest);
-		paqueteTest.agregarPaqueteTipo(pqtTest);
+
 		
 		JMenuBar mainMenu = new JMenuBar();
 		frmAdmTrabajo.setJMenuBar(mainMenu);
@@ -299,6 +293,22 @@ public class Principal {
 			}
 		});
 		menuPaquete.add(itemAgregarTipoPaq);
+		
+		JMenu mnNewMenu = new JMenu("Datos");
+		mainMenu.add(mnNewMenu);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Cargar datos");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CargarDatos.ingresarUsuarios();
+				CargarDatos.ingresarPaquetes();
+				CargarDatos.ingresarTipos();
+				CargarDatos.ingresarPaqueteTipos();
+				CargarDatos.ingresarKeywords();
+				CargarDatos.ingresarOfertasLaborales();
+				CargarDatos.ingresarKeywordsOfertas();
+			}
+		});
+		mnNewMenu.add(mntmNewMenuItem);
 	}
-
 }

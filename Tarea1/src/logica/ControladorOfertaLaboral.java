@@ -9,7 +9,8 @@ import excepciones.PaqueteRepetidoException;
 
 import java.util.Map;
 import java.util.HashMap;
-
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Date;
 
 import excepciones.NoHayPaquetesException;
@@ -17,8 +18,12 @@ import excepciones.NoHayTiposException;
 import excepciones.TipoRepetidoException;
 import excepciones.TipoYaAgragadoException;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 
 public class ControladorOfertaLaboral implements IOfertaLaboral {
@@ -47,7 +52,7 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 	}
 	
     public String DatosPaqueteAMostrar(DTPaquete p) {
-    	return "Nombre: " + p.getNombre() + "\nDescripcion: " + p.getDescripcion() + "\nPeriodo de validez: " + p.getPeriodoDeValidez() + "\nDescuento: " + p.getDescuento() + "\nCosto: " + p.getCostoAsociado();
+    	return "Nombre: " + p.getNombre() + "\nDescripcion: " + p.getDescripcion() + "\nPeriodo de validez: " + p.getPeriodoDeValidez() + " días\nDescuento: " + p.getDescuento() + "%\nCosto: $" + p.getCostoAsociado();
     }
 
 	public DTTipo[] listarTipoPublicacionOfertaLaboral() throws TipoPubNoExistenException {
@@ -117,7 +122,7 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 			throw new PaqueteRepetidoException("Ya existe el Paquete %s".formatted(datosPaquete.getNombre()));
 		
 		Paquete nuevoPaquete = new Paquete(datosPaquete.getNombre(), datosPaquete.getDescripcion(), datosPaquete.getPeriodoDeValidez(), 
-														datosPaquete.getDescuento(), datosPaquete.getCostoAsociado());
+														datosPaquete.getDescuento(), datosPaquete.getFecha(), datosPaquete.getCostoAsociado());
 		
 		mt.agregarPaquete(nuevoPaquete);
 	}
@@ -180,7 +185,6 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 		if(!p.agregarTipo(cantidad, t))
 			throw new TipoYaAgragadoException("Ya se habia agregado el tipo " + tipTipo + " al paquete " + tipPaquete);
 	}
-		
 
 }
 

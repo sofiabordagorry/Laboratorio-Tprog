@@ -1,6 +1,9 @@
 package logica;
 
 import excepciones.ExisteUnUsuarioYaRegistradoException;
+
+import java.util.List;
+
 import excepciones.EmpresasNoExistenException;
 
 public interface IUsuario {

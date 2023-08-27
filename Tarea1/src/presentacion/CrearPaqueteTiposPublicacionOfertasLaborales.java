@@ -16,6 +16,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JFrame;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
@@ -203,7 +204,7 @@ public class CrearPaqueteTiposPublicacionOfertasLaborales extends JInternalFrame
 		String costoAsociadoU = textFieldCostoAsociado.getText();
 		
 		if(checkForm()) {
-			DTPaquete datosPaquete = new DTPaquete(nombreU, descripcionU, Integer.parseInt(periodoValidezU), Float.parseFloat(descuentoU), 
+			DTPaquete datosPaquete = new DTPaquete(nombreU, descripcionU, Integer.parseInt(periodoValidezU), Float.parseFloat(descuentoU), LocalDate.parse("20/05/1950"),
 																	Float.parseFloat(costoAsociadoU), null);
 			
 			try {

@@ -40,7 +40,8 @@ import excepciones.NoExistenPaquetesException;
 public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
 
 	private IOfertaLaboral col;
-	JComboBox<ComboBoxItem> comboBox;
+	private JComboBox<ComboBoxItem> comboBox;
+	private JList<DTPaqueteTipo> list;
 
 	/**
 	 * Create the frame.
@@ -99,7 +100,7 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         getContentPane().add(comboBox, gbc_comboBox);
         
         JTextArea areaDatos = new JTextArea();
-        JList<DTPaqueteTipo> list = new JList<>();
+        list = new JList<>();
         comboBox.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -182,7 +183,7 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
                     
                     if (selectedItem != null) {
                     	DTTipo tipoAsociado = selectedItem.getTipo();
-                    	String datosTipo = "Nombre: " + tipoAsociado.getNombre() + "\nDescripcion: " + tipoAsociado.getDescripcion() + "\nExposicion: " + tipoAsociado.getExposicion() + "\nDuracion: " + tipoAsociado.getDuracion() + "\nCosto: $" + tipoAsociado.getCosto() + "\n Fecha de alta: " + tipoAsociado.getFechaDeAlta().toString();
+                    	String datosTipo = "Nombre: " + tipoAsociado.getNombre() + "\nDescripcion: " + tipoAsociado.getDescripcion() + "\nExposicion: " + tipoAsociado.getExposicion() + "\nDuracion: " + tipoAsociado.getDuracion() + " días\nCosto: $" + tipoAsociado.getCosto() + "\n Fecha de alta: " + tipoAsociado.getFechaDeAlta().toString();
                     	areaDatosTipo.setText(datosTipo);
                     }
         		}
@@ -192,6 +193,11 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         JButton btnCancelar = new JButton("Cancelar");
         btnCancelar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	areaDatosTipo.setText("");
+            	areaDatos.setText("");
+            	comboBox.setSelectedIndex(-1);
+            	DTPaqueteTipo[] pq = new DTPaqueteTipo[0];
+            	list.setListData(pq);
                 setVisible(false);
             }
         });
@@ -225,9 +231,11 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
 	
 	class ComboBoxModel extends DefaultComboBoxModel<ComboBoxItem> {
 		public ComboBoxModel(DTPaquete[] paqlist) {
-			for (DTPaquete paquete : paqlist) {
-				ComboBoxItem item = new ComboBoxItem(paquete);
-				addElement(item);
+			if (paqlist != null) {
+				for (DTPaquete paquete : paqlist) {
+					ComboBoxItem item = new ComboBoxItem(paquete);
+					addElement(item);
+				}
 			}
 		}
 	}
@@ -236,4 +244,5 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
 		DTPaquete[] listaPaq = col.listarPaquetes();
 		comboBox.setModel(new ComboBoxModel(listaPaq));
 	}
+	
 }
