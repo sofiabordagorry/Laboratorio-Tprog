@@ -268,7 +268,7 @@ public class CargarDatos {
 		ManejadorUsuario mu = ManejadorUsuario.getInstancia();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yy");
 		
-		String csvFilePath = "./Tarea1/src/CSV/Postulaciones.csv";
+		String csvFilePath = "./src/CSV/Postulaciones.csv";
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
 			String line;

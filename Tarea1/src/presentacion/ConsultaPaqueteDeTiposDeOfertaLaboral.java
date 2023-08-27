@@ -89,15 +89,15 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         getContentPane().add(lblPaquetes, gbc_lblPaquetes);
         
         try {
-        DTPaquete[] listaPaq = iOL.listarPaquetes();
-        comboBox = new JComboBox<>(new ComboBoxModel(listaPaq));
-        GridBagConstraints gbc_comboBox = new GridBagConstraints();
-        gbc_comboBox.gridwidth = 2;
-        gbc_comboBox.insets = new Insets(0, 0, 5, 0);
-        gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
-        gbc_comboBox.gridx = 1;
-        gbc_comboBox.gridy = 1;
-        getContentPane().add(comboBox, gbc_comboBox);
+	        DTPaquete[] listaPaq = iOL.listarPaquetes();
+	        comboBox = new JComboBox<>(new ComboBoxModel(listaPaq));
+	        GridBagConstraints gbc_comboBox = new GridBagConstraints();
+	        gbc_comboBox.gridwidth = 2;
+	        gbc_comboBox.insets = new Insets(0, 0, 5, 0);
+	        gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
+	        gbc_comboBox.gridx = 1;
+	        gbc_comboBox.gridy = 1;
+	        getContentPane().add(comboBox, gbc_comboBox);
         }
         JTextArea areaDatos = new JTextArea();
         list = new JList<>();

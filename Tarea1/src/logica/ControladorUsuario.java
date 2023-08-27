@@ -155,10 +155,11 @@ public class ControladorUsuario implements IUsuario {
 		 ManejadorUsuario iMU =  ManejadorUsuario.getInstancia();
 		 Empresa[] empresas = iMU.getEmpresas();
 		 boolean hayOL = false;
-		 for(int i = 0; i < empresas.length; i++) {
-			 hayOL = hayOL || (empresas[i].getOfertasLaborales().size() != 0);
-		 }
+
 		 if (empresas != null ) {
+			 for(int i = 0; i < empresas.length; i++) {
+				 hayOL = hayOL || (empresas[i].getOfertasLaborales().size() != 0);
+			 }
 			 if(hayOL) {
 				 DTEmpresa[] arrEmp = new DTEmpresa[empresas.length];
 				 for(int i = 0; i < empresas.length; i++) {
@@ -174,14 +175,15 @@ public class ControladorUsuario implements IUsuario {
 
 	}
 
-	public DTOfertaLaboral[] listarOfertasLaborales(String nomEmpresa) throws OfertasLaboralesNoExistenException {
+	public DTOfertaLaboral[] listarOfertasLaborales(String nickEmpresa) throws OfertasLaboralesNoExistenException {
 		ManejadorUsuario iMU = ManejadorUsuario.getInstancia();
 		Empresa[] empresas = iMU.getEmpresas();
-		int i = 0;
-		while(empresas[i].getNombreEmpresa() != nomEmpresa) {
-			i++;
-		}
-		Empresa e = empresas[i];
+//		int i = 0;
+//		while(empresas[i].getNombreEmpresa() != nomEmpresa) {
+//			i++;
+//		}
+//		Empresa e = empresas[i];
+		Empresa e = iMU.buscarEmpresa(nickEmpresa);
 		Map<String, OfertaLaboral> ofLab = e.getOfertasLaborales();
 		if(ofLab.size() != 0) {
 			DTOfertaLaboral[] ofertasRes = new DTOfertaLaboral[ofLab.size()];
@@ -217,6 +219,4 @@ public class ControladorUsuario implements IUsuario {
 		Postulante e = iMU.buscarPostulante(nick);
 		e.modificarDatos(nom, ap, f, nac);
 	}
-	
-
 }

@@ -22,11 +22,6 @@ public class ManejadorTipo {
 		return instancia;
 	}
 	
-	public void limpiar() {
-        this.mapPaquetes.clear();
-        this.mapTipos.clear();
-    }
-	
 	public void agregarTipo(Tipo t) {//AGREGAR UN TIPO A LA COLECCION
 		mapTipos.put(t.getNombre(), t);
 	}
@@ -98,8 +93,6 @@ public class ManejadorTipo {
 	public void eliminarTipo(String nombre) {//ELIMINAR TIPO DE LA COLECCION
 		mapTipos.remove(nombre);
 	}
-	
-
 	public void limpiar() {
 		this.mapPaquetes.clear();
 		this.mapTipos.clear();

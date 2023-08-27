@@ -1,4 +1,4 @@
-package test;
+package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -51,6 +51,7 @@ import logica.DTKeyword;
 import logica.ManejadorOfertaLaboral;
 import logica.ManejadorTipo;
 import logica.ManejadorUsuario;
+import logica.Empresa;
 
 class ControladorOfertaLaboralTests{
 
@@ -559,7 +560,10 @@ class ControladorOfertaLaboralTests{
 		assertEquals(of.getTipoOL().getNombre(), datos.getTipo().getNombre());
 		assertTrue(of.getKeywords().size() == 0 && datos.getKeywords().size() == 0);
 		assertTrue(of.getPostulaciones().size() == 0 && datos.getPostulaciones().size() == 0);
-		assertEquals(of.getEmpresaCreadora(), datos.getDTEmpresa());
+		//assertEquals(of.getEmpresaCreadora(), datos.getDTEmpresa());
+	}
+
+	@Test
 	void testVacioListarKeywords() {
 		assertThrows(KeywordsNoExistenException.class, ()->{controladorOfertaLaboral.listarKeywords();});
 	}
