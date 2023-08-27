@@ -25,8 +25,6 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 	public ControladorOfertaLaboral() {
 		
 	}
-
-
 	public DTPaquete[] listarPaquetes() {
 		ManejadorTipo mt = ManejadorTipo.getInstancia();
 		Paquete[] paquetes = mt.getPaquetes();
@@ -89,7 +87,8 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 	public void ingresarDatosOL(String empresa, String nombreTipo, DTOfertaLaboral ol) throws OfertaLaboralRepetidaException {
 		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
 		OfertaLaboral olExiste = mol.buscarOfertaLaboral(ol.getNombre());
-		
+		ManejadorUsuario mu = ManejadorUsuario.getInstancia();
+		Empresa e = mu.buscarEmpresa(empresa);
 		if(olExiste != null) 
 			throw new OfertaLaboralRepetidaException("Ya existe la Oferta Laboral %s".formatted(olExiste.getNombre()));
 		
@@ -101,11 +100,10 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 			keys.put(entry.getKey(), mol.buscarKeyword(entry.getKey()));
 		
 		OfertaLaboral olNueva = new OfertaLaboral(ol.getNombre(), ol.getDescripcion(), ol.getCiudad(), ol.getDepartamente(), 
-															ol.getHorario(), ol.getRemuneracion(), ol.getFechaDeAlta(), ol.getCostoAsociado(), t, keys);
+															ol.getHorario(), ol.getRemuneracion(), ol.getFechaDeAlta(), ol.getCostoAsociado(), t, keys, e);
 		
 		mol.agregarOfertaLaboral(olNueva);
-		ManejadorUsuario mu = ManejadorUsuario.getInstancia();
-		Empresa e = mu.buscarEmpresa(empresa);
+
 		e.agregarOfertaLaboral(olNueva);
 	}
 	
@@ -181,6 +179,11 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 			throw new TipoYaAgragadoException("Ya se habia agregado el tipo " + tipTipo + " al paquete " + tipPaquete);
 	}
 		
+	public DTOfertaLaboral mostrarDatosOfertaLaboral(String OfertaLaboral) {
+		ManejadorOfertaLaboral contOfertaLaboral = ManejadorOfertaLaboral.getInstance();
+		DTOfertaLaboral ofLabRes= contOfertaLaboral.buscarOfertaLaboral(OfertaLaboral).getDataOfertaLaboral();
+		return ofLabRes;
+	}
 
 }
 

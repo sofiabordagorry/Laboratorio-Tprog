@@ -1,9 +1,16 @@
 package logica;
 
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 import java.util.HashMap;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+
 
 public class Empresa extends Usuario {
 	
@@ -18,6 +25,7 @@ public class Empresa extends Usuario {
 		this.descripcion = descripcion;
 		this.link = link;
 		this.ofertasLaborales = new HashMap<>();
+
 	}
 	
 	public String getNombreEmpresa() {
@@ -56,7 +64,6 @@ public class Empresa extends Usuario {
 		return new DTEmpresa(this.getNickname(), this.getNombre(), this.getApellido(),
 				this.getCorreo(), this.getNombreEmpresa(),this.getDescripcion(), 
 				this.getLink());
-//	public DTEmpresa getDataEmpresa() 
 	}
 	
 	public ArrayList<DTOfertaLaboral> obtenerOfertasVigentes() {
@@ -81,5 +88,30 @@ public class Empresa extends Usuario {
 	
 	public OfertaLaboral buscarOferta(String oferta) {
 		return this.ofertasLaborales.get(oferta);
+	}
+
+	public DTEmpresa getDataEmpresa() {
+		Map<String, DTOfertaLaboral> ofertasLab = new HashMap<>();
+		Map<String, OfertaLaboral> ol = this.getOfertasLaborales();
+		if(ol.size() != 0) {
+			for(Map.Entry<String, OfertaLaboral> entry : ol.entrySet()) {
+				ofertasLab.put(entry.getKey(), entry.getValue().getDataOfertaLaboral());
+			}
+		}
+			DTEmpresa dtE = new DTEmpresa(this.getNickname(), this.getNombre(), this.getApellido(), this.getCorreo(), ofertasLab, this.getNombreEmpresa(), this.getDescripcion(), this.getLink());
+			return dtE;
+	}
+	
+	public DTUsuario getDataUsuario() {
+		return this.getDataEmpresa();
+
+	}
+	
+	public void modificarDatos(String nombre, String apellido, String nomEmp, String desc, String l) {
+		this.setNombre(nombre);
+		this.setApellido(apellido);
+		this.setNombreEmpresa(nomEmp);
+		this.setDescripcion(desc);
+		this.setLink(l);
 	}
 }

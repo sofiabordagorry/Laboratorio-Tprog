@@ -54,11 +54,10 @@ public class RegistrarUsuario extends JInternalFrame {
     /**
      * Create the frame.
      */
-    public RegistrarUsuario() {
+    public RegistrarUsuario(IUsuario iu) {
         // Se inicializa con la interfaz de usuarios
-    	Factory fact = Factory.getInstance();
-    	iUsuario = fact.getIUsuario();
     	
+    	iUsuario = iu;
         // Propiedades del JInternalFrame como dimensión, posición dentro del frame,
         // etc.
         setResizable(true);
@@ -406,7 +405,7 @@ public class RegistrarUsuario extends JInternalFrame {
 
         if(checkForm()) {
         	if (esPostulante) {
-        		DTPostulante postInfo = new DTPostulante(textField.getText(), textFieldNombre.getText(), textFieldApellido.getText(), textFieldMail.getText(), null, dateChooser.getDate().toInstant()
+        		DTPostulante postInfo = new DTPostulante(textField.getText(), textFieldNombre.getText(), textFieldApellido.getText(), textFieldMail.getText(), dateChooser.getDate().toInstant()
         			      .atZone(ZoneId.systemDefault())
         			      .toLocalDate(), textFieldNacionalidad.getText());
         		try {

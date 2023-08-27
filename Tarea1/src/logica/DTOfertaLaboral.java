@@ -17,10 +17,10 @@ public class DTOfertaLaboral {
 	private DTTipo dataTipo;
 	private Map<String, DTKeyword> dataKeywords;
 	private List<DTPostulacion> dataPostulaciones;
-	private DTEmpresa dataEmpresa;
-	private DTCompra dataCompra;
+	private String dataEmpresa;//CAMBIADO
+	//private DTCompra dataCompra;
 	
-	public DTOfertaLaboral(String nombre, String descripcion, String ciudad, String departamento, String horario, float remuneracion, LocalDate fechaDeAlta, float costoAsociado, DTTipo dataTipo, Map<String, DTKeyword> dataKeywords, List<DTPostulacion> dataPostulaciones, DTEmpresa dataEmpresa, DTCompra dataCompra) {
+	public DTOfertaLaboral(String nombre, String descripcion, String ciudad, String departamento, String horario, float remuneracion, LocalDate fechaDeAlta, float costoAsociado, DTTipo dataTipo, Map<String, DTKeyword> dataKeywords, List<DTPostulacion> dataPostulaciones, String dataEmpresa) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.ciudad = ciudad;
@@ -33,7 +33,7 @@ public class DTOfertaLaboral {
 		this.dataKeywords = dataKeywords;
 		this.dataPostulaciones = dataPostulaciones;
 		this.dataEmpresa = dataEmpresa;
-		this.dataCompra = dataCompra;
+		//this.dataCompra = dataCompra;
 	}
 	
 	public DTOfertaLaboral(String nombre, String descripcion, String ciudad, String departamento, String horario, float remuneracion, LocalDate fechaDeAlta, Map<String, DTKeyword> keys) {
@@ -102,11 +102,8 @@ public class DTOfertaLaboral {
 		return this.dataPostulaciones;
 	}
 	
-	public DTEmpresa getDTEmpresa() {
+	public String getDTEmpresa() {
 		return this.dataEmpresa;
-	}
-	public DTCompra getDTCompra() {
-		return this.dataCompra;
 	}
 	
 	public String toString() {

@@ -1,7 +1,9 @@
 package logica;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 public class Postulante extends Usuario {
 	
@@ -13,7 +15,8 @@ public class Postulante extends Usuario {
 		super(nickname, nombre, apellido, correo);
 		this.fechaNacimiento = fechaNacimiento;
 		this.nacionalidad = nacionalidad;
-		//this.postulaciones = new Linkedlist<>();
+		this.postulaciones = new LinkedList<>();
+
 	}
 	
 	public LocalDate getFechaNacimiento() {
@@ -24,6 +27,7 @@ public class Postulante extends Usuario {
 		return this.nacionalidad;
 	}
 	
+
 	public Boolean existePostulacion(String oferta) {
 		LinkedList<Postulacion> postulaciones = this.postulaciones;
 		Boolean existe=false;
@@ -35,5 +39,42 @@ public class Postulante extends Usuario {
 	
 	public void agregarPostulacion(Postulacion postulacion) {
 		this.postulaciones.add(postulacion);
+	}
+
+	public LinkedList<Postulacion> getPostulaciones(){
+		return this.postulaciones;
+	}
+	
+	public void setFechaNacimiento(LocalDate fecha) {
+		this.fechaNacimiento = fecha;
+	}
+	
+	public void setNacionalidad(String nac) {
+		this.nacionalidad = nac;
+	}
+	
+	public DTPostulante getDataPostulante() {
+//		Map<String, DTOfertaLaboral> ofertasLab = new HashMap<>();
+//		LinkedList<Postulacion> post = this.getPostulaciones();
+//		if(post.size() != 0) {
+//			for(Postulacion p : post) {
+//				ofertasLab.put(p.getOfertaLaboral().getNombre(), p.getOfertaLaboral().getDataOfertaLaboral());
+//			}
+//		}
+		DTPostulante dtP = new DTPostulante(this.getNickname(),this.getNombre(),this.getApellido(),this.getCorreo(),this.getFechaNacimiento(),this.getNacionalidad());
+		return dtP;
+
+	}
+	
+	public DTUsuario getDataUsuario() {
+		return this.getDataPostulante();
+
+	}
+	
+	public void modificarDatos(String nombre, String apellido, LocalDate fechaNac, String nacionalidad) {
+		this.setNombre(nombre);
+		this.setApellido(apellido);
+		this.setFechaNacimiento(fechaNac);
+		this.setNacionalidad(nacionalidad);
 	}
 }

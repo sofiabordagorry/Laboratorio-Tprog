@@ -28,34 +28,34 @@ public class ManejadorUsuario {
 		mapPostulantes.put(p.getNickname(), p);
 	}
 	
+	public Empresa[] getEmpresas(){//OBTENER COLECCIONES DE EMPRESAS
+        if (this.mapEmpresas.isEmpty())
+            return null;
+        else {
+            Collection<Empresa> emps = this.mapEmpresas.values();
+            Object[] o = emps.toArray();
+            Empresa[] empresas = new Empresa[o.length];
+            for (int i = 0; i < o.length; i++) {
+                empresas[i] = (Empresa) o[i];
+            }
 
-	public Empresa[] getEmpresas() {
-	    if (this.mapEmpresas.isEmpty()) {
-	        return null;
-	    } else {
-	        Collection<Empresa> emps = this.mapEmpresas.values();
-	        Object[] o = emps.toArray();
-	        Empresa[] empresas = new Empresa[o.length];
-	        for (int i = 0; i < o.length; i++) {
-	            empresas[i] = (Empresa) o[i];
-	        }
-	        return empresas;
-	    }
+            return empresas;
+        }
 	}
 
-	
-	public Postulante[] getPostulantes() {
-	    if (this.mapPostulantes.isEmpty()) {
-	        return null;
-	    } else {
-	        Collection<Postulante> postus = this.mapPostulantes.values();
-	        Object[] o = postus.toArray();
-	        Postulante[] postulantes = new Postulante[o.length];
-	        for (int i = 0; i < o.length; i++) {
-	        	postulantes[i] = (Postulante) o[i];
-	        }
-	        return postulantes;
-	    }
+	public Postulante[] getPostulantes(){//OBTENER COLECCION DE POSTULANTES
+        if (this.mapPostulantes.isEmpty())
+            return null;
+        else {
+            Collection<Postulante> post = this.mapPostulantes.values();
+            Object[] o = post.toArray();
+            Postulante[] postulantes = new Postulante[o.length];
+            for (int i = 0; i < o.length; i++) {
+                postulantes[i] = (Postulante) o[i];
+            }
+
+            return postulantes;
+        }
 	}
 
 	

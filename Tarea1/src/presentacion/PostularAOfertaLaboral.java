@@ -51,7 +51,8 @@ import logica.DTPostulacion;
 	    private IUsuario controlUsr;
 
 		
-		public PostularAOfertaLaboral() {
+		public PostularAOfertaLaboral(IUsuario iu) {
+			controlUsr = iu;
 			
 			setResizable(true);
 	        setIconifiable(true);
@@ -87,6 +88,12 @@ import logica.DTPostulacion;
 	        getContentPane().add(lblNewLabel, gbc_lblNewLabel);
 	        
 	        comboBoxEmpresas = new JComboBox<DTEmpresa>();
+	        comboBoxEmpresas.addActionListener(new ActionListener() {
+		    	 public void actionPerformed(ActionEvent e) {
+		    		 if(comboBoxEmpresas.getSelectedIndex() != -1)
+		                cargarOfertasLaborales();
+		            }
+		    });
 	        GridBagConstraints gbc_comboBoxEmpresas = new GridBagConstraints();
 	        gbc_comboBoxEmpresas.gridwidth = 4;
 	        gbc_comboBoxEmpresas.insets = new Insets(5, 5, 8, 5);
@@ -239,13 +246,12 @@ import logica.DTPostulacion;
 					controlUsr.ingresarPostulacion(CVReducidoU, motivacionU, fechaDeAltaU, empresaU.getNickname(), ofertaLaboralU.getNombre(), postulanteU.getNickname());
 					
 					JOptionPane.showMessageDialog(this, "El postulante se ha postulado con éxito", "Postular a Oferta Laboral",
-	                        JOptionPane.INFORMATION_MESSAGE);} 
-				catch(YaSePostuloException e) {	JOptionPane.showMessageDialog(this, e.getMessage(), 
-						"Postular A Oferta Laboral",
-						JOptionPane.ERROR_MESSAGE);}
-				
-				limpiarFormulario();
-				setVisible(false);
+	                        JOptionPane.INFORMATION_MESSAGE);
+					limpiarFormulario();
+					setVisible(false);
+				} catch (YaSePostuloException e) {	JOptionPane.showMessageDialog(this, e.getMessage(), 
+					"Postular A Oferta Laboral",
+					JOptionPane.ERROR_MESSAGE);}
 			}
 			
 		}
@@ -312,7 +318,7 @@ import logica.DTPostulacion;
 
 		
    public boolean  cargarOfertasLaborales() {
-		DTEmpresa empresaU = (DTEmpresa) this.comboBoxOfertaLaboral.getSelectedItem();
+		DTEmpresa empresaU = (DTEmpresa) this.comboBoxEmpresas.getSelectedItem();
 		DefaultComboBoxModel<DTOfertaLaboral> model;
 		try {
 			model= new DefaultComboBoxModel<DTOfertaLaboral>(controlUsr.listarOfertasLaboralesVigentes(empresaU.getNickname()));
@@ -359,8 +365,9 @@ import logica.DTPostulacion;
 		private void limpiarFormulario() {
 			textAreaCV.setText("");
 			textAreaMotivacion.setText("");
-			comboBoxEmpresas.removeAllItems();
-			comboBoxOfertaLaboral.removeAllItems();
-			comboBoxPostulante.removeAllItems();
+			dateChooser.setDate(null);
+			comboBoxEmpresas.setSelectedIndex(-1);
+			comboBoxOfertaLaboral.setSelectedIndex(-1);
+			comboBoxPostulante.setSelectedIndex(-1);
 		}
 	}

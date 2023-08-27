@@ -1,29 +1,36 @@
 package presentacion;
 
 import java.awt.EventQueue;
-import java.time.LocalDate;
 
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
+
+import logica.Empresa;
 import logica.Factory;
 import logica.IOfertaLaboral;
-
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-
 import logica.IUsuario;
+import logica.Keyword;
+import logica.ManejadorOfertaLaboral;
 import logica.ManejadorTipo;
+import logica.ManejadorUsuario;
+import logica.OfertaLaboral;
 import logica.Paquete;
 import logica.PaqueteTipo;
+import logica.Postulante;
 import logica.Tipo;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class Principal {
 	
-	private IOfertaLaboral IOL;
+
 	private IUsuario IU;
+	private IOfertaLaboral IOL;
 	
     private AltaOfertaLaboral creAltOLInternalFrame;
     private CrearPaqueteTiposPublicacionOfertasLaborales crePaqTipPubOLInternalFrame;
@@ -66,44 +73,77 @@ public class Principal {
 		
 
 		//PRUEBAS
-//		ManejadorUsuario mu = ManejadorUsuario.getInstancia();
-//		Empresa emp = new Empresa("nickEmp1", "nom", "ap", "Jokin@gmail.com", "nomEmp", "desc", "Hola.com");
-//		Empresa emp1 = new Empresa("nickEmp2", "nom", "ap", "Jokin2@gmail.com", "nomEmp", "desc", "Hola.com");
-//		mu.agregarEmpresa(emp);
-//		mu.agregarEmpresa(emp1);
-//		ManejadorTipo mt = ManejadorTipo.getInstancia();
-//		LocalDate date = LocalDate.of(2023, 1, 23);
-//		LocalDate date1 = LocalDate.of(2022, 1, 23);
-//		Tipo t = new Tipo("Tipo1", "Desc", 3, 5, 1000, date);
-//		Tipo t1 = new Tipo("Tipo2", "Desc", 3, 5, 1000, date1);
-//		mt.agregarTipo(t);
-//		mt.agregarTipo(t1);
-//		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
-//		Keyword k = new Keyword("Sheeeeeeeeesh");
+		ManejadorUsuario mu = ManejadorUsuario.getInstancia();
+		Empresa emp = new Empresa("nickEmp1", "nom", "ap", "Jokin@gmail.com", "nomEmp", "desc", "Hola.com");
+		Empresa emp1 = new Empresa("nickEmp2", "nom", "ap", "Jokin2@gmail.com", "nomEmp", "desc", "Hola.com");
+		mu.agregarEmpresa(emp);
+		mu.agregarEmpresa(emp1);
+		ManejadorTipo mt = ManejadorTipo.getInstancia();
+		LocalDate date = LocalDate.of(2023, 1, 23);
+		LocalDate date1 = LocalDate.of(2022, 1, 23);
+		Tipo t = new Tipo("Tipo1", "Desc", 3, 5, 1000, date);
+		Tipo t1 = new Tipo("Tipo2", "Desc", 3, 5, 1000, date1);
+		mt.agregarTipo(t);
+		mt.agregarTipo(t1);
+		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
+		Keyword k = new Keyword("Sheeeeeeeeesh");
 //		Keyword k2 = new Keyword("Sheeesh");
-//		Keyword k3 = new Keyword("Sheeeeeeeeeshasdfasdf");
-//		Keyword k4 = new Keyword("Sheeeshsdddas");
-//		Keyword k5 = new Keyword("Sheeeeeeasdfasdf");
-//		Keyword k6 = new Keyword("Sheasdfasdfasdfh");
-//		Keyword k7 = new Keyword("Sheeeasdfasdfasdfasasdfas");
-//		Keyword k8 = new Keyword("Sheasdfasdfasdfh");
-//		mol.agregarKeyword(k);
-//		mol.agregarKeyword(k3);
+		Keyword k3 = new Keyword("Sheeeeeeeeeshasdfasdf");
+		Keyword k4 = new Keyword("Sheeeshsdddas");
+		Keyword k5 = new Keyword("Sheeeeeeasdfasdf");
+		Keyword k6 = new Keyword("Sheasdfasdfasdfh");
+		Keyword k7 = new Keyword("Sheeeasdfasdfasdfasasdfas");
+		Keyword k8 = new Keyword("Sheasdfasdfasdfh");
+		mol.agregarKeyword(k);
+		mol.agregarKeyword(k3);
 //		mol.agregarKeyword(k2);
-//		mol.agregarKeyword(k4);
-//		mol.agregarKeyword(k5);
-//		mol.agregarKeyword(k6);
-//		mol.agregarKeyword(k7);
-//		mol.agregarKeyword(k8);
+		mol.agregarKeyword(k4);
+		mol.agregarKeyword(k5);
+		mol.agregarKeyword(k6);
+		mol.agregarKeyword(k7);
+		mol.agregarKeyword(k8);
 //	
 		
 		creConPaqTipOLInternalFrame = new ConsultaPaqueteDeTiposDeOfertaLaboral(IOL);
 
-		
+
+//		Factory fab = Factory.getInstance();
+//		IU = fab.getIUsuario();
+//		IOL = fab.getIOfertaLaboral();
+//		
+//		 ManejadorUsuario iMU =  ManejadorUsuario.getInstancia();
+		 ManejadorOfertaLaboral iMOL = ManejadorOfertaLaboral.getInstance();
+		 Empresa u1 = new Empresa("nickname", "nombre", "apellido", "correo", "NombreEmpresa", "descripcion", "link");
+		 LocalDate d = LocalDate.now();
+		 Postulante u2 = new Postulante("nickname2", "nombre2", "apellido2", "correo2", d,"nacionalidad");
+//
+//		 Tipo t1 = new Tipo("NOMBRE TIPO", "DESCRIPCION TIPO", 20, 10, 111.1f, d);
+		 Map<String, Keyword> mK1 = new HashMap<>();
+		 Keyword k1 = new Keyword("KEYWORD1");
+		 Keyword k2 = new Keyword("KEYWORD2");
+		 mK1.put(k1.getNombre(), k1);
+		 mK1.put(k2.getNombre(), k2);
+//		 //para probar
+		 OfertaLaboral of1 = new OfertaLaboral("Oferta Laboral", "Descripcion", "CIUDAD", "DEPARTAMENTO", "HORARIO", 700.5f, d, 4045.66f, t1, mK1, u1);
+		 //Postulacion p1 = new Postulacion(d, "Curriculum vitae reducido kjdshfghdksj;hgfdskjhg;fdshjglkjdsfhgkljhfdsklghdfslkghsdfklhglkfdsjghlkjdsfhglkdfsjhglkfdhsgklhsdflkgjhdfskljghldsfkjhgklsdfjhgkljsdfgh", "Motivacionksajlhdfkljsdgfkjdfshgklhsdfkjghfsdlkghksjdfhgklshdfghdsfklhgklsdfhglksfdhglkshdfglkhdsfkljghdsflkghsdfkljghdfkslhgfdklsjhgksdfhgkjdsfhgkljfdshglksfdjhgklsd", u2, of1);
+//		 p1.setOfertaLaboral(of1);
+//		 p1.setPostulante(u2);
+//		 of1.agregarPostulacion(p1);
+//		 u2.agregarPostulacion(p1);
+//		 //System.out.println(u1.getOfertasLaborales().size());
+		 iMOL.agregarOfertaLaboral(of1);
+		 mu.agregarPostulante(u2);
+		 mu.agregarEmpresa(u1);
+		 u1.agregarOfertaLaboral(of1);
+//		 //Empresa emp = iMU.buscarEmpresa("nickname");
+//		 //System.out.println(emp.getOfertasLaborales().size());
+//		
+//		creConPaqTipOLInternalFrame = new ConsultaPaqueteDeTiposDeOfertaLaboral();
+
 		creConPaqTipOLInternalFrame.setLocation(25,25);
 		creConPaqTipOLInternalFrame.setVisible(false);
 		
-		crePosAOLInternalFrame = new PostularAOfertaLaboral();
+		crePosAOLInternalFrame = new PostularAOfertaLaboral(IU);
 		crePosAOLInternalFrame.setLocation(25,25);
 		crePosAOLInternalFrame.setVisible(false);
 		
@@ -123,20 +163,21 @@ public class Principal {
 		creAltTipPubOLPaqInternalFrame.setLocation(25,25);
 		creAltTipPubOLPaqInternalFrame.setVisible(false);
 		
-		creUsrInternalFrame = new RegistrarUsuario();
+		creUsrInternalFrame = new RegistrarUsuario(IU);
 		creUsrInternalFrame.setLocation(25, 25);
 		creUsrInternalFrame.setVisible(false);
 		
-		creConUsuInternalFrame = new ConsultaUsuario();
+		creConUsuInternalFrame = new ConsultaUsuario(IU,IOL,frmAdmTrabajo);
+
 		creConUsuInternalFrame.setSize(441, 500);
 		creConUsuInternalFrame.setLocation(25,25);
 		creConUsuInternalFrame.setVisible(false);
 		
-		creConOfLabInternalFrame = new ConsultaOfertaLaboral();
+		creConOfLabInternalFrame = new ConsultaOfertaLaboral(IU, IOL);
 		creConOfLabInternalFrame.setLocation(25, 25);
 		creConOfLabInternalFrame.setVisible(false);
 		
-		creModUsuInternalFrame = new ModificarDatosUsuario();
+		creModUsuInternalFrame = new ModificarDatosUsuario(IU);
 		creModUsuInternalFrame.setLocation(25,25);
 		creModUsuInternalFrame.setVisible(false);
 		
@@ -198,7 +239,10 @@ public class Principal {
 		itemConsultaUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// VENTANA PARA CONSULTAR USUARIO
-				creConUsuInternalFrame.setVisible(true);
+				if(creConUsuInternalFrame.cargarUsuarios()) {
+					creConUsuInternalFrame.setVisible(true);
+				}
+
 			}
 		});
 		userMenu.add(itemConsultaUsuario);
@@ -208,6 +252,7 @@ public class Principal {
 			public void actionPerformed(ActionEvent e) {
 				// VENTANA PARA MODIFICAR DATOS DE USUARIO
 				creModUsuInternalFrame.setVisible(true);
+				creModUsuInternalFrame.cargarUsuarios();
 			}
 		});
 		userMenu.add(itemModifUsuario);
@@ -216,7 +261,11 @@ public class Principal {
 		itemPostular.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// VENTANA PARA POSTULAR USUARIO
-				crePosAOLInternalFrame.setVisible(true);
+				if(crePosAOLInternalFrame.cargarEmpresas()) {
+					if(crePosAOLInternalFrame.cargarPostulantes()) {
+						crePosAOLInternalFrame.setVisible(true);
+					}	
+				}
 			}
 		});
 		userMenu.add(itemPostular);
@@ -242,7 +291,10 @@ public class Principal {
 		itemConsultaOF.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// VENTANA PARA CONSULTAR OFERTA LABORAL
-				creConOfLabInternalFrame.setVisible(true);
+
+				if(creConOfLabInternalFrame.cargarEmpresas()){
+					creConOfLabInternalFrame.setVisible(true);
+				}
 			}
 		});
 		menuTrabajo.add(itemConsultaOF);

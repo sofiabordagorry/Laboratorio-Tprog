@@ -44,10 +44,10 @@ public class Postulacion {
 	public void setCVReducido(String CVReducido) {
 		this.CVReducido = CVReducido;
 	}
-	
 
 	public void setMotivacion(String motivacion) {
 		this.motivacion = motivacion;
+
 	}
 	
 	public void setPostulante(Postulante postulante) {
@@ -61,5 +61,10 @@ public class Postulacion {
 	public Boolean verificarOfertaLaboral(String oferta) {
 		String nombre = this.ofertaLaboral.getNombre();
 		return oferta==nombre;
+	}
+
+	public DTPostulacion getDataPostulacion() {
+		DTPostulacion dtP = new DTPostulacion(this.getFecha(), this.getCVReducido(), this.getMotivacion(), this.getPostulante().getNombre() + " " + this.getPostulante().getApellido());
+		return dtP;
 	}
 }
