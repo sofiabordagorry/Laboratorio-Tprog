@@ -82,11 +82,15 @@ public class ControladorUsuario implements IUsuario {
     }
     
     public  DTOfertaLaboral[] listarOfertasLaboralesVigentes(String empresa) throws EmpresaSinOfertasException{
-        ManejadorUsuario mu = ManejadorUsuario.getInstancia();
+    ManejadorUsuario mu = ManejadorUsuario.getInstancia();
         Empresa emp = mu.buscarEmpresa(empresa);
         ArrayList<DTOfertaLaboral> ofertas = emp.obtenerOfertasVigentes();
-        DTOfertaLaboral[] dtofertas = ofertas.toArray(new DTOfertaLaboral[ofertas.size()]);
-        //DTOfertaLaboral[] dtofertas = (DTOfertaLaboral[]) ofertas.toArray();
+      DTOfertaLaboral[] dtofertas;
+        if (ofertas != null) {
+        	 dtofertas = ofertas.toArray(new DTOfertaLaboral[ofertas.size()]);
+        } else {
+        	dtofertas = null;
+        }
         if (dtofertas != null) { return  dtofertas;}
         else { throw new EmpresaSinOfertasException("La empresa seleccionada no tiene ofertas vigentes");}
     }
@@ -133,7 +137,6 @@ public class ControladorUsuario implements IUsuario {
 					 arrUsu[empresas.length + j] = postulantes[j].getDataPostulante();
 				 }
 			 }
-			 System.out.println(empresas.length);
 			 return arrUsu;
 		 }else{
 			 throw new UsuariosNoExistenException("No existen Usuarios registradas");
@@ -197,11 +200,11 @@ public class ControladorUsuario implements IUsuario {
 
 	}
 
-	public DTOfertaLaboral mostrarDatosOfertaLaboral(String OfertaLaboral) {
-		ManejadorOfertaLaboral contOfertaLaboral = ManejadorOfertaLaboral.getInstance();
-		DTOfertaLaboral ofLabRes= contOfertaLaboral.buscarOfertaLaboral(OfertaLaboral).getDataOfertaLaboral();
-		return ofLabRes;
-	}
+//	public DTOfertaLaboral mostrarDatosOfertaLaboral(String OfertaLaboral) {
+//		ManejadorOfertaLaboral contOfertaLaboral = ManejadorOfertaLaboral.getInstance();
+//		DTOfertaLaboral ofLabRes= contOfertaLaboral.buscarOfertaLaboral(OfertaLaboral).getDataOfertaLaboral();
+//		return ofLabRes;
+//	}
 
 	public void modificarEmpresa(String nick, String nom, String ap, String nomE, String desc, String l) {
 		ManejadorUsuario iMU = ManejadorUsuario.getInstancia();

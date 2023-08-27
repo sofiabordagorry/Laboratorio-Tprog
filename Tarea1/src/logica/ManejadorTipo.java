@@ -94,4 +94,8 @@ public class ManejadorTipo {
 		mapTipos.remove(nombre);
 	}
 	
+	public void borrarTodo() {
+		this.mapPaquetes.clear();
+		this.mapTipos.clear();
+	}
 }

@@ -206,7 +206,7 @@ public class Principal {
 	private void initialize() {
 		frmAdmTrabajo = new JFrame();
 		frmAdmTrabajo.setTitle("Administrador Trabajo.uy");
-		frmAdmTrabajo.setBounds(100, 100, 754, 710);
+		frmAdmTrabajo.setBounds(100, 100, 900, 900);
 		frmAdmTrabajo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		LocalDate d = LocalDate.of(1900, 1, 1);
