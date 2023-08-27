@@ -82,9 +82,4 @@ public class ManejadorOfertaLaboral {
 		return this.keywords.containsKey(nombre);
 	}
 	
-
-	public void limpiar() {
-		this.ofertasLaborales.clear();
-		this.keywords.clear();
-	}
 }

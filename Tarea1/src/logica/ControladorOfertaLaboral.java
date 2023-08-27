@@ -105,7 +105,7 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 		for(Map.Entry<String, DTKeyword> entry: ol.getKeywords().entrySet()) 
 			keys.put(entry.getKey(), mol.buscarKeyword(entry.getKey()));
 		
-		OfertaLaboral olNueva = new OfertaLaboral(ol.getNombre(), ol.getDescripcion(), ol.getCiudad(), ol.getDepartamente(), 
+		OfertaLaboral olNueva = new OfertaLaboral(ol.getNombre(), ol.getDescripcion(), ol.getCiudad(), ol.getDepartamento(), 
 															ol.getHorario(), ol.getRemuneracion(), ol.getFechaDeAlta(), ol.getCostoAsociado(), t, keys, e);
 		
 		mol.agregarOfertaLaboral(olNueva);

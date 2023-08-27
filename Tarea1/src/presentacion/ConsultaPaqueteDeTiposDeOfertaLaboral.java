@@ -1,5 +1,7 @@
 package presentacion;
 
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.awt.EventQueue;
 import java.awt.Font;
 
@@ -35,6 +37,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import excepciones.NoExistenPaquetesException;
+import excepciones.NoHayPaquetesException;
 
 @SuppressWarnings("serial")
 public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
@@ -42,6 +45,7 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
 	private IOfertaLaboral col;
 	private JComboBox<ComboBoxItem> comboBox;
 	private JList<DTPaqueteTipo> list;
+	private JTextArea areaDatos;
 
 	/**
 	 * Create the frame.
@@ -89,34 +93,36 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         getContentPane().add(lblPaquetes, gbc_lblPaquetes);
         
         try {
-        DTPaquete[] listaPaq = iOL.listarPaquetes();
-        comboBox = new JComboBox<>(new ComboBoxModel(listaPaq));
-        GridBagConstraints gbc_comboBox = new GridBagConstraints();
-        gbc_comboBox.gridwidth = 2;
-        gbc_comboBox.insets = new Insets(0, 0, 5, 0);
-        gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
-        gbc_comboBox.gridx = 1;
-        gbc_comboBox.gridy = 1;
-        getContentPane().add(comboBox, gbc_comboBox);
+            DTPaquete[] listaPaq = iOL.listarPaquetes();
+            comboBox = new JComboBox<>(new ComboBoxModel(listaPaq));
+            GridBagConstraints gbc_comboBox = new GridBagConstraints();
+            gbc_comboBox.gridwidth = 2;
+            gbc_comboBox.insets = new Insets(0, 0, 5, 0);
+            gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
+            gbc_comboBox.gridx = 1;
+            gbc_comboBox.gridy = 1;
+            getContentPane().add(comboBox, gbc_comboBox);
+            areaDatos = new JTextArea();
+            list = new JList<>();
+            comboBox.addActionListener(new ActionListener() {
+            	@Override
+            	public void actionPerformed(ActionEvent e) {
+            		JComboBox<ComboBoxItem> source = (JComboBox<ComboBoxItem>) e.getSource();
+            		ComboBoxItem selectedItem = (ComboBoxItem)source.getSelectedItem();
+            		
+            		if (selectedItem != null) {
+            			DTPaquete p = selectedItem.getPaquete();
+            			String datos = iOL.DatosPaqueteAMostrar(p);
+            			areaDatos.setText(datos);
+            			
+            			DTPaqueteTipo[] pqt = p.getPaqueteTipos();
+            			list.setListData(pqt);
+            		}
+            	}
+            });
+        } catch (NoHayPaquetesException e) {
+        	fail(e.getMessage());
         }
-        JTextArea areaDatos = new JTextArea();
-        list = new JList<>();
-        comboBox.addActionListener(new ActionListener() {
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
-        		JComboBox<ComboBoxItem> source = (JComboBox<ComboBoxItem>) e.getSource();
-        		ComboBoxItem selectedItem = (ComboBoxItem)source.getSelectedItem();
-        		
-        		if (selectedItem != null) {
-        			DTPaquete p = selectedItem.getPaquete();
-        			String datos = iOL.DatosPaqueteAMostrar(p);
-        			areaDatos.setText(datos);
-        			
-        			DTPaqueteTipo[] pqt = p.getPaqueteTipos();
-        			list.setListData(pqt);
-        		}
-        	}
-        });
         
         JLabel lblDatos = new JLabel("Datos:");
         lblDatos.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -241,8 +247,12 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
 	}
 	
 	public void updateComboBox() {
-		DTPaquete[] listaPaq = col.listarPaquetes();
-		comboBox.setModel(new ComboBoxModel(listaPaq));
+		try {
+			DTPaquete[] listaPaq = col.listarPaquetes();
+			comboBox.setModel(new ComboBoxModel(listaPaq));
+		} catch (NoHayPaquetesException e) {
+			fail(e.getMessage());
+		}
 	}
 	
 }

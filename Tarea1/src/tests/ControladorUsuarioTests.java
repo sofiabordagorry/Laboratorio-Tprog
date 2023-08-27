@@ -217,7 +217,7 @@ class ControladorUsuarioTests {
 			assertEquals(o[0].getNombre(), nombreOL);
 			assertEquals(o[0].getDescripcion(), descripcionOL);
 			assertEquals(o[0].getCiudad(), ciudadOL);
-			assertEquals(o[0].getDepartamente(), departamentoOL);
+			assertEquals(o[0].getDepartamento(), departamentoOL);
 			assertEquals(o[0].getHorario(), horario);
 			assertEquals(o[0].getRemuneracion(), remuneracion);
 			assertEquals(o[0].getFechaDeAlta(), dateOL);
