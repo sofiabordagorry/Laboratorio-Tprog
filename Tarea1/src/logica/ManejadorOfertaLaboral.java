@@ -3,6 +3,8 @@ package logica;
 import java.util.Map;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Collection;
+
 
 public class ManejadorOfertaLaboral {
 	
@@ -54,6 +56,7 @@ public class ManejadorOfertaLaboral {
             return keys;
         }
 	}
+
 	
 	public void agregarOfertaLaboral(OfertaLaboral ol) {
 		this.ofertasLaborales.put(ol.getNombre(), ol);
@@ -77,5 +80,11 @@ public class ManejadorOfertaLaboral {
 	
 	public boolean existeKeyword(String nombre) {
 		return this.keywords.containsKey(nombre);
+	}
+	
+
+	public void limpiar() {
+		this.ofertasLaborales.clear();
+		this.keywords.clear();
 	}
 }

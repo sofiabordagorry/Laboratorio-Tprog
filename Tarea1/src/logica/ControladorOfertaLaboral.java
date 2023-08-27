@@ -30,6 +30,7 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 	public ControladorOfertaLaboral() {
 		
 	}
+	
 	public DTPaquete[] listarPaquetes() throws NoHayPaquetesException {
 		ManejadorTipo mt = ManejadorTipo.getInstancia();
 		Paquete[] paquetes = mt.getPaquetes();
@@ -137,13 +138,14 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 	
 	public void ingresarKeyword(String nombre){
 		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
-        //Keyword k = mol.buscarKeyword(nombre);
-        //if (t != null)
+        Keyword k = mol.buscarKeyword(nombre);
+        if (k == null) {
         //    throw new TipoRepetidoException("El Tipo " + nombre + " ya esta registrado");
 
-        Keyword k = new Keyword(nombre);
+        k = new Keyword(nombre);
         mol.agregarKeyword(k);
-		}
+        }
+}
 	
 	public String[] listarNomPaquetes() throws NoHayPaquetesException{
 		ManejadorTipo mt = ManejadorTipo.getInstancia();
@@ -190,5 +192,7 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 		return ofLabRes;
 	}
 
+	
+	
 }
 
