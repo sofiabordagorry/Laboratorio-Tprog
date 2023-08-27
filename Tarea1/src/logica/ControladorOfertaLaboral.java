@@ -30,7 +30,8 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 	public ControladorOfertaLaboral() {
 		
 	}
-	public DTPaquete[] listarPaquetes() {
+	
+	public DTPaquete[] listarPaquetes() throws NoHayPaquetesException {
 		ManejadorTipo mt = ManejadorTipo.getInstancia();
 		Paquete[] paquetes = mt.getPaquetes();
 		
@@ -45,7 +46,7 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 			
 			return dt;
 		} else {
-			return null;
+			throw new NoHayPaquetesException("No hay paquetes registrados");
 		}
 	}
 	
@@ -191,5 +192,7 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 		return ofLabRes;
 	}
 
+	
+	
 }
 
