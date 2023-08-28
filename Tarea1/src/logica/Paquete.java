@@ -42,10 +42,6 @@ public class Paquete {
         return this.descuento;
     }
     
-//    public LocalDate getFecha() {
-//   	return this.fecha;
- //   }
-    
     public float getCostoAsociado() {
         return this.costoAsociado;
     }

@@ -177,32 +177,21 @@ public class ControladorUsuario implements IUsuario {
 
 	public DTOfertaLaboral[] listarOfertasLaborales(String nickEmpresa) throws OfertasLaboralesNoExistenException {
 		ManejadorUsuario iMU = ManejadorUsuario.getInstancia();
-		Empresa[] empresas = iMU.getEmpresas();
 
 		Empresa e = iMU.buscarEmpresa(nickEmpresa);
 		Map<String, OfertaLaboral> ofLab = e.getOfertasLaborales();
 		if(ofLab.size() != 0) {
 			DTOfertaLaboral[] ofertasRes = new DTOfertaLaboral[ofLab.size()];
-			if(ofLab.size() != 0) {
-				int j = 0;
-				for(Map.Entry<String, OfertaLaboral> entry : ofLab.entrySet()) {
-					ofertasRes[j] = entry.getValue().getDataOfertaLaboral();
-					j++;
-				}
+			int j = 0;
+			for(Map.Entry<String, OfertaLaboral> entry : ofLab.entrySet()) {
+				ofertasRes[j] = entry.getValue().getDataOfertaLaboral();
+				j++;
 			}
 			return ofertasRes;
-		}else {
+		} else {
 			throw new OfertasLaboralesNoExistenException("La empresa seleccionada no tiene Ofertas Laborales");
 		}
-		
-
 	}
-
-//	public DTOfertaLaboral mostrarDatosOfertaLaboral(String OfertaLaboral) {
-//		ManejadorOfertaLaboral contOfertaLaboral = ManejadorOfertaLaboral.getInstance();
-//		DTOfertaLaboral ofLabRes= contOfertaLaboral.buscarOfertaLaboral(OfertaLaboral).getDataOfertaLaboral();
-//		return ofLabRes;
-//	}
 
 	public void modificarEmpresa(String nick, String nom, String ap, String nomE, String desc, String l) {
 		ManejadorUsuario iMU = ManejadorUsuario.getInstancia();

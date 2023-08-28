@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
-import logica.CargarDatos;
 import logica.Empresa;
 import logica.Factory;
 import logica.IOfertaLaboral;
@@ -72,71 +71,6 @@ public class Principal {
 		Factory fac = Factory.getInstance();
 		IOL = fac.getIOfertaLaboral();
 		IU = fac.getIUsuario();
-		
-
-		//PRUEBAS
-//		ManejadorUsuario mu = ManejadorUsuario.getInstancia();
-//		Empresa emp = new Empresa("nickEmp1", "nom", "ap", "Jokin@gmail.com", "nomEmp", "desc", "Hola.com");
-//		Empresa emp1 = new Empresa("nickEmp2", "nom", "ap", "Jokin2@gmail.com", "nomEmp", "desc", "Hola.com");
-//		mu.agregarEmpresa(emp);
-//		mu.agregarEmpresa(emp1);
-//		ManejadorTipo mt = ManejadorTipo.getInstancia();
-//		LocalDate date = LocalDate.of(2023, 1, 23);
-//		LocalDate date1 = LocalDate.of(2022, 1, 23);
-//		Tipo t = new Tipo("Tipo1", "Desc", 3, 5, 1000, date);
-//		Tipo t1 = new Tipo("Tipo2", "Desc", 3, 5, 1000, date1);
-//		mt.agregarTipo(t);
-//		mt.agregarTipo(t1);
-//		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
-//		Keyword k = new Keyword("Sheeeeeeeeesh");
-////		Keyword k2 = new Keyword("Sheeesh");
-//		Keyword k3 = new Keyword("Sheeeeeeeeeshasdfasdf");
-//		Keyword k4 = new Keyword("Sheeeshsdddas");
-//		Keyword k5 = new Keyword("Sheeeeeeasdfasdf");
-//		Keyword k6 = new Keyword("Sheasdfasdfasdfh");
-//		Keyword k7 = new Keyword("Sheeeasdfasdfasdfasasdfas");
-//		Keyword k8 = new Keyword("Sheasdfasdfasdfh");
-//		mol.agregarKeyword(k);
-//		mol.agregarKeyword(k3);
-////		mol.agregarKeyword(k2);
-//		mol.agregarKeyword(k4);
-//		mol.agregarKeyword(k5);
-//		mol.agregarKeyword(k6);
-//		mol.agregarKeyword(k7);
-//		mol.agregarKeyword(k8);
-////	
-//		Factory fab = Factory.getInstance();
-//		IU = fab.getIUsuario();
-//		IOL = fab.getIOfertaLaboral();
-//		
-//		 ManejadorUsuario iMU =  ManejadorUsuario.getInstancia();
-//		 ManejadorOfertaLaboral iMOL = ManejadorOfertaLaboral.getInstance();
-//		 Empresa u1 = new Empresa("nickname", "nombre", "apellido", "correo", "NombreEmpresa", "descripcion", "link");
-//		 LocalDate d = LocalDate.now();
-//		 Postulante u2 = new Postulante("nickname2", "nombre2", "apellido2", "correo2", d,"nacionalidad");
-////
-//		 //Tipo t1 = new Tipo("NOMBRE TIPO", "DESCRIPCION TIPO", 20, 10, 111.1f, d);
-//		 Map<String, Keyword> mK1 = new HashMap<>();
-//		 Keyword k1 = new Keyword("KEYWORD1");
-//		 Keyword k2 = new Keyword("KEYWORD2");
-//		 mK1.put(k1.getNombre(), k1);
-//		 mK1.put(k2.getNombre(), k2);
-////		 //para probar
-//		 OfertaLaboral of1 = new OfertaLaboral("Oferta Laboral", "Descripcion", "CIUDAD", "DEPARTAMENTO", "HORARIO", 700.5f, d, 4045.66f, t1, mK1, u1);
-//		 Postulacion p1 = new Postulacion(d, "Curriculum vitae reducido kjdshfghdksj;hgfdskjhg;fdshjglkjdsfhgkljhfdsklghdfslkghsdfklhglkfdsjghlkjdsfhglkdfsjhglkfdhsgklhsdflkgjhdfskljghldsfkjhgklsdfjhgkljsdfgh", "Motivacionksajlhdfkljsdgfkjdfshgklhsdfkjghfsdlkghksjdfhgklshdfghdsfklhgklsdfhglksfdhglkshdfglkhdsfkljghdsflkghsdfkljghdfkslhgfdklsjhgksdfhgkjdsfhgkljfdshglksfdjhgklsd", u2, of1);
-//		 p1.setOfertaLaboral(of1);
-//		 p1.setPostulante(u2);
-//		 of1.agregarPostulacion(p1);
-//		 u2.agregarPostulacion(p1);
-////		 //System.out.println(u1.getOfertasLaborales().size());
-//		 iMOL.agregarOfertaLaboral(of1);
-//		 mu.agregarPostulante(u2);
-//		 mu.agregarEmpresa(u1);
-//		 u1.agregarOfertaLaboral(of1);
-//		 //Empresa emp = iMU.buscarEmpresa("nickname");
-//		 //System.out.println(emp.getOfertasLaborales().size());
-//		
-//		creConPaqTipOLInternalFrame = new ConsultaPaqueteDeTiposDeOfertaLaboral();
 		 
 		creConPaqTipOLInternalFrame = new ConsultaPaqueteDeTiposDeOfertaLaboral(IOL);
 		creConPaqTipOLInternalFrame.setLocation(25,25);
@@ -206,15 +140,6 @@ public class Principal {
 		frmAdmTrabajo.setTitle("Administrador Trabajo.uy");
 		frmAdmTrabajo.setBounds(100, 100, 900, 900);
 		frmAdmTrabajo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		LocalDate d = LocalDate.of(1900, 1, 1);
-		Paquete paqueteTest = new Paquete("nombreTest", "descripcionTest", 5, 0.5f, 500.0f, d);
-		ManejadorTipo m = ManejadorTipo.getInstancia();
-		m.agregarPaquete(paqueteTest);
-		
-		Tipo tipoTest = new Tipo("Nombretipo", "Descripciontipo", 5, 5, 5.0f, LocalDate.now());
-		PaqueteTipo pqtTest = new PaqueteTipo(5, tipoTest);
-		paqueteTest.agregarPaqueteTipo(pqtTest);
 		
 		JMenuBar mainMenu = new JMenuBar();
 		frmAdmTrabajo.setJMenuBar(mainMenu);
@@ -334,8 +259,8 @@ public class Principal {
 		itemConsultarPaquete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// VENTANA PARA CONSULTAR PAQUETE
-				creConPaqTipOLInternalFrame.updateComboBox();
-				creConPaqTipOLInternalFrame.setVisible(true);
+				if (creConPaqTipOLInternalFrame.updateComboBox())
+					creConPaqTipOLInternalFrame.setVisible(true);
 			}
 		});
 		menuPaquete.add(itemConsultarPaquete);

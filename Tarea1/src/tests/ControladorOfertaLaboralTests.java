@@ -231,12 +231,12 @@ class ControladorOfertaLaboralTests{
 	
 	@Test
 	void listarNomTiposVacioTest() {
-		try {
-			String[] res = controladorOfertaLaboral.listarNomTipos();
-		} catch (NoHayTiposException e) {
-			fail(e.getMessage());
-			e.printStackTrace();
-		}
+		assertThrows(NoHayTiposException.class, ()->{controladorOfertaLaboral.listarNomTipos();});
+	}
+	
+	@Test
+	void listarKeywordsVaciasTest() {
+		assertThrows(KeywordsNoExistenException.class, ()->{controladorOfertaLaboral.listarKeywords();});
 	}
 	
 	@Test
@@ -365,12 +365,7 @@ class ControladorOfertaLaboralTests{
 	
 	@Test
 	void listarNomPaquetesVacioTest() {
-		try {
-			String[] noms = controladorOfertaLaboral.listarNomPaquetes();
-		} catch (NoHayPaquetesException e) {
-			fail(e.getMessage());
-			e.printStackTrace();
-		}
+		assertThrows(NoHayPaquetesException.class, ()->{controladorOfertaLaboral.listarNomPaquetes();});
 	}
 	
 	@Test

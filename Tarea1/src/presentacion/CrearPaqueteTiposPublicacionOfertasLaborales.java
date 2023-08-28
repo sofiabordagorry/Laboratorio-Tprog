@@ -52,7 +52,7 @@ public class CrearPaqueteTiposPublicacionOfertasLaborales extends JInternalFrame
         setMaximizable(false);
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setClosable(true);
-        setTitle("Crear Paquete de Tipo de Publicacion de Oferta Laborale");
+        setTitle("Crear Paquete de Tipo de Publicacion de Oferta Laborales");
         setBounds(10, 40, 465, 291);
         GridBagLayout gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[]{100, 150, 150};

@@ -56,13 +56,11 @@ public class Postulante extends Usuario {
 	public DTPostulante getDataPostulante() {
 		Map<String, DTOfertaLaboral> ofertasLab = new HashMap<>();
 		LinkedList<Postulacion> post = this.getPostulaciones();
-		//System.out.println(post.size());
 		if(post != null) {
 			for(Postulacion p : post) {
 				OfertaLaboral dtOL = p.getOfertaLaboral();
 				ofertasLab.put(dtOL.getNombre(), dtOL.getDataOfertaLaboral());
 			}
-			System.out.println(ofertasLab.size());
 		}
 		DTPostulante dtP = new DTPostulante(this.getNickname(),this.getNombre(),this.getApellido(),this.getCorreo(),this.getFechaNacimiento(),this.getNacionalidad(), ofertasLab);
 		return dtP;

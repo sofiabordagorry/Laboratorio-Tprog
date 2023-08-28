@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
@@ -343,6 +345,14 @@ public class ModificarDatosUsuario extends JInternalFrame {
 		}
 	}
 	
+	private boolean validar(String s) {
+        // Expresión regular que permite letras, espacios, la letra 'ñ' y caracteres acentuados
+        String regex = "^[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]*$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(s);
+        return matcher.matches();
+    }
+	
 	public boolean CheckForm() {
 		String nombre = textNombre.getText();
 		String apellido = textApellido.getText();
@@ -350,6 +360,11 @@ public class ModificarDatosUsuario extends JInternalFrame {
 		String FechaNombreEmp = textFechaNomEmp.getText();
 		String NacionalidadLink = textNacLink.getText();
 		Date FechaNacimiento = dateChooser.getDate();
+		
+		if(!validar(nombre) || !validar(apellido)) {
+			JOptionPane.showMessageDialog(this, "Ingrese un nombre y apellido válidos", "Modificar Datos de Usuario", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
 		
 		if(comboBoxUsuarios.getSelectedItem() instanceof DTEmpresa) {
 			if(nombre.isEmpty() || apellido.isEmpty() || descripcion.isEmpty() || FechaNombreEmp.isEmpty()) {
