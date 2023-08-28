@@ -436,7 +436,7 @@ public class RegistrarUsuario extends JInternalFrame {
     }
     
 	private boolean validar(String s) {
-        // Expresión regular que permite letras, espacios, la letra 'ñ' y caracteres acentuados
+        // Expresión regular que permite letras, espacios, numeros, la letra 'ñ' y caracteres acentuados
         String regex = "^[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]*$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(s);
@@ -445,7 +445,7 @@ public class RegistrarUsuario extends JInternalFrame {
 	
 	private boolean validarNickname(String s) {
         // Expresión regular que permite letras, espacios, la letra 'ñ' y caracteres acentuados
-        String regex = "^[a-zA-ZñÑáéíóúÁÉÍÓÚ]*$";
+        String regex = "^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9]*$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(s);
         return matcher.matches();
