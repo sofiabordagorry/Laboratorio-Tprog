@@ -76,6 +76,7 @@ public class ModificarDatosUsuario extends JInternalFrame {
 	    	 public void actionPerformed(ActionEvent e) {
 	                String selectedItem = (String) comboBoxUsuarios.getSelectedItem();
 	                cargarDatos(selectedItem);
+	                
 	            }
 	    });
 		GridBagConstraints gbc_comboBoxUsuarios = new GridBagConstraints();
@@ -272,7 +273,7 @@ public class ModificarDatosUsuario extends JInternalFrame {
 	}
 	
     public void cargarUsuarios() {
-        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>();
+    	DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>();
         try {
         DTUsuario[] us = contUsuario.listarUsuarios();
 	        for(DTUsuario u : us) {
@@ -353,6 +354,7 @@ public class ModificarDatosUsuario extends JInternalFrame {
         return matcher.matches();
     }
 	
+	
 	public boolean CheckForm() {
 		String nombre = textNombre.getText();
 		String apellido = textApellido.getText();
@@ -361,17 +363,20 @@ public class ModificarDatosUsuario extends JInternalFrame {
 		String NacionalidadLink = textNacLink.getText();
 		Date FechaNacimiento = dateChooser.getDate();
 		
+		String selectedUser = (String) comboBoxUsuarios.getSelectedItem();
+		DTUsuario u = contUsuario.mostrarInformacionUsuario(selectedUser);
+		
 		if(!validar(nombre) || !validar(apellido)) {
 			JOptionPane.showMessageDialog(this, "Ingrese un nombre y apellido válidos", "Modificar Datos de Usuario", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
-		
-		if(comboBoxUsuarios.getSelectedItem() instanceof DTEmpresa) {
+	
+		if(u instanceof DTEmpresa) {
 			if(nombre.isEmpty() || apellido.isEmpty() || descripcion.isEmpty() || FechaNombreEmp.isEmpty()) {
 				JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "Modificar Datos de Usuario", JOptionPane.ERROR_MESSAGE);
 				return false;
 			}
-		}else if (comboBoxUsuarios.getSelectedItem() instanceof DTPostulante){
+		}else if (u instanceof DTPostulante){
 			if(nombre.isEmpty() || apellido.isEmpty() || NacionalidadLink.isEmpty()) {
 				JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "Modificar Datos de Usuario", JOptionPane.ERROR_MESSAGE);
 				return false;
@@ -388,7 +393,7 @@ public class ModificarDatosUsuario extends JInternalFrame {
 		return true;
 		
 	}
-	
+
 	public void limpiarFormulario() {
 		textAreaDescripcion.setText("");
 		textNombre.setText("");;
