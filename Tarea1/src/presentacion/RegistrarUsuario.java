@@ -436,7 +436,7 @@ public class RegistrarUsuario extends JInternalFrame {
     }
     
 	private boolean validar(String s) {
-        // Expresión regular que permite letras, espacios, la letra 'ñ' y caracteres acentuados
+        // Expresión regular que permite letras, espacios, numeros, la letra 'ñ' y caracteres acentuados
         String regex = "^[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]*$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(s);
@@ -445,7 +445,7 @@ public class RegistrarUsuario extends JInternalFrame {
 	
 	private boolean validarNickname(String s) {
         // Expresión regular que permite letras, espacios, la letra 'ñ' y caracteres acentuados
-        String regex = "^[a-zA-ZñÑáéíóúÁÉÍÓÚ]*$";
+        String regex = "^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9]*$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(s);
         return matcher.matches();
@@ -499,6 +499,7 @@ public class RegistrarUsuario extends JInternalFrame {
 			if (dateU.compareTo(new Date()) > 0) {
 				JOptionPane.showMessageDialog(this, "Se debe elegir una fecha anterior a la actual", "Registrar Usuario",
 						JOptionPane.ERROR_MESSAGE);
+				return false;
 			}
 		}
 				
