@@ -13,6 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
 import logica.IUsuario;
 import logica.Keyword;
 import logica.ManejadorOfertaLaboral;
@@ -291,8 +293,11 @@ public class Principal {
 				CargarDatos.ingresarOfertasLaborales();
 				CargarDatos.ingresarKeywordsOfertas();
 				CargarDatos.ingresarPostulaciones();
+        		JOptionPane.showMessageDialog(frmAdmTrabajo, "Datos cargados con éxito", "Administrador Trabajo.uy",
+        				JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
+		
 		mnNewMenu.add(mntmNewMenuItem);
 	}
 }
