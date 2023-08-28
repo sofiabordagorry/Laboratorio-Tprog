@@ -29,7 +29,7 @@ public class CargarDatos {
 	
 	public static void ingresarPaquetes() {
 		ManejadorTipo m = ManejadorTipo.getInstancia();
-		String csvFilePath = "./Tarea1/src/CSV/Paquetes.csv";
+		String csvFilePath = "./src/CSV/Paquetes.csv";
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yy");
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
@@ -53,7 +53,7 @@ public class CargarDatos {
 	
 	public static void ingresarTipos() {
 		ManejadorTipo m = ManejadorTipo.getInstancia();
-		String csvFilePath = "./Tarea1/src/CSV/TipoPublicacion.csv";
+		String csvFilePath = "./src/CSV/TipoPublicacion.csv";
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
@@ -77,7 +77,7 @@ public class CargarDatos {
 	
 	public static void ingresarPaqueteTipos() {
 		ManejadorTipo m = ManejadorTipo.getInstancia();
-		String csvFilePath = "./Tarea1/src/CSV/TiposPublicacionPaquetes.csv";
+		String csvFilePath = "./src/CSV/TiposPublicacionPaquetes.csv";
 		
 		Map<String, Paquete> paqs = m.getMapPaquete();
 		Map<String, Tipo> tipos = m.getMapTipo();
@@ -101,7 +101,7 @@ public class CargarDatos {
 	}
 	
 	public static List<Usuario> cargarUsuarios() {
-		String csvFilePath = "./Tarea1/src/CSV/Usuarios.csv";
+		String csvFilePath = "./src/CSV/Usuarios.csv";
 		List<Usuario> usuarios = new ArrayList<>();
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
@@ -126,7 +126,7 @@ public class CargarDatos {
 	}
 	
 	public static List<Postulante> cargarPostulantes() {
-		String csvFilePath = "./Tarea1/src/CSV/Usuarios-Postulantes.csv";
+		String csvFilePath = "./src/CSV/Usuarios-Postulantes.csv";
 		List<Postulante> postulantes = new ArrayList<>();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
 		
@@ -157,7 +157,7 @@ public class CargarDatos {
 	}
 	
 	public static List<Empresa> cargarEmpresas() {
-		String csvFilePath = "./Tarea1/src/CSV/Usuarios-Empresas.csv";
+		String csvFilePath = "./src/CSV/Usuarios-Empresas.csv";
 		List<Empresa> empresas = new ArrayList<>();
 		
 		List<Usuario> users = cargarUsuarios();
@@ -202,7 +202,7 @@ public class CargarDatos {
 	
 	public static void ingresarKeywords() {
 		ManejadorOfertaLaboral m = ManejadorOfertaLaboral.getInstance();
-		String csvFilePath = "./Tarea1/src/CSV/Keywords.csv";
+		String csvFilePath = "./src/CSV/Keywords.csv";
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
 			String line;
@@ -229,7 +229,7 @@ public class CargarDatos {
 		ManejadorUsuario mu = ManejadorUsuario.getInstancia();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yy");
 		
-		String csvFilePath = "./Tarea1/src/CSV/OfertasLaborales.csv";
+		String csvFilePath = "./src/CSV/OfertasLaborales.csv";
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
 			String line;
