@@ -420,7 +420,7 @@ public class RegistrarUsuario extends JInternalFrame {
         					JOptionPane.ERROR_MESSAGE);
         		}
         	} else {
-        		DTEmpresa empInfo = new DTEmpresa(textField.getText(), textFieldNombre.getText(), textFieldApellido.getText(), textFieldMail.getText(), null, lblNombreEmpresa.getText(), textPane.getText(), textField_2.getText());
+        		DTEmpresa empInfo = new DTEmpresa(textField.getText(), textFieldNombre.getText(), textFieldApellido.getText(), textFieldMail.getText(), null, textFieldNombreEmpresa.getText(), textPane.getText(), textField_2.getText());
         		try {
         			iUsuario.ingresarDatosEmpresa(empInfo);
             		JOptionPane.showMessageDialog(this, "Usuario registrado con éxito", "Registrar Usuario",
@@ -465,7 +465,7 @@ public class RegistrarUsuario extends JInternalFrame {
 		String mailU = textFieldMail.getText();
 		String nacionalidadU = textFieldNacionalidad.getText();
 		Date dateU = dateChooser.getDate();
-		String nombreEmpresaU = lblNombreEmpresa.getText();
+		String nombreEmpresaU = textFieldNombreEmpresa.getText();
 		String descripcionU = textPane.getText();
 		
 		if (!validarNickname(nicknameU)) {

@@ -32,6 +32,7 @@ import logica.DTUsuario;
 import logica.Factory;
 import logica.IOfertaLaboral;
 import logica.IUsuario;
+import logica.Keyword;
 import logica.ManejadorUsuario;
 
 import logica.DTPostulante;
@@ -262,15 +263,18 @@ class ControladorUsuarioTests {
 		        //Datos de tipo
 		        String nombreTipo = "Nombre Tipo Test ListarEmpresasOK";
 		        String descripcionTipo = "Descripcion Tipo Test ListarEmpresasOK";
-        int exposicionTipo = 10;
-        int duracionTipo = 100000;
-        float costoTipo = 15.0f;
-        Date fechaDeAltaTipo = new Date();
+		        int exposicionTipo = 10;
+		        int duracionTipo = 100000;
+		        float costoTipo = 15.0f;
+		        Date fechaDeAltaTipo = new Date();
            LocalDate localDate = fechaDeAltaTipo.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
            DTTipo dtTipo = new DTTipo(nombreTipo, descripcionTipo, exposicionTipo,duracionTipo,costoTipo,localDate);
 
            //Datos de Keyword 
            String nombreK = "NombreKey";
+           Keyword key = new Keyword(nombreK);
+           mol = ManejadorOfertaLaboral.getInstance();
+           mol.agregarKeyword(key);
            DTKeyword dtk = new DTKeyword(nombreK);
            Map<String, DTKeyword> mapdtk = new HashMap<>();
            mapdtk.put(nombreK, dtk);
@@ -292,7 +296,7 @@ class ControladorUsuarioTests {
            String apellidoPostu = "ApellidoPostu";
            String correoPostu = "correoPostu";
            LocalDate fechaPostu = LocalDate.of(2023, 8, 1);
-           String nacionalidadPostu = "nacionalidadPostu";          
+           String nacionalidadPostu = "nacionalidadPostu";           
            DTPostulante dtpos = new DTPostulante(nickPostu, nombrePostu, apellidoPostu, correoPostu, fechaPostu, nacionalidadPostu);
            
            
@@ -366,6 +370,9 @@ class ControladorUsuarioTests {
 
        //Datos de Keyword 
        String nombreK = "NombreKey2";
+       Keyword key = new Keyword(nombreK);
+       mol = ManejadorOfertaLaboral.getInstance();
+       mol.agregarKeyword(key);
        DTKeyword dtk = new DTKeyword(nombreK);
        Map<String, DTKeyword> mapdtk = new HashMap<>();
        mapdtk.put(nombreK, dtk);
