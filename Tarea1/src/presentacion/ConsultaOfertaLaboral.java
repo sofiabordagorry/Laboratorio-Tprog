@@ -397,6 +397,8 @@ public class ConsultaOfertaLaboral extends JInternalFrame {
 	
 	public boolean cargarEmpresas() {
 		model.setRowCount(0);
+		textAreaCV.setText("");
+		textAreaMotivacion.setText("");
 		comboBoxOL.setSelectedIndex(-1);
 		DefaultComboBoxModel<DTEmpresa> model;
 		try {
@@ -418,6 +420,8 @@ public class ConsultaOfertaLaboral extends JInternalFrame {
 	
 	public void cargarOfertasLaborales(String selectedItem) {
 		model.setRowCount(0);
+		textAreaCV.setText("");
+		textAreaMotivacion.setText("");
 		try {
 			DefaultComboBoxModel<DTOfertaLaboral> model = new DefaultComboBoxModel<DTOfertaLaboral>(contUsuario.listarOfertasLaborales(selectedItem));
 			comboBoxOL.setModel(model);
@@ -430,6 +434,8 @@ public class ConsultaOfertaLaboral extends JInternalFrame {
 	
 	public void cargarDatos(String selectedItem) {
 		model.setRowCount(0);
+		textAreaCV.setText("");
+		textAreaMotivacion.setText("");
 		DTOfertaLaboral datosOL = contOfertaLaboral.mostrarDatosOfertaLaboral(selectedItem);
 		textFieldNombre.setText(datosOL.getNombre());
 		textAreaDescripcion.setText(datosOL.getDescripcion());
