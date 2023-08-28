@@ -14,7 +14,7 @@ public class ManejadorTipo {
 		mapTipos = new HashMap<>();
 		mapPaquetes = new HashMap<>();
 	}
-	
+	 
 	public static ManejadorTipo getInstancia() {//OBTENER INSTANCIA 
 		if(instancia == null) {
 			instancia = new ManejadorTipo();
@@ -92,6 +92,11 @@ public class ManejadorTipo {
 	
 	public void eliminarTipo(String nombre) {//ELIMINAR TIPO DE LA COLECCION
 		mapTipos.remove(nombre);
+	}
+	
+	public void limpiar() {
+		mapTipos.clear();
+		mapPaquetes.clear();
 	}
 	
 }

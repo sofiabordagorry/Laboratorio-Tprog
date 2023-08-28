@@ -52,7 +52,7 @@ public class ConsultaOfertaLaboral extends JInternalFrame {
 	private JTable tablePostulaciones;
 	private IUsuario contUsuario;
 	private IOfertaLaboral contOfertaLaboral;
-	private JComboBox<DTEmpresa> comboBoxEmpresas;
+	private JComboBox<DTEmpresa> comboBoxEmpresas; 
 	private JComboBox<DTOfertaLaboral> comboBoxOL;
 	private JComboBox<DTKeyword> comboBoxKeywords;
 	private JTextArea textAreaDescripcion;
@@ -88,7 +88,7 @@ public class ConsultaOfertaLaboral extends JInternalFrame {
 	    	 public void actionPerformed(ActionEvent e) {
 	                if(comboBoxEmpresas.getSelectedIndex() != -1) {
 	                	DTEmpresa selectedItem = (DTEmpresa) comboBoxEmpresas.getSelectedItem();
-	                	cargarOfertasLaborales(selectedItem.getNombreDeEmpresa());
+	                	cargarOfertasLaborales(selectedItem.getNickname());
 	                }
 	            }
 	    });
@@ -396,27 +396,28 @@ public class ConsultaOfertaLaboral extends JInternalFrame {
 	}
 	
 	public boolean cargarEmpresas() {
+		model.setRowCount(0);
+		comboBoxOL.setSelectedIndex(-1);
 		DefaultComboBoxModel<DTEmpresa> model;
 		try {
-			try {
-	        	model = new DefaultComboBoxModel<DTEmpresa>(contUsuario.listarEmpresas());
-	        	comboBoxEmpresas.setModel(model);
-			}catch(NoExistenEmpresasOfertasLaboralesException e) {
-				JOptionPane.showMessageDialog(this, e.getMessage(), 
-						"Consulta de Oferta Laboral",
-						JOptionPane.ERROR_MESSAGE);
-				return false;
-			}
+			model = new DefaultComboBoxModel<DTEmpresa>(contUsuario.listarEmpresas());
+        	comboBoxEmpresas.setModel(model);
 		}catch(EmpresasNoExistenException e) {
 			JOptionPane.showMessageDialog(this, e.getMessage(), 
 					"Consulta de Oferta Laboral",
 					JOptionPane.ERROR_MESSAGE);
 			return false;
-		}
+		}catch(NoExistenEmpresasOfertasLaboralesException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage(), 
+					"Consulta de Oferta Laboral",
+					JOptionPane.ERROR_MESSAGE);
+			return false;
+		};
 		return true;
 	}
 	
 	public void cargarOfertasLaborales(String selectedItem) {
+		model.setRowCount(0);
 		try {
 			DefaultComboBoxModel<DTOfertaLaboral> model = new DefaultComboBoxModel<DTOfertaLaboral>(contUsuario.listarOfertasLaborales(selectedItem));
 			comboBoxOL.setModel(model);
@@ -428,11 +429,12 @@ public class ConsultaOfertaLaboral extends JInternalFrame {
 	}
 	
 	public void cargarDatos(String selectedItem) {
+		model.setRowCount(0);
 		DTOfertaLaboral datosOL = contOfertaLaboral.mostrarDatosOfertaLaboral(selectedItem);
 		textFieldNombre.setText(datosOL.getNombre());
 		textAreaDescripcion.setText(datosOL.getDescripcion());
 		textFieldCiudad.setText(datosOL.getCiudad());
-		textFieldDepartamento.setText(datosOL.getDepartamente());
+		textFieldDepartamento.setText(datosOL.getDepartamento());
 		textFieldHorario.setText(datosOL.getHorario());
 		textFieldRemuneracion.setText(String.valueOf(datosOL.getRemuneracion()));
 		textFieldFechaDeAlta.setText(datosOL.getFechaDeAlta().toString());

@@ -58,7 +58,7 @@ public class AltaOfertaLaboral extends JInternalFrame {
 	private JDateChooser dateChooserFechaDeAlta;
 	
 	public AltaOfertaLaboral(IUsuario IU,IOfertaLaboral IOL) {
-		
+	
 		cu = IU;
 		col = IOL;
 		
@@ -340,7 +340,7 @@ public class AltaOfertaLaboral extends JInternalFrame {
 				keys.put(k, new DTKeyword(k));
 			
 			DTOfertaLaboral datosOL = new DTOfertaLaboral(nombreU, descripcionU, ciudadU, departamentoU, horarioU, 
-																		Integer.parseInt(remuneracionU), fechaDeAltaU, keys);
+																		Float.parseFloat(remuneracionU), fechaDeAltaU, keys);
 			try {
 				col.ingresarDatosOL(empresaU.getNickname(), tipPubOLU.getNombre(), datosOL);
 				

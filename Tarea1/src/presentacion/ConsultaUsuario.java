@@ -269,6 +269,7 @@ public class ConsultaUsuario extends JInternalFrame {
 	}
 	
 	public void cargarDatos(String selectedItem) {
+		comboBoxOL.removeAllItems();
 		DTUsuario u = contUsuario.mostrarInformacionUsuario(selectedItem);
 		
 		textNickname.setText(u.getNickname());
@@ -276,8 +277,10 @@ public class ConsultaUsuario extends JInternalFrame {
 		textApellido.setText(u.getApellido());
 		textCorreo.setText(u.getCorreo());
 		Map<String, DTOfertaLaboral> ofLab = u.getDTOfertasLaborales();
+		//System.out.println("Tamanio" + ofLab.size());
 		DTOfertaLaboral[] arrOfertas;
 		if(ofLab != null) {
+			//System.out.println("LLEGUE");
 			arrOfertas = new DTOfertaLaboral[ofLab.size()];
 			int i = 0;
 			for(Map.Entry<String, DTOfertaLaboral> entry : u.getDTOfertasLaborales().entrySet()) {
@@ -332,14 +335,16 @@ public class ConsultaUsuario extends JInternalFrame {
     
     public void consultaOfertaLaboral(IUsuario iu, IOfertaLaboral iol, JFrame frmAdmTrabajo) {
     	DTOfertaLaboral dtselectedOL = (DTOfertaLaboral) comboBoxOL.getSelectedItem();
-    	setVisible(false);
-    	limpiarFormulario();
-    	ConsultaOfertaLaboral creConOfLabInternalFrame = new ConsultaOfertaLaboral(iu, iol);
-    	creConOfLabInternalFrame.setLocation(25,25);
-    	//System.out.println("LLEGUE");
-		frmAdmTrabajo.getContentPane().add(creConOfLabInternalFrame);
-    	creConOfLabInternalFrame.referenceConsultaUsuario(dtselectedOL.getNombre(), dtselectedOL.getDTEmpresa());
-    	creConOfLabInternalFrame.setVisible(true);
+    	if(dtselectedOL != null) {
+	    	setVisible(false);
+	    	limpiarFormulario();
+	    	ConsultaOfertaLaboral creConOfLabInternalFrame = new ConsultaOfertaLaboral(iu, iol);
+	    	creConOfLabInternalFrame.setLocation(25,25);
+	    	//System.out.println("LLEGUE");
+			frmAdmTrabajo.getContentPane().add(creConOfLabInternalFrame);
+	    	creConOfLabInternalFrame.referenceConsultaUsuario(dtselectedOL.getNombre(), dtselectedOL.getDTEmpresa());
+	    	creConOfLabInternalFrame.setVisible(true);
+    	}
     }
     
     public void limpiarFormulario() {

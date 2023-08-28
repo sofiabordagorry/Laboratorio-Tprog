@@ -102,4 +102,5 @@ public class ManejadorUsuario {
         this.mapEmpresas.clear();
         this.mapPostulantes.clear();
     }
+
 }

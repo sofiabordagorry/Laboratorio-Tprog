@@ -93,7 +93,7 @@ public class Empresa extends Usuario {
 	public DTEmpresa getDataEmpresa() {
 		Map<String, DTOfertaLaboral> ofertasLab = new HashMap<>();
 		Map<String, OfertaLaboral> ol = this.getOfertasLaborales();
-		if(ol.size() != 0) {
+		if(ol != null) {
 			for(Map.Entry<String, OfertaLaboral> entry : ol.entrySet()) {
 				ofertasLab.put(entry.getKey(), entry.getValue().getDataOfertaLaboral());
 			}

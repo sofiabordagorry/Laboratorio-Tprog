@@ -352,7 +352,7 @@ public class ModificarDatosUsuario extends JInternalFrame {
 		Date FechaNacimiento = dateChooser.getDate();
 		
 		if(comboBoxUsuarios.getSelectedItem() instanceof DTEmpresa) {
-			if(nombre.isEmpty() || apellido.isEmpty() || descripcion.isEmpty() || FechaNombreEmp.isEmpty() || NacionalidadLink.isEmpty()) {
+			if(nombre.isEmpty() || apellido.isEmpty() || descripcion.isEmpty() || FechaNombreEmp.isEmpty()) {
 				JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "Modificar Datos de Usuario", JOptionPane.ERROR_MESSAGE);
 				return false;
 			}

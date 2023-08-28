@@ -6,4 +6,5 @@ public class TipoRepetidoException extends Exception {
     public TipoRepetidoException(String string) {
         super(string);
     }
+
 }

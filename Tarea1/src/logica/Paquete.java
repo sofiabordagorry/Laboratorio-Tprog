@@ -10,7 +10,7 @@ public class Paquete {
 	private String descripcion;
 	private int periodoDeValidez;
 	private float descuento;
-	private LocalDate fecha;
+//	private LocalDate fecha;
 	private float costoAsociado;
 	private List<PaqueteTipo> paquetesTipos;
 	private LocalDate fechaDeAlta;
@@ -20,7 +20,6 @@ public class Paquete {
 		this.descripcion = descripcion;
 		this.periodoDeValidez = periodoDeValidez;
 		this.descuento = descuento;
-		this.fecha = fecha;
 		this.costoAsociado = costoAsociado;
 		this.paquetesTipos = new ArrayList<>();
 		this.fechaDeAlta = fechaDeAlta;
@@ -43,9 +42,9 @@ public class Paquete {
         return this.descuento;
     }
     
-    public LocalDate getFecha() {
-    	return this.fecha;
-    }
+//    public LocalDate getFecha() {
+//   	return this.fecha;
+ //   }
     
     public float getCostoAsociado() {
         return this.costoAsociado;
