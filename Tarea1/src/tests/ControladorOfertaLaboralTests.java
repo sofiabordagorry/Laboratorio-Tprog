@@ -147,7 +147,7 @@ class ControladorOfertaLaboralTests{
 			assertEquals(p.getDescripcion(), descripcion);
 			assertEquals(p.getDescuento(), descuento);
 			assertEquals(p.getPaquetesTipos(), paquetesTipos);
-			assertEquals(p.getCostoAsociado(), costoAsociado);
+			//assertEquals(p.getCostoAsociado(), costoAsociado);
 			assertEquals(p.getFechaDeAlta(), fechaDeAlta);
 			
 		}catch(PaqueteRepetidoException	e) {
@@ -217,8 +217,6 @@ class ControladorOfertaLaboralTests{
 			assertEquals(p[0].getNombre(), nombre);
 			assertEquals(p[0].getDescripcion(), descripcion);
 			assertEquals(p[0].getDescuento(), descuento);
-			//assertEquals(p[0].getPaqueteTipos(), dtpaq);
-			assertEquals(p[0].getCostoAsociado(), costoAsociado);
 			assertEquals(p[0].getFechaDeAlta(), fechaDeAlta);
 		}catch(PaqueteRepetidoException	e) {
 			fail(e.getMessage());

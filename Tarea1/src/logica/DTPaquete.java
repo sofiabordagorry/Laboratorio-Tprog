@@ -18,11 +18,19 @@ public class DTPaquete {
 		this.descripcion = descripcion;
 		this.periodoDeValidez = periodoDeValidez;
 		this.descuento = descuento;
-		this.fecha = fecha;
 		this.costoAsociado = costoAsociado;
 		this.paquetesTipos = dtpaq;
 		this.fechaDeAlta = fechaDeAlta;
 
+	}
+	
+	public DTPaquete(String nombre, String descripcion, int periodoDeValidez, float descuento, DTPaqueteTipo[] dtpaq, LocalDate fechaDeAlta) {
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.periodoDeValidez = periodoDeValidez;
+		this.descuento = descuento;
+		this.paquetesTipos = dtpaq;
+		this.fechaDeAlta = fechaDeAlta;
 	}
 	
 	public String getNombre() {

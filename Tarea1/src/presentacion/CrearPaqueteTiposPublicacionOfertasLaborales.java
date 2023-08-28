@@ -39,7 +39,6 @@ public class CrearPaqueteTiposPublicacionOfertasLaborales extends JInternalFrame
 	private JTextField textFieldNombre;
 	private JTextField textFieldPeriodoValidez;
 	private JTextField textFieldDescuento;
-	private JTextField textFieldCostoAsociado;
 	private JTextArea textAreaDescripcion;
 	private JDateChooser dateChooserFechaDeAlta;
 	
@@ -56,9 +55,9 @@ public class CrearPaqueteTiposPublicacionOfertasLaborales extends JInternalFrame
         setBounds(10, 40, 465, 291);
         GridBagLayout gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[]{100, 150, 150};
-        gridBagLayout.rowHeights = new int[]{0, 0, 100, 0, 0, 0, 0, 0, 0};
+        gridBagLayout.rowHeights = new int[]{0, 0, 100, 0, 0, 0, 0, 0};
         gridBagLayout.columnWeights = new double[]{0, 1.0, 1.0};
-        gridBagLayout.rowWeights = new double[]{0, 0, 1.0, 0, 0, 0, 0.0, 0.0, Double.MIN_VALUE};
+        gridBagLayout.rowWeights = new double[]{0, 0, 1.0, 0, 0, 0.0, 0.0, Double.MIN_VALUE};
         getContentPane().setLayout(gridBagLayout);
         
         JLabel lblNewLabel = new JLabel("Ingrese  los siguientes datos: ");
@@ -152,25 +151,6 @@ public class CrearPaqueteTiposPublicacionOfertasLaborales extends JInternalFrame
         getContentPane().add(textFieldDescuento, gbc_textFieldDescuento);
         textFieldDescuento.setColumns(10);
         
-        JLabel lblNewLabel_5 = new JLabel("Costo asociado: ");
-        lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        GridBagConstraints gbc_lblNewLabel_5 = new GridBagConstraints();
-        gbc_lblNewLabel_5.insets = new Insets(0, 0, 5, 5);
-        gbc_lblNewLabel_5.anchor = GridBagConstraints.EAST;
-        gbc_lblNewLabel_5.gridx = 0;
-        gbc_lblNewLabel_5.gridy = 5;
-        getContentPane().add(lblNewLabel_5, gbc_lblNewLabel_5);
-        
-        textFieldCostoAsociado = new JTextField();
-        textFieldCostoAsociado.setColumns(10);
-        GridBagConstraints gbc_textFieldCostoAsociado = new GridBagConstraints();
-        gbc_textFieldCostoAsociado.gridwidth = 2;
-        gbc_textFieldCostoAsociado.insets = new Insets(0, 0, 5, 40);
-        gbc_textFieldCostoAsociado.fill = GridBagConstraints.HORIZONTAL;
-        gbc_textFieldCostoAsociado.gridx = 1;
-        gbc_textFieldCostoAsociado.gridy = 5;
-        getContentPane().add(textFieldCostoAsociado, gbc_textFieldCostoAsociado);
-        
         JButton btnCancelar = new JButton("Cancelar");
         btnCancelar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
@@ -185,7 +165,7 @@ public class CrearPaqueteTiposPublicacionOfertasLaborales extends JInternalFrame
         gbc_lblNewLabel_6.anchor = GridBagConstraints.EAST;
         gbc_lblNewLabel_6.insets = new Insets(0, 0, 5, 5);
         gbc_lblNewLabel_6.gridx = 0;
-        gbc_lblNewLabel_6.gridy = 6;
+        gbc_lblNewLabel_6.gridy = 5;
         getContentPane().add(lblNewLabel_6, gbc_lblNewLabel_6);
         
         dateChooserFechaDeAlta = new JDateChooser();
@@ -194,7 +174,7 @@ public class CrearPaqueteTiposPublicacionOfertasLaborales extends JInternalFrame
         gbc_dateChooserFechaDeAlta.insets = new Insets(0, 0, 5, 40);
         gbc_dateChooserFechaDeAlta.fill = GridBagConstraints.BOTH;
         gbc_dateChooserFechaDeAlta.gridx = 1;
-        gbc_dateChooserFechaDeAlta.gridy = 6;
+        gbc_dateChooserFechaDeAlta.gridy = 5;
         getContentPane().add(dateChooserFechaDeAlta, gbc_dateChooserFechaDeAlta);
         
         btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -202,7 +182,7 @@ public class CrearPaqueteTiposPublicacionOfertasLaborales extends JInternalFrame
         gbc_btnCancelar.anchor = GridBagConstraints.WEST;
         gbc_btnCancelar.insets = new Insets(0, 0, 10, 20);
         gbc_btnCancelar.gridx = 1;
-        gbc_btnCancelar.gridy = 7;
+        gbc_btnCancelar.gridy = 6;
         getContentPane().add(btnCancelar, gbc_btnCancelar);
         
         JButton btnAceptar = new JButton("Aceptar");
@@ -217,7 +197,7 @@ public class CrearPaqueteTiposPublicacionOfertasLaborales extends JInternalFrame
         gbc_btnAceptar.insets = new Insets(0, 0, 10, 30);
         gbc_btnAceptar.anchor = GridBagConstraints.WEST;
         gbc_btnAceptar.gridx = 2;
-        gbc_btnAceptar.gridy = 7;
+        gbc_btnAceptar.gridy = 6;
         getContentPane().add(btnAceptar, gbc_btnAceptar);
 	}
 	
@@ -226,13 +206,12 @@ public class CrearPaqueteTiposPublicacionOfertasLaborales extends JInternalFrame
 		String descripcionU = textAreaDescripcion.getText();
 		String periodoValidezU = textFieldPeriodoValidez.getText();
 		String descuentoU = textFieldDescuento.getText();
-		String costoAsociadoU = textFieldCostoAsociado.getText();
 		Date fechaDeAltaU = dateChooserFechaDeAlta.getDate();
 		
 		if(checkForm()) {
 			LocalDate fechaDeAlta = this.convertirDateALocalDate(fechaDeAltaU);
 			DTPaquete datosPaquete = new DTPaquete(nombreU, descripcionU, Integer.parseInt(periodoValidezU), Float.parseFloat(descuentoU), 
-																	Float.parseFloat(costoAsociadoU), null, fechaDeAlta);
+																	null, fechaDeAlta);
 			
 			try {
 				col.ingresarDatosPaquete(datosPaquete);
@@ -254,14 +233,13 @@ public class CrearPaqueteTiposPublicacionOfertasLaborales extends JInternalFrame
 		String descripcionU = textAreaDescripcion.getText();
 		String periodoValidezU = textFieldPeriodoValidez.getText();
 		String descuentoU = textFieldDescuento.getText();
-		String costoAsociadoU = textFieldCostoAsociado.getText();
 		Date fechaDeAltaU = dateChooserFechaDeAlta.getDate();
 		long milisegundosDesdeEnero2000 = 946684800000L;
 	    Date fechaAntigua = new Date(milisegundosDesdeEnero2000);
 		Date fechaDia = new Date();
 		
 		if (nombreU.isEmpty() || descripcionU.isEmpty() || periodoValidezU.isEmpty() || 
-				descuentoU.isEmpty() || costoAsociadoU.isEmpty()) {
+				descuentoU.isEmpty()) {
 				JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "Crear Paquetes de Tipos de Publicacion de Ofertas Laborales",
 						JOptionPane.ERROR_MESSAGE);
 				return false;
@@ -320,22 +298,6 @@ public class CrearPaqueteTiposPublicacionOfertasLaborales extends JInternalFrame
 			return false;
 		}
 		
-		try {
-			Float.parseFloat(costoAsociadoU);
-		} catch(NumberFormatException e) {
-			JOptionPane.showMessageDialog(this, "El Costo Asociado debe ser un numero", 
-					"Crear Paquetes de Tipos de Publicacion de Ofertas Laborales",
-					JOptionPane.ERROR_MESSAGE);
-			return false;
-		}
-		
-		if(Float.parseFloat(costoAsociadoU) <= 0) {
-			JOptionPane.showMessageDialog(this, "El Costo Asociado debe ser mayor a cero", 
-					"Crear Paquetes de Tipos de Publicacion de Ofertas Laborales",
-					JOptionPane.ERROR_MESSAGE);
-			return false;
-		}
-		
 		if (fechaDeAltaU.compareTo(fechaDia) > 0) {
 			JOptionPane.showMessageDialog(this, "La Fecha de Alta no puede ser posterior a la fecha actual", 
 					"Crear Paquetes de Tipos de Publicacion de Ofertas Laborales",
@@ -378,7 +340,6 @@ public class CrearPaqueteTiposPublicacionOfertasLaborales extends JInternalFrame
 		textFieldNombre.setText("");
 		textAreaDescripcion.setText("");
 		textFieldPeriodoValidez.setText("");
-		textFieldCostoAsociado.setText("");
 		textFieldDescuento.setText("");
 		dateChooserFechaDeAlta.setDate(null);
 	}

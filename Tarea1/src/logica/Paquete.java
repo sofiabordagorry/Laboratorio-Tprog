@@ -10,7 +10,6 @@ public class Paquete {
 	private String descripcion;
 	private int periodoDeValidez;
 	private float descuento;
-//	private LocalDate fecha;
 	private float costoAsociado;
 	private List<PaqueteTipo> paquetesTipos;
 	private LocalDate fechaDeAlta;
@@ -71,19 +70,23 @@ public class Paquete {
 				this.getDescuento(), this.getCostoAsociado(), dtpaq, this.fechaDeAlta);
     } 	
 
-
-    
     public boolean agregarTipo(int cantidad, Tipo t) {
-    	List<PaqueteTipo> paqT = this.getPaquetesTipos();
-    	PaqueteTipo pt;
-    	for (int i = 0; i < paqT.size(); i++) {
-    		pt = paqT.get(i);
-    		if(pt.getTipo().getNombre() == t.getNombre())
-    			return false;
-    	}
-    	//No hay link entre Paquete y Tipo
-    	pt = new PaqueteTipo(cantidad, t);
-    	this.agregarPaqueteTipo(pt);
-    	return true;
+        List<PaqueteTipo> paqT = this.getPaquetesTipos();
+        PaqueteTipo pt;
+        for (int i = 0; i < paqT.size(); i++) {
+            pt = paqT.get(i);
+            if(pt.getTipo().getNombre() == t.getNombre())
+                return false;
+        }
+        //No hay link entre Paquete y Tipo
+        pt = new PaqueteTipo(cantidad, t);
+        this.agregarPaqueteTipo(pt);
+        //arrglo del costoAsociado
+        float costo = (t.getCosto() * cantidad) *((100-this.descuento)/100);
+        sumarACosto(costo);
+        return true;
+    }
+    public void sumarACosto(float c) {
+        this.costoAsociado = this.costoAsociado + c;
     }
 }
