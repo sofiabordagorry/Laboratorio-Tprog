@@ -499,6 +499,7 @@ public class RegistrarUsuario extends JInternalFrame {
 			if (dateU.compareTo(new Date()) > 0) {
 				JOptionPane.showMessageDialog(this, "Se debe elegir una fecha anterior a la actual", "Registrar Usuario",
 						JOptionPane.ERROR_MESSAGE);
+				return false;
 			}
 		}
 				
