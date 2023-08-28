@@ -1,5 +1,7 @@
 package presentacion;
 
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.awt.EventQueue;
 import java.awt.Font;
 
@@ -10,46 +12,65 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.Map;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
+import logica.DTPaquete;
+import logica.DTPaqueteTipo;
+import logica.DTTipo;
+import logica.Factory;
+import logica.IOfertaLaboral;
+import logica.ManejadorTipo;
+import logica.Paquete;
+import logica.PaqueteTipo;
+import logica.Tipo;
+
+import javax.swing.JTextArea;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import excepciones.NoExistenPaquetesException;
+import excepciones.NoHayPaquetesException;
 
 @SuppressWarnings("serial")
 public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ConsultaPaqueteDeTiposDeOfertaLaboral frame = new ConsultaPaqueteDeTiposDeOfertaLaboral();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private IOfertaLaboral col;
+	private JComboBox<ComboBoxItem> comboBox;
+	private JList<DTPaqueteTipo> list;
+	private JTextArea areaDatos;
 
 	/**
 	 * Create the frame.
+	 * @throws NoExistenPaquetesException 
 	 */
-	public ConsultaPaqueteDeTiposDeOfertaLaboral() {
-        setBounds(10, 40, 487, 246);
-        setResizable(true);
+	public ConsultaPaqueteDeTiposDeOfertaLaboral(IOfertaLaboral iOL) {
+    	
+		// Interfaz Oferta Laboral
+		col = iOL;
+		
+    	// ManejadorTipo
+    	ManejadorTipo m = ManejadorTipo.getInstancia();
+    	
+        setBounds(10, 40, 780, 441);
+        setResizable(false);
         setIconifiable(true);
         setMaximizable(true);
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setClosable(true);    
         GridBagLayout gridBagLayout = new GridBagLayout();
-        gridBagLayout.columnWidths = new int[]{100, 150, 150};
+        gridBagLayout.columnWidths = new int[]{50, 50, 50};
         gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
-        gridBagLayout.columnWeights = new double[]{1.0, 1.0, 0};
+        gridBagLayout.columnWeights = new double[]{1.0, 1.0, 0.0};
         gridBagLayout.rowWeights = new double[]{0, 0, 1.0, 1.0, 1.0, 0, 0, 0.0, Double.MIN_VALUE};
         getContentPane().setLayout(gridBagLayout);
         
@@ -72,8 +93,8 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         gbc_lblPaquetes.gridx = 0;
         gbc_lblPaquetes.gridy = 1;
         getContentPane().add(lblPaquetes, gbc_lblPaquetes);
-        
-        JComboBox<String> comboBox = new JComboBox<String>();
+         
+        comboBox = new JComboBox<ComboBoxItem>();
         GridBagConstraints gbc_comboBox = new GridBagConstraints();
         gbc_comboBox.gridwidth = 2;
         gbc_comboBox.insets = new Insets(0, 0, 5, 0);
@@ -81,6 +102,24 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         gbc_comboBox.gridx = 1;
         gbc_comboBox.gridy = 1;
         getContentPane().add(comboBox, gbc_comboBox);
+        areaDatos = new JTextArea();
+        list = new JList<>();
+        comboBox.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		JComboBox<ComboBoxItem> source = (JComboBox<ComboBoxItem>) e.getSource();
+        		ComboBoxItem selectedItem = (ComboBoxItem)source.getSelectedItem();
+        		
+        		if (selectedItem != null) {
+        			DTPaquete p = selectedItem.getPaquete();
+        			String datos = iOL.DatosPaqueteAMostrar(p);
+        			areaDatos.setText(datos);
+        			
+        			DTPaqueteTipo[] pqt = p.getPaqueteTipos();
+        			list.setListData(pqt);
+        		}
+        	}
+        });
         
         JLabel lblDatos = new JLabel("Datos:");
         lblDatos.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -91,14 +130,18 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         gbc_lblDatos.gridy = 2;
         getContentPane().add(lblDatos, gbc_lblDatos);
         
-        JPanel panel = new JPanel();
-        GridBagConstraints gbc_panel = new GridBagConstraints();
-        gbc_panel.gridwidth = 2;
-        gbc_panel.insets = new Insets(0, 0, 5, 0);
-        gbc_panel.fill = GridBagConstraints.BOTH;
-        gbc_panel.gridx = 1;
-        gbc_panel.gridy = 2;
-        getContentPane().add(panel, gbc_panel);
+        areaDatos.setMargin(new Insets(15,15,15,15));
+        areaDatos.setEditable(false);
+        areaDatos.setWrapStyleWord(true); // Ajuste de palabras
+        areaDatos.setLineWrap(true); // Ajuste de líneas
+        JScrollPane textScrollPane = new JScrollPane(areaDatos);
+        GridBagConstraints gbc_textScrollPane = new GridBagConstraints();
+        gbc_textScrollPane.gridwidth = 2;
+        gbc_textScrollPane.insets = new Insets(0, 0, 5, 0);
+        gbc_textScrollPane.fill = GridBagConstraints.BOTH;
+        gbc_textScrollPane.gridx = 1;
+        gbc_textScrollPane.gridy = 2;
+        getContentPane().add(textScrollPane, gbc_textScrollPane);
         
         JLabel lblTiposOL = new JLabel("Tipos de publicación de ofertas laborales:");
         lblTiposOL.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -109,21 +152,13 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         gbc_lblTiposOL.gridy = 3;
         getContentPane().add(lblTiposOL, gbc_lblTiposOL);
         
-        JList list = new JList();
         GridBagConstraints gbc_list = new GridBagConstraints();
-        gbc_list.gridwidth = 2;
+        gbc_list.gridwidth = 3;
         gbc_list.insets = new Insets(0, 0, 5, 0);
         gbc_list.fill = GridBagConstraints.BOTH;
         gbc_list.gridx = 1;
         gbc_list.gridy = 3;
         getContentPane().add(list, gbc_list);
-        
-        JButton btnCancelar = new JButton("Cancelar");
-        btnCancelar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-            }
-        });
         
         JLabel lblNewLabel = new JLabel("Datos tipo:");
         lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -134,14 +169,48 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         gbc_lblNewLabel.gridy = 4;
         getContentPane().add(lblNewLabel, gbc_lblNewLabel);
         
-        JPanel panel_2 = new JPanel();
-        GridBagConstraints gbc_panel_2 = new GridBagConstraints();
-        gbc_panel_2.gridwidth = 2;
-        gbc_panel_2.insets = new Insets(0, 0, 5, 0);
-        gbc_panel_2.fill = GridBagConstraints.BOTH;
-        gbc_panel_2.gridx = 1;
-        gbc_panel_2.gridy = 4;
-        getContentPane().add(panel_2, gbc_panel_2);
+        JTextArea areaDatosTipo = new JTextArea();
+        areaDatosTipo.setMargin(new Insets(15,15,15,15));
+        areaDatosTipo.setEditable(false);
+        areaDatosTipo.setWrapStyleWord(true); // Ajuste de palabras
+        areaDatosTipo.setLineWrap(true); // Ajuste de líneas
+        JScrollPane textScrollPane2 = new JScrollPane(areaDatosTipo);
+        GridBagConstraints gbc_textScrollPane2 = new GridBagConstraints();
+        gbc_textScrollPane2.gridwidth = 2;
+        gbc_textScrollPane2.insets = new Insets(0, 0, 5, 0);
+        gbc_textScrollPane2.fill = GridBagConstraints.BOTH;
+        gbc_textScrollPane2.gridx = 1;
+        gbc_textScrollPane2.gridy = 4;
+        getContentPane().add(textScrollPane2, gbc_textScrollPane2);
+        
+        list.addListSelectionListener(new ListSelectionListener() {
+        	@Override
+        	public void valueChanged(ListSelectionEvent e) {
+        		if(!e.getValueIsAdjusting()) {
+        			JList<DTPaqueteTipo> source = (JList<DTPaqueteTipo>) e.getSource();
+                    DTPaqueteTipo selectedItem = source.getSelectedValue();
+                    
+                    if (selectedItem != null) {
+                    	DTTipo tipoAsociado = selectedItem.getTipo();
+                    	String datosTipo = "Nombre: " + tipoAsociado.getNombre() + "\nDescripcion: " + tipoAsociado.getDescripcion() + "\nExposicion: " + tipoAsociado.getExposicion() + "\nDuracion: " + tipoAsociado.getDuracion() + " días\nCosto: $" + tipoAsociado.getCosto() + "\n Fecha de alta: " + tipoAsociado.getFechaDeAlta().toString();
+                    	areaDatosTipo.setText(datosTipo);
+                    }
+        		}
+        	}
+        });
+        
+        JButton btnCancelar = new JButton("Cancelar");
+        btnCancelar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	areaDatosTipo.setText("");
+            	areaDatos.setText("");
+            	comboBox.setSelectedIndex(-1);
+            	DTPaqueteTipo[] pq = new DTPaqueteTipo[0];
+            	list.setListData(pq);
+                setVisible(false);
+            }
+        });
+        
         GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
         gbc_btnCancelar.insets = new Insets(0, 0, 5, 0);
         gbc_btnCancelar.gridwidth = 2;
@@ -151,5 +220,46 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         getContentPane().add(btnCancelar, gbc_btnCancelar);
 
 	}
-
+	
+	class ComboBoxItem {
+		private DTPaquete instancia;
+		
+		public ComboBoxItem(DTPaquete instancia) {
+			this.instancia = instancia;
+		}
+		
+		public DTPaquete getPaquete() {
+			return instancia;
+		}
+		
+		@Override
+		public String toString() {
+			return instancia.getNombre();
+		}
+	}
+	
+	class ComboBoxModel extends DefaultComboBoxModel<ComboBoxItem> {
+		public ComboBoxModel(DTPaquete[] paqlist) {
+			if (paqlist != null) {
+				for (DTPaquete paquete : paqlist) {
+					ComboBoxItem item = new ComboBoxItem(paquete);
+					addElement(item);
+				}
+			}
+		}
+	}
+	
+	public boolean updateComboBox() {
+		try {
+			DTPaquete[] listaPaq = col.listarPaquetes();
+			ComboBoxModel model = new ComboBoxModel(listaPaq);
+			comboBox.setModel(model);
+            return true;
+		} catch (NoHayPaquetesException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage(), 
+					"Consulta de Paquetes", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+	}
+	
 }

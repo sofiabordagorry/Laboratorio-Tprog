@@ -12,7 +12,12 @@ public class Keyword {
 		return this.nombre;
 	}
 	
-	/*public void setNombre(String nombre) {
+	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}*/
+	}
+	
+	public DTKeyword getDataKeyWord() {
+		DTKeyword dtKW = new DTKeyword(this.getNombre());
+		return dtKW;
+	}
 }

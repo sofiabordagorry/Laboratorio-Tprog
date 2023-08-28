@@ -1,0 +1,9 @@
+Ref; Paquete; Tipos; Cantidad
+PTP1;Básico;Premium;1
+PTP2;Básico;Destacada;1
+PTP3;Básico;Estándar;1
+PTP4;Destacado;Estándar;2
+PTP5;Destacado;Básica;1
+PTP6;Premium;Premium;2
+PTP7;Premium;Estándar;2
+PTP8;Express;Destacada;2

@@ -17,10 +17,10 @@ public class DTOfertaLaboral {
 	private DTTipo dataTipo;
 	private Map<String, DTKeyword> dataKeywords;
 	private List<DTPostulacion> dataPostulaciones;
-	private DTEmpresa dataEmpresa;
-	private DTCompra dataCompra;
+	private String dataEmpresa;//CAMBIADO
+	//private DTCompra dataCompra;
 	
-	public DTOfertaLaboral(String nombre, String descripcion, String ciudad, String departamento, String horario, float remuneracion, LocalDate fechaDeAlta, float costoAsociado, DTTipo dataTipo, Map<String, DTKeyword> dataKeywords, List<DTPostulacion> dataPostulaciones, DTEmpresa dataEmpresa, DTCompra dataCompra) {
+	public DTOfertaLaboral(String nombre, String descripcion, String ciudad, String departamento, String horario, float remuneracion, LocalDate fechaDeAlta, float costoAsociado, DTTipo dataTipo, Map<String, DTKeyword> dataKeywords, List<DTPostulacion> dataPostulaciones, String dataEmpresa) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.ciudad = ciudad;
@@ -33,19 +33,29 @@ public class DTOfertaLaboral {
 		this.dataKeywords = dataKeywords;
 		this.dataPostulaciones = dataPostulaciones;
 		this.dataEmpresa = dataEmpresa;
-		this.dataCompra = dataCompra;
+		//this.dataCompra = dataCompra;
 	}
 	
-	public DTOfertaLaboral(String nombre, String descripcion, String ciudad, String departamento, String horario, float remuneracion) {
+	public DTOfertaLaboral(String nombre, String descripcion, String ciudad, String departamento, String horario, float remuneracion, LocalDate fechaDeAlta, Map<String, DTKeyword> keys) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.ciudad = ciudad;
 		this.departamento = departamento;
 		this.horario = horario;
 		this.remuneracion = remuneracion;
-		this.fechaDeAlta = LocalDate.now();
+		this.fechaDeAlta = fechaDeAlta;
 		this.dataTipo = null;
-		this.dataKeywords = null;
+		this.dataKeywords = keys;
+	}
+	public DTOfertaLaboral(String nombre, String descripcion, String ciudad, String departamento, String horario, float remuneracion, LocalDate fechaDeAlta) {
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.ciudad = ciudad;
+		this.departamento = departamento;
+		this.horario = horario;
+		this.remuneracion = remuneracion;
+		this.fechaDeAlta = fechaDeAlta;
+		this.dataTipo = null;
 	}
 	
 	public String getNombre() {
@@ -60,7 +70,7 @@ public class DTOfertaLaboral {
 		return this.ciudad;
 	}
 
-	public String getDepartamente() {
+	public String getDepartamento() {
 		return this.departamento;
 	}
 	
@@ -92,10 +102,11 @@ public class DTOfertaLaboral {
 		return this.dataPostulaciones;
 	}
 	
-	public DTEmpresa getDTEmpresa() {
+	public String getDTEmpresa() {
 		return this.dataEmpresa;
 	}
-	public DTCompra getDTCompra() {
-		return this.dataCompra;
+	
+	public String toString() {
+		return this.nombre;
 	}
 }

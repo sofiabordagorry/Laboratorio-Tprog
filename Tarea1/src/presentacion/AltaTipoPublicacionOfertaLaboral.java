@@ -8,16 +8,15 @@ import java.awt.GridBagConstraints;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import excepciones.TipoRepetidoException;
+import logica.IOfertaLaboral;
 
-import java.time.format.DateTimeFormatter;
 import com.toedter.calendar.JDateChooser;
-import java.time.LocalDate;
 import java.util.Date;
 
 import java.awt.Insets;
 import javax.swing.JButton;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.util.regex.Pattern;
@@ -27,10 +26,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
-import com.toedter.calendar.JDateChooser;
 
 @SuppressWarnings("serial")
 public class AltaTipoPublicacionOfertaLaboral extends JInternalFrame {
+	
+	private IOfertaLaboral ICol;
 	
 	private JTextField textFieldNombre;
 	private JTextField textFieldExposicion;
@@ -40,7 +40,10 @@ public class AltaTipoPublicacionOfertaLaboral extends JInternalFrame {
 	private JDateChooser dateChooser;
 	
 	
-	public AltaTipoPublicacionOfertaLaboral() {
+	public AltaTipoPublicacionOfertaLaboral(IOfertaLaboral iol) {
+		
+		ICol = iol;
+		
 		getContentPane().setFont(new Font("Tahoma", Font.BOLD, 11));
 		
 		 setResizable(false);
@@ -223,6 +226,7 @@ public class AltaTipoPublicacionOfertaLaboral extends JInternalFrame {
 		textFieldExposicion.setText("");
 		textFieldCosto.setText("");
 		textFieldDuracion.setText("");
+		dateChooser.setDate(null);
 	}
 	
 	protected void cmdAltaTipoPublicacionOfertaLaboral(ActionEvent arg0) {
@@ -231,23 +235,26 @@ public class AltaTipoPublicacionOfertaLaboral extends JInternalFrame {
 		String exposicionT = this.textFieldExposicion.getText();
 		String costoT = this.textFieldCosto.getText();
 		String duracionT = this.textFieldDuracion.getText();
+		Date fechaAlta = dateChooser.getDate();
 		
 		if(checkFormulario()) {
-			//try {
-               // controlTipo.registrarUsuario(nombreU, apellidoU, ciU);
+			try {
+				ICol.ingresarTipo(nombreT, descripcionT, Integer.parseInt(exposicionT), Integer.parseInt(duracionT), Float.parseFloat(costoT), fechaAlta);
 
                 // Muestro éxito de la operación
-                //JOptionPane.showMessageDialog(this, "El Tipo de Publicacion se ha agregado con éxito", "Alta de Tipo de Publicacion de Oferta Laboral",
-                //        JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "El Tipo de Publicacion se ha agregado con éxito", "Alta de Tipo de Publicacion de Oferta Laboral",
+                        JOptionPane.INFORMATION_MESSAGE);
+                
+                // Limpio el internal frame antes de cerrar la ventana
+                limpiarFormulario();
+                setVisible(false);
 
-          //  } catch (TipoYaAgragadoException e) {
+          } catch (TipoRepetidoException e) {
                 // Muestro error de registro
-           //     JOptionPane.showMessageDialog(this, e.getMessage(), "Alta de Tipo de Publicacion de Oferta Laboral", JOptionPane.ERROR_MESSAGE);
-          //  }
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Alta de Tipo de Publicacion de Oferta Laboral", JOptionPane.ERROR_MESSAGE);
+           }
 
-            // Limpio el internal frame antes de cerrar la ventana
-            limpiarFormulario();
-            setVisible(false);
+           
 		}
 	}
 	
@@ -259,7 +266,7 @@ public class AltaTipoPublicacionOfertaLaboral extends JInternalFrame {
 		String costoT = this.textFieldCosto.getText();
 		Date fechaAlta = dateChooser.getDate();
 		Date fechaHoy = new Date();
-		long milisegundosDesdeEnero1900 = -2208988800000L; // Milisegundos desde la época para el 1 de enero de 1900
+		//long milisegundosDesdeEnero1900 = -2208988800000L; // Milisegundos desde la época para el 1 de enero de 1900
 		long milisegundosDesdeEnero2000 = 946684800000L;// Milisegundos desde la época para el 1 de enero de 2000
         Date fechaAntigua = new Date(milisegundosDesdeEnero2000);
 		
@@ -332,9 +339,4 @@ public class AltaTipoPublicacionOfertaLaboral extends JInternalFrame {
         Matcher matcher = pattern.matcher(s);
         return matcher.matches();
     }
-
-
-	
-	
-	
 }

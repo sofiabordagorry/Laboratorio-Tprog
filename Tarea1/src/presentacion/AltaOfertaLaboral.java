@@ -2,12 +2,23 @@ package presentacion;
 
 import javax.swing.JInternalFrame;
 
-//import excepciones.UsuarioRepetidoException;
-//import logica.IControladorUsuario;
+import excepciones.EmpresasNoExistenException;
+import excepciones.TipoPubNoExistenException;
+import excepciones.KeywordsNoExistenException;
+import excepciones.OfertaLaboralRepetidaException;
+
 import logica.DTTipo;
 import logica.DTKeyword;
 import logica.IUsuario;
+import logica.DTEmpresa;
+import logica.DTOfertaLaboral;
+import logica.IOfertaLaboral;
 
+import java.util.Map;
+import java.util.HashMap;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.util.Date;
@@ -33,6 +44,7 @@ import javax.swing.JList;
 public class AltaOfertaLaboral extends JInternalFrame {
 	
 	private IUsuario cu;
+	private IOfertaLaboral col;
 	
 	private JTextField textFieldNombre;
 	private JTextArea textAreaDescripcion;
@@ -40,15 +52,15 @@ public class AltaOfertaLaboral extends JInternalFrame {
 	private JTextField textFieldRemuneracion;
 	private JTextField textFieldCiudad;
 	private JTextField textFieldDepartamento;
-	private JComboBox<?> comboBoxEmpresas;
+	private JComboBox<DTEmpresa> comboBoxEmpresas;
 	private JComboBox<DTTipo> comboBoxTipPubOL;
 	private JList<String> listKeys;
-	private DefaultListModel<String> listModel;
 	private JDateChooser dateChooserFechaDeAlta;
 	
-	public AltaOfertaLaboral() {
-		
-		//cu = icu;
+	public AltaOfertaLaboral(IUsuario IU,IOfertaLaboral IOL) {
+	
+		cu = IU;
+		col = IOL;
 		
 		setResizable(true);
         setIconifiable(true);
@@ -56,13 +68,13 @@ public class AltaOfertaLaboral extends JInternalFrame {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setClosable(true);
         setTitle("Alta de Oferta Laboral");
-        setBounds(10, 10, 574, 539);
+        setBounds(10, 10, 574, 591);
         
         GridBagLayout gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[]{100, 150, 150, 100};
         gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 100, 0, 0, 70, 0, 0, 0, 0, 0, 0, 0};
         gridBagLayout.columnWeights = new double[]{0.0, 1.0, 1.0, 0.0};
-        gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+        gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
         getContentPane().setLayout(gridBagLayout);
         
         JLabel lblNewLabel_3 = new JLabel("Elija e ingrese los siguientes datos: ");
@@ -83,7 +95,7 @@ public class AltaOfertaLaboral extends JInternalFrame {
         gbc_lblNewLabel.gridy = 1;
         getContentPane().add(lblNewLabel, gbc_lblNewLabel);
         
-        comboBoxEmpresas = new JComboBox<Object>();
+        comboBoxEmpresas = new JComboBox<DTEmpresa>();
         GridBagConstraints gbc_comboBoxEmpresas = new GridBagConstraints();
         gbc_comboBoxEmpresas.gridwidth = 4;
         gbc_comboBoxEmpresas.insets = new Insets(0, 10, 8, 10);
@@ -119,22 +131,7 @@ public class AltaOfertaLaboral extends JInternalFrame {
         gbc_lblNewLabel_2.gridy = 5;
         getContentPane().add(lblNewLabel_2, gbc_lblNewLabel_2);
         
-        DTKeyword tKey = new DTKeyword("Programador");
-        listModel = new DefaultListModel<>();
-        listModel.addElement(tKey.getNombre());
-        listModel.addElement(tKey.getNombre());
-        listModel.addElement(tKey.getNombre());
-        listModel.addElement(tKey.getNombre());
-        listModel.addElement(tKey.getNombre());
-        listModel.addElement(tKey.getNombre());
-        listModel.addElement(tKey.getNombre());
-        listModel.addElement(tKey.getNombre());
-        listModel.addElement(tKey.getNombre());
-        listModel.addElement(tKey.getNombre());
-        listModel.addElement(tKey.getNombre());
-        listModel.addElement(tKey.getNombre());
-        
-        listKeys = new JList<>(listModel);
+        listKeys = new JList<>();
         GridBagConstraints gbc_listKeys = new GridBagConstraints();
         gbc_listKeys.gridwidth = 2;
         gbc_listKeys.insets = new Insets(0, 10, 8, 10);
@@ -325,27 +322,36 @@ public class AltaOfertaLaboral extends JInternalFrame {
 	protected void cmdAltaOfertaLaboralActionPerformed(ActionEvent arg0) {
 		
 		String nombreU = this.textFieldNombre.getText();
-		
+		String descripcionU = this.textAreaDescripcion.getText(); 
 		String horarioU = this.textFieldHorario.getText();
 		String remuneracionU = this.textFieldRemuneracion.getText();
 		String ciudadU = this.textFieldCiudad.getText();
 		String departamentoU = this.textFieldDepartamento.getText();
-		//DTEmpresa empresaU = (DTEmpresa) this.comboBoxEmpresas.getSelectedItem();
+		DTEmpresa empresaU = (DTEmpresa) this.comboBoxEmpresas.getSelectedItem();
 		DTTipo tipPubOLU = (DTTipo) this.comboBoxTipPubOL.getSelectedItem();
 		List<String> keysSeleccionadas = listKeys.getSelectedValuesList(); 
+		Date fechaAltaU = dateChooserFechaDeAlta.getDate();
 		
 		
 		if(checkForm()) {
-			/*DTOfertaLaboral datosOL = new DTOfertaLaboral(nombreU, descripcionU, ciudadU, departamentoU, horarioU, Integer.parseInt(remuneracionU));
+			LocalDate fechaDeAltaU = this.convertirDateALocalDate(fechaAltaU);
+			Map<String, DTKeyword> keys = new HashMap<>();
+			for(String k : keysSeleccionadas) 
+				keys.put(k, new DTKeyword(k));
 			
+			DTOfertaLaboral datosOL = new DTOfertaLaboral(nombreU, descripcionU, ciudadU, departamentoU, horarioU, 
+																		Float.parseFloat(remuneracionU), fechaDeAltaU, keys);
 			try {
-				cu.ingresarDatosOL(ciudadU, departamentoU, null, null)
-			} catch(OfertaRepetidaException e) {
+				col.ingresarDatosOL(empresaU.getNickname(), tipPubOLU.getNombre(), datosOL);
+				
+				JOptionPane.showMessageDialog(this, "La Oferta Laboral se ha creado con éxito", "Alta de Oferta Laboral",
+                        JOptionPane.INFORMATION_MESSAGE);
+				limpiarFormulario();
+				setVisible(false);
+			} catch(OfertaLaboralRepetidaException e) {
 				JOptionPane.showMessageDialog(this, e.getMessage(), "Alta de Oferta Laboral", 
 					JOptionPane.ERROR_MESSAGE);
-			}*/
-			limpiarFormulario();
-			setVisible(false);
+			}
 		}
 		
 	}
@@ -358,7 +364,7 @@ public class AltaOfertaLaboral extends JInternalFrame {
 		String remuneracionU = this.textFieldRemuneracion.getText();
 		String ciudadU = this.textFieldCiudad.getText();
 		String departamentoU = this.textFieldDepartamento.getText();
-		//DTEmpresa empresaU = (DTEmpresa) this.comboBoxEmpresas.getSelectedItem();
+		DTEmpresa empresaU = (DTEmpresa) this.comboBoxEmpresas.getSelectedItem();
 		DTTipo tipPubOLU = (DTTipo) this.comboBoxTipPubOL.getSelectedItem();
 		List<String> keysSeleccionadas = listKeys.getSelectedValuesList(); 
 		Date fechaAltaU = dateChooserFechaDeAlta.getDate();
@@ -367,8 +373,7 @@ public class AltaOfertaLaboral extends JInternalFrame {
         Date fechaAntigua = new Date(milisegundosDesdeEnero2000);
 		Date fechaDia = new Date();
 		
-		
-		/*if(empresaU == null) {
+		if(empresaU == null) {
 			JOptionPane.showMessageDialog(this, "Se debe elegir una Empresa", "Alta de Oferta Laboral", 
 					JOptionPane.ERROR_MESSAGE);
 			return false;
@@ -378,7 +383,7 @@ public class AltaOfertaLaboral extends JInternalFrame {
 			JOptionPane.showMessageDialog(this, "Se debe elegir un Tipo de Publicacion", "Alta de Oferta Laboral", 
 					JOptionPane.ERROR_MESSAGE);
 			return false;
-		}*/
+		}
 		
 		if(keysSeleccionadas.isEmpty()) {
 			JOptionPane.showMessageDialog(this, "Se debe elegir al menos una Keyword", "Alta de Oferta Laboral",
@@ -457,6 +462,66 @@ public class AltaOfertaLaboral extends JInternalFrame {
         return matcher.matches();
     }
 	
+	private LocalDate convertirDateALocalDate(Date date) {
+        // Convertir Date a Instant
+        Instant instant = date.toInstant();
+
+        // Obtener ZoneId (Zona horaria)
+        ZoneId defaultZoneId = ZoneId.systemDefault();
+
+        // Crear LocalDate a partir de Instant y ZoneId
+        LocalDate localDate = instant.atZone(defaultZoneId).toLocalDate();
+
+        return localDate;
+    }
+	
+	public boolean cargarEmpresas() {
+		DefaultComboBoxModel<DTEmpresa> model;
+		try {
+			model = new DefaultComboBoxModel<DTEmpresa>(cu.listarEmpresasAOL());
+			this.comboBoxEmpresas.setModel(model);
+		} catch(EmpresasNoExistenException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage(), 
+					"Alta de Oferta Laboral",
+					JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean cargarTiposPubOL() {
+		DefaultComboBoxModel<DTTipo> model;
+		try {
+			model = new DefaultComboBoxModel<DTTipo>(col.listarTipoPublicacionOfertaLaboral());
+			this.comboBoxTipPubOL.setModel(model);
+		} catch(TipoPubNoExistenException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage(), 
+					"Alta de Oferta Laboral",
+					JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean cargarKeywords() {
+		DefaultListModel<String> model;
+		try {
+			model = new DefaultListModel<String>();
+			String[] keys = col.listarKeywords();
+			for(String k: keys) {
+				model.addElement(k);
+			}
+			this.listKeys.setModel(model);
+		} catch(KeywordsNoExistenException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage(), 
+					"Alta de Oferta Laboral",
+					JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		
+		return true;
+	}
+	
 	private void limpiarFormulario() {
 		textFieldNombre.setText("");
 		textAreaDescripcion.setText("");
@@ -464,8 +529,9 @@ public class AltaOfertaLaboral extends JInternalFrame {
 		textFieldCiudad.setText("");
 		textFieldDepartamento.setText("");
 		textFieldRemuneracion.setText("");
-		/*comboBoxEmpresas.removeAllItems();
-		comboBoxTipPubOL.removeAllItems();
-		listModel.removeAllElements();*/
+		comboBoxEmpresas.setSelectedIndex(-1);
+		comboBoxTipPubOL.setSelectedIndex(-1);
+		listKeys.clearSelection();
+		dateChooserFechaDeAlta.setDate(null);
 	}
 }
