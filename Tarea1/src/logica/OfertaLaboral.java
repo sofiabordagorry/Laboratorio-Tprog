@@ -100,15 +100,15 @@ public class OfertaLaboral {
 	}
 
 	public String getEmpresaCreadora(){
-		return this.empresaCreadora.getNombreEmpresa();
+		return this.empresaCreadora.getNickname();
 	}
 	
 	public DTOfertaLaboral getDataOfertaLaboral() {
-		DTTipo dataTipoOL = this.getTipoOL().getDataTipo();
+		DTTipo dataTipoOL = this.getTipoOL().getDataTipo(); 
 		Map<String, DTKeyword> dataKeyWords = new HashMap<>();
 		
 		
-		if (this.getKeywords().isEmpty()) {
+		if (!this.getKeywords().isEmpty()) {
 		for (Map.Entry<String, Keyword> entry : this.getKeywords().entrySet()) {
 			dataKeyWords.put(entry.getKey(), entry.getValue().getDataKeyWord());
 		}

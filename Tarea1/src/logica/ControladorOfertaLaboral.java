@@ -118,7 +118,7 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 		Paquete p = mt.buscarPaquete(datosPaquete.getNombre());
 		
 		if(p != null)
-			throw new PaqueteRepetidoException("Ya existe el Paquete %s".formatted(datosPaquete.getNombre()));
+			throw new PaqueteRepetidoException("Ya existe el Paquete %s".formatted(datosPaquete.getNombre())); 
 		
 		Paquete nuevoPaquete = new Paquete(datosPaquete.getNombre(), datosPaquete.getDescripcion(), datosPaquete.getPeriodoDeValidez(), 
 		datosPaquete.getDescuento(), datosPaquete.getCostoAsociado(), datosPaquete.getFechaDeAlta());
@@ -188,7 +188,7 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 		
 	public DTOfertaLaboral mostrarDatosOfertaLaboral(String OfertaLaboral) {
 		ManejadorOfertaLaboral contOfertaLaboral = ManejadorOfertaLaboral.getInstance();
-		DTOfertaLaboral ofLabRes= contOfertaLaboral.buscarOfertaLaboral(OfertaLaboral).getDataOfertaLaboral();
+		DTOfertaLaboral ofLabRes = contOfertaLaboral.buscarOfertaLaboral(OfertaLaboral).getDataOfertaLaboral();
 		return ofLabRes;
 	}
 

@@ -254,7 +254,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		getContentPane().add(comboBoxOL, gbc_comboBoxOL);
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.addActionListener(new ActionListener() {
+		btnCancelar.addActionListener(new ActionListener() { 
             public void actionPerformed(ActionEvent e) {
                 limpiarFormulario();
                 setVisible(false);
@@ -338,7 +338,7 @@ public class ConsultaUsuario extends JInternalFrame {
     	if(dtselectedOL != null) {
 	    	setVisible(false);
 	    	limpiarFormulario();
-	    	ConsultaOfertaLaboral creConOfLabInternalFrame = new ConsultaOfertaLaboral(iu, iol);
+	    	ConsultaOfertaLaboral creConOfLabInternalFrame = new ConsultaOfertaLaboral(iu, iol); 
 	    	creConOfLabInternalFrame.setLocation(25,25);
 	    	//System.out.println("LLEGUE");
 			frmAdmTrabajo.getContentPane().add(creConOfLabInternalFrame);

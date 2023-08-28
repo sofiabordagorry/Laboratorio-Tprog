@@ -54,7 +54,7 @@ public class ControladorUsuario implements IUsuario {
 		if (empresas != null) {
 			DTEmpresa[] de = new DTEmpresa[empresas.length];
 			Empresa empresa;
-			
+			 
 			for(int i = 0; i < empresas.length; i++) {
 				empresa = empresas[i];
 				de[i] = empresa.getDataEmpresaALO();

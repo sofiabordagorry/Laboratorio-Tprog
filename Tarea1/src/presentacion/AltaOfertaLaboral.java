@@ -322,7 +322,7 @@ public class AltaOfertaLaboral extends JInternalFrame {
 	protected void cmdAltaOfertaLaboralActionPerformed(ActionEvent arg0) {
 		
 		String nombreU = this.textFieldNombre.getText();
-		String descripcionU = this.textAreaDescripcion.getText();
+		String descripcionU = this.textAreaDescripcion.getText(); 
 		String horarioU = this.textFieldHorario.getText();
 		String remuneracionU = this.textFieldRemuneracion.getText();
 		String ciudadU = this.textFieldCiudad.getText();

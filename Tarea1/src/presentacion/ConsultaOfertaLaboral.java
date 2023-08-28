@@ -60,7 +60,7 @@ public class ConsultaOfertaLaboral extends JInternalFrame {
 	private JTextArea textAreaCV;
 	private DefaultTableModel model;
 
-	public ConsultaOfertaLaboral(IUsuario IU, IOfertaLaboral IOL) {
+	public ConsultaOfertaLaboral(IUsuario IU, IOfertaLaboral IOL) { 
 		contUsuario = IU;
 		contOfertaLaboral = IOL;
 		setTitle("Consulta de Oferta Laboral");
@@ -125,7 +125,7 @@ public class ConsultaOfertaLaboral extends JInternalFrame {
 		getContentPane().add(comboBoxOL, gbc_comboBoxOL);
 		
 		JLabel lblNewLabel_2 = new JLabel("Nombre:");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 12)); 
 		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
 		gbc_lblNewLabel_2.anchor = GridBagConstraints.EAST;
 		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
