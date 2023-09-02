@@ -71,6 +71,8 @@ class ControladorOfertaLaboralTests{
 		mol.limpiar();
 		mt = ManejadorTipo.getInstancia();
 		mt.limpiar();
+		mu = ManejadorUsuario.getInstancia();
+		mu.borrarUsuarios();
 	}
 	
 	@Test

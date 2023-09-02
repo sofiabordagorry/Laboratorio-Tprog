@@ -117,6 +117,26 @@ class ControladorUsuarioTests {
 		assertThrows(ExisteUnUsuarioYaRegistradoException.class, ()->{cu.ingresarDatosPostulante(dataP);});
 	}
 	
+	void testRegistrarPostulanteRepetidoMail() {
+		//Data postulante 
+		//String nickname = "NicknamePrueba2";
+		String nickname2 = "NicknamePrueba22";
+		String nombre = "NombrePrueba";
+		String apellido = "ApellidoPrueba";
+		String correo = "correoPrueba2@gmail.com";
+		LocalDate fechaDeNacimiento = LocalDate.of(2023, 1, 1);
+		String nacionalidad = "Uruguay";
+		DTPostulante dataP = new DTPostulante(nickname2, nombre, apellido, correo, fechaDeNacimiento, nacionalidad);
+		
+		try {
+			cu.ingresarDatosPostulante(dataP);
+		} catch(ExisteUnUsuarioYaRegistradoException e) {
+			fail(e.getMessage());
+			e.printStackTrace();
+		}
+		assertThrows(ExisteUnUsuarioYaRegistradoException.class, ()->{cu.ingresarDatosPostulante(dataP);});
+}
+	
 	@Test
 	void testListarPostulanteOK() {
 		String nickname = "NicknamePrueba3";

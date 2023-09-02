@@ -53,7 +53,7 @@ public class ConsultaUsuario extends JInternalFrame {
 
 	public ConsultaUsuario(IUsuario iu, IOfertaLaboral iol, JFrame frmAdmTrabajo) {
         contUsuario = iu;
-		
+	
 		setTitle("Consulta de Usuario");
 		setClosable(true);
 		setBounds(100, 100, 441, 486);

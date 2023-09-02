@@ -59,7 +59,7 @@ public class RegistrarUsuario extends JInternalFrame {
      */
     public RegistrarUsuario(IUsuario iu) {
         // Se inicializa con la interfaz de usuarios
-    	
+    
     	iUsuario = iu;
         // Propiedades del JInternalFrame como dimensión, posición dentro del frame,
         // etc.
@@ -413,6 +413,8 @@ public class RegistrarUsuario extends JInternalFrame {
             		iUsuario.ingresarDatosPostulante(postInfo);
             		JOptionPane.showMessageDialog(this, "Usuario registrado con éxito", "Registrar Usuario",
             				JOptionPane.INFORMATION_MESSAGE);
+            		limpiarFormulario();
+            		setVisible(false);
         		} catch(ExisteUnUsuarioYaRegistradoException e) {
         			JOptionPane.showMessageDialog(this, e.getMessage(), "Registrar Usuario",
         					JOptionPane.ERROR_MESSAGE);
@@ -423,13 +425,13 @@ public class RegistrarUsuario extends JInternalFrame {
         			iUsuario.ingresarDatosEmpresa(empInfo);
             		JOptionPane.showMessageDialog(this, "Usuario registrado con éxito", "Registrar Usuario",
             				JOptionPane.INFORMATION_MESSAGE);
+            		limpiarFormulario();
+                    setVisible(false);
         		} catch(ExisteUnUsuarioYaRegistradoException e) {
         			JOptionPane.showMessageDialog(this, e.getMessage(), "Registrar Usuario",
         					JOptionPane.ERROR_MESSAGE);
         		}
         	}
-        	limpiarFormulario();
-            setVisible(false);
         }
     }
     
@@ -511,7 +513,7 @@ public class RegistrarUsuario extends JInternalFrame {
 	
 		return true;
 	}
-
+    
     // Permite borrar el contenido de un formulario antes de cerrarlo.
     // Recordar que las ventanas no se destruyen, sino que simplemente 
     // se ocultan, por lo que conviene borrar la información para que 
