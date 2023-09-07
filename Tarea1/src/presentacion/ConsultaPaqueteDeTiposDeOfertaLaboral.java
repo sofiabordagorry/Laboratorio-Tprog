@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -40,6 +41,7 @@ import javax.swing.event.ListSelectionListener;
 
 import excepciones.NoExistenPaquetesException;
 import excepciones.NoHayPaquetesException;
+import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
 public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
@@ -47,7 +49,7 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
 	private IOfertaLaboral col;
 	private JComboBox<ComboBoxItem> comboBox;
 	private JList<DTPaqueteTipo> list;
-	private JTextArea areaDatos;
+	private JTextArea descripcionText;
 
 	/**
 	 * Create the frame.
@@ -61,17 +63,17 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
     	// ManejadorTipo
     	ManejadorTipo m = ManejadorTipo.getInstancia();
     	
-        setBounds(10, 40, 780, 441);
-        setResizable(false);
+        setBounds(10, 40, 780, 524);
+        setResizable(true);
         setIconifiable(true);
         setMaximizable(true);
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setClosable(true);    
         GridBagLayout gridBagLayout = new GridBagLayout();
-        gridBagLayout.columnWidths = new int[]{50, 50, 50};
-        gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
+        gridBagLayout.columnWidths = new int[]{50, 207, 99};
+        gridBagLayout.rowHeights = new int[]{36, 0, 29, 39, 28, 29, 28, 27, 29, 29, 30, 0, 29, 25, 27, 28, 0, 0, 0, 0};
         gridBagLayout.columnWeights = new double[]{1.0, 1.0, 0.0};
-        gridBagLayout.rowWeights = new double[]{0, 0, 1.0, 1.0, 1.0, 0, 0, 0.0, Double.MIN_VALUE};
+        gridBagLayout.rowWeights = new double[]{0, 0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0, 0.0, Double.MIN_VALUE};
         getContentPane().setLayout(gridBagLayout);
         
         // LISTAR PAQUETES
@@ -102,8 +104,107 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         gbc_comboBox.gridx = 1;
         gbc_comboBox.gridy = 1;
         getContentPane().add(comboBox, gbc_comboBox);
-        areaDatos = new JTextArea();
         list = new JList<>();
+        
+        JLabel NombrePaq = new JLabel("Nombre: ");
+        GridBagConstraints gbc_NombrePaq = new GridBagConstraints();
+        gbc_NombrePaq.anchor = GridBagConstraints.EAST;
+        gbc_NombrePaq.insets = new Insets(0, 0, 5, 5);
+        gbc_NombrePaq.gridx = 0;
+        gbc_NombrePaq.gridy = 2;
+        getContentPane().add(NombrePaq, gbc_NombrePaq);
+        
+        JLabel nombrePaqText = new JLabel("");
+        GridBagConstraints gbc_nombrePaqText = new GridBagConstraints();
+        gbc_nombrePaqText.anchor = GridBagConstraints.WEST;
+        gbc_nombrePaqText.insets = new Insets(0, 0, 5, 5);
+        gbc_nombrePaqText.gridx = 1;
+        gbc_nombrePaqText.gridy = 2;
+        getContentPane().add(nombrePaqText, gbc_nombrePaqText);
+        
+        JLabel descripcionPaq = new JLabel("Descripcion: ");
+        GridBagConstraints gbc_descripcionPaq = new GridBagConstraints();
+        gbc_descripcionPaq.anchor = GridBagConstraints.EAST;
+        gbc_descripcionPaq.insets = new Insets(0, 0, 5, 5);
+        gbc_descripcionPaq.gridx = 0;
+        gbc_descripcionPaq.gridy = 3;
+        getContentPane().add(descripcionPaq, gbc_descripcionPaq);
+        
+        JTextArea descripcionPaqText = new JTextArea();
+        GridBagConstraints gbc_descripcionPaqText = new GridBagConstraints();
+        gbc_descripcionPaqText.insets = new Insets(0, 0, 5, 5);
+        gbc_descripcionPaqText.fill = GridBagConstraints.BOTH;
+        gbc_descripcionPaqText.gridx = 1;
+        gbc_descripcionPaqText.gridy = 3;
+        descripcionPaqText.setEditable(false);
+        descripcionPaqText.setWrapStyleWord(true); 
+        descripcionPaqText.setLineWrap(true);
+        getContentPane().add(descripcionPaqText, gbc_descripcionPaqText);
+        
+        JLabel periodoDeValidez = new JLabel("Periodo de validez: ");
+        GridBagConstraints gbc_periodoDeValidez = new GridBagConstraints();
+        gbc_periodoDeValidez.anchor = GridBagConstraints.EAST;
+        gbc_periodoDeValidez.insets = new Insets(0, 0, 5, 5);
+        gbc_periodoDeValidez.gridx = 0;
+        gbc_periodoDeValidez.gridy = 4;
+        getContentPane().add(periodoDeValidez, gbc_periodoDeValidez);
+        
+        JLabel periodoDeValidezText = new JLabel("");
+        GridBagConstraints gbc_periodoDeValidezText = new GridBagConstraints();
+        gbc_periodoDeValidezText.anchor = GridBagConstraints.WEST;
+        gbc_periodoDeValidezText.insets = new Insets(0, 0, 5, 5);
+        gbc_periodoDeValidezText.gridx = 1;
+        gbc_periodoDeValidezText.gridy = 4;
+        getContentPane().add(periodoDeValidezText, gbc_periodoDeValidezText);
+        
+        JLabel descuentoPaq = new JLabel("Descuento: ");
+        GridBagConstraints gbc_descuentoPaq = new GridBagConstraints();
+        gbc_descuentoPaq.anchor = GridBagConstraints.EAST;
+        gbc_descuentoPaq.insets = new Insets(0, 0, 5, 5);
+        gbc_descuentoPaq.gridx = 0;
+        gbc_descuentoPaq.gridy = 5;
+        getContentPane().add(descuentoPaq, gbc_descuentoPaq);
+        
+        JLabel descuentoPaqText = new JLabel("");
+        GridBagConstraints gbc_descuentoPaqText = new GridBagConstraints();
+        gbc_descuentoPaqText.anchor = GridBagConstraints.WEST;
+        gbc_descuentoPaqText.insets = new Insets(0, 0, 5, 5);
+        gbc_descuentoPaqText.gridx = 1;
+        gbc_descuentoPaqText.gridy = 5;
+        getContentPane().add(descuentoPaqText, gbc_descuentoPaqText);
+        
+        JLabel costoAsociadoPaq = new JLabel("Costo asociado: ");
+        GridBagConstraints gbc_costoAsociadoPaq = new GridBagConstraints();
+        gbc_costoAsociadoPaq.anchor = GridBagConstraints.EAST;
+        gbc_costoAsociadoPaq.insets = new Insets(0, 0, 5, 5);
+        gbc_costoAsociadoPaq.gridx = 0;
+        gbc_costoAsociadoPaq.gridy = 6;
+        getContentPane().add(costoAsociadoPaq, gbc_costoAsociadoPaq);
+        
+        JLabel costoAsociadoText = new JLabel("");
+        GridBagConstraints gbc_costoAsociadoText = new GridBagConstraints();
+        gbc_costoAsociadoText.anchor = GridBagConstraints.WEST;
+        gbc_costoAsociadoText.insets = new Insets(0, 0, 5, 5);
+        gbc_costoAsociadoText.gridx = 1;
+        gbc_costoAsociadoText.gridy = 6;
+        getContentPane().add(costoAsociadoText, gbc_costoAsociadoText);
+        
+        JLabel fechaDeAltaPaq = new JLabel("Fecha de alta: ");
+        GridBagConstraints gbc_fechaDeAltaPaq = new GridBagConstraints();
+        gbc_fechaDeAltaPaq.anchor = GridBagConstraints.EAST;
+        gbc_fechaDeAltaPaq.insets = new Insets(0, 0, 5, 5);
+        gbc_fechaDeAltaPaq.gridx = 0;
+        gbc_fechaDeAltaPaq.gridy = 7;
+        getContentPane().add(fechaDeAltaPaq, gbc_fechaDeAltaPaq);
+        
+        JLabel fechaDeAltaText = new JLabel("");
+        GridBagConstraints gbc_fechaDeAltaText = new GridBagConstraints();
+        gbc_fechaDeAltaText.anchor = GridBagConstraints.WEST;
+        gbc_fechaDeAltaText.insets = new Insets(0, 0, 5, 5);
+        gbc_fechaDeAltaText.gridx = 1;
+        gbc_fechaDeAltaText.gridy = 7;
+        getContentPane().add(fechaDeAltaText, gbc_fechaDeAltaText);
+        
         comboBox.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -112,36 +213,18 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         		
         		if (selectedItem != null) {
         			DTPaquete p = selectedItem.getPaquete();
-        			String datos = iOL.DatosPaqueteAMostrar(p);
-        			areaDatos.setText(datos);
-        			
+        			// CAMBIAR DATOS
+        			nombrePaqText.setText(p.getNombre());
+        			descripcionPaqText.setText(p.getDescripcion());
+        			periodoDeValidezText.setText(String.valueOf(p.getPeriodoDeValidez()) + " días");
+        			descuentoPaqText.setText(String.valueOf(p.getDescuento()) + " %");
+        			costoAsociadoText.setText("$" + String.valueOf(p.getCostoAsociado()));
+        			fechaDeAltaText.setText(p.getFechaDeAlta().toString());
         			DTPaqueteTipo[] pqt = p.getPaqueteTipos();
         			list.setListData(pqt);
         		}
         	}
         });
-        
-        JLabel lblDatos = new JLabel("Datos:");
-        lblDatos.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        GridBagConstraints gbc_lblDatos = new GridBagConstraints();
-        gbc_lblDatos.anchor = GridBagConstraints.EAST;
-        gbc_lblDatos.insets = new Insets(0, 0, 5, 5);
-        gbc_lblDatos.gridx = 0;
-        gbc_lblDatos.gridy = 2;
-        getContentPane().add(lblDatos, gbc_lblDatos);
-        
-        areaDatos.setMargin(new Insets(15,15,15,15));
-        areaDatos.setEditable(false);
-        areaDatos.setWrapStyleWord(true); // Ajuste de palabras
-        areaDatos.setLineWrap(true); // Ajuste de líneas
-        JScrollPane textScrollPane = new JScrollPane(areaDatos);
-        GridBagConstraints gbc_textScrollPane = new GridBagConstraints();
-        gbc_textScrollPane.gridwidth = 2;
-        gbc_textScrollPane.insets = new Insets(0, 0, 5, 0);
-        gbc_textScrollPane.fill = GridBagConstraints.BOTH;
-        gbc_textScrollPane.gridx = 1;
-        gbc_textScrollPane.gridy = 2;
-        getContentPane().add(textScrollPane, gbc_textScrollPane);
         
         JLabel lblTiposOL = new JLabel("Tipos de publicación de ofertas laborales:");
         lblTiposOL.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -149,39 +232,152 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         gbc_lblTiposOL.anchor = GridBagConstraints.EAST;
         gbc_lblTiposOL.insets = new Insets(0, 0, 5, 5);
         gbc_lblTiposOL.gridx = 0;
-        gbc_lblTiposOL.gridy = 3;
+        gbc_lblTiposOL.gridy = 8;
         getContentPane().add(lblTiposOL, gbc_lblTiposOL);
         
         GridBagConstraints gbc_list = new GridBagConstraints();
-        gbc_list.gridwidth = 3;
+        gbc_list.gridwidth = 2;
         gbc_list.insets = new Insets(0, 0, 5, 0);
         gbc_list.fill = GridBagConstraints.BOTH;
         gbc_list.gridx = 1;
-        gbc_list.gridy = 3;
+        gbc_list.gridy = 8;
         getContentPane().add(list, gbc_list);
         
-        JLabel lblNewLabel = new JLabel("Datos tipo:");
-        lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-        gbc_lblNewLabel.anchor = GridBagConstraints.EAST;
-        gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-        gbc_lblNewLabel.gridx = 0;
-        gbc_lblNewLabel.gridy = 4;
-        getContentPane().add(lblNewLabel, gbc_lblNewLabel);
+        JLabel lblNombre = new JLabel("Nombre: ");
+        GridBagConstraints gbc_lblNombre = new GridBagConstraints();
+        gbc_lblNombre.anchor = GridBagConstraints.EAST;
+        gbc_lblNombre.insets = new Insets(0, 0, 5, 5);
+        gbc_lblNombre.gridx = 0;
+        gbc_lblNombre.gridy = 10;
+        getContentPane().add(lblNombre, gbc_lblNombre);
         
-        JTextArea areaDatosTipo = new JTextArea();
-        areaDatosTipo.setMargin(new Insets(15,15,15,15));
-        areaDatosTipo.setEditable(false);
-        areaDatosTipo.setWrapStyleWord(true); // Ajuste de palabras
-        areaDatosTipo.setLineWrap(true); // Ajuste de líneas
-        JScrollPane textScrollPane2 = new JScrollPane(areaDatosTipo);
-        GridBagConstraints gbc_textScrollPane2 = new GridBagConstraints();
-        gbc_textScrollPane2.gridwidth = 2;
-        gbc_textScrollPane2.insets = new Insets(0, 0, 5, 0);
-        gbc_textScrollPane2.fill = GridBagConstraints.BOTH;
-        gbc_textScrollPane2.gridx = 1;
-        gbc_textScrollPane2.gridy = 4;
-        getContentPane().add(textScrollPane2, gbc_textScrollPane2);
+        JLabel lblNameText = new JLabel("");
+        GridBagConstraints gbc_lblNameText = new GridBagConstraints();
+        gbc_lblNameText.anchor = GridBagConstraints.WEST;
+        gbc_lblNameText.gridwidth = 2;
+        gbc_lblNameText.insets = new Insets(0, 0, 5, 0);
+        gbc_lblNameText.gridx = 1;
+        gbc_lblNameText.gridy = 10;
+        getContentPane().add(lblNameText, gbc_lblNameText);
+        
+        JLabel lblDescripcion = new JLabel("Descripcion: ");
+        GridBagConstraints gbc_lblDescripcion = new GridBagConstraints();
+        gbc_lblDescripcion.anchor = GridBagConstraints.EAST;
+        gbc_lblDescripcion.insets = new Insets(0, 0, 5, 5);
+        gbc_lblDescripcion.gridx = 0;
+        gbc_lblDescripcion.gridy = 11;
+        getContentPane().add(lblDescripcion, gbc_lblDescripcion);
+        
+        descripcionText = new JTextArea();
+        GridBagConstraints gbc_descripcionText = new GridBagConstraints();
+        gbc_descripcionText.gridwidth = 2;
+        gbc_descripcionText.insets = new Insets(0, 0, 5, 0);
+        gbc_descripcionText.fill = GridBagConstraints.HORIZONTAL;
+        gbc_descripcionText.gridx = 1;
+        gbc_descripcionText.gridy = 11;
+        getContentPane().add(descripcionText, gbc_descripcionText);
+        descripcionText.setWrapStyleWord(true); 
+        descripcionText.setLineWrap(true);
+        descripcionText.setEditable(false);
+        descripcionText.setColumns(10);
+        
+        JLabel lblExposicion = new JLabel("Exposicion: ");
+        GridBagConstraints gbc_lblExposicion = new GridBagConstraints();
+        gbc_lblExposicion.anchor = GridBagConstraints.EAST;
+        gbc_lblExposicion.insets = new Insets(0, 0, 5, 5);
+        gbc_lblExposicion.gridx = 0;
+        gbc_lblExposicion.gridy = 12;
+        getContentPane().add(lblExposicion, gbc_lblExposicion);
+        
+        JLabel exposicionText = new JLabel("");
+        GridBagConstraints gbc_exposicionText = new GridBagConstraints();
+        gbc_exposicionText.anchor = GridBagConstraints.WEST;
+        gbc_exposicionText.gridwidth = 2;
+        gbc_exposicionText.insets = new Insets(0, 0, 5, 0);
+        gbc_exposicionText.gridx = 1;
+        gbc_exposicionText.gridy = 12;
+        getContentPane().add(exposicionText, gbc_exposicionText);
+        
+        JLabel lblDuracion = new JLabel("Duracion: ");
+        GridBagConstraints gbc_lblDuracion = new GridBagConstraints();
+        gbc_lblDuracion.anchor = GridBagConstraints.EAST;
+        gbc_lblDuracion.insets = new Insets(0, 0, 5, 5);
+        gbc_lblDuracion.gridx = 0;
+        gbc_lblDuracion.gridy = 13;
+        getContentPane().add(lblDuracion, gbc_lblDuracion);
+        
+        JLabel duracionText = new JLabel("");
+        GridBagConstraints gbc_duracionText = new GridBagConstraints();
+        gbc_duracionText.anchor = GridBagConstraints.WEST;
+        gbc_duracionText.gridwidth = 2;
+        gbc_duracionText.insets = new Insets(0, 0, 5, 0);
+        gbc_duracionText.gridx = 1;
+        gbc_duracionText.gridy = 13;
+        getContentPane().add(duracionText, gbc_duracionText);
+        
+        JLabel lblFecha = new JLabel("Fecha de alta: ");
+        GridBagConstraints gbc_lblFecha = new GridBagConstraints();
+        gbc_lblFecha.anchor = GridBagConstraints.EAST;
+        gbc_lblFecha.insets = new Insets(0, 0, 5, 5);
+        gbc_lblFecha.gridx = 0;
+        gbc_lblFecha.gridy = 14;
+        getContentPane().add(lblFecha, gbc_lblFecha);
+        
+        JLabel fechaText = new JLabel("");
+        GridBagConstraints gbc_fechaText = new GridBagConstraints();
+        gbc_fechaText.anchor = GridBagConstraints.WEST;
+        gbc_fechaText.gridwidth = 2;
+        gbc_fechaText.insets = new Insets(0, 0, 5, 0);
+        gbc_fechaText.gridx = 1;
+        gbc_fechaText.gridy = 14;
+        getContentPane().add(fechaText, gbc_fechaText);
+        
+        JLabel lblCosto = new JLabel("Costo: ");
+        GridBagConstraints gbc_lblCosto = new GridBagConstraints();
+        gbc_lblCosto.anchor = GridBagConstraints.EAST;
+        gbc_lblCosto.insets = new Insets(0, 0, 5, 5);
+        gbc_lblCosto.gridx = 0;
+        gbc_lblCosto.gridy = 15;
+        getContentPane().add(lblCosto, gbc_lblCosto);
+        
+        JLabel costoText = new JLabel("");
+        GridBagConstraints gbc_costoText = new GridBagConstraints();
+        gbc_costoText.anchor = GridBagConstraints.WEST;
+        gbc_costoText.gridwidth = 2;
+        gbc_costoText.insets = new Insets(0, 0, 5, 0);
+        gbc_costoText.gridx = 1;
+        gbc_costoText.gridy = 15;
+        getContentPane().add(costoText, gbc_costoText);
+        
+        JButton btnCancelar = new JButton("Cancelar");
+        btnCancelar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+    			nombrePaqText.setText("");
+    			descripcionPaqText.setText("");
+    			periodoDeValidezText.setText("");
+    			descuentoPaqText.setText("");
+    			costoAsociadoText.setText("");
+    			fechaDeAltaText.setText("");
+            	lblNameText.setText("");
+            	descripcionText.setText("");
+            	exposicionText.setText("");
+            	duracionText.setText("");
+            	fechaText.setText("");
+            	costoText.setText("");
+            	comboBox.setSelectedIndex(-1);
+            	DTPaqueteTipo[] pqt = new DTPaqueteTipo[0];
+            	list.setListData(pqt);
+            	setVisible(false);
+            }
+        });
+        
+        GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
+        gbc_btnCancelar.insets = new Insets(0, 0, 5, 0);
+        gbc_btnCancelar.gridwidth = 2;
+        gbc_btnCancelar.fill = GridBagConstraints.BOTH;
+        gbc_btnCancelar.gridx = 1;
+        gbc_btnCancelar.gridy = 16;
+        getContentPane().add(btnCancelar, gbc_btnCancelar);
         
         list.addListSelectionListener(new ListSelectionListener() {
         	@Override
@@ -192,32 +388,16 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
                     
                     if (selectedItem != null) {
                     	DTTipo tipoAsociado = selectedItem.getTipo();
-                    	String datosTipo = "Nombre: " + tipoAsociado.getNombre() + "\nDescripcion: " + tipoAsociado.getDescripcion() + "\nExposicion: " + tipoAsociado.getExposicion() + "\nDuracion: " + tipoAsociado.getDuracion() + " días\nCosto: $" + tipoAsociado.getCosto() + "\n Fecha de alta: " + tipoAsociado.getFechaDeAlta().toString();
-                    	areaDatosTipo.setText(datosTipo);
+                    	lblNameText.setText(tipoAsociado.getNombre());
+                    	descripcionText.setText(tipoAsociado.getDescripcion());
+                    	exposicionText.setText(String.valueOf(tipoAsociado.getExposicion()));
+                    	duracionText.setText(String.valueOf(tipoAsociado.getDuracion()) + " días");
+                    	fechaText.setText(tipoAsociado.getFechaDeAlta().toString());
+                    	costoText.setText("$" + String.valueOf(tipoAsociado.getCosto()));
                     }
         		}
         	}
         });
-        
-        JButton btnCancelar = new JButton("Cancelar");
-        btnCancelar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            	areaDatosTipo.setText("");
-            	areaDatos.setText("");
-            	comboBox.setSelectedIndex(-1);
-            	DTPaqueteTipo[] pq = new DTPaqueteTipo[0];
-            	list.setListData(pq);
-                setVisible(false);
-            }
-        });
-        
-        GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
-        gbc_btnCancelar.insets = new Insets(0, 0, 5, 0);
-        gbc_btnCancelar.gridwidth = 2;
-        gbc_btnCancelar.fill = GridBagConstraints.BOTH;
-        gbc_btnCancelar.gridx = 1;
-        gbc_btnCancelar.gridy = 5;
-        getContentPane().add(btnCancelar, gbc_btnCancelar);
 
 	}
 	

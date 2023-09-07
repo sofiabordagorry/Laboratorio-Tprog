@@ -61,6 +61,10 @@ public class ManejadorUsuario {
 	public Map<String, Postulante> getMapPostulantes() {
 		return this.mapPostulantes;
 	}
+	
+	public Map<String, Empresa> getMapEmpresas() {
+		return this.mapEmpresas;
+	}
 
 	
 	public Usuario buscarUsuario(String nickname) {//BUSCAR UN USUARIO
