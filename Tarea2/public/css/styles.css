@@ -58,6 +58,10 @@ nav {
     padding: 5%;
 }
 
+#web-content {
+    height: 100%;
+}
+
 .ofertaLaboral {
     margin-top: 5px;
 }
