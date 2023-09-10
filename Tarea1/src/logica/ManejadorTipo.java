@@ -98,5 +98,9 @@ public class ManejadorTipo {
 		mapTipos.clear();
 		mapPaquetes.clear();
 	}
+
+	public Map<String, Tipo> getMapTipos() {
+		return mapTipos;
+	}
 	
 }

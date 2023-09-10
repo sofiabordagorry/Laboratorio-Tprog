@@ -242,13 +242,13 @@ public class CargarDatos {
 				}
 				
 				String[] parts = line.split(";");
-				Empresa[] empresas = mu.getEmpresas();
-				Tipo[] tipos = m.getTipos();
+				Map<String, Empresa> empresas = mu.getMapEmpresas();
+				Map<String, Tipo> tipos = m.getMapTipos();
 				Map<String, Keyword> keywords = new HashMap<>();
 				
-				OfertaLaboral of = new OfertaLaboral(parts[1], parts[2], parts[4], parts[3], parts[5], Float.parseFloat(parts[6]), LocalDate.parse(parts[9], formatter), 0, tipos[Integer.parseInt(parts[8])], keywords, empresas[Integer.parseInt(parts[7]) - 10]);
+				OfertaLaboral of = new OfertaLaboral(parts[1], parts[2], parts[4], parts[3], parts[5], Float.parseFloat(parts[6]), LocalDate.parse(parts[9], formatter), 0, tipos.get(parts[8]), keywords, empresas.get(parts[7]));
 				mof.agregarOfertaLaboral(of);
-				empresas[Integer.parseInt(parts[7]) - 10].agregarOfertaLaboral(of);
+				empresas.get(parts[7]).agregarOfertaLaboral(of);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
