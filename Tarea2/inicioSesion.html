@@ -11,10 +11,9 @@
 </head>
 <body>
     <!-- Barra de navegación -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="./index.html">
-            <img src="./public/files/NicePng_minecraft-stick-png_3575714.png" width="40" height="40" />
-            Trabajo.uy
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-fixed-top">
+        <a class="navbar-brand" href="./indexVisitante.html">
+            <img src="./public/files/logo.png" width="150" height="auto" />
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -22,12 +21,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Iniciar sesión</a>
+                <a class="nav-link" href="./inicioSesion.html"><i class="fa-solid fa-right-to-bracket" style="color: #dfe2e7;"></i> Iniciar sesión</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Registrar Usuario</a>
+                <a class="nav-link" href="#"><i class="fa-solid fa-user-plus" style="color: #dfe2e7;"></i> Registrar Usuario</a>
             </li>
-        </ul>
+            </ul>
+        </div>
     </nav>
     <div class="container-fluid" id="web-content">
         <div class="row justify-content-md-center">
@@ -36,12 +36,12 @@
                     <form id="loginForm">
                         <h3>Ingrese a su cuenta</h3>
                         <div class="form-group">
-                          <label for="InputEmail">Nickname o e-mail</label>
-                          <input type="email" class="form-control" id="InputEmailLogin" aria-describedby="emailHelp" placeholder="Ingresar nickname o e-mail">
+                          <label for="InputNicknameEmail">Nickname o e-mail</label>
+                          <input type="nickname" class="form-control" id="InputNicknameEmailLogin" placeholder="Ingresar nickname o e-mail" required>
                         </div>
                         <div class="form-group">
                           <label for="InputPassword">Contraseña</label>
-                          <input type="password" class="form-control" id="InputPasswordLogin" placeholder="Contraseña">
+                          <input type="password" class="form-control" id="InputPasswordLogin" placeholder="Contraseña" required>
                         </div>
                         <button type="submit" class="btn">Iniciar sesión</button>
                       </form>
@@ -56,5 +56,6 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/a3b19d1f5c.js" crossorigin="anonymous"></script>
 </body>
 </html>

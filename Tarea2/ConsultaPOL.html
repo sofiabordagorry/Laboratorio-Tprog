@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Bootstrap, NO BORRAR-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./public/css/styles.css" />
+    <link rel="stylesheet" href="./public/css/consultaOfertaLaboral.css"/>
+    <title>Trabajo.uy</title>
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-fixed-top">
+        <a class="navbar-brand" href="./index.html">
+            <img src="./public/files/NicePng_minecraft-stick-png_3575714.png" width="40" height="40" />
+            Trabajo.uy
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Iniciar sesión</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Registrar Usuario</a>
+            </li>
+            </ul>
+        </div>
+        </nav>
+        <div class="container-fluid" id="web-content">
+            <div class="row justify-content-md-center">
+                <!-- Barra de navegación de la izquierda / keywords -->
+                <div class="col-md-3 col-sm-12" id="sidebar">
+                    <div class="list-group m-2">
+                        <div class="header d-flex" data-toggle="collapse" aria-controls="actionList" href="#actionList">
+                          <h2 class="list-group-item-heading mr-auto p-2">Mi Perfil</h2>
+                          <img class="p-2" width="50" height="50" src="./public/files/collapse.png" />
+                        </div>
+                        <div id="actionList" class="collapse">
+                          <a class="list-group-item list-group-item-action">Acción</a>
+                        </div>
+                    </div>
+                    <div class="list-group m-2">
+                      <div class="header d-flex" data-toggle="collapse" aria-controls="keywordList" href="#keywordList">
+                          <h2 class="list-group-item-heading mr-auto p-2">Keywords</h2>
+                          <img class="p-2" width="50" height="50" src="./public/files/collapse.png" />
+                      </div>
+                      <div id="keywordList" class="collapse">
+                          <a class="list-group-item list-group-item-action">Tiempo completo</a>
+                          <a class="list-group-item list-group-item-action">Medio tiempo</a>
+                          <a class="list-group-item list-group-item-action">Remoto</a>
+                          <a class="list-group-item list-group-item-action">Freelance</a>
+                          <a class="list-group-item list-group-item-action">Temporal</a>
+                          <a class="list-group-item list-group-item-action">Permanente</a>
+                          <a class="list-group-item list-group-item-action">Computación</a>
+                          <a class="list-group-item list-group-item-action">Administración</a>
+                          <a class="list-group-item list-group-item-action">Logística</a>
+                          <a class="list-group-item list-group-item-action">Contabilidad</a>
+                      </div>
+                  </div>
+                </div>
+                <div class="col-md-9 col-sm-12" id="main-content">
+                    <!-- ACÁ VA TODO EL CONTENIDO ESPECÍFICO DE LA PÁGINA 
+                    EJEMPLO:-->
+                    <div class="container-fluid" id="consultaOferta">
+                        <div class="row">
+                            <div class="col-md-8 col-sm-12" id="ofertaInfo">
+                                <div>
+                                    <img class="imagenOferta mx-auto d-block p-2" src="https://assets.herbalifenutrition.com/content/dam/regional/samcam/es_uy/sites/herbalife_nutrition/web_graphic/billboards/2021/11-Nov/dialy-nutrition-1155x515.jpg" />
+                                    <h2 class="text-center p-2">Vendedor de Herbalife</h2>
+                                    <p class="text-center p-2">Si te gustaría ser tu propio jefe, emprender una nueva aventura, aprovechar tu tiempo libre y además generar unos ingresos extras inicia tu propio negocio independiente con Herbalife Nutrition. Siéntete satisfecho ayudando a otros a sentirse más saludables y lograr sus objetivos.</p>
+                                </div>
+                                <div class="p-4">
+                                    <p><i class="fa-solid fa-money-bills" style="color: #000000;"></i> <b>Remuneración:</b> 25000000 pesos uruguayos</p>
+                                    <p><i class="fa-solid fa-clock"></i> <b>Horario:</b> 06:00-23:00</p>
+                                    <p><i class="fa-solid fa-location-crosshairs"></i> <b>Departamento: </b> Cualquiera</p>
+                                    <p><i class="fa-solid fa-location-crosshairs"></i> <b>Ciudad: </b> Cualquiera</p>
+                                    <p><i class="fa-solid fa-calendar-days"></i> <b>Fecha de alta: </b> 01/01/2023</p>
+                                    <p><i class="fa-solid fa-dollar-sign"></i> <b>Costo: </b> $10000</p>
+                                    <p><i class="fa-solid fa-key"></i> <b>Keywords:</b>
+                                    Remoto, Freelance, Temporal, Permanente</p>
+                                </div>
+                            </div>
+                            <div class="col col-md-4 col-sm-12" id="postulacionesPaquetesCol">
+                                <div id="postulaciones">
+                                    <h2>Postulaciones</h2>
+                                    <div class="postulante">
+                                        <img width="100" height="100" class="img-fluid img-thumbnail" src="./public/files/jimh.jpg" />
+                                        <a href="./PostulacionHervyJim.html">Jim Halpert</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <footer class="container-fluid">
+        TPGR18
+    </footer>
+    <!-- Scripts que usa Bootstrap, NO BORRAR -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/a3b19d1f5c.js" crossorigin="anonymous"></script>
+</body>
+</html>

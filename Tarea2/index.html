@@ -34,22 +34,32 @@
             <!-- Barra de navegación de la izquierda / keywords -->
             <div class="col col-md-4 col-sm-12" id="sidebar">
                 <div class="list-group m-2">
-                    <h2 class="list-group-item-heading">Mi Perfil</h2>
-                    <a class="list-group-item list-group-item-action">Acción</a>
+                    <div class="header d-flex" data-toggle="collapse" aria-controls="actionList" href="#actionList">
+                      <h2 class="list-group-item-heading mr-auto p-2">Mi Perfil</h2>
+                      <img class="p-2" width="50" height="50" src="./public/files/collapse.png" />
+                    </div>
+                    <div id="actionList" class="collapse">
+                      <a class="list-group-item list-group-item-action">Acción</a>
+                    </div>
                 </div>
                 <div class="list-group m-2">
-                    <h2 class="list-group-item-heading">Keywords</h2>
-                    <a class="list-group-item list-group-item-action">Tiempo completo</a>
-                    <a class="list-group-item list-group-item-action">Medio tiempo</a>
-                    <a class="list-group-item list-group-item-action">Remoto</a>
-                    <a class="list-group-item list-group-item-action">Freelance</a>
-                    <a class="list-group-item list-group-item-action">Temporal</a>
-                    <a class="list-group-item list-group-item-action">Permanente</a>
-                    <a class="list-group-item list-group-item-action">Computación</a>
-                    <a class="list-group-item list-group-item-action">Administración</a>
-                    <a class="list-group-item list-group-item-action">Logística</a>
-                    <a class="list-group-item list-group-item-action">Contabilidad</a>
-                </div>
+                  <div class="header d-flex" data-toggle="collapse" aria-controls="keywordList" href="#keywordList">
+                      <h2 class="list-group-item-heading mr-auto p-2">Keywords</h2>
+                      <img class="p-2" width="50" height="50" src="./public/files/collapse.png" />
+                  </div>
+                  <div id="keywordList" class="collapse">
+                      <a class="list-group-item list-group-item-action">Tiempo completo</a>
+                      <a class="list-group-item list-group-item-action">Medio tiempo</a>
+                      <a class="list-group-item list-group-item-action">Remoto</a>
+                      <a class="list-group-item list-group-item-action">Freelance</a>
+                      <a class="list-group-item list-group-item-action">Temporal</a>
+                      <a class="list-group-item list-group-item-action">Permanente</a>
+                      <a class="list-group-item list-group-item-action">Computación</a>
+                      <a class="list-group-item list-group-item-action">Administración</a>
+                      <a class="list-group-item list-group-item-action">Logística</a>
+                      <a class="list-group-item list-group-item-action">Contabilidad</a>
+                  </div>
+              </div>
             </div>
             <div class="col col-md-8 col-sm-12" id="main-content">
                 <!-- ACÁ VA TODO EL CONTENIDO ESPECÍFICO DE LA PÁGINA 
@@ -64,7 +74,7 @@
                             <div class="card-body">
                               <h5 class="card-title">Vendedor de herbalife</h5>
                               <p class="card-text">Si te gustaría ser tu propio jefe, emprender una nueva aventura, aprovechar tu tiempo libre y además generar unos ingresos extras inicia tu propio negocio independiente con Herbalife Nutrition. Siéntete satisfecho ayudando a otros a sentirse más saludables y lograr sus objetivos.</p>
-                              <a href="#">Leer más...</a>
+                              <a href="./consultaOfertaLaboralHerbalife.html">Leer más...</a>
                             </div>
                           </div>
                         </div>
