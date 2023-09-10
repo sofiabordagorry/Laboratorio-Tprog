@@ -191,6 +191,12 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 		DTOfertaLaboral ofLabRes = contOfertaLaboral.buscarOfertaLaboral(OfertaLaboral).getDataOfertaLaboral();
 		return ofLabRes;
 	}
+	
+	public void AcepRechOL(EstadoOL e, String OL) {
+		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
+		OfertaLaboral oferta = mol.buscarOfertaLaboral(OL);
+		oferta.setEstado(e);
+	}
 
 	
 	
