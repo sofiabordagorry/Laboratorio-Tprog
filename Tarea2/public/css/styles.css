@@ -51,11 +51,11 @@ nav {
 }
 
 #sidebar {
-    padding: 5%;
+    padding: 1%;
 }
 
 #main-content {
-    padding: 5%;
+    padding: 1%;
 }
 
 #web-content {
@@ -74,17 +74,14 @@ nav {
     user-select: none; /* Standard syntax */
 }
 
-.list-group-item-heading {
-    background-color: #393D3F;
-    margin: 0;
-    color:#C6C5B9;
-    border-bottom: 2px solid black;
-    font-size: 1.5rem;
-    padding: 15px;
-}
-
 .list-group-item:hover, .list-group-item:active {
     background-color: #7fb2c0;
+}
+
+.list-group-item-heading {
+    margin: 0;
+    color:#C6C5B9;
+    font-size: 1.5rem;
 }
 
 .card {
@@ -100,4 +97,20 @@ nav {
 
 .card-title {
     font-family: 'Fjalla One', sans-serif;
+}
+
+.header {
+    background-color: #393D3F;
+    margin: 0;
+    color:#C6C5B9;
+    border-bottom: 2px solid black;
+    font-size: 1.5rem;
+    padding: 15px;
+}
+
+.ofertaLaboral {
+    background-color: rgba(255, 255, 255, 0.795);
+    border-radius: 2em;
+    padding: 15px;
+    margin: 10px;
 }
