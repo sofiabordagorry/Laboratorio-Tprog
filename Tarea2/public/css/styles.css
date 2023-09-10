@@ -97,3 +97,7 @@ nav {
 .btn > a {
     color: white;
 }
+
+#pagNav {
+    background-color: rgba(63, 57, 57, 0);
+}
