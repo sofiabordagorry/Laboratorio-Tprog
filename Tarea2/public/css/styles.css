@@ -101,8 +101,3 @@ nav {
 #pagNav {
     background-color: rgba(63, 57, 57, 0);
 }
-
-.active {
-    background-color: #73a4b1 !important;
-    border: none;
-}

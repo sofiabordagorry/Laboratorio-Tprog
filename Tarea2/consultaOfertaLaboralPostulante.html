@@ -11,23 +11,23 @@
 </head>
 <body>
     <!-- Barra de navegación -->
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-fixed-top">
-        <a class="navbar-brand" href="./indexEmpresa.html">
-            <img src="./public/files/logo.png" width="150" height="auto" />
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa-solid fa-user" style="color: #dfe2e7;"></i> Jim Halpert</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#"><i class="fa-solid fa-right-from-bracket fa-flip-horizontal"></i> Cerrar sesión</a>
-            </li>
-        </div>
-    </nav>
+     <nav class="navbar navbar-expand-lg navbar-dark navbar-fixed-top">
+      <a class="navbar-brand" href="./indexPostulante.html">
+          <img src="./public/files/logo.png" width="150" height="auto" />
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+              <a class="nav-link" href="#"><i class="fa-solid fa-user" style="color: #dfe2e7;"></i> Jim Halpert</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="fa-solid fa-right-from-bracket fa-flip-horizontal"></i> Cerrar sesión</a>
+          </li>
+      </div>
+  </nav>
         <div class="container-fluid" id="web-content">
             <div class="row justify-content-md-center">
                 <!-- Barra de navegación de la izquierda / keywords -->
@@ -65,7 +65,34 @@
                           <a class="list-group-item list-group-item-action">Logística</a>
                           <a class="list-group-item list-group-item-action">Contabilidad</a>
                       </div>
+                    </a>
+                    <div id="actionList" class="collapse">
+                      <a class="list-group-item list-group-item-action" href="#"><i class="fa-solid fa-circle-user"></i> <b>Mi Perfil</b></a>
+                      <a class="list-group-item list-group-item-action" href="#"><i class="fa-solid fa-folder"></i> Mis Postulaciones</a>
+                      <a class="list-group-item list-group-item-action" href="#"><i class="fa-solid fa-users"></i> Busqueda de usuarios</a>
+                      <a class="list-group-item list-group-item-action" href="#"><i class="fa-solid fa-square-poll-vertical"></i> Consultar tipos</a>
+                    </div>
+                </div>
+                <div class="list-group m-2">
+                  <a href="#">
+                    <div class="header d-flex" data-toggle="collapse" aria-controls="keywordList" href="#keywordList">
+                        <h2 class="list-group-item-heading mr-auto p-2">Keywords</h2>
+                        <img class="p-2" width="50" height="50" src="./public/files/collapse.png" />
+                    </div>
+                  </a>
+                  <div id="keywordList" class="collapse">
+                      <a class="list-group-item list-group-item-action">Tiempo completo</a>
+                      <a class="list-group-item list-group-item-action">Medio tiempo</a>
+                      <a class="list-group-item list-group-item-action">Remoto</a>
+                      <a class="list-group-item list-group-item-action">Freelance</a>
+                      <a class="list-group-item list-group-item-action">Temporal</a>
+                      <a class="list-group-item list-group-item-action">Permanente</a>
+                      <a class="list-group-item list-group-item-action">Computación</a>
+                      <a class="list-group-item list-group-item-action">Administración</a>
+                      <a class="list-group-item list-group-item-action">Logística</a>
+                      <a class="list-group-item list-group-item-action">Contabilidad</a>
                   </div>
+              </div>
                 </div>
                 <div class="col-md-9 col-sm-12" id="main-content">
                     <!-- ACÁ VA TODO EL CONTENIDO ESPECÍFICO DE LA PÁGINA 
@@ -95,7 +122,7 @@
                                     <h2>Postulacion</h2>
                                     <div class="postulante">
                                         <img width="100" height="100" class="img-fluid img-thumbnail" src="./public/files/jimh.jpg" />
-                                        <a href="#">Mi Postulación</a>
+                                        <a href="./PostulacionJimYHerv.html">Mi Postulación</a>
                                     </div>
                                 </div>
                             </div>

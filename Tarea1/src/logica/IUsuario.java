@@ -28,6 +28,7 @@ public interface IUsuario {
 	public abstract DTEmpresa[] listarEmpresasAOL() throws EmpresasNoExistenException;
 	public abstract DTPostulante[] listarPostulantes() throws PostulantesNoExistenException;
 	public abstract DTOfertaLaboral[] listarOfertasLaboralesVigentes(String empresa) throws EmpresaSinOfertasException;
+	public abstract DTOfertaLaboral[] listarOfertasLaboralesIngresadas(String empresa) throws EmpresaSinOfertasException;
 	public abstract void ingresarPostulacion(String CVReducido, String motivacion, LocalDate fecha, String empresa, String oferta, String postulante) throws YaSePostuloException;
 }
 

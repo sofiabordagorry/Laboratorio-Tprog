@@ -42,6 +42,7 @@ import logica.DTPaqueteTipo;
 import logica.DTPostulacion;
 import logica.DTTipo;
 import logica.Empresa;
+import logica.EstadoOL;
 import logica.DTEmpresa;
 import logica.DTKeyword;
 import logica.ManejadorOfertaLaboral;
@@ -338,7 +339,7 @@ class ControladorOfertaLaboralTests{
 			controladorUsuario.ingresarDatosEmpresa(dte); 
 			mt = ManejadorTipo.getInstancia();
 			Tipo tOL = mt.buscarTipo(nombreTipo);
-			DTOfertaLaboral ol = new DTOfertaLaboral(nombre, descripcionOL, ciudad, departamento, horario, remuneracion, fechaDeAlta, costoAsociado, dataTipo, dataKeywords, dataPostulaciones, empresa);
+			DTOfertaLaboral ol = new DTOfertaLaboral(nombre, descripcionOL, ciudad, departamento, horario, remuneracion, fechaDeAlta, costoAsociado, dataTipo, dataKeywords, dataPostulaciones, empresa, EstadoOL.Aceptada);
 			controladorOfertaLaboral.ingresarDatosOL(empresa,  nombreTipo, ol);
 			mol = ManejadorOfertaLaboral.getInstance();
 			OfertaLaboral Ol = mol.buscarOfertaLaboral(nombre);
@@ -455,7 +456,7 @@ class ControladorOfertaLaboralTests{
 			controladorUsuario.ingresarDatosEmpresa(dte); 
 			mt = ManejadorTipo.getInstancia();
 			Tipo tOL = mt.buscarTipo(nombreTipo);
-			DTOfertaLaboral ol = new DTOfertaLaboral(nombre, descripcionOL, ciudad, departamento, horario, remuneracion, fechaDeAlta, costoAsociado, dataTipo, dataKeywords, dataPostulaciones, empresa);
+			DTOfertaLaboral ol = new DTOfertaLaboral(nombre, descripcionOL, ciudad, departamento, horario, remuneracion, fechaDeAlta, costoAsociado, dataTipo, dataKeywords, dataPostulaciones, empresa, EstadoOL.Aceptada);
 			controladorOfertaLaboral.ingresarDatosOL(empresa,  nombreTipo, ol);
 			mol = ManejadorOfertaLaboral.getInstance();
 			OfertaLaboral Ol = mol.buscarOfertaLaboral(nombre);
@@ -478,7 +479,7 @@ class ControladorOfertaLaboralTests{
 			fail(e.getMessage());
 			e.printStackTrace();
 		}
-		DTOfertaLaboral ol = new DTOfertaLaboral(nombre, descripcionOL, ciudad, departamento, horario, remuneracion, fechaDeAlta, costoAsociado, dataTipo, dataKeywords, dataPostulaciones, empresa);
+		DTOfertaLaboral ol = new DTOfertaLaboral(nombre, descripcionOL, ciudad, departamento, horario, remuneracion, fechaDeAlta, costoAsociado, dataTipo, dataKeywords, dataPostulaciones, empresa, EstadoOL.Aceptada);
 		assertThrows(OfertaLaboralRepetidaException.class, ()->{controladorOfertaLaboral.ingresarDatosOL(empresa,  nombreTipo, ol);});
 	}
 	

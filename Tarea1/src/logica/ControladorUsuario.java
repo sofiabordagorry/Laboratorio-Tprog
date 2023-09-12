@@ -125,6 +125,15 @@ public class ControladorUsuario implements IUsuario {
         else { throw new EmpresaSinOfertasException("La empresa seleccionada no tiene ofertas vigentes");}
     }
     
+    
+    public  DTOfertaLaboral[] listarOfertasLaboralesIngresadas(String empresa) throws EmpresaSinOfertasException{
+        ManejadorUsuario mu = ManejadorUsuario.getInstancia();
+            Empresa emp = mu.buscarEmpresa(empresa);
+            DTOfertaLaboral[] ofertas = emp.obtenerOfertasIngresadas();
+            if (ofertas != null){ return  ofertas;}
+            else { throw new EmpresaSinOfertasException("La empresa seleccionada no tiene ofertas ingresadas");}
+        }
+    
     public void ingresarPostulacion(String CVReducido, String motivacion, LocalDate fecha, String empresa, String oferta, String postulante) throws YaSePostuloException {
         ManejadorUsuario mu = ManejadorUsuario.getInstancia();
         Postulante pos = mu.buscarPostulante(postulante);
