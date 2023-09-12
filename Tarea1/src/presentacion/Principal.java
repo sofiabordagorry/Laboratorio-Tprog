@@ -35,6 +35,7 @@ public class Principal {
 	private IUsuario IU;
 	private IOfertaLaboral IOL;
 	
+	private AceptarORechazarOL creAcepRechOLInternalFrame;
     private AltaOfertaLaboral creAltOLInternalFrame;
     private CrearPaqueteTiposPublicacionOfertasLaborales crePaqTipPubOLInternalFrame;
 	private AgregarTipoPublicacionOfertaLaboralPaquete creAltTipPubOLPaqInternalFrame;
@@ -82,6 +83,10 @@ public class Principal {
 		crePosAOLInternalFrame.setLocation(25,25);
 		crePosAOLInternalFrame.setVisible(false);
 		
+		creAcepRechOLInternalFrame = new AceptarORechazarOL(IU, IOL);
+		creAcepRechOLInternalFrame.setLocation(25, 25);
+		creAcepRechOLInternalFrame.setVisible(false);
+		
 		creAltOLInternalFrame = new AltaOfertaLaboral(IU, IOL);
 		creAltOLInternalFrame.setLocation(25, 25);
 		creAltOLInternalFrame.setVisible(false);
@@ -126,7 +131,7 @@ public class Principal {
 		frmAdmTrabajo.getContentPane().add(crePosAOLInternalFrame);
 		frmAdmTrabajo.getContentPane().add(creUsrInternalFrame);
 		frmAdmTrabajo.getContentPane().add(creConPaqTipOLInternalFrame);
-
+		frmAdmTrabajo.getContentPane().add(creAcepRechOLInternalFrame);
 		frmAdmTrabajo.getContentPane().add(creConUsuInternalFrame);
 		frmAdmTrabajo.getContentPane().add(creConOfLabInternalFrame);
 		frmAdmTrabajo.getContentPane().add(creModUsuInternalFrame);
@@ -234,13 +239,16 @@ public class Principal {
 		});
 		menuTrabajo.add(itemAltaTipoOF);
 		
-//		JMenuItem itemAltaKeyword = new JMenuItem("Agregar keyword");
-//		itemAltaKeyword.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				// VENTANA PARA AGREGAR KEYWORD
-//			}
-//		});
-//		menuTrabajo.add(itemAltaKeyword);
+		JMenuItem itemAcepRechOL = new JMenuItem("Aceptar o Rechazar Oferta Laboral");
+		itemAcepRechOL.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// VENTANA PARA AGREGAR KEYWORD
+				if(creAcepRechOLInternalFrame.cargarEmpresas()){
+					creAcepRechOLInternalFrame.setVisible(true);
+				}
+			}
+		});
+		menuTrabajo.add(itemAcepRechOL);
 		
 		
 		// Menú de paquetes

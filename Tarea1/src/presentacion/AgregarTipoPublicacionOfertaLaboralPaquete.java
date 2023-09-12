@@ -33,7 +33,7 @@ public class AgregarTipoPublicacionOfertaLaboralPaquete extends JInternalFrame {
 	private JComboBox<String> comboBoxPaquete;
 	private JComboBox<String> comboBoxTipo;
 	
-	
+
 	public AgregarTipoPublicacionOfertaLaboralPaquete(IOfertaLaboral iol) {
 		
 		IOL = iol;
@@ -174,12 +174,12 @@ public class AgregarTipoPublicacionOfertaLaboralPaquete extends JInternalFrame {
             return false;
         }
 		
-		if (tipPaquete == null ) {
+		if (tipPaquete == "" ) {
             JOptionPane.showMessageDialog(this, "Elija un Paquete", "Alta de Tipo de Publicacion de Oferta Laboral",
                     JOptionPane.ERROR_MESSAGE);
             return false;
         }
-		if (tipTipo == null ) {
+		if (tipTipo == "" ) {
             JOptionPane.showMessageDialog(this, "Elija un Tipo de Publicacion", "Alta de Tipo de Publicacion de Oferta Laboral",
                     JOptionPane.ERROR_MESSAGE);
             return false;

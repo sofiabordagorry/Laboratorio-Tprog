@@ -19,6 +19,8 @@ public interface IOfertaLaboral {
 	public abstract String[] listarKeywords() throws KeywordsNoExistenException;
 	public abstract void ingresarDatosOL(String empresa, String nombreTipo, DTOfertaLaboral ol) throws OfertaLaboralRepetidaException;
 	public abstract void ingresarDatosPaquete(DTPaquete datosPaquete) throws PaqueteRepetidoException;
+	
+	public abstract void AcepRechOL(EstadoOL e, String OL);
 
 	public abstract void ingresarTipo(String nombre, String descripcion, int exposicionT, int duracion, Float costo, Date fechaAlta) throws TipoRepetidoException;
 	

@@ -79,7 +79,9 @@ nav {
     user-select: none; /* Standard syntax */
 }
 
-.list-group-item:hover, .list-group-item:active, .list-group-item:focus {
+
+.list-group-item:hover, .list-group-item:active {
+
     background-color: #7fb2c0;
 }
 
@@ -87,6 +89,13 @@ nav {
     margin: 0;
     color:#C6C5B9;
     font-size: 1.5rem;
+
+}
+
+.card {
+    background-color: #d3e7da00;
+    border: none;
+
 }
 
 .btn {
@@ -94,10 +103,24 @@ nav {
     color: white;
 }
 
-.btn > a {
-    color: white;
+
+.card-title {
+    font-family: 'Fjalla One', sans-serif;
 }
 
-#pagNav {
-    background-color: rgba(63, 57, 57, 0);
+.header {
+    background-color: #393D3F;
+    margin: 0;
+    color:#C6C5B9;
+    border-bottom: 2px solid black;
+    font-size: 1.5rem;
+    padding: 15px;
+}
+
+.ofertaLaboral {
+    background-color: rgba(255, 255, 255, 0.795);
+    border-radius: 2em;
+    padding: 15px;
+    margin: 10px;
+
 }

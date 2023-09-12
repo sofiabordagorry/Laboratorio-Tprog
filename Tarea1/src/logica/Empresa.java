@@ -26,7 +26,7 @@ public class Empresa extends Usuario {
 		this.link = link;
 		this.ofertasLaborales = new HashMap<>();
 
-	}
+	} 
 	
 	public String getNombreEmpresa() {
 		return this.nombreEmpresa;
@@ -84,6 +84,28 @@ public class Empresa extends Usuario {
 	        }
 	    }
 	    return dof;
+	}
+	
+	public DTOfertaLaboral[] obtenerOfertasIngresadas() {
+		Map<String, OfertaLaboral> ofertasLaborales = this.ofertasLaborales;
+	    if (ofertasLaborales.isEmpty()) { //consigo el array
+	        return null;
+	    } else {
+	    	OfertaLaboral oferta;
+	    	int i =0;
+	    	DTOfertaLaboral[] dof = new DTOfertaLaboral[ofertasLaborales.size()];
+	    	for (Map.Entry<String, OfertaLaboral> entry : ofertasLaborales.entrySet()) {
+	        	oferta = entry.getValue();
+	        	if(oferta.getEstado() == EstadoOL.Ingresada) {
+                dof[i] = new DTOfertaLaboral(oferta.getNombre(), oferta.getDescripcion(), oferta.getCiudad(), oferta.getDepartamento(), oferta.getHorario(), oferta.getRemuneracion(), oferta.getFechaDeAlta());
+	        	i++;
+	        	}
+	        }
+	    	if(i==0)
+	    		return null;
+	    	return dof;
+	    }
+	    
 	}
 	
 	public OfertaLaboral buscarOferta(String oferta) {

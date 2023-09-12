@@ -19,6 +19,7 @@ public class OfertaLaboral {
 	private Tipo tipoOL;
 	private List<Postulacion> postulaciones;
 	private Map<String, Keyword> keywords;
+	private EstadoOL estado;
 	
 	private Empresa empresaCreadora;//nuevo atributo agregado
 	
@@ -36,13 +37,21 @@ public class OfertaLaboral {
 		this.tipoOL = tipoOL;
 		this.postulaciones = new ArrayList<>();
 		this.keywords = keywords;
-		
+		this.estado = EstadoOL.Ingresada;
 		this.empresaCreadora = empCreadora;
+	}
+	
+	public void setEstado(EstadoOL e) {
+		this.estado = e;
 	}
 	
 	//Getters
 	public String getNombre() {
 		return this.nombre;
+	}
+	
+	public EstadoOL getEstado() {
+		return this.estado;
 	}
 	
 	public String getDescripcion() {
@@ -118,7 +127,7 @@ public class OfertaLaboral {
 			dataPostulaciones.add(p.getDataPostulacion());
 		}
 		
-		DTOfertaLaboral dtOL = new DTOfertaLaboral(this.getNombre(),this.getDescripcion(),this.getCiudad(),this.getDepartamento(),this.getHorario(),this.getRemuneracion(),this.getFechaDeAlta(),this.getCostoAsociado(),dataTipoOL, dataKeyWords, dataPostulaciones,this.getEmpresaCreadora());
+		DTOfertaLaboral dtOL = new DTOfertaLaboral(this.getNombre(),this.getDescripcion(),this.getCiudad(),this.getDepartamento(),this.getHorario(),this.getRemuneracion(),this.getFechaDeAlta(),this.getCostoAsociado(),dataTipoOL, dataKeyWords, dataPostulaciones,this.getEmpresaCreadora(), this.getEstado());
 		return dtOL;
 	}
 }
