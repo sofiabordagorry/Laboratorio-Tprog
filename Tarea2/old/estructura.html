@@ -6,13 +6,12 @@
     <!--Bootstrap, NO BORRAR-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="./public/css/styles.css" />
-    <link rel="stylesheet" href="./public/css/index.css" />
     <title>Trabajo.uy</title>
 </head>
 <body>
     <!-- Barra de navegación -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-fixed-top">
-      <a class="navbar-brand" href="./indexVisitante.html">
+      <a class="navbar-brand" href="./index.html">
           <img src="./public/files/logo.png" width="150" height="auto" />
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,29 +31,13 @@
     <div class="container-fluid" id="web-content">
         <div class="row justify-content-md-center">
             <!-- Barra de navegación de la izquierda / keywords -->
-            <div class="col col-md-3 col-sm-12" id="sidebar">
-              <div class="list-group m-2">
-                <a href="#">
-                  <div class="header d-flex" data-toggle="collapse" aria-controls="actionList" href="#actionList">
-                    <h2 class="list-group-item-heading mr-auto p-2">Area de Visitante</h2>
-                    <img class="p-2" width="50" height="50" src="./public/files/collapse.png" />
-                  </div>
-                </a>
-                <div id="actionList" class="collapse">
-                  <a class="list-group-item list-group-item-action" href="#"><i class="fa-solid fa-circle-user"></i> <b>Registrarse</b></a>
-                  <a class="list-group-item list-group-item-action" href="#"><i class="fa-solid fa-users"></i> Busqueda de usuarios</a>
-                  <a class="list-group-item list-group-item-action" href="#"><i class="fa-solid fa-square-poll-vertical"></i> Consultar tipos</a>
-                  <a class="list-group-item list-group-item-action" href="#"><i class="fa-solid fa-box-open"></i> Consultar paquetes</a>
+            <div class="col-md-4 col-sm-12" id="sidebar">
+                <div class="list-group m-2">
+                    <h2 class="list-group-item-heading">Mi Perfil</h2>
+                    <a class="list-group-item list-group-item-action">Acción</a>
                 </div>
-            </div>
-              <div class="list-group m-2">
-                <a href="#">
-                  <div class="header d-flex" data-toggle="collapse" aria-controls="keywordList" href="#keywordList">
-                      <h2 class="list-group-item-heading mr-auto p-2">Keywords</h2>
-                      <img class="p-2" width="50" height="50" src="./public/files/collapse.png" />
-                  </div>
-                </a>
-                <div id="keywordList" class="collapse">
+                <div class="list-group m-2">
+                    <h2 class="list-group-item-heading">Keywords</h2>
                     <a class="list-group-item list-group-item-action">Tiempo completo</a>
                     <a class="list-group-item list-group-item-action">Medio tiempo</a>
                     <a class="list-group-item list-group-item-action">Remoto</a>
@@ -67,22 +50,20 @@
                     <a class="list-group-item list-group-item-action">Contabilidad</a>
                 </div>
             </div>
-            </div>
-            <div class="col col-md-9 col-sm-12" id="main-content">
+            <div class="col-md-8 col-sm-12" id="main-content">
                 <!-- ACÁ VA TODO EL CONTENIDO ESPECÍFICO DE LA PÁGINA 
                 EJEMPLO:-->
                 <div class="col ofertaLaboral">
-                  <h2>Todas las ofertas</h2>
                     <div class="card mb-3" style="max-width: 650px;">
                         <div class="row no-gutters">
                           <div class="col-md-4">
-                            <img src="https://kinsta.com/es/wp-content/uploads/sites/8/2021/12/front-end-developer-1024x512.png" class="card-img" alt="...">
+                            <img src="https://assets.herbalifenutrition.com/content/dam/regional/samcam/es_uy/sites/herbalife_nutrition/web_graphic/billboards/2021/11-Nov/dialy-nutrition-1155x515.jpg" class="card-img" alt="...">
                           </div>
                           <div class="col-md-8">
                             <div class="card-body">
-                              <h5 class="card-title"> Desarrollador Frontend</h5>
-                              <p class="card-text">Únete a nuestro equipo de desarrollo frontend y crea experiencias de usuario excepcionales.</p>
-                              <button class="btn"><a href="./consultaOfertaLaboralDFVisitante.html">Ver oferta</a></button>
+                              <h5 class="card-title">Vendedor de herbalife</h5>
+                              <p class="card-text">Si te gustaría ser tu propio jefe, emprender una nueva aventura, aprovechar tu tiempo libre y además generar unos ingresos extras inicia tu propio negocio independiente con Herbalife Nutrition. Siéntete satisfecho ayudando a otros a sentirse más saludables y lograr sus objetivos.</p>
+                              <a href="#">Leer más...</a>
                             </div>
                           </div>
                         </div>
@@ -92,33 +73,17 @@
                     <div class="card mb-3" style="max-width: 650px;">
                         <div class="row no-gutters">
                           <div class="col-md-4">
-                            <img src="https://blog.orientu.com.br/wp-content/uploads/2021/02/analista-de-marketing.jpeg" class="card-img" alt="...">
+                            <img src="https://www.ionos.es/digitalguide/fileadmin/_processed_/9/e/csm_minecraft-server-hosten-t_ed708735d5.webp" class="card-img" alt="...">
                           </div>
                           <div class="col-md-8">
                             <div class="card-body">
-                              <h5 class="card-title"> A. de Marketing Digital </h5>
-                              <p class="card-text">Únete a nuestro equipo de marketing y trabaja en estrategias digitales innovadoras.</p>
-                              <button class="btn"><a href="./consultaOfertaLaboralAMVisitante.html">Ver oferta</a></button>
+                              <h5 class="card-title">Arquitecto de Minecraft</h5>
+                              <p class="card-text">Se busca ayudante de arquitecto que maneje con fluidez el software Minecraft. REQUISITOS EXCLUYENTES: Ser español</p>
+                              <a href="#">Leer más...</a>
                             </div>
                           </div>
                         </div>
                       </div>
-                </div>
-                 <div class="col ofertaLaboral">
-                    <div class="card mb-3" style="max-width: 650px;">
-                        <div class="row no-gutters">
-                          <div class="col-md-4">
-                            <img src="https://www.hubspot.com/hubfs/media/estrategianegocio.jpeg" class="card-img" alt="...">
-                          </div>
-                          <div class="col-md-8">
-                            <div class="card-body">
-                              <h5 class="card-title"> Estratega de Negocios </h5>
-                              <p class="card-text">Forma parte de nuestro equipo de estrategia y contribuye al crecimiento de las empresas clientes.</p>
-                              <button class="btn"><a href="./consultaOfertaLaboralENVisitante.html">Ver oferta</a></button>
-                            </div>
-                          </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -133,4 +98,3 @@
     <script src="https://kit.fontawesome.com/a3b19d1f5c.js" crossorigin="anonymous"></script>
   </body>
 </html>
-
