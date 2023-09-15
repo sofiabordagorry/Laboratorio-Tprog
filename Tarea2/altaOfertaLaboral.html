@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Bootstrap, NO BORRAR-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./public/css/styles.css" />
+    <link rel="stylesheet" href="./public/css/index.css" />
+    <link rel="stylesheet" href="./public/css/altaOfertaLaboral.css">
+    <title>Trabajo.uy</title>
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-fixed-top">
+      <a class="navbar-brand" href="./indexEmpresa.html">
+          <img src="./public/files/logo.png" width="150" height="auto" />
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+              <a class="nav-link" href="#"><i class="fa-solid fa-user" style="color: #dfe2e7;"></i> EcoTech</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="fa-solid fa-right-from-bracket fa-flip-horizontal"></i> Cerrar sesión</a>
+          </li>
+      </div>
+  </nav>
+    <div class="container-fluid" id="web-content">
+        <div class="row justify-content-md-center">
+            <!-- Barra de navegación de la izquierda / keywords -->
+            <div class="col-md-3 col-sm-12" id="sidebar">
+                <div class="list-group m-2">
+                    <a href="#">
+                      <div class="header d-flex" data-toggle="collapse" aria-controls="actionList" href="#actionList">
+                        <h2 class="list-group-item-heading mr-auto p-2">Area de Usuario</h2>
+                        <img class="p-2" width="50" height="50" src="./public/files/collapse.png" />
+                      </div>
+                    </a>
+                    <div id="actionList" class="collapse">
+                      <a class="list-group-item list-group-item-action" href="#"><i class="fa-solid fa-circle-user"></i> <b>Mi Perfil</b></a>
+                      <a class="list-group-item list-group-item-action" href="#"><i class="fa-solid fa-bullhorn"></i> Publicar oferta laboral</a>
+                      <a class="list-group-item list-group-item-action" href="./misOfertas.html"><i class="fa-solid fa-folder"></i> Mis Ofertas</a>
+                      <a class="list-group-item list-group-item-action" href="#"><i class="fa-solid fa-users"></i> Busqueda de usuarios</a>
+                      <a class="list-group-item list-group-item-action" href="#"><i class="fa-solid fa-square-poll-vertical"></i> Consultar tipos</a>
+                      <a class="list-group-item list-group-item-action" href="#"><i class="fa-solid fa-box-open"></i> Consultar paquetes</a>
+                    </div>
+                </div>
+                <div class="list-group m-2">
+                  <a href="#">
+                    <div class="header d-flex" data-toggle="collapse" aria-controls="keywordList" href="#keywordList">
+                        <h2 class="list-group-item-heading mr-auto p-2">Keywords</h2>
+                        <img class="p-2" width="50" height="50" src="./public/files/collapse.png" />
+                    </div>
+                  </a>
+                  <div id="keywordList" class="collapse">
+                      <a class="list-group-item list-group-item-action">Tiempo completo</a>
+                      <a class="list-group-item list-group-item-action">Medio tiempo</a>
+                      <a class="list-group-item list-group-item-action">Remoto</a>
+                      <a class="list-group-item list-group-item-action">Freelance</a>
+                      <a class="list-group-item list-group-item-action">Temporal</a>
+                      <a class="list-group-item list-group-item-action">Permanente</a>
+                      <a class="list-group-item list-group-item-action">Computación</a>
+                      <a class="list-group-item list-group-item-action">Administración</a>
+                      <a class="list-group-item list-group-item-action">Logística</a>
+                      <a class="list-group-item list-group-item-action">Contabilidad</a>
+                  </div>
+              </div>
+            </div>
+            <div class="col-md-9 col-sm-12" id="main-content">
+                <!-- ACÁ VA TODO EL CONTENIDO ESPECÍFICO DE LA PÁGINA 
+                EJEMPLO:-->
+                <form action="" class="formulario" id="formulario">
+					<h3>Alta de Oferta Laboral</h3>
+					<br>
+					
+					<!-- Tipo de publicacion -->
+					<div class="form-group formulario__grupo" id="grupo__tipo">
+				    	<label for="tipo" class="form-label">Tipos de publicaciones para Ofertas Laborales</label>
+				    	<br>
+				    	<div class="input-group">
+							<select class="form-select form-select-lg form-control custom-select" name="tipo" id="tipo">
+								<option selected disabled value="">Eliga alguno de los tipos...</option>
+								<option value="1">Básica</option>
+								<option value="2">Premium</option>
+								<option value="3">Estándar</option>
+								<option value="4">Destacada</option>
+								<i class="formulario__validacion-estado fa-solid fa-circle-xmark"></i>
+							</select>
+							<div class="input-group-append">
+								<i class="formulario__validacion-estado formulario__validacion-estado-select fa-solid fa-circle-xmark"></i>
+							</div>
+				    	</div>
+						<p class="formulario__input-error">Debe elegir Tipo de Oferta Laboral.	</p>
+					</div>
+					
+					<!-- Nombre de la Oferta -->
+					<div class="form-group formulario__grupo" id="grupo__nombre">
+				    	<label for="nombre" class="form-label">Nombre de la Oferta Laboral</label>
+				    	<div class="input-group">
+				    		<input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre de la Oferta">
+				    		<div class="input-group-append">
+								<i class="formulario__validacion-estado formulario__validacion-estado-input fa-solid fa-circle-xmark"></i>
+							</div>
+				    	</div>
+				    	<p class="formulario__input-error">Debe ingresar un nombre.</p>
+				  	</div>
+				  	
+				  	<!-- Descripcion de la Oferta y Keywords -->
+					<div class="form-group">
+						<div class="row">
+							
+							<!-- Descripcion -->
+							<div class="col-md-6 formulario__grupo" id="grupo__descripcion">
+								<label for="descripcion" class="form-label">Descripción</label>
+								<div class="input-group">
+									<textarea class="form-control" name="descripcion" id="descripcion" rows="3" placeholder="Descripción de la Oferta"></textarea>
+									<div class="input-group-append">
+										<i class="formulario__validacion-estado formulario__validacion-estado-caja fa-solid fa-circle-xmark"></i>
+									</div>
+								</div>
+								<p class="formulario__input-error">Debe ingresar un descripción.</p>
+							</div>
+							
+							<!-- Keywords -->
+							<div class="col-md-6 formulario__grupo" id="grupo__keywords">
+								<label for="keywords" class="form-label">Keywords</label>
+								<br>
+								<div class="input-group">
+									<select multiple class="form-select form-control custom-select" aria-label="Multiple select example" name="keywords" id="keywords">
+										<option value="1">Tiempo completo</option>
+										<option value="2">Medio tiempo</option>
+										<option value="3">Remoto</option>
+										<option value="4">Freelance</option>
+										<option value="5">Temporal</option>
+										<option value="6">Permanente</option>
+										<option value="7">Computación</option>
+										<option value="8">Administración</option>
+										<option value="9">Logística</option>
+										<option value="10">Contabilidad</option>
+									</select>
+									<div class="input-group-append">
+										<i class="formulario__validacion-estado formulario__validacion-estado-caja fa-solid fa-circle-xmark"></i>
+									</div>
+								</div>
+								<p class="formulario__input-error">Debe elegir al menos una keyword.</p>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Horario y remunarcion de la Oferta -->
+					<div class = "form-group">
+						<div class="row">
+							
+							<!-- Horario -->
+							<div class="col-md-6 formulario__grupo" id="grupo__horario">
+								<label for="horario" class = "form-label">Horario</label>
+								<div class="input-group">
+									<input type="text" class="form-control" name="horario" id="horario" placeholder="Ejemplo: 09:00 - 18:00">
+									<div class="input-group-append">
+										<i class="formulario__validacion-estado formulario__validacion-estado-input fa-solid fa-circle-xmark"></i>
+									</div>
+								</div>
+								<p class="formulario__input-error">Debe ingresar un horario.</p>
+								<p class="formulario__input-error2">Debe ingresar un horario correcto como el ejemplo.</p>
+							</div>
+							
+							<!-- Remuneracion -->
+							<div class="col-md-6 formulario__grupo" id="grupo__remuneracion">
+								<label for ="remuneracion" class = "form-label">Remuneración</label>
+								<div class="input-group">
+									<input type="number" class="form-control" name="remuneracion" id="remuneracion" placeholder="Solo números">
+									<div class="input-group-append">
+										<i class="formulario__validacion-estado formulario__validacion-estado-input fa-solid fa-circle-xmark"></i>
+									</div>
+								</div>
+								<p class="formulario__input-error">Debe ingresar una remuneración.</p>
+								<p class="formulario__input-error2">La remuneración debe ser mayor a cero.</p>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Forma de pago -->
+					<div class="form-group formulario__grupo" id="grupo__tipoCompra">
+						<label for="tipoCompra" class="form-label">Forma de Pago</label>
+						<div class="input-group">
+							<select class="form-select form-select-lg form-control custom-select" name="tipoCompra" id="tipoCompra">
+								<option selected disabled value="">Eliga la fomra de Pago...</option>
+								<option value="general">General</option>
+								<option value="paquete">Por Paquete</option>
+							</select>
+							<div class="input-group-append">
+								<i class="formulario__validacion-estado formulario__validacion-estado-select fa-solid fa-circle-xmark"></i>
+							</div>
+						</div>
+						<p class="formulario__input-error">Debe elegir una forma de pago.</p>
+					</div>
+						
+						<!--Paquetes comprados-->
+					<div class="formulario__grupo" id="grupo__paquetes">
+						<div class="form-group paquetes-estado">
+							<label for="paquetes" class="form-label">Paquetes comprados</label>
+							<div class="input-group">
+								<select class="form-select form-select-lg form-control custom-select" name="paquetes" id="paquetes">
+									<option selected disabled value="">Elegir Paquete...</option>
+									<option value="paquetePremium">Paquete Básico</option>
+								</select>
+								<div class="input-group-append">
+									<i class="formulario__validacion-estado formulario__validacion-estado-select fa-solid fa-circle-xmark"></i>
+								</div>
+							</div>
+							<p class="formulario__input-error">Debe elegir un Paquete.</p>
+						</div>
+					</div>
+					<div class="formulario__grupo formulario__grupo-btn-aceptar-cancelar">
+						 <div class="row">
+							<div class="col-md-4">
+								<button type="submit" class="btn btn-primary formulario__btn">Aceptar</button>
+								<p class="formulario__mensaje-exitoso" id="formulario__mensaje-exitoso">Oferta Laboral ingresada correctamente.</p>
+							</div>
+							<div class="col-md-1">
+								<a class="btn btn-secondary" href="./indexEmpresa.html" role="button">Cancelar</a>
+							</div>
+						</div>
+					</div>
+				</form>
+            </div>
+        </div>
+    </div>
+    <footer class="container-fluid">
+        TPGR18
+    </footer>
+    <!-- Scripts que usa Bootstrap, NO BORRAR -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/a3b19d1f5c.js" crossorigin="anonymous"></script>
+    <script src="./public/js/altaDeOfertaLaboral.js"></script>
+  </body>
+</html>
