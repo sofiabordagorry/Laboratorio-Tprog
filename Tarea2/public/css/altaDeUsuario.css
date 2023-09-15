@@ -1,0 +1,160 @@
+@charset "ISO-8859-1";
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@200&display=swap');
+
+#web-content {
+    background-image: url("../files/gentepala.jpg") !important;
+    background-size: cover;
+} 
+
+form {
+    background-color: rgba(255, 255, 255, 0.808);
+    padding: 40px;
+    border-radius: 1em;
+    max-width: 80%;
+    min-width: 50%;
+    margin: auto;
+    font-family: 'Inter Tight', sans-serif;
+}
+
+.formulario__input-error {
+	font-size: 12px;
+	margin-bottom: 0;
+	display: block;
+}
+
+.formulario__input-error2 {
+	font-size: 12px;
+	margin-bottom: 0;
+	display: block;
+}
+
+/* Tipo de usuario */
+
+.desc_link-estado {
+	display: none;
+}
+
+.desc_link-estado-activo {
+	display: block;
+}
+
+.nacio_fech-estado {
+	display: none;
+}
+
+.nacio_fech-estado-activo {
+	display: block;
+}
+
+/* -------------- */
+
+/* Ajustes de el icono cruz */
+.formulario__validacion-estado {
+	position: absolute;
+	z-index: 100;
+	font-size: 16;
+	opacity: 0;
+}
+
+
+.formulario__validacion-estado-input {
+	right: 8px;
+	bottom: 11px;
+}
+
+.formulario__validacion-estado-select {
+	right: 26px;
+	bottom: 11px;
+}
+
+.formulario__validacion-estado-caja {
+	right: 7px;
+	bottom: 40px;
+}
+
+.formulario__validacion-estado-file {
+	position: absolute;
+	right: 84px;
+	bottom: 11px;
+	z-index: 100;
+	font-size: 16;
+	opacity: 0;
+}
+
+.formulario__validacion-estado-fecha {
+	right: 35px;
+	bottom: 11px;
+}
+
+/* --------------------------- */
+
+.formulario__mensaje-exitoso {
+	display: none;
+}
+
+.formulario__mensaje-exitoso-activo {
+	font-size: 14px;
+	color: #119200;
+	display: block;
+	margin-top: 5px;
+}
+
+.formulario__input-error {
+	font-size: 12px;
+	margin-bottom: 0;
+	display: none;
+}
+
+.formulario__input-error2 {
+	font-size: 12px;
+	margin-bottom: 0;
+	display: none;
+}
+
+.formulario__input-error-activo {
+	display: block;
+	color: #bb2929;
+}
+
+.btn {
+    background-color: #73a4b1;
+    color: white;
+}
+
+#descripcion {
+	height: 100px;
+	resize: none;
+}
+
+/* Estilos para validacion */
+
+.formulario__grupo-correcto 
+.formulario__validacion-estado {
+	color: #1ed12d;
+	opacity: 1;
+}
+
+.formulario__grupo-incorrecto 
+.form-label {
+	color: #bb2929;
+}
+
+.formulario__grupo-incorrecto 
+.formulario__validacion-estado {
+	color: #bb2929;
+	opacity: 1;
+}
+
+.formulario__grupo-incorrecto 
+.form-select {
+	border: #ff0000;
+}
+
+
+@media(max-width: 768px) {
+	form {
+		margin-top: 10px;
+		padding: 10px;
+		max-width: 95%;
+	}
+}
