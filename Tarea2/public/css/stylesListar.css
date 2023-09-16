@@ -1,0 +1,31 @@
+#web-content {
+    background-image: url("../files/gentepala.jpg") !important;
+    background-size: cover;
+}
+
+#buscador {
+	max-width: 100%;
+}
+
+#barraBusqueda {
+	text-align: center;
+}
+
+#listarContainer{
+	min-height: 0%;
+	background-color: rgba(255, 255, 255, 0.808);
+	padding: 50px;
+	border-radius: 1em;
+	max-width: 95%;
+	min-width: 50%;
+	margin:auto;
+	font-family: 'Inter Tight', sans-serif;
+}
+
+.contenedor{
+	display: block;
+}
+
+.list-group-item{
+	list-style: none;
+}
