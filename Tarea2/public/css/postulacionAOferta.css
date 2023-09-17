@@ -1,0 +1,27 @@
+form {
+    background-color: rgba(255, 255, 255, 0.808);
+    padding: 50px;
+    border-radius: 1em;
+    max-width: 80%;
+    min-width: 50%;
+    margin: auto;
+    font-family: 'Inter Tight', sans-serif;
+}
+
+
+.btn {
+    background-color: #73a4b1;
+    color: white;
+}
+
+#descripcion {
+	height: 100px;
+	resize: none;
+}
+
+@media(max-width: 768px) {
+	#loginForm {
+		padding: 10px;
+		margin: 5px;
+	}
+}
