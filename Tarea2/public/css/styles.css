@@ -4,6 +4,7 @@
 body {
     background-image: url("../files/bgpattern.png");
     height: 100vh;
+    margin-top: 150px;
 }
 
 h2 {
