@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@200&display=swap');
+
+body {
+    background-image: url("../files/bgpattern.png");
+    height: 100vh;
+    margin-top: 150px;
+}
+
+h2 {
+    color: #393D3F;
+    padding: 5px;
+    font-family: 'Fjalla One', sans-serif;
+}
+
+a {
+    color: rgb(46, 163, 124);
+    font-family: 'Inter Tight', sans-serif;
+}
+
+h1, p, span {
+    font-family: 'Inter Tight', sans-serif;
+}
+
+a:hover {
+    color: rgb(39, 148, 139);
+}
+
+footer {
+    color: white;
+    background-color: #393D3F;
+    padding: 10px;
+}
+
+.navbar-brand {
+    color: #73a4b1 !important;
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 1.8rem;
+}
+
+.navbar {
+    padding: 20px;
+    margin: 0;
+}
+
+nav {
+    background-color: #393D3F;
+}
+
+#sidebar {
+    padding: 1%;
+}
+
+#main-content {
+    padding: 1%;
+}
+
+#web-content {
+    min-height: 100%;
+}
+
+.header {
+    background-color: #393D3F;
+    margin: 0;
+    color:#C6C5B9;
+    border-bottom: 2px solid black;
+    font-size: 1.5rem;
+    padding: 15px;
+}
+
+.ofertaLaboral {
+    margin-top: 5px;
+}
+
+.list-group-item, .list-group-item-action {
+    background-color: #dfddce;
+    color: #393D3F !important;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+
+.list-group-item:hover, .list-group-item:active, .list-group-item:focus {
+    background-color: #7fb2c0;
+}
+
+.list-group-item-heading {
+    margin: 0;
+    color:#C6C5B9;
+    font-size: 1.5rem;
+}
+
+.btn {
+    background-color: #73a4b1;
+    color: white;
+}
+
+.btn > a {
+    color: white;
+}
+
+#pagNav {
+    background-color: rgba(63, 57, 57, 0);
+}
+
+.active {
+    background-color: #73a4b1 !important;
+    border: none;
+}
