@@ -175,7 +175,7 @@ public class CargarDatos {
 				}
 				
 				String[] parts = line.split(";");
-				Empresa user = new Empresa(usersArr[i].getNickname(), usersArr[i].getNombre(), usersArr[i].getApellido(), usersArr[i].getCorreo(), parts[1], parts[2], parts[3]);
+				Empresa user = new Empresa(usersArr[i].getNickname(), usersArr[i].getNombre(), usersArr[i].getApellido(), usersArr[i].getCorreo()/*, parts[1]*/, parts[2], parts[3]);
 				empresas.add(user);
 				i++;
 			}

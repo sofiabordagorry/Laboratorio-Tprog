@@ -1,7 +1,7 @@
 package presentacion;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+//import java.awt.BorderLayout;
+//import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;
 import java.awt.GridBagLayout;
@@ -19,7 +19,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 
 import java.awt.Font;
-import javax.swing.JPanel;
+//import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -307,10 +307,12 @@ public class ConsultaUsuario extends JInternalFrame {
         	scrollPaneDescripcion.setVisible(true);
         	textAreaDescripcion.setVisible(true);
         	lblDescripcion.setVisible(true);
-        	lblFechaNomEmp.setText("Nombre de Empresa:");
+        	lblFechaNomEmp.setVisible(false);
+        	textFechaNomEmp.setVisible(false);
+        	//lblFechaNomEmp.setText("Nombre de Empresa:");
         	lblNacLink.setText("Link:");
         	DTEmpresa selectedEmp = (DTEmpresa) u;
-        	textFechaNomEmp.setText(selectedEmp.getNombreDeEmpresa());
+        	//textFechaNomEmp.setText(selectedEmp.getNombreDeEmpresa());
         	textNacLink.setText(selectedEmp.getLink());
         	textAreaDescripcion.setText(selectedEmp.getDescripcion());
         }

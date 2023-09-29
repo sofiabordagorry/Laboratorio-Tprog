@@ -1,6 +1,6 @@
 package presentacion;
 
-import java.awt.EventQueue;
+//import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.Map;
+//import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,7 +25,7 @@ import com.toedter.calendar.JDateChooser;
 
 import excepciones.UsuariosNoExistenException;
 import logica.DTEmpresa;
-import logica.DTOfertaLaboral;
+//import logica.DTOfertaLaboral;
 import logica.DTPostulante;
 import logica.DTUsuario;
 import logica.IUsuario;
@@ -33,6 +33,7 @@ import logica.IUsuario;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 
+@SuppressWarnings("serial")
 public class ModificarDatosUsuario extends JInternalFrame {
 	private IUsuario contUsuario;
 	private JComboBox<String> comboBoxUsuarios;
@@ -320,10 +321,12 @@ public class ModificarDatosUsuario extends JInternalFrame {
         	dateChooser.setVisible(false);
         	textFechaNomEmp.setVisible(true);
         	textFechaNomEmp.setEditable(true);
-        	lblFechaNomEmp.setText("Nombre de Empresa:");
+        	lblFechaNomEmp.setVisible(false);
+        	textFechaNomEmp.setVisible(false);
+        	//lblFechaNomEmp.setText("Nombre de Empresa:");
         	lblNacLink.setText("Link:");
         	DTEmpresa selectedEmp = (DTEmpresa) u;
-        	textFechaNomEmp.setText(selectedEmp.getNombreDeEmpresa());
+        	//textFechaNomEmp.setText(selectedEmp.getNombreDeEmpresa());
         	textNacLink.setText(selectedEmp.getLink());
         	textNacLink.setEditable(true);
         	textAreaDescripcion.setText(selectedEmp.getDescripcion());
@@ -337,7 +340,7 @@ public class ModificarDatosUsuario extends JInternalFrame {
 			String selectedUser = (String) comboBoxUsuarios.getSelectedItem();
 			DTUsuario u = contUsuario.mostrarInformacionUsuario(selectedUser);
 			if(u instanceof DTEmpresa) {
-				contUsuario.modificarEmpresa(textNickname.getText(),textNombre.getText(), textApellido.getText(), textFechaNomEmp.getText(),textAreaDescripcion.getText(),textNacLink.getText());
+				contUsuario.modificarEmpresa(textNickname.getText(),textNombre.getText(), textApellido.getText()/*, textFechaNomEmp.getText()*/,textAreaDescripcion.getText(),textNacLink.getText());
 			}else if (u instanceof DTPostulante) {
 				contUsuario.modificarPostulante(textNickname.getText(),textNombre.getText(), textApellido.getText(), dateChooser.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),textNacLink.getText());
 			}

@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.time.LocalDate;
+//import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.regex.Matcher;
@@ -18,7 +18,7 @@ import com.toedter.calendar.JDateChooser;
 import excepciones.ExisteUnUsuarioYaRegistradoException;
 import logica.DTEmpresa;
 import logica.DTPostulante;
-import logica.Factory;
+//import logica.Factory;
 import logica.IUsuario;
 
 @SuppressWarnings("serial")
@@ -49,8 +49,8 @@ public class RegistrarUsuario extends JInternalFrame {
     private JScrollPane textScrollPane;
     private JTextPane textPane;
     private IUsuario iUsuario;
-    private JLabel lblNombreEmpresa;
-    private JTextField textFieldNombreEmpresa;
+//    private JLabel lblNombreEmpresa;
+//    private JTextField textFieldNombreEmpresa;
     
     private boolean esPostulante;
 
@@ -152,8 +152,8 @@ public class RegistrarUsuario extends JInternalFrame {
         		    textField_2.setVisible(true);
         		    textPane.setVisible(true);
                     textScrollPane.setVisible(true);
-                    lblNombreEmpresa.setVisible(true);
-                    textFieldNombreEmpresa.setVisible(true);
+//                    lblNombreEmpresa.setVisible(true);
+//                    textFieldNombreEmpresa.setVisible(true);
         		    esPostulante = false;
         		} else {
         		    descripcionLabel.setVisible(false);
@@ -161,8 +161,8 @@ public class RegistrarUsuario extends JInternalFrame {
         		    textField_2.setVisible(false);
         		    textPane.setVisible(false);
                     textScrollPane.setVisible(false);
-                    lblNombreEmpresa.setVisible(false);
-                    textFieldNombreEmpresa.setVisible(false);
+//                    lblNombreEmpresa.setVisible(false);
+//                    textFieldNombreEmpresa.setVisible(false);
         		    esPostulante = true;
         		}
         	}
@@ -299,26 +299,26 @@ public class RegistrarUsuario extends JInternalFrame {
                         
         // EMPRESA
                         
-        lblNombreEmpresa = new JLabel("Nombre de Empresa");
-        lblNombreEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        GridBagConstraints gbc_lblNombreEmpresa = new GridBagConstraints();
-        gbc_lblNombreEmpresa.anchor = GridBagConstraints.EAST;
-        gbc_lblNombreEmpresa.insets = new Insets(0, 0, 5, 5);
-        gbc_lblNombreEmpresa.gridx = 0;
-        gbc_lblNombreEmpresa.gridy = 8;
-        getContentPane().add(lblNombreEmpresa, gbc_lblNombreEmpresa);
-        lblNombreEmpresa.setVisible(false);
-        
-        textFieldNombreEmpresa = new JTextField();
-        GridBagConstraints gbc_textFieldNombreEmpresa = new GridBagConstraints();
-        gbc_textFieldNombreEmpresa.gridwidth = 3;
-        gbc_textFieldNombreEmpresa.insets = new Insets(0, 0, 5, 0);
-        gbc_textFieldNombreEmpresa.fill = GridBagConstraints.HORIZONTAL;
-        gbc_textFieldNombreEmpresa.gridx = 1;
-        gbc_textFieldNombreEmpresa.gridy = 8;
-        getContentPane().add(textFieldNombreEmpresa, gbc_textFieldNombreEmpresa);
-        textFieldNombreEmpresa.setColumns(10);
-        textFieldNombreEmpresa.setVisible(false);
+//        lblNombreEmpresa = new JLabel("Nombre de Empresa");
+//        lblNombreEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 12));
+//        GridBagConstraints gbc_lblNombreEmpresa = new GridBagConstraints();
+//        gbc_lblNombreEmpresa.anchor = GridBagConstraints.EAST;
+//        gbc_lblNombreEmpresa.insets = new Insets(0, 0, 5, 5);
+//        gbc_lblNombreEmpresa.gridx = 0;
+//        gbc_lblNombreEmpresa.gridy = 8;
+//        getContentPane().add(lblNombreEmpresa, gbc_lblNombreEmpresa);
+//        lblNombreEmpresa.setVisible(false);
+//        
+//        textFieldNombreEmpresa = new JTextField();
+//        GridBagConstraints gbc_textFieldNombreEmpresa = new GridBagConstraints();
+//        gbc_textFieldNombreEmpresa.gridwidth = 3;
+//        gbc_textFieldNombreEmpresa.insets = new Insets(0, 0, 5, 0);
+//        gbc_textFieldNombreEmpresa.fill = GridBagConstraints.HORIZONTAL;
+//        gbc_textFieldNombreEmpresa.gridx = 1;
+//        gbc_textFieldNombreEmpresa.gridy = 8;
+//        getContentPane().add(textFieldNombreEmpresa, gbc_textFieldNombreEmpresa);
+//        textFieldNombreEmpresa.setColumns(10);
+//        textFieldNombreEmpresa.setVisible(false);
                 
         descripcionLabel = new JLabel("Descripción general");
         descripcionLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -420,7 +420,8 @@ public class RegistrarUsuario extends JInternalFrame {
         					JOptionPane.ERROR_MESSAGE);
         		}
         	} else {
-        		DTEmpresa empInfo = new DTEmpresa(textField.getText(), textFieldNombre.getText(), textFieldApellido.getText(), textFieldMail.getText(), null, textFieldNombreEmpresa.getText(), textPane.getText(), textField_2.getText());
+        		//DTEmpresa empInfo = new DTEmpresa(textField.getText(), textFieldNombre.getText(), textFieldApellido.getText(), textFieldMail.getText(), null, textFieldNombreEmpresa.getText(), textPane.getText(), textField_2.getText());
+        		DTEmpresa empInfo = new DTEmpresa(textField.getText(), textFieldNombre.getText(), textFieldApellido.getText(), textFieldMail.getText(), null, textPane.getText(), textField_2.getText());
         		try {
         			iUsuario.ingresarDatosEmpresa(empInfo);
             		JOptionPane.showMessageDialog(this, "Usuario registrado con éxito", "Registrar Usuario",
@@ -465,7 +466,7 @@ public class RegistrarUsuario extends JInternalFrame {
 		String mailU = textFieldMail.getText();
 		String nacionalidadU = textFieldNacionalidad.getText();
 		Date dateU = dateChooser.getDate();
-		String nombreEmpresaU = textFieldNombreEmpresa.getText();
+		//String nombreEmpresaU = textFieldNombreEmpresa.getText();
 		String descripcionU = textPane.getText();
 		
 		if (!validarNickname(nicknameU)) {
@@ -504,7 +505,7 @@ public class RegistrarUsuario extends JInternalFrame {
 		}
 				
 		if (!esPostulante) {
-			if (nombreU.isEmpty() || apellidoU.isEmpty() || mailU.isEmpty() || descripcionU.isEmpty() || nombreEmpresaU.isEmpty()) {
+			if (nombreU.isEmpty() || apellidoU.isEmpty() || mailU.isEmpty() || descripcionU.isEmpty() /*|| nombreEmpresaU.isEmpty()*/) {
 				JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "Registrar Usuario",
 					JOptionPane.ERROR_MESSAGE);
 				return false;
@@ -526,7 +527,7 @@ public class RegistrarUsuario extends JInternalFrame {
         textFieldNacionalidad.setText("");
         textPane.setText("");
         textField_2.setText("");
-        textFieldNombreEmpresa.setText("");
+        //textFieldNombreEmpresa.setText("");
         dateChooser.setDate(null);
     }
 }

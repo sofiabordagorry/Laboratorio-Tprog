@@ -11,13 +11,13 @@ import excepciones.OfertasLaboralesNoExistenException;
 import excepciones.UsuariosNoExistenException;
 import excepciones.ExisteUnUsuarioYaRegistradoException;
 
-import java.util.List;
+//import java.util.List;
 
 import excepciones.EmpresasNoExistenException;
 
 
 public interface IUsuario {
-	public abstract void modificarEmpresa(String nick, String nom,String ap, String nomE, String desc, String l);
+	public abstract void modificarEmpresa(String nick, String nom,String ap/*, String nomE*/, String desc, String l);
 	public abstract void modificarPostulante(String nick, String nom, String ap, LocalDate f, String nac);
 	public abstract DTOfertaLaboral[] listarOfertasLaborales(String nomEmpresa) throws OfertasLaboralesNoExistenException;
 	public abstract DTUsuario mostrarInformacionUsuario(String nickname);

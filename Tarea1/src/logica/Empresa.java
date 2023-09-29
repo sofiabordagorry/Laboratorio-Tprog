@@ -6,31 +6,31 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.HashMap;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
+//import java.util.HashMap;
+//import java.util.Iterator;
+//import java.util.Map;
+//import java.util.Map.Entry;
 
 
 public class Empresa extends Usuario {
 	
-	private String nombreEmpresa;
+	//private String nombreEmpresa;
 	private String descripcion;
 	private String link;
 	private Map<String, OfertaLaboral> ofertasLaborales;
 	
-	public Empresa(String nickname, String nombre, String apellido, String correo, String nombreEmpresa, String descripcion, String link) {
+	public Empresa(String nickname, String nombre, String apellido, String correo/*, String nombreEmpresa*/, String descripcion, String link) {
 		super(nickname, nombre, apellido, correo);
-		this.nombreEmpresa = nombreEmpresa;
+		//this.nombreEmpresa = nombreEmpresa;
 		this.descripcion = descripcion;
 		this.link = link;
 		this.ofertasLaborales = new HashMap<>();
 
 	} 
 	
-	public String getNombreEmpresa() {
-		return this.nombreEmpresa;
-	}
+//	public String getNombreEmpresa() {
+//		return this.nombreEmpresa;
+//	}
 	
 	public String getDescripcion() {
 		return this.descripcion;
@@ -44,9 +44,9 @@ public class Empresa extends Usuario {
 		return this.link;
 	}
 	
-	public void setNombreEmpresa(String nombreEmpresa) {
-		this.nombreEmpresa = nombreEmpresa;
-	}
+//	public void setNombreEmpresa(String nombreEmpresa) {
+//		this.nombreEmpresa = nombreEmpresa;
+//	}
 	
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
@@ -62,7 +62,7 @@ public class Empresa extends Usuario {
 	
 	public DTEmpresa getDataEmpresaALO() {
 		return new DTEmpresa(this.getNickname(), this.getNombre(), this.getApellido(),
-				this.getCorreo(), this.getNombreEmpresa(),this.getDescripcion(), 
+				this.getCorreo()/*, this.getNombreEmpresa()*/,this.getDescripcion(), 
 				this.getLink());
 	}
 	
@@ -120,7 +120,7 @@ public class Empresa extends Usuario {
 				ofertasLab.put(entry.getKey(), entry.getValue().getDataOfertaLaboral());
 			}
 		}
-			DTEmpresa dtE = new DTEmpresa(this.getNickname(), this.getNombre(), this.getApellido(), this.getCorreo(), ofertasLab, this.getNombreEmpresa(), this.getDescripcion(), this.getLink());
+			DTEmpresa dtE = new DTEmpresa(this.getNickname(), this.getNombre(), this.getApellido(), this.getCorreo(), ofertasLab/*, this.getNombreEmpresa()*/, this.getDescripcion(), this.getLink());
 			return dtE;
 	}
 	
@@ -129,10 +129,10 @@ public class Empresa extends Usuario {
 
 	}
 	
-	public void modificarDatos(String nombre, String apellido, String nomEmp, String desc, String l) {
+	public void modificarDatos(String nombre, String apellido/*, String nomEmp*/, String desc, String l) {
 		this.setNombre(nombre);
 		this.setApellido(apellido);
-		this.setNombreEmpresa(nomEmp);
+		//this.setNombreEmpresa(nomEmp);
 		this.setDescripcion(desc);
 		this.setLink(l);
 	}
