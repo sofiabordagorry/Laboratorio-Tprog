@@ -12,10 +12,8 @@ import excepciones.EmpresasNoExistenException;
 import excepciones.PostulantesNoExistenException;
 import excepciones.YaSePostuloException;
 
-//import java.time.LocalDate;
 import java.util.Map;
 
-//import excepciones.EmpresasNoExistenException;
 import excepciones.NoExistenEmpresasOfertasLaboralesException;
 import excepciones.OfertasLaboralesNoExistenException;
 import excepciones.UsuariosNoExistenException;
@@ -67,7 +65,7 @@ public class ControladorUsuario implements IUsuario {
 		Usuario user = m.buscarUsuario(emp.getNickname());
 		if (user == null) {
 			if(this.existeMail(emp.getCorreo()) == false) {
-				Empresa new_user = new Empresa(emp.getNickname(), emp.getNombre(), emp.getApellido(), emp.getCorreo()/*, emp.getNombreDeEmpresa()*/, emp.getDescripcion(), emp.getLink());
+				Empresa new_user = new Empresa(emp.getNickname(), emp.getNombre(), emp.getApellido(), emp.getCorreo(), emp.getDescripcion(), emp.getLink());
 				m.agregarEmpresa(new_user);
 			} else {
 				throw new ExisteUnUsuarioYaRegistradoException("Existe un usuario ya registrado con ese mail");
@@ -232,10 +230,10 @@ public class ControladorUsuario implements IUsuario {
 		}
 	}
 
-	public void modificarEmpresa(String nick, String nom, String ap/*, String nomE*/, String desc, String l) {
+	public void modificarEmpresa(String nick, String nom, String ap, String desc, String l) {
 		ManejadorUsuario iMU = ManejadorUsuario.getInstancia();
 		Empresa e = iMU.buscarEmpresa(nick);
-		e.modificarDatos(nom, ap/*, nomE*/, desc, l);
+		e.modificarDatos(nom, ap, desc, l);
 	}
 
 	public void modificarPostulante(String nick, String nom, String ap, LocalDate f, String nac) {

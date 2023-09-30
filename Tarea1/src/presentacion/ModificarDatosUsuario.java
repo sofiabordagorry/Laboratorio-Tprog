@@ -310,7 +310,6 @@ public class ModificarDatosUsuario extends JInternalFrame {
         	Date date = Date.from(selectedPost.getFechaDeNacimiento().atStartOfDay(ZoneId.systemDefault()).toInstant());
         	dateChooser.setDate(date);
         	dateChooser.setEnabled(true);
-        	//textFechaNomEmp.setText(selectedPost.getFechaDeNacimiento().toString());
         	textNacLink.setText(selectedPost.getNacionalidad());
         	textNacLink.setEditable(true);
         }else if(u instanceof DTEmpresa) {
@@ -323,10 +322,8 @@ public class ModificarDatosUsuario extends JInternalFrame {
         	textFechaNomEmp.setEditable(true);
         	lblFechaNomEmp.setVisible(false);
         	textFechaNomEmp.setVisible(false);
-        	//lblFechaNomEmp.setText("Nombre de Empresa:");
         	lblNacLink.setText("Link:");
         	DTEmpresa selectedEmp = (DTEmpresa) u;
-        	//textFechaNomEmp.setText(selectedEmp.getNombreDeEmpresa());
         	textNacLink.setText(selectedEmp.getLink());
         	textNacLink.setEditable(true);
         	textAreaDescripcion.setText(selectedEmp.getDescripcion());
