@@ -198,7 +198,24 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 		oferta.setEstado(e);
 	}
 
-	
+	public DTOfertaLaboral[] listarTodasOfertasLaborales() throws OfertasLaboralesNoExistenNingunaException{
+		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
+		Map<String, OfertaLaboral> ols = mol.getOfertasLaborales();
+		if(ols.size() == 0) {
+			System.out.println("ninguna ol");
+		}
+		if(ols.size() != 0) {
+			DTOfertaLaboral[] todasOls = new DTOfertaLaboral[ols.size()];
+			int i = 0;
+			for(Map.Entry<String, OfertaLaboral> entry : ols.entrySet()) {
+				todasOls[i] = entry.getValue().getDataOfertaLaboral();
+				i++;
+			}
+			return todasOls;
+		} else {
+			throw new OfertasLaboralesNoExistenNingunaException("No existen Ofertas Laborales");
+		}
+	}
 	
 }
 

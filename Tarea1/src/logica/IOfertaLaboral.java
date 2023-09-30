@@ -32,5 +32,6 @@ public interface IOfertaLaboral {
 	
 	public abstract void agregarTipoAPaquete(int cantidad, String tipPaquete, String tipTipo) throws TipoYaAgragadoException;
 	public abstract DTOfertaLaboral mostrarDatosOfertaLaboral(String OfertaLaboral);
+	public abstract DTOfertaLaboral[] listarTodasOfertasLaborales() throws OfertasLaboralesNoExistenNingunaException;
 
 }

@@ -1,8 +1,8 @@
-package excepciones;
+package exceptions;
 
 @SuppressWarnings("serial")
-public class EmpresaSinOfertasException extends Exception{
-	public EmpresaSinOfertasException(String string) {
+public class OfertasLaboralesNoExistenNingunaException extends Exception{
+	public OfertasLaboralesNoExistenNingunaException(String string) {
 		super(string);
 	}
 }
