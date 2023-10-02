@@ -178,7 +178,7 @@ class ControladorUsuarioTests {
 		String nombreEmpresa = "NombreEmpresaPrueba";
 		String descripcion = "DescripcionPrueba";
 		String link = "LinkPrueba";
-		DTEmpresa emp = new DTEmpresa(nickname, nombre, apellido, correo, nombreEmpresa, descripcion, link);
+		DTEmpresa emp = new DTEmpresa(nickname, nombre, apellido, correo, descripcion, link);
 		try {
 			cu.ingresarDatosEmpresa(emp);
 			DTEmpresa[] listaE = cu.listarEmpresasAOL();
@@ -186,7 +186,6 @@ class ControladorUsuarioTests {
 			assertEquals(listaE[0].getNickname(), nickname);
 			assertEquals(listaE[0].getApellido(), apellido);
 			assertEquals(listaE[0].getCorreo(), correo);
-			assertEquals(listaE[0].getNombreDeEmpresa(), nombreEmpresa);
 			assertEquals(listaE[0].getDescripcion(), descripcion);
 			assertEquals(listaE[0].getLink(), link);
 		} catch (ExisteUnUsuarioYaRegistradoException e) {
@@ -208,10 +207,9 @@ class ControladorUsuarioTests {
 		String nombre = "NombrePrueba";
 		String apellido = "ApellidoPrueba";
 		String correo = "correoPrueba3@gmail.com";
-		String nombreEmpresa = "NombreEmpresaPrueba";
 		String descripcion = "DescripcionPrueba";
 		String link = "LinkPrueba";
-		DTEmpresa emp = new DTEmpresa(nickname, nombre, apellido, correo, nombreEmpresa, descripcion, link);
+		DTEmpresa emp = new DTEmpresa(nickname, nombre, apellido, correo, descripcion, link);
 		
 		//Datos de tipo
 		String nombreTipo = "Nombre Tipo Test ListarEmpresasOK";
@@ -275,10 +273,9 @@ class ControladorUsuarioTests {
 		        String nombre = "NombrePrueba";
 		        String apellido = "ApellidoPrueba";
 		        String correo = "correoPrueba3@gmail.com";
-		        String nombreEmpresa = "NombreEmpresaPrueba";
 		        String descripcion = "DescripcionPrueba";
 		        String link = "LinkPrueba";
-		        DTEmpresa emp = new DTEmpresa(nickname, nombre, apellido, correo, nombreEmpresa, descripcion, link);
+		        DTEmpresa emp = new DTEmpresa(nickname, nombre, apellido, correo, descripcion, link);
 
 		        //Datos de tipo
 		        String nombreTipo = "Nombre Tipo Test ListarEmpresasOK";
@@ -373,10 +370,9 @@ class ControladorUsuarioTests {
     String nombre = "NombrePrueba";
     String apellido = "ApellidoPrueba";
     String correo = "correoPrueba3@gmail.com";
-    String nombreEmpresa = "NombreEmpresaPrueba";
     String descripcion = "DescripcionPrueba";
     String link = "LinkPrueba";
-    DTEmpresa emp = new DTEmpresa(nickname, nombre, apellido, correo, nombreEmpresa, descripcion, link);
+    DTEmpresa emp = new DTEmpresa(nickname, nombre, apellido, correo, descripcion, link);
 
     //Datos de tipo
     String nombreTipo2 = "Nombre2 Tipo Test ListarEmpresasOK";
@@ -465,10 +461,9 @@ class ControladorUsuarioTests {
 		String nombre = "NombrePrueba";
 		String apellido = "ApellidoPrueba";
 		String correo = "correoPrueba3@gmail.com";
-		String nombreEmpresa = "NombreEmpresaPrueba";
 		String descripcion = "DescripcionPrueba";
 		String link = "LinkPrueba";
-		DTEmpresa emp = new DTEmpresa(nickname, nombre, apellido, correo, nombreEmpresa, descripcion, link);
+		DTEmpresa emp = new DTEmpresa(nickname, nombre, apellido, correo, descripcion, link);
 		
        	try {
 			cu.ingresarDatosEmpresa(emp);
@@ -485,10 +480,9 @@ class ControladorUsuarioTests {
 		String nombre = "NombrePrueba";
 		String apellido = "ApellidoPrueba";
 		String correo = "correoPrueba3@gmail.com";
-		String nombreEmpresa = "NombreEmpresaPrueba";
 		String descripcion = "DescripcionPrueba";
 		String link = "LinkPrueba";
-		DTEmpresa emp = new DTEmpresa(nickname, nombre, apellido, correo, nombreEmpresa, descripcion, link);
+		DTEmpresa emp = new DTEmpresa(nickname, nombre, apellido, correo, descripcion, link);
 		try {
 			cu.ingresarDatosEmpresa(emp);
 			DTUsuario[] usu = new DTEmpresa[1];
@@ -544,10 +538,9 @@ class ControladorUsuarioTests {
 		String nombreE = "NombrePrueba";
 		String apellidoE = "ApellidoPrueba";
 		String correoE = "correoPrueba3@gmail.com";
-		String nombreEmpresa = "NombreEmpresaPrueba";
 		String descripcion = "DescripcionPrueba";
 		String link = "LinkPrueba";
-		DTEmpresa emp = new DTEmpresa(nicknameE, nombreE, apellidoE, correoE, nombreEmpresa, descripcion, link);
+		DTEmpresa emp = new DTEmpresa(nicknameE, nombreE, apellidoE, correoE, descripcion, link);
 		try {
 			cu.ingresarDatosEmpresa(emp);
 			cu.ingresarDatosPostulante(dataP);
@@ -602,10 +595,9 @@ class ControladorUsuarioTests {
 		String apellidoTest = "Apellido Test";
 		String correoTest = "Correo Test RegUsuOK";
 		Map<String, DTOfertaLaboral> ofertasLaboralesTest = new HashMap<>();
-		String nombreEmpresaTest = "Nombre Empresa Test RegUsuOK";
 		String descripcionTest = "Descripcion Test RegUsuOK";
 		String linkTest = "Link Test RegUsuOK";
-		DTEmpresa uEmp = new DTEmpresa(nicknameTest, nombreTest, apellidoTest, correoTest, ofertasLaboralesTest, nombreEmpresaTest, descripcionTest, linkTest);
+		DTEmpresa uEmp = new DTEmpresa(nicknameTest, nombreTest, apellidoTest, correoTest, ofertasLaboralesTest, descripcionTest, linkTest);
 		try {
 			cu.ingresarDatosEmpresa(uEmp);
 			DTUsuario du = cu.mostrarInformacionUsuario(nicknameTest);
@@ -617,7 +609,6 @@ class ControladorUsuarioTests {
 			assertEquals(de.getCorreo(), correoTest);
 			assertEquals(de.getDTOfertasLaborales(), ofertasLaboralesTest);
 			assertEquals(de.getDescripcion(), descripcionTest);
-			assertEquals(de.getNombreDeEmpresa(), nombreEmpresaTest);
 			assertEquals(de.getLink(), linkTest);
 		}catch(ExisteUnUsuarioYaRegistradoException e) {
 			fail(e.getMessage());
@@ -635,7 +626,7 @@ class ControladorUsuarioTests {
 		String nombreEmpresaTest = "Nombre Empresa Test RegUsuRepe";
 		String descripcionTest = "Descripcion Test RegUsuRepe";
 		String linkTest = "Link Test RegUsuRepe";
-		DTEmpresa uEmp = new DTEmpresa(nicknameTest, nombreTest, apellidoTest, correoTest, ofertasLaboralesTest, nombreEmpresaTest, descripcionTest, linkTest);
+		DTEmpresa uEmp = new DTEmpresa(nicknameTest, nombreTest, apellidoTest, correoTest, ofertasLaboralesTest, descripcionTest, linkTest);
 		try {
 			cu.ingresarDatosEmpresa(uEmp);
 		}catch(ExisteUnUsuarioYaRegistradoException e){
@@ -652,11 +643,10 @@ class ControladorUsuarioTests {
 		String apellidoTest = "Apellido Test ListarEmpresasOK";
 		String correoTest = "Correo Test ListarEmpresasOK";
 		Map<String, DTOfertaLaboral> ofertasLaboralesTest = new HashMap<>();
-		String nombreEmpresaTest = "Nombre Empresa Test ListarEmpresasOK";
 		String descripcionTest = "Descripcion Test ListarEmpresasOK";
 		String linkTest = "Link Test ListarEmpresasOK";
 		DTEmpresa[] empresas = new DTEmpresa[1];
-		DTEmpresa uEmp = new DTEmpresa(nicknameTest, nombreTest, apellidoTest, correoTest, ofertasLaboralesTest, nombreEmpresaTest, descripcionTest, linkTest);
+		DTEmpresa uEmp = new DTEmpresa(nicknameTest, nombreTest, apellidoTest, correoTest, ofertasLaboralesTest, descripcionTest, linkTest);
 		empresas[0] = uEmp;
 		
 		String nombreTipo = "Nombre Tipo Test ListarEmpresasOK";
@@ -704,7 +694,6 @@ class ControladorUsuarioTests {
 			assertEquals(dt1.getRemuneracion(), remuneracionOL);
 
 			assertEquals(emps[0].getDescripcion(), empresas[0].getDescripcion());
-			assertEquals(emps[0].getNombreDeEmpresa(), empresas[0].getNombreDeEmpresa());
 			assertEquals(emps[0].getLink(), empresas[0].getLink());
 		}catch(ExisteUnUsuarioYaRegistradoException e) {
 			fail(e.getMessage());
@@ -736,10 +725,9 @@ class ControladorUsuarioTests {
 		String apellidoTest = "Apellido Test ListarEmpresasOK";
 		String correoTest = "Correo Test ListarEmpresasOK";
 		Map<String, DTOfertaLaboral> ofertasLaboralesTest = new HashMap<>();
-		String nombreEmpresaTest = "Nombre Empresa Test ListarEmpresasOK";
 		String descripcionTest = "Descripcion Test ListarEmpresasOK";
 		String linkTest = "Link Test ListarEmpresasOK";
-		DTEmpresa uEmp = new DTEmpresa(nicknameTest, nombreTest, apellidoTest, correoTest, ofertasLaboralesTest, nombreEmpresaTest, descripcionTest, linkTest);
+		DTEmpresa uEmp = new DTEmpresa(nicknameTest, nombreTest, apellidoTest, correoTest, ofertasLaboralesTest, descripcionTest, linkTest);
 		//ManejadorUsuario mu = ManejadorUsuario.getInstancia();
 		try {
 			//int cantEmpresas = mu.getEmpresas().length;
@@ -759,10 +747,9 @@ class ControladorUsuarioTests {
 		String apellidoTest = "Apellido Test ListarEmpresasOK";
 		String correoTest = "Correo Test ListarEmpresasOK";
 		Map<String, DTOfertaLaboral> ofertasLaboralesTest = new HashMap<>();
-		String nombreEmpresaTest = "Nombre Empresa Test ListarEmpresasOK";
 		String descripcionTest = "Descripcion Test ListarEmpresasOK";
 		String linkTest = "Link Test ListarEmpresasOK";
-		DTEmpresa uEmp = new DTEmpresa(nicknameTest, nombreTest, apellidoTest, correoTest, ofertasLaboralesTest, nombreEmpresaTest, descripcionTest, linkTest);
+		DTEmpresa uEmp = new DTEmpresa(nicknameTest, nombreTest, apellidoTest, correoTest, ofertasLaboralesTest, descripcionTest, linkTest);
 		
 		String nombreTipo = "Nombre Tipo Test ListarEmpresasOK";
 		String descripcionTipo = "Descripcion Tipo Test ListarEmpresasOK";
@@ -820,10 +807,9 @@ class ControladorUsuarioTests {
 		String apellidoTest = "Apellido Test ListarEmpresasOK";
 		String correoTest = "Correo Test ListarEmpresasOK";
 		Map<String, DTOfertaLaboral> ofertasLaboralesTest = new HashMap<>();
-		String nombreEmpresaTest = "Nombre Empresa Test ListarEmpresasOK";
 		String descripcionTest = "Descripcion Test ListarEmpresasOK";
 		String linkTest = "Link Test ListarEmpresasOK";
-		DTEmpresa uEmp = new DTEmpresa(nicknameTest, nombreTest, apellidoTest, correoTest, ofertasLaboralesTest, nombreEmpresaTest, descripcionTest, linkTest);
+		DTEmpresa uEmp = new DTEmpresa(nicknameTest, nombreTest, apellidoTest, correoTest, ofertasLaboralesTest, descripcionTest, linkTest);
 		
 
 		try {
@@ -842,15 +828,13 @@ class ControladorUsuarioTests {
 		String apellidoViejo = "ApellidoViejo";
 		String correoViejo = "CorreoViejo";
 		Map<String, DTOfertaLaboral> ofertasLaboralesViejo = new HashMap<>();
-		String nombreEmpresaViejo = "NombreEmpresaViejo";
 		String descripcionViejo = "DescripcionVieja";
 		String linkViejo = "LinkViejo";
 		//DTEmpresa[] empresas = new DTEmpresa[1];
-		DTEmpresa uEmp = new DTEmpresa(nicknameViejo, nombreViejo, apellidoViejo, correoViejo, ofertasLaboralesViejo, nombreEmpresaViejo, descripcionViejo, linkViejo);
+		DTEmpresa uEmp = new DTEmpresa(nicknameViejo, nombreViejo, apellidoViejo, correoViejo, ofertasLaboralesViejo, descripcionViejo, linkViejo);
 		
 		String nombreNuevo = "NombreNuevo";
 		String apellidoNuevo = "ApellidoNuevo";
-		String nombreEmpresaNuevo = "NombreEmpresaNuevo";
 		String descripcionNuevo = "DescripcionNuevo";
 		String linkNuevo = "LinkNuevo";
 		
@@ -861,13 +845,12 @@ class ControladorUsuarioTests {
 			e.printStackTrace();
 		}
 		
-		cu.modificarEmpresa(nicknameViejo, nombreNuevo, apellidoNuevo, nombreEmpresaNuevo, descripcionNuevo, linkNuevo);
+		cu.modificarEmpresa(nicknameViejo, nombreNuevo, apellidoNuevo, descripcionNuevo, linkNuevo);
 		
 		DTUsuario du = cu.mostrarInformacionUsuario(nicknameViejo);
 		DTEmpresa de = (DTEmpresa) du;
 		assertEquals(de.getNombre(), nombreNuevo);
 		assertEquals(de.getApellido(), apellidoNuevo);
-		assertEquals(de.getNombreDeEmpresa(), nombreEmpresaNuevo);
 		assertEquals(de.getDescripcion(), descripcionNuevo);
 		assertEquals(de.getLink(), linkNuevo);
 	}

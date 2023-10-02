@@ -1,4 +1,4 @@
-package exceptions;
+package excepciones;
 
 @SuppressWarnings("serial")
 public class EmpresaSinOfertasException extends Exception{

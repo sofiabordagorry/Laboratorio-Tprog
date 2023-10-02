@@ -3,6 +3,7 @@ package logica;
 import excepciones.TipoPubNoExistenException;
 import excepciones.KeywordsNoExistenException;
 import excepciones.OfertaLaboralRepetidaException;
+import excepciones.OfertasLaboralesNoExistenNingunaException;
 import excepciones.PaqueteRepetidoException;
 
 import java.util.Date;

@@ -5,6 +5,7 @@ import excepciones.NoExistenPaquetesException;
 import excepciones.KeywordsNoExistenException;
 import excepciones.TipoPubNoExistenException;
 import excepciones.OfertaLaboralRepetidaException;
+import excepciones.OfertasLaboralesNoExistenNingunaException;
 import excepciones.PaqueteRepetidoException;
 
 import java.util.Map;

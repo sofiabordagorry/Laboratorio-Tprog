@@ -40,6 +40,12 @@ import javax.swing.JComboBox;
 import java.awt.Font;
 import javax.swing.JList;
 
+import javax.swing.JSpinner;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+
 @SuppressWarnings("serial")
 public class AltaOfertaLaboral extends JInternalFrame {
 	
@@ -48,7 +54,9 @@ public class AltaOfertaLaboral extends JInternalFrame {
 	
 	private JTextField textFieldNombre;
 	private JTextArea textAreaDescripcion;
-	private JTextField textFieldHorario;
+    private JTextField textFieldHorario; // Cambiado a JTextField para mostrar el horario
+	private JSpinner spinnerHoraInicio;
+	private JSpinner spinnerHoraFin;
 	private JTextField textFieldRemuneracion;
 	private JTextField textFieldCiudad;
 	private JTextField textFieldDepartamento;
@@ -71,16 +79,16 @@ public class AltaOfertaLaboral extends JInternalFrame {
         setBounds(10, 10, 574, 591);
         
         GridBagLayout gridBagLayout = new GridBagLayout();
-        gridBagLayout.columnWidths = new int[]{100, 150, 150, 100};
+        gridBagLayout.columnWidths = new int[]{100, 0, 150, 0, 0, 0, 150, 100};
         gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 100, 0, 0, 70, 0, 0, 0, 0, 0, 0, 0};
-        gridBagLayout.columnWeights = new double[]{0.0, 1.0, 1.0, 0.0};
+        gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0};
         gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
         getContentPane().setLayout(gridBagLayout);
         
         JLabel lblNewLabel_3 = new JLabel("Elija e ingrese los siguientes datos: ");
         lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 13));
         GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
-        gbc_lblNewLabel_3.gridwidth = 4;
+        gbc_lblNewLabel_3.gridwidth = 8;
         gbc_lblNewLabel_3.insets = new Insets(8, 0, 5, 0);
         gbc_lblNewLabel_3.gridx = 0;
         gbc_lblNewLabel_3.gridy = 0;
@@ -89,7 +97,7 @@ public class AltaOfertaLaboral extends JInternalFrame {
         JLabel lblNewLabel = new JLabel("Empresas:");
         lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
         GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-        gbc_lblNewLabel.gridwidth = 4;
+        gbc_lblNewLabel.gridwidth = 8;
         gbc_lblNewLabel.insets = new Insets(5, 0, 5, 0);
         gbc_lblNewLabel.gridx = 0;
         gbc_lblNewLabel.gridy = 1;
@@ -97,7 +105,7 @@ public class AltaOfertaLaboral extends JInternalFrame {
         
         comboBoxEmpresas = new JComboBox<DTEmpresa>();
         GridBagConstraints gbc_comboBoxEmpresas = new GridBagConstraints();
-        gbc_comboBoxEmpresas.gridwidth = 4;
+        gbc_comboBoxEmpresas.gridwidth = 8;
         gbc_comboBoxEmpresas.insets = new Insets(0, 10, 8, 10);
         gbc_comboBoxEmpresas.fill = GridBagConstraints.HORIZONTAL;
         gbc_comboBoxEmpresas.gridx = 0;
@@ -107,7 +115,7 @@ public class AltaOfertaLaboral extends JInternalFrame {
         JLabel lblNewLabel_1 = new JLabel("Tipos de Publicaciones de Ofertas Laborales: ");
         lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
         GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-        gbc_lblNewLabel_1.gridwidth = 4;
+        gbc_lblNewLabel_1.gridwidth = 8;
         gbc_lblNewLabel_1.insets = new Insets(5, 0, 5, 0);
         gbc_lblNewLabel_1.gridx = 0;
         gbc_lblNewLabel_1.gridy = 3;
@@ -115,7 +123,7 @@ public class AltaOfertaLaboral extends JInternalFrame {
         
         comboBoxTipPubOL = new JComboBox<DTTipo>();
         GridBagConstraints gbc_comboBoxTipPubOL = new GridBagConstraints();
-        gbc_comboBoxTipPubOL.gridwidth = 4;
+        gbc_comboBoxTipPubOL.gridwidth = 8;
         gbc_comboBoxTipPubOL.insets = new Insets(0, 10, 8, 10);
         gbc_comboBoxTipPubOL.fill = GridBagConstraints.HORIZONTAL;
         gbc_comboBoxTipPubOL.gridx = 0;
@@ -126,7 +134,7 @@ public class AltaOfertaLaboral extends JInternalFrame {
         lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
         GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
         gbc_lblNewLabel_2.insets = new Insets(5, 0, 5, 0);
-        gbc_lblNewLabel_2.gridwidth = 4;
+        gbc_lblNewLabel_2.gridwidth = 8;
         gbc_lblNewLabel_2.gridx = 0;
         gbc_lblNewLabel_2.gridy = 5;
         getContentPane().add(lblNewLabel_2, gbc_lblNewLabel_2);
@@ -142,10 +150,10 @@ public class AltaOfertaLaboral extends JInternalFrame {
         
         JScrollPane scrollPane = new JScrollPane(listKeys);
         GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-        gbc_scrollPane.gridwidth = 2;
+        gbc_scrollPane.gridwidth = 5;
         gbc_scrollPane.insets = new Insets(0, 10, 8, 10);
         gbc_scrollPane.fill = GridBagConstraints.BOTH;
-        gbc_scrollPane.gridx = 1;
+        gbc_scrollPane.gridx = 2;
         gbc_scrollPane.gridy = 6;
 
         getContentPane().add(scrollPane, gbc_scrollPane);
@@ -162,9 +170,9 @@ public class AltaOfertaLaboral extends JInternalFrame {
         textFieldNombre = new JTextField();
         GridBagConstraints gbc_textFieldNombre = new GridBagConstraints();
         gbc_textFieldNombre.fill = GridBagConstraints.HORIZONTAL;
-        gbc_textFieldNombre.gridwidth = 3;
+        gbc_textFieldNombre.gridwidth = 6;
         gbc_textFieldNombre.insets = new Insets(0, 0, 5, 40);
-        gbc_textFieldNombre.gridx = 1;
+        gbc_textFieldNombre.gridx = 2;
         gbc_textFieldNombre.gridy = 8;
         getContentPane().add(textFieldNombre, gbc_textFieldNombre);
         textFieldNombre.setColumns(10);
@@ -180,10 +188,10 @@ public class AltaOfertaLaboral extends JInternalFrame {
         
         JScrollPane scrollPane_1 = new JScrollPane();
         GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
-        gbc_scrollPane_1.gridwidth = 3;
+        gbc_scrollPane_1.gridwidth = 6;
         gbc_scrollPane_1.insets = new Insets(0, 0, 5, 40);
         gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
-        gbc_scrollPane_1.gridx = 1;
+        gbc_scrollPane_1.gridx = 2;
         gbc_scrollPane_1.gridy = 9;
         getContentPane().add(scrollPane_1, gbc_scrollPane_1);
         
@@ -193,6 +201,8 @@ public class AltaOfertaLaboral extends JInternalFrame {
         textAreaDescripcion.setEditable(true);
         scrollPane_1.setViewportView(textAreaDescripcion);
         
+
+     // JLabel para describir el campo de horario
         JLabel lblNewLabel_9 = new JLabel("Horario:");
         lblNewLabel_9.setFont(new Font("Tahoma", Font.PLAIN, 12));
         GridBagConstraints gbc_lblNewLabel_9 = new GridBagConstraints();
@@ -201,17 +211,74 @@ public class AltaOfertaLaboral extends JInternalFrame {
         gbc_lblNewLabel_9.gridx = 0;
         gbc_lblNewLabel_9.gridy = 10;
         getContentPane().add(lblNewLabel_9, gbc_lblNewLabel_9);
-        
+
+        // JSpinner para seleccionar la hora de inicio
+        spinnerHoraInicio = new JSpinner(new SpinnerDateModel());
+        JSpinner.DateEditor dateEditorInicio = new JSpinner.DateEditor(spinnerHoraInicio, "HH:mm");
+        spinnerHoraInicio.setEditor(dateEditorInicio);
+        GridBagConstraints gbc_spinnerHoraInicio = new GridBagConstraints();
+        gbc_spinnerHoraInicio.fill = GridBagConstraints.HORIZONTAL;
+        gbc_spinnerHoraInicio.insets = new Insets(0, 0, 5, 5);
+        gbc_spinnerHoraInicio.gridx = 3;
+        gbc_spinnerHoraInicio.gridy = 10;
+        getContentPane().add(spinnerHoraInicio, gbc_spinnerHoraInicio);
+
+        // JLabel para el separador "-"
+        JLabel lblSeparador = new JLabel(" - ");
+        GridBagConstraints gbc_lblSeparador = new GridBagConstraints();
+        gbc_lblSeparador.insets = new Insets(0, 0, 5, 5);
+        gbc_lblSeparador.gridx = 4;
+        gbc_lblSeparador.gridy = 10;
+        getContentPane().add(lblSeparador, gbc_lblSeparador);
+
+        // JSpinner para seleccionar la hora de fin
+        spinnerHoraFin = new JSpinner(new SpinnerDateModel());
+        JSpinner.DateEditor dateEditorFin = new JSpinner.DateEditor(spinnerHoraFin, "HH:mm");
+        spinnerHoraFin.setEditor(dateEditorFin);
+        GridBagConstraints gbc_spinnerHoraFin = new GridBagConstraints();
+        gbc_spinnerHoraFin.fill = GridBagConstraints.HORIZONTAL;
+        gbc_spinnerHoraFin.insets = new Insets(0, 0, 5, 5);
+        gbc_spinnerHoraFin.gridx = 5;
+        gbc_spinnerHoraFin.gridy = 10;
+        getContentPane().add(spinnerHoraFin, gbc_spinnerHoraFin);
+
+        // JTextField para mostrar el horario seleccionado
         textFieldHorario = new JTextField();
+        textFieldHorario.setEditable(false); // Establece el JTextField como no editable
         GridBagConstraints gbc_textFieldHorario = new GridBagConstraints();
         gbc_textFieldHorario.fill = GridBagConstraints.HORIZONTAL;
-        gbc_textFieldHorario.gridwidth = 3;
         gbc_textFieldHorario.insets = new Insets(0, 0, 5, 40);
-        gbc_textFieldHorario.gridx = 1;
+        gbc_textFieldHorario.gridx = 6; // Cambia el valor del gridx para colocarlo al lado de los JSpinner
         gbc_textFieldHorario.gridy = 10;
         getContentPane().add(textFieldHorario, gbc_textFieldHorario);
         textFieldHorario.setColumns(10);
-        
+
+     // Agrega un ChangeListener a los JSpinner para actualizar el JTextField y validar las horas
+        ChangeListener changeListener = new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                Date horaInicio = (Date) spinnerHoraInicio.getValue();
+                Date horaFin = (Date) spinnerHoraFin.getValue();
+
+                if (horaFin.before(horaInicio)) {
+                    // La hora final es menor que la hora inicial, muestra un mensaje de error
+                    JOptionPane.showMessageDialog(null, "La hora final debe ser mayor que la hora inicial", "Error", JOptionPane.ERROR_MESSAGE);
+                    
+                    // Restaura la hora final a la hora inicial y actualiza el JTextField
+                    spinnerHoraFin.setValue(horaInicio);
+                    horaFin = horaInicio;
+                }
+
+                SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+                String horarioString = dateFormat.format(horaInicio) + " - " + dateFormat.format(horaFin);
+                textFieldHorario.setText(horarioString);
+            }
+        };
+
+        spinnerHoraInicio.addChangeListener(changeListener);
+        spinnerHoraFin.addChangeListener(changeListener);
+
+
         JLabel lblNewLabel_6 = new JLabel("Remuneración: ");
         lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 12));
         GridBagConstraints gbc_lblNewLabel_6 = new GridBagConstraints();
@@ -224,9 +291,9 @@ public class AltaOfertaLaboral extends JInternalFrame {
         textFieldRemuneracion = new JTextField();
         GridBagConstraints gbc_textFieldRemuneracion = new GridBagConstraints();
         gbc_textFieldRemuneracion.fill = GridBagConstraints.HORIZONTAL;
-        gbc_textFieldRemuneracion.gridwidth = 3;
+        gbc_textFieldRemuneracion.gridwidth = 6;
         gbc_textFieldRemuneracion.insets = new Insets(0, 0, 5, 40);
-        gbc_textFieldRemuneracion.gridx = 1;
+        gbc_textFieldRemuneracion.gridx = 2;
         gbc_textFieldRemuneracion.gridy = 11;
         getContentPane().add(textFieldRemuneracion, gbc_textFieldRemuneracion);
         textFieldRemuneracion.setColumns(10);
@@ -243,9 +310,9 @@ public class AltaOfertaLaboral extends JInternalFrame {
         textFieldCiudad = new JTextField();
         GridBagConstraints gbc_textFieldCiudad = new GridBagConstraints();
         gbc_textFieldCiudad.fill = GridBagConstraints.HORIZONTAL;
-        gbc_textFieldCiudad.gridwidth = 3;
+        gbc_textFieldCiudad.gridwidth = 6;
         gbc_textFieldCiudad.insets = new Insets(0, 0, 5, 40);
-        gbc_textFieldCiudad.gridx = 1;
+        gbc_textFieldCiudad.gridx = 2;
         gbc_textFieldCiudad.gridy = 12;
         getContentPane().add(textFieldCiudad, gbc_textFieldCiudad);
         textFieldCiudad.setColumns(10);
@@ -262,9 +329,9 @@ public class AltaOfertaLaboral extends JInternalFrame {
         textFieldDepartamento = new JTextField();
         GridBagConstraints gbc_textFieldDepartamento = new GridBagConstraints();
         gbc_textFieldDepartamento.fill = GridBagConstraints.HORIZONTAL;
-        gbc_textFieldDepartamento.gridwidth = 3;
+        gbc_textFieldDepartamento.gridwidth = 6;
         gbc_textFieldDepartamento.insets = new Insets(0, 0, 5, 40);
-        gbc_textFieldDepartamento.gridx = 1;
+        gbc_textFieldDepartamento.gridx = 2;
         gbc_textFieldDepartamento.gridy = 13;
         getContentPane().add(textFieldDepartamento, gbc_textFieldDepartamento);
         textFieldDepartamento.setColumns(10);
@@ -288,10 +355,10 @@ public class AltaOfertaLaboral extends JInternalFrame {
         
         dateChooserFechaDeAlta = new JDateChooser();
         GridBagConstraints gbc_dateChooser = new GridBagConstraints();
-        gbc_dateChooser.gridwidth = 3;
+        gbc_dateChooser.gridwidth = 6;
         gbc_dateChooser.insets = new Insets(0, 0, 5, 40);
         gbc_dateChooser.fill = GridBagConstraints.BOTH;
-        gbc_dateChooser.gridx = 1;
+        gbc_dateChooser.gridx = 2;
         gbc_dateChooser.gridy = 14;
         getContentPane().add(dateChooserFechaDeAlta, gbc_dateChooser);
         
@@ -299,7 +366,7 @@ public class AltaOfertaLaboral extends JInternalFrame {
         GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
         gbc_btnCancelar.anchor = GridBagConstraints.WEST;
         gbc_btnCancelar.insets = new Insets(0, 0, 10, 5);
-        gbc_btnCancelar.gridx = 1;
+        gbc_btnCancelar.gridx = 2;
         gbc_btnCancelar.gridy = 15;
         getContentPane().add(btnCancelar, gbc_btnCancelar);
         
@@ -314,7 +381,7 @@ public class AltaOfertaLaboral extends JInternalFrame {
         GridBagConstraints gbc_btnAceptar = new GridBagConstraints();
         gbc_btnAceptar.anchor = GridBagConstraints.WEST;
         gbc_btnAceptar.insets = new Insets(0, 0, 10, 5);
-        gbc_btnAceptar.gridx = 2;
+        gbc_btnAceptar.gridx = 6;
         gbc_btnAceptar.gridy = 15;
         getContentPane().add(btnAceptar, gbc_btnAceptar);
 	}

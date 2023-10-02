@@ -329,7 +329,7 @@ class ControladorOfertaLaboralTests{
 			dataKeywords.put(nombreK,dtk);
 			List<DTPostulacion> dataPostulaciones = new ArrayList<>();
 		 
-		 DTEmpresa dte = new DTEmpresa(nicknameE, nombreE, apellido, correo, ofertasLaborales, nombreDeEmpresa, descripcion, link);
+		 DTEmpresa dte = new DTEmpresa(nicknameE, nombreE, apellido, correo, ofertasLaborales, descripcion, link);
 
 		 
 		try {
@@ -447,7 +447,7 @@ class ControladorOfertaLaboralTests{
 			dataKeywords.put(nombreK,dtk);
 			List<DTPostulacion> dataPostulaciones = new ArrayList<>();
 		 
-		 DTEmpresa dte = new DTEmpresa(nicknameE, nombreE, apellido, correo, ofertasLaborales, nombreDeEmpresa, descripcion, link);
+		 DTEmpresa dte = new DTEmpresa(nicknameE, nombreE, apellido, correo, ofertasLaborales, descripcion, link);
 
 		try {
 			
@@ -536,7 +536,7 @@ class ControladorOfertaLaboralTests{
 		LocalDate fechaAlta = LocalDate.now();
 		Tipo t = new Tipo(nombre, descripcion, exposicion, duracion, costo, fechaAlta);
 		Map<String, Keyword> keywords = new HashMap<>();
-		Empresa emp = new Empresa("a", "b", "c", "d", "e", "f", "g");
+		Empresa emp = new Empresa("a", "b", "c", "d", "e", "f");
 		OfertaLaboral of = new OfertaLaboral("OF1", "DESC", "CIUDAD", "DEPARTAMENTO", "HORARIO", 50f, LocalDate.now(), 50f, t, keywords, emp);
 		mt.agregarTipo(t);
 		mof.agregarOfertaLaboral(of);
