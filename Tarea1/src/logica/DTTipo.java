@@ -20,7 +20,7 @@ public class DTTipo {
 	}
 	
 	public String toString() {
-		return this.nombre + this.exposicion;
+		return this.nombre;
 	}
 	
 	public String getNombre() {
