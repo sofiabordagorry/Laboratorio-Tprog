@@ -1,7 +1,5 @@
 package logica;
 
-
-import excepciones.NoExistenPaquetesException;
 import excepciones.KeywordsNoExistenException;
 import excepciones.TipoPubNoExistenException;
 import excepciones.OfertaLaboralRepetidaException;
@@ -9,8 +7,6 @@ import excepciones.PaqueteRepetidoException;
 
 import java.util.Map;
 import java.util.HashMap;
-import java.util.List;
-import java.util.ArrayList;
 import java.util.Date;
 
 import excepciones.NoHayPaquetesException;
@@ -18,13 +14,7 @@ import excepciones.NoHayTiposException;
 import excepciones.TipoRepetidoException;
 import excepciones.TipoYaAgragadoException;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-
 
 public class ControladorOfertaLaboral implements IOfertaLaboral {
 	public ControladorOfertaLaboral() {
@@ -106,7 +96,7 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 			keys.put(entry.getKey(), mol.buscarKeyword(entry.getKey()));
 		
 		OfertaLaboral olNueva = new OfertaLaboral(ol.getNombre(), ol.getDescripcion(), ol.getCiudad(), ol.getDepartamento(), 
-															ol.getHorario(), ol.getRemuneracion(), ol.getFechaDeAlta(), ol.getCostoAsociado(), t, keys, e);
+															ol.getHorario(), ol.getRemuneracion(), ol.getFechaDeAlta(), ol.getCostoAsociado(), t, keys, e, ol.getImagen());
 		
 		mol.agregarOfertaLaboral(olNueva);
 
@@ -121,7 +111,7 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 			throw new PaqueteRepetidoException("Ya existe el Paquete %s".formatted(datosPaquete.getNombre())); 
 		
 		Paquete nuevoPaquete = new Paquete(datosPaquete.getNombre(), datosPaquete.getDescripcion(), datosPaquete.getPeriodoDeValidez(), 
-		datosPaquete.getDescuento(), 0, datosPaquete.getFechaDeAlta());
+		datosPaquete.getDescuento(), 0, datosPaquete.getFechaDeAlta(), datosPaquete.getImagen());
 		
 		mt.agregarPaquete(nuevoPaquete);
 	}
@@ -156,8 +146,10 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 		String[] dp = new String[mapPaquetes.size()];
 		int i =0;
 		for (Map.Entry<String, Paquete> entry : mapPaquetes.entrySet()) {
-			dp[i] = entry.getKey();
-			i++;
+			if(entry.getValue().getCompra() == null) {
+				dp[i] = entry.getKey();
+				i++;
+			}
 		}
 		return dp;
 	}

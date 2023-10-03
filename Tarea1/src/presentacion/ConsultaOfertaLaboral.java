@@ -31,6 +31,8 @@ import java.util.List;
 import java.util.Map;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -388,6 +390,13 @@ public class ConsultaOfertaLaboral extends JInternalFrame {
 		gbc_btnCancelar.gridx = 0;
 		gbc_btnCancelar.gridy = 14;
 		getContentPane().add(btnCancelar, gbc_btnCancelar);
+		
+        this.addInternalFrameListener(new InternalFrameAdapter() {
+            @Override
+            public void internalFrameClosing(InternalFrameEvent e) {
+                limpiarFormulario();
+            }
+        });
 	}
 	
 	public boolean cargarEmpresas() {
@@ -476,7 +485,21 @@ public class ConsultaOfertaLaboral extends JInternalFrame {
 	public void referenceConsultaUsuario(String nombreOL, String empresa) {
 		cargarEmpresas();
 		cargarOfertasLaborales(empresa);
+		int cantEmps = comboBoxEmpresas.getItemCount();
+		int cantOL = comboBoxOL.getItemCount();
+		for(int i = 0; i < cantEmps; i++) {
+			DTEmpresa e = (DTEmpresa) comboBoxEmpresas.getItemAt(i);
+			if(e.getNickname() .equals(empresa)) {
+				comboBoxEmpresas.setSelectedItem(e);
+			}
+		}
 		
+		for(int i = 0; i < cantOL; i++) {
+			DTOfertaLaboral ol = comboBoxOL.getItemAt(i);
+			if(ol.getNombre().equals(nombreOL)) {
+				comboBoxOL.setSelectedItem(ol);
+			}
+		}
 		comboBoxEmpresas.setSelectedItem(empresa);
 		comboBoxOL.setSelectedItem(nombreOL);
 		cargarDatos(nombreOL);

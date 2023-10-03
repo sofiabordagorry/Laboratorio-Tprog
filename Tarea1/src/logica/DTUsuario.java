@@ -7,6 +7,8 @@ public class DTUsuario {
 	private String nombre;
 	private String apellido;
 	private String correo;
+	private String contrasenia;
+	private byte[] imagen;
 	private Map<String, DTOfertaLaboral> ofertasLaborales;
 	
 	public DTUsuario(String nickname, String nombre, String apellido, String correo, Map<String, DTOfertaLaboral> ofertasLaborales) {
@@ -22,6 +24,33 @@ public class DTUsuario {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.correo = correo;
+	}
+	
+	public DTUsuario(String nickname, String nombre, String apellido, String correo,String contrasenia) {
+		this.nickname = nickname;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.correo = correo;
+		this.contrasenia = contrasenia;
+	}
+	
+	public DTUsuario(String nickname, String nombre, String apellido, String correo, Map<String, DTOfertaLaboral> ofertasLaborales, String contrasenia) {
+		this.nickname = nickname;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.correo = correo;
+		this.ofertasLaborales = ofertasLaborales;
+		this.contrasenia = contrasenia;
+	}
+	
+	public DTUsuario(String nickname, String nombre, String apellido, String correo, Map<String, DTOfertaLaboral> ofertasLaborales, String contrasenia, byte[] image) {
+		this.nickname = nickname;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.correo = correo;
+		this.ofertasLaborales = ofertasLaborales;
+		this.contrasenia = contrasenia;
+		this.imagen = image;
 	}
 	
 	public String getNickname() {
@@ -46,5 +75,13 @@ public class DTUsuario {
 	
 	public String toString() {
 		return this.nickname;
+	}
+
+	public String getContrasenia() {
+		return contrasenia;
+	}
+
+	public byte[] getImagen() {
+		return imagen;
 	}
 }

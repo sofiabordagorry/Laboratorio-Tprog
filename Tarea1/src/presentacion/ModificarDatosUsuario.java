@@ -20,6 +20,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 
 import com.toedter.calendar.JDateChooser;
 
@@ -270,10 +272,24 @@ public class ModificarDatosUsuario extends JInternalFrame {
         gbc_btnAceptar.gridy = 9;
         getContentPane().add(btnAceptar, gbc_btnAceptar);
         
-
+        this.addInternalFrameListener(new InternalFrameAdapter() {
+            @Override
+            public void internalFrameClosing(InternalFrameEvent e) {
+                limpiarFormulario();
+            }
+        });
+        
+    	textFechaNomEmp.setVisible(false);
+    	textNacLink.setVisible(false);
+    	dateChooser.setVisible(false);
+    	lblDescripcion.setVisible(false);
+    	lblFechaNomEmp.setVisible(false);
+    	lblNacLink.setVisible(false);
+    	textAreaDescripcion.setVisible(false);
+    	scrollPaneDescripcion.setVisible(false);
 	}
 	
-    public void cargarUsuarios() {
+    public boolean cargarUsuarios() {
     	DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>();
         try {
         DTUsuario[] us = contUsuario.listarUsuarios();
@@ -281,10 +297,12 @@ public class ModificarDatosUsuario extends JInternalFrame {
 	        	model.addElement(u.getNickname());
 	        }
 	        comboBoxUsuarios.setModel(model);
+	        return true;
         }catch(UsuariosNoExistenException e) {
         	JOptionPane.showMessageDialog(this, e.getMessage(), 
 					"Consulta de Usuario",
 					JOptionPane.ERROR_MESSAGE);
+        	return false;
         }
     }
     
@@ -318,10 +336,12 @@ public class ModificarDatosUsuario extends JInternalFrame {
         	textAreaDescripcion.setEditable(true);
         	lblDescripcion.setVisible(true);
         	dateChooser.setVisible(false);
-        	textFechaNomEmp.setVisible(true);
-        	textFechaNomEmp.setEditable(true);
-        	lblFechaNomEmp.setVisible(false);
-        	textFechaNomEmp.setVisible(false);
+        	//textFechaNomEmp.setVisible(true);
+        	//textFechaNomEmp.setEditable(true);
+        	//lblFechaNomEmp.setVisible(false);
+        	//textFechaNomEmp.setVisible(false);
+        	textNacLink.setVisible(true);
+        	lblNacLink.setVisible(true);
         	lblNacLink.setText("Link:");
         	DTEmpresa selectedEmp = (DTEmpresa) u;
         	textNacLink.setText(selectedEmp.getLink());

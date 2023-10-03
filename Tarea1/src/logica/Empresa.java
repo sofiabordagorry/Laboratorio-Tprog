@@ -12,8 +12,24 @@ public class Empresa extends Usuario {
 	private String link;
 	private Map<String, OfertaLaboral> ofertasLaborales;
 	
-	public Empresa(String nickname, String nombre, String apellido, String correo/*, String nombreEmpresa*/, String descripcion, String link) {
+	public Empresa(String nickname, String nombre, String apellido, String correo, String descripcion, String link) {
 		super(nickname, nombre, apellido, correo);
+		this.descripcion = descripcion;
+		this.link = link;
+		this.ofertasLaborales = new HashMap<>();
+
+	} 
+	
+	public Empresa(String nickname, String nombre, String apellido, String correo, String descripcion, String link, String contrasenia) {
+		super(nickname, nombre, apellido, correo, contrasenia);
+		this.descripcion = descripcion;
+		this.link = link;
+		this.ofertasLaborales = new HashMap<>();
+
+	} 
+	
+	public Empresa(String nickname, String nombre, String apellido, String correo, String descripcion, String link, String contrasenia, byte[] image) {
+		super(nickname, nombre, apellido, correo, contrasenia, image);
 		this.descripcion = descripcion;
 		this.link = link;
 		this.ofertasLaborales = new HashMap<>();

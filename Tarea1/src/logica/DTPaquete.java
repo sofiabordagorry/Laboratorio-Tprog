@@ -11,6 +11,7 @@ public class DTPaquete {
 	private float costoAsociado;
 	private DTPaqueteTipo[] paquetesTipos;
 	private LocalDate fechaDeAlta;
+	private byte[] imagen;
 	
 	
 	public DTPaquete(String nombre, String descripcion, int periodoDeValidez, float descuento, float costoAsociado, DTPaqueteTipo[] dtpaq, LocalDate fechaDeAlta) {
@@ -31,6 +32,16 @@ public class DTPaquete {
 		this.descuento = descuento;
 		this.paquetesTipos = dtpaq;
 		this.fechaDeAlta = fechaDeAlta;
+	}
+	
+	public DTPaquete(String nombre, String descripcion, int periodoDeValidez, float descuento, DTPaqueteTipo[] dtpaq, LocalDate fechaDeAlta, byte[] image) {
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.periodoDeValidez = periodoDeValidez;
+		this.descuento = descuento;
+		this.paquetesTipos = dtpaq;
+		this.fechaDeAlta = fechaDeAlta;
+		this.imagen = image;
 	}
 	
 	public String getNombre() {
@@ -67,6 +78,10 @@ public class DTPaquete {
 	
 	public LocalDate getFechaDeAlta() {
 		return this.fechaDeAlta;
+	}
+
+	public byte[] getImagen() {
+		return imagen;
 	}
 }
 

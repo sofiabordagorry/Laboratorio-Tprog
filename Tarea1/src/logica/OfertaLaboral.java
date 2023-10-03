@@ -20,7 +20,7 @@ public class OfertaLaboral {
 	private List<Postulacion> postulaciones;
 	private Map<String, Keyword> keywords;
 	private EstadoOL estado;
-	
+	private byte[] imagen;
 	private Empresa empresaCreadora;//nuevo atributo agregado
 	
 	
@@ -39,6 +39,24 @@ public class OfertaLaboral {
 		this.keywords = keywords;
 		this.estado = EstadoOL.Ingresada;
 		this.empresaCreadora = empCreadora;
+	}
+	
+	public OfertaLaboral(String nombre, String descripcion, String ciudad, String departamento, String horario,
+			float remuneracion, LocalDate fechaDeAlta, float costoAsociado, Tipo tipoOL, Map<String, Keyword> keywords, Empresa empCreadora, byte[] image) {
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.ciudad = ciudad;
+		this.departamento = departamento;
+		this.horario = horario;
+		this.remuneracion = remuneracion;
+		this.fechaDeAlta = fechaDeAlta;
+		this.costoAsociado = tipoOL.getCosto();
+		this.tipoOL = tipoOL;
+		this.postulaciones = new ArrayList<>();
+		this.keywords = keywords;
+		this.estado = EstadoOL.Ingresada;
+		this.empresaCreadora = empCreadora;
+		this.setImagen(image);
 	}
 	
 	public void setEstado(EstadoOL e) {
@@ -129,5 +147,13 @@ public class OfertaLaboral {
 		
 		DTOfertaLaboral dtOL = new DTOfertaLaboral(this.getNombre(),this.getDescripcion(),this.getCiudad(),this.getDepartamento(),this.getHorario(),this.getRemuneracion(),this.getFechaDeAlta(),this.getCostoAsociado(),dataTipoOL, dataKeyWords, dataPostulaciones,this.getEmpresaCreadora(), this.getEstado());
 		return dtOL;
+	}
+
+	public byte[] getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(byte[] imagen) {
+		this.imagen = imagen;
 	}
 }

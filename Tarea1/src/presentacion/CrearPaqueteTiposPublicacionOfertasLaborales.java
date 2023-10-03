@@ -15,13 +15,14 @@ import java.time.ZoneId;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 import javax.swing.JButton;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JFrame;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
@@ -199,6 +200,13 @@ public class CrearPaqueteTiposPublicacionOfertasLaborales extends JInternalFrame
         gbc_btnAceptar.gridx = 2;
         gbc_btnAceptar.gridy = 6;
         getContentPane().add(btnAceptar, gbc_btnAceptar);
+        
+        this.addInternalFrameListener(new InternalFrameAdapter() {
+            @Override
+            public void internalFrameClosing(InternalFrameEvent e) {
+                limpiarFormulario();
+            }
+        });
 	}
 	
 	private void cmdCrearPaqTipPubOL(ActionEvent arg0) {
@@ -252,12 +260,12 @@ public class CrearPaqueteTiposPublicacionOfertasLaborales extends JInternalFrame
 			return false;
 		}
 		
-		if(!this.validar(nombreU)) {
-			JOptionPane.showMessageDialog(this, "El Nombre debe ser solo letras", 
-					"Crear Paquetes de Tipos de Publicacion de Ofertas Laborales",
-					JOptionPane.ERROR_MESSAGE);
-			return false;
-		}
+//		if(!this.validar(nombreU)) {
+//			JOptionPane.showMessageDialog(this, "El Nombre debe ser solo letras", 
+//					"Crear Paquetes de Tipos de Publicacion de Ofertas Laborales",
+//					JOptionPane.ERROR_MESSAGE);
+//			return false;
+//		}
 
 		try {
 			Integer.parseInt(periodoValidezU);
@@ -328,13 +336,13 @@ public class CrearPaqueteTiposPublicacionOfertasLaborales extends JInternalFrame
         return localDate;
     }
 	
-	private boolean validar(String s) {
-        // Expresión regular que permite letras, espacios, la letra 'ñ' y caracteres acentuados
-        String regex = "^[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]*$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(s);
-        return matcher.matches();
-    }
+//	private boolean validar(String s) {
+//        // Expresión regular que permite letras, espacios, la letra 'ñ' y caracteres acentuados
+//        String regex = "^[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]*$";
+//        Pattern pattern = Pattern.compile(regex);
+//        Matcher matcher = pattern.matcher(s);
+//        return matcher.matches();
+//    }
 	
 	private void limpiarFormulario() {
 		textFieldNombre.setText("");

@@ -25,6 +25,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 
 import excepciones.UsuariosNoExistenException;
 import logica.DTEmpresa;
@@ -50,6 +52,10 @@ public class ConsultaUsuario extends JInternalFrame {
 	private JLabel lblDescripcion;
 	private JLabel lblFechaNomEmp;
 	private JLabel lblNacLink;
+	private JLabel lblNickname;
+	private JLabel lblNombre;
+	private JLabel lblApellido;
+	private JLabel lblCorreo;
 
 	public ConsultaUsuario(IUsuario iu, IOfertaLaboral iol, JFrame frmAdmTrabajo) {
         contUsuario = iu;
@@ -63,7 +69,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		gridBagLayout.columnWeights = new double[]{0.0, 1.0};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		getContentPane().setLayout(gridBagLayout);
-		
+        
 		JLabel lblSeleccioneUnUsuario = new JLabel("Seleccione un Usuario");
 		GridBagConstraints gbc_lblSeleccioneUnUsuario = new GridBagConstraints();
 		gbc_lblSeleccioneUnUsuario.gridwidth = 2;
@@ -89,7 +95,8 @@ public class ConsultaUsuario extends JInternalFrame {
 		gbc_comboBoxUsuarios.gridy = 1;
 		getContentPane().add(comboBoxUsuarios, gbc_comboBoxUsuarios);
 		
-		JLabel lblNickname = new JLabel("Nickname:");
+		lblNickname = new JLabel("Nickname:");
+		//JLabel lblNickname = new JLabel("Nickname:");
 		lblNickname.setFont(new Font("Dialog", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblNickname = new GridBagConstraints();
 		gbc_lblNickname.anchor = GridBagConstraints.EAST;
@@ -108,7 +115,8 @@ public class ConsultaUsuario extends JInternalFrame {
 		getContentPane().add(textNickname, gbc_textNickname);
 		textNickname.setColumns(10);
 		
-		JLabel lblNombre = new JLabel("Nombre:");
+		lblNombre = new JLabel("Nombre:");
+		//JLabel lblNombre = new JLabel("Nombre:");
 		lblNombre.setFont(new Font("Dialog", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblNombre = new GridBagConstraints();
 		gbc_lblNombre.anchor = GridBagConstraints.EAST;
@@ -127,7 +135,8 @@ public class ConsultaUsuario extends JInternalFrame {
 		getContentPane().add(textNombre, gbc_textNombre);
 		textNombre.setColumns(10);
 		
-		JLabel lblApellido = new JLabel("Apellido:");
+		lblApellido = new JLabel("Apellido:");
+		//JLabel lblApellido = new JLabel("Apellido:");
 		lblApellido.setFont(new Font("Dialog", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblApellido = new GridBagConstraints();
 		gbc_lblApellido.anchor = GridBagConstraints.EAST;
@@ -146,7 +155,8 @@ public class ConsultaUsuario extends JInternalFrame {
 		getContentPane().add(textApellido, gbc_textApellido);
 		textApellido.setColumns(10);
 		
-		JLabel lblCorreo = new JLabel("Correo:");
+		lblCorreo = new JLabel("Correo:");
+		//JLabel lblCorreo = new JLabel("Correo:");
 		lblCorreo.setFont(new Font("Dialog", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblCorreo = new GridBagConstraints();
 		gbc_lblCorreo.anchor = GridBagConstraints.EAST;
@@ -266,6 +276,21 @@ public class ConsultaUsuario extends JInternalFrame {
 		gbc_btnCancelar.gridx = 1;
 		gbc_btnCancelar.gridy = 11;
 		getContentPane().add(btnCancelar, gbc_btnCancelar);
+		
+        this.addInternalFrameListener(new InternalFrameAdapter() {
+            @Override
+            public void internalFrameClosing(InternalFrameEvent e) {
+                limpiarFormulario();
+            }
+        });
+        
+        lblDescripcion.setVisible(false);
+        textAreaDescripcion.setVisible(false);
+        scrollPaneDescripcion.setVisible(false);
+        lblNacLink.setVisible(false);
+        textNacLink.setVisible(false);
+        lblFechaNomEmp.setVisible(false);
+        textFechaNomEmp.setVisible(false);
 	}
 	
 	public void cargarDatos(String selectedItem) {
@@ -296,8 +321,12 @@ public class ConsultaUsuario extends JInternalFrame {
         	scrollPaneDescripcion.setVisible(false);
         	textAreaDescripcion.setVisible(false);
         	lblDescripcion.setVisible(false);
+        	lblFechaNomEmp.setVisible(true);
+        	textFechaNomEmp.setVisible(true);
+        	lblNacLink.setVisible(true);
         	lblFechaNomEmp.setText("Fecha de Nacimiento:");
         	lblNacLink.setText("Nacionalidad:");
+        	textNacLink.setVisible(true);
         	DTPostulante selectedPost = (DTPostulante) u;
         	textFechaNomEmp.setText(selectedPost.getFechaDeNacimiento().toString());
         	textNacLink.setText(selectedPost.getNacionalidad());
@@ -305,6 +334,8 @@ public class ConsultaUsuario extends JInternalFrame {
         	scrollPaneDescripcion.setVisible(true);
         	textAreaDescripcion.setVisible(true);
         	lblDescripcion.setVisible(true);
+        	lblNacLink.setVisible(true);
+        	textNacLink.setVisible(true);
         	lblFechaNomEmp.setVisible(false);
         	textFechaNomEmp.setVisible(false);
         	lblNacLink.setText("Link:");
@@ -334,8 +365,6 @@ public class ConsultaUsuario extends JInternalFrame {
     public void consultaOfertaLaboral(IUsuario iu, IOfertaLaboral iol, JFrame frmAdmTrabajo) {
     	DTOfertaLaboral dtselectedOL = (DTOfertaLaboral) comboBoxOL.getSelectedItem();
     	if(dtselectedOL != null) {
-	    	//setVisible(false);
-	    	//limpiarFormulario();
 	    	ConsultaOfertaLaboral creConOfLabInternalFrame = new ConsultaOfertaLaboral(iu, iol); 
 	    	creConOfLabInternalFrame.setLocation(25,25);
 			frmAdmTrabajo.getContentPane().add(creConOfLabInternalFrame);
@@ -352,6 +381,7 @@ public class ConsultaUsuario extends JInternalFrame {
     	textFechaNomEmp.setText("");
     	textNacLink.setText("");
     	textAreaDescripcion.setText("");
+    	comboBoxOL.setSelectedIndex(-1);
     }
 
  }

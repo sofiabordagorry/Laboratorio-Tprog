@@ -1,8 +1,5 @@
 package presentacion;
 
-import static org.junit.jupiter.api.Assertions.fail;
-
-import java.awt.EventQueue;
 import java.awt.Font;
 
 import javax.swing.JInternalFrame;
@@ -12,36 +9,25 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
-import java.util.Map;
-
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-
 import logica.DTPaquete;
 import logica.DTPaqueteTipo;
 import logica.DTTipo;
-import logica.Factory;
 import logica.IOfertaLaboral;
 import logica.ManejadorTipo;
-import logica.Paquete;
-import logica.PaqueteTipo;
-import logica.Tipo;
-
 import javax.swing.JTextArea;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import excepciones.NoExistenPaquetesException;
 import excepciones.NoHayPaquetesException;
-import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
 public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
@@ -50,6 +36,17 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
 	private JComboBox<ComboBoxItem> comboBox;
 	private JList<DTPaqueteTipo> list;
 	private JTextArea descripcionText;
+	private JLabel nombrePaqText;
+	private JTextArea descripcionPaqText;
+	private JLabel periodoDeValidezText;
+	private JLabel descuentoPaqText;
+	private JLabel costoAsociadoText;
+	private JLabel fechaDeAltaText;
+	private JLabel lblNameText;
+	private JLabel exposicionText;
+	private JLabel duracionText;
+	private JLabel fechaText;
+	private JLabel costoText;
 
 	/**
 	 * Create the frame.
@@ -61,7 +58,8 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
 		col = iOL;
 		
     	// ManejadorTipo
-    	ManejadorTipo m = ManejadorTipo.getInstancia();
+    	@SuppressWarnings("unused")
+		ManejadorTipo m = ManejadorTipo.getInstancia();
     	
         setBounds(10, 40, 780, 524);
         setResizable(true);
@@ -114,7 +112,8 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         gbc_NombrePaq.gridy = 2;
         getContentPane().add(NombrePaq, gbc_NombrePaq);
         
-        JLabel nombrePaqText = new JLabel("");
+        nombrePaqText = new JLabel("");
+        //JLabel nombrePaqText = new JLabel("");
         GridBagConstraints gbc_nombrePaqText = new GridBagConstraints();
         gbc_nombrePaqText.anchor = GridBagConstraints.WEST;
         gbc_nombrePaqText.insets = new Insets(0, 0, 5, 5);
@@ -130,7 +129,8 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         gbc_descripcionPaq.gridy = 3;
         getContentPane().add(descripcionPaq, gbc_descripcionPaq);
         
-        JTextArea descripcionPaqText = new JTextArea();
+        descripcionPaqText = new JTextArea();
+        //JTextArea descripcionPaqText = new JTextArea();
         GridBagConstraints gbc_descripcionPaqText = new GridBagConstraints();
         gbc_descripcionPaqText.insets = new Insets(0, 0, 5, 5);
         gbc_descripcionPaqText.fill = GridBagConstraints.BOTH;
@@ -149,7 +149,8 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         gbc_periodoDeValidez.gridy = 4;
         getContentPane().add(periodoDeValidez, gbc_periodoDeValidez);
         
-        JLabel periodoDeValidezText = new JLabel("");
+        periodoDeValidezText = new JLabel("");
+        //JLabel periodoDeValidezText = new JLabel("");
         GridBagConstraints gbc_periodoDeValidezText = new GridBagConstraints();
         gbc_periodoDeValidezText.anchor = GridBagConstraints.WEST;
         gbc_periodoDeValidezText.insets = new Insets(0, 0, 5, 5);
@@ -165,7 +166,8 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         gbc_descuentoPaq.gridy = 5;
         getContentPane().add(descuentoPaq, gbc_descuentoPaq);
         
-        JLabel descuentoPaqText = new JLabel("");
+        descuentoPaqText = new JLabel("");
+        //JLabel descuentoPaqText = new JLabel("");
         GridBagConstraints gbc_descuentoPaqText = new GridBagConstraints();
         gbc_descuentoPaqText.anchor = GridBagConstraints.WEST;
         gbc_descuentoPaqText.insets = new Insets(0, 0, 5, 5);
@@ -181,7 +183,8 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         gbc_costoAsociadoPaq.gridy = 6;
         getContentPane().add(costoAsociadoPaq, gbc_costoAsociadoPaq);
         
-        JLabel costoAsociadoText = new JLabel("");
+        costoAsociadoText = new JLabel("");
+        //JLabel costoAsociadoText = new JLabel("");
         GridBagConstraints gbc_costoAsociadoText = new GridBagConstraints();
         gbc_costoAsociadoText.anchor = GridBagConstraints.WEST;
         gbc_costoAsociadoText.insets = new Insets(0, 0, 5, 5);
@@ -197,7 +200,8 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         gbc_fechaDeAltaPaq.gridy = 7;
         getContentPane().add(fechaDeAltaPaq, gbc_fechaDeAltaPaq);
         
-        JLabel fechaDeAltaText = new JLabel("");
+        fechaDeAltaText = new JLabel("");
+        //JLabel fechaDeAltaText = new JLabel("");
         GridBagConstraints gbc_fechaDeAltaText = new GridBagConstraints();
         gbc_fechaDeAltaText.anchor = GridBagConstraints.WEST;
         gbc_fechaDeAltaText.insets = new Insets(0, 0, 5, 5);
@@ -208,7 +212,8 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         comboBox.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		JComboBox<ComboBoxItem> source = (JComboBox<ComboBoxItem>) e.getSource();
+        		@SuppressWarnings("unchecked")
+				JComboBox<ComboBoxItem> source = (JComboBox<ComboBoxItem>) e.getSource();
         		ComboBoxItem selectedItem = (ComboBoxItem)source.getSelectedItem();
         		
         		if (selectedItem != null) {
@@ -251,7 +256,8 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         gbc_lblNombre.gridy = 10;
         getContentPane().add(lblNombre, gbc_lblNombre);
         
-        JLabel lblNameText = new JLabel("");
+        lblNameText = new JLabel("");
+        //JLabel lblNameText = new JLabel("");
         GridBagConstraints gbc_lblNameText = new GridBagConstraints();
         gbc_lblNameText.anchor = GridBagConstraints.WEST;
         gbc_lblNameText.gridwidth = 2;
@@ -289,7 +295,8 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         gbc_lblExposicion.gridy = 12;
         getContentPane().add(lblExposicion, gbc_lblExposicion);
         
-        JLabel exposicionText = new JLabel("");
+        exposicionText = new JLabel("");
+        //JLabel exposicionText = new JLabel("");
         GridBagConstraints gbc_exposicionText = new GridBagConstraints();
         gbc_exposicionText.anchor = GridBagConstraints.WEST;
         gbc_exposicionText.gridwidth = 2;
@@ -306,7 +313,8 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         gbc_lblDuracion.gridy = 13;
         getContentPane().add(lblDuracion, gbc_lblDuracion);
         
-        JLabel duracionText = new JLabel("");
+        duracionText = new JLabel("");
+        //JLabel duracionText = new JLabel("");
         GridBagConstraints gbc_duracionText = new GridBagConstraints();
         gbc_duracionText.anchor = GridBagConstraints.WEST;
         gbc_duracionText.gridwidth = 2;
@@ -323,7 +331,8 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         gbc_lblFecha.gridy = 14;
         getContentPane().add(lblFecha, gbc_lblFecha);
         
-        JLabel fechaText = new JLabel("");
+        fechaText = new JLabel("");
+        //JLabel fechaText = new JLabel("");
         GridBagConstraints gbc_fechaText = new GridBagConstraints();
         gbc_fechaText.anchor = GridBagConstraints.WEST;
         gbc_fechaText.gridwidth = 2;
@@ -340,7 +349,8 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         gbc_lblCosto.gridy = 15;
         getContentPane().add(lblCosto, gbc_lblCosto);
         
-        JLabel costoText = new JLabel("");
+        costoText = new JLabel("");
+        //JLabel costoText = new JLabel("");
         GridBagConstraints gbc_costoText = new GridBagConstraints();
         gbc_costoText.anchor = GridBagConstraints.WEST;
         gbc_costoText.gridwidth = 2;
@@ -352,22 +362,23 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         JButton btnCancelar = new JButton("Cancelar");
         btnCancelar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-    			nombrePaqText.setText("");
-    			descripcionPaqText.setText("");
-    			periodoDeValidezText.setText("");
-    			descuentoPaqText.setText("");
-    			costoAsociadoText.setText("");
-    			fechaDeAltaText.setText("");
-            	lblNameText.setText("");
-            	descripcionText.setText("");
-            	exposicionText.setText("");
-            	duracionText.setText("");
-            	fechaText.setText("");
-            	costoText.setText("");
-            	comboBox.setSelectedIndex(-1);
-            	DTPaqueteTipo[] pqt = new DTPaqueteTipo[0];
-            	list.setListData(pqt);
-            	setVisible(false);
+            	limpiarFormulario();
+//    			nombrePaqText.setText("");
+//    			descripcionPaqText.setText("");
+//    			periodoDeValidezText.setText("");
+//    			descuentoPaqText.setText("");
+//    			costoAsociadoText.setText("");
+//    			fechaDeAltaText.setText("");
+//            	lblNameText.setText("");
+//            	descripcionText.setText("");
+//            	exposicionText.setText("");
+//            	duracionText.setText("");
+//            	fechaText.setText("");
+//            	costoText.setText("");
+//            	comboBox.setSelectedIndex(-1);
+//            	DTPaqueteTipo[] pqt = new DTPaqueteTipo[0];
+//            	list.setListData(pqt);
+//            	setVisible(false);
             }
         });
         
@@ -383,7 +394,8 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         	@Override
         	public void valueChanged(ListSelectionEvent e) {
         		if(!e.getValueIsAdjusting()) {
-        			JList<DTPaqueteTipo> source = (JList<DTPaqueteTipo>) e.getSource();
+        			@SuppressWarnings("unchecked")
+					JList<DTPaqueteTipo> source = (JList<DTPaqueteTipo>) e.getSource();
                     DTPaqueteTipo selectedItem = source.getSelectedValue();
                     
                     if (selectedItem != null) {
@@ -398,7 +410,33 @@ public class ConsultaPaqueteDeTiposDeOfertaLaboral extends JInternalFrame {
         		}
         	}
         });
+        
+        this.addInternalFrameListener(new InternalFrameAdapter() {
+            @Override
+            public void internalFrameClosing(InternalFrameEvent e) {
+                limpiarFormulario();
+            }
+        });
 
+	}
+	
+	protected void limpiarFormulario() {
+		nombrePaqText.setText("");
+		descripcionPaqText.setText("");
+		periodoDeValidezText.setText("");
+		descuentoPaqText.setText("");
+		costoAsociadoText.setText("");
+		fechaDeAltaText.setText("");
+    	lblNameText.setText("");
+    	descripcionText.setText("");
+    	exposicionText.setText("");
+    	duracionText.setText("");
+    	fechaText.setText("");
+    	costoText.setText("");
+    	comboBox.setSelectedIndex(-1);
+    	DTPaqueteTipo[] pqt = new DTPaqueteTipo[0];
+    	list.setListData(pqt);
+    	setVisible(false);
 	}
 	
 	class ComboBoxItem {

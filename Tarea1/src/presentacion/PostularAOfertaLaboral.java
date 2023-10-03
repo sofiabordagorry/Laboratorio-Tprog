@@ -1,39 +1,33 @@
 package presentacion;
 
 import java.awt.GridBagLayout;
-import java.awt.Dimension; 
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import java.awt.*;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
+
 
 import java.awt.Font;
-import java.awt.BorderLayout;
-import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.Date;
 
 
-import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 
 import excepciones.EmpresaSinOfertasException;
 import excepciones.EmpresasNoExistenException;
 import excepciones.PostulantesNoExistenException;
-import excepciones.UsuarioNoExisteException;
 import excepciones.YaSePostuloException;
 import logica.DTEmpresa;
 import logica.IUsuario;
 import logica.DTPostulante;
 import logica.DTOfertaLaboral;
-import logica.DTPostulacion;
 
 
 	@SuppressWarnings("serial")
@@ -227,6 +221,13 @@ import logica.DTPostulacion;
 	        gbc_btnAceptar.gridx = 2;
 	        gbc_btnAceptar.gridy = 12;
 	        getContentPane().add(btnAceptar, gbc_btnAceptar);
+	        
+	        this.addInternalFrameListener(new InternalFrameAdapter() {
+	            @Override
+	            public void internalFrameClosing(InternalFrameEvent e) {
+	                limpiarFormulario();
+	            }
+	        });
 		}
 		
 		protected void cmdPostularAOfertaLaboralActionPerformed(ActionEvent arg0) {

@@ -2,11 +2,7 @@ package presentacion;
 
 import java.awt.EventQueue;
 
-import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
 
-import logica.Empresa;
 import logica.Factory;
 import logica.IOfertaLaboral;
 import javax.swing.JFrame;
@@ -16,16 +12,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import logica.IUsuario;
-import logica.Keyword;
-import logica.ManejadorOfertaLaboral;
-import logica.ManejadorTipo;
-import logica.ManejadorUsuario;
-import logica.OfertaLaboral;
-import logica.Paquete;
-import logica.PaqueteTipo;
-import logica.Postulacion;
-import logica.Postulante;
-import logica.Tipo;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -182,8 +168,9 @@ public class Principal {
 		itemModifUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// VENTANA PARA MODIFICAR DATOS DE USUARIO
-				creModUsuInternalFrame.setVisible(true);
-				creModUsuInternalFrame.cargarUsuarios();
+				if(creModUsuInternalFrame.cargarUsuarios()) {
+					creModUsuInternalFrame.setVisible(true);
+				}
 			}
 		});
 		userMenu.add(itemModifUsuario);

@@ -50,7 +50,7 @@ public class ControladorUsuario implements IUsuario {
 		Usuario user = m.buscarUsuario(post.getNickname());
 		if (user == null) {
 			if(this.existeMail(post.getCorreo()) == false) {
-				Postulante new_user = new Postulante(post.getNickname(), post.getNombre(), post.getApellido(), post.getCorreo(), post.getFechaDeNacimiento(), post.getNacionalidad());
+				Postulante new_user = new Postulante(post.getNickname(), post.getNombre(), post.getApellido(), post.getCorreo(), post.getFechaDeNacimiento(), post.getNacionalidad(), post.getContrasenia(), post.getImagen());
 				m.agregarPostulante(new_user);
 			} else {
 				throw new ExisteUnUsuarioYaRegistradoException("Existe un usuario ya registrado con ese mail");
@@ -65,7 +65,7 @@ public class ControladorUsuario implements IUsuario {
 		Usuario user = m.buscarUsuario(emp.getNickname());
 		if (user == null) {
 			if(this.existeMail(emp.getCorreo()) == false) {
-				Empresa new_user = new Empresa(emp.getNickname(), emp.getNombre(), emp.getApellido(), emp.getCorreo(), emp.getDescripcion(), emp.getLink());
+				Empresa new_user = new Empresa(emp.getNickname(), emp.getNombre(), emp.getApellido(), emp.getCorreo(), emp.getDescripcion(), emp.getLink(), emp.getContrasenia(), emp.getImagen());
 				m.agregarEmpresa(new_user);
 			} else {
 				throw new ExisteUnUsuarioYaRegistradoException("Existe un usuario ya registrado con ese mail");
@@ -119,7 +119,9 @@ public class ControladorUsuario implements IUsuario {
         } else {
         	dtofertas = null;
         }
-        if (dtofertas != null) { return  dtofertas;}
+        if (dtofertas != null) { 
+        	return  dtofertas;
+        }
         else { throw new EmpresaSinOfertasException("La empresa seleccionada no tiene ofertas vigentes");}
     }
     

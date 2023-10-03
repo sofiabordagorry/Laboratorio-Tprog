@@ -3,7 +3,6 @@ package logica;
 import java.util.List;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.time.LocalDate;
 
 public class Paquete {
 	private String nombre;
@@ -13,6 +12,8 @@ public class Paquete {
 	private float costoAsociado;
 	private List<PaqueteTipo> paquetesTipos;
 	private LocalDate fechaDeAlta;
+	private byte[] imagen;
+	private Compra compra;
 	
 	public Paquete(String nombre, String descripcion, int periodoDeValidez, float descuento, float costoAsociado, LocalDate fechaDeAlta) {
 		this.nombre = nombre;
@@ -22,6 +23,17 @@ public class Paquete {
 		this.costoAsociado = costoAsociado;
 		this.paquetesTipos = new ArrayList<>();
 		this.fechaDeAlta = fechaDeAlta;
+	}
+	
+	public Paquete(String nombre, String descripcion, int periodoDeValidez, float descuento, float costoAsociado, LocalDate fechaDeAlta, byte[] image) {
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.periodoDeValidez = periodoDeValidez;
+		this.descuento = descuento;
+		this.costoAsociado = costoAsociado;
+		this.paquetesTipos = new ArrayList<>();
+		this.fechaDeAlta = fechaDeAlta;
+		this.setImagen(image);
 	}
 	
     // Getters
@@ -89,4 +101,20 @@ public class Paquete {
     public void sumarACosto(float c) {
         this.costoAsociado = this.costoAsociado + c;
     }
+
+	public byte[] getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(byte[] imagen) {
+		this.imagen = imagen;
+	}
+
+	public Compra getCompra() {
+		return compra;
+	}
+
+	public void setCompra(Compra compra) {
+		this.compra = compra;
+	}
 }

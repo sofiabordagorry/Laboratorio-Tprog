@@ -18,8 +18,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
-
-
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.Font;
@@ -108,7 +108,12 @@ public class AgregarTipoPublicacionOfertaLaboralPaquete extends JInternalFrame {
 		getContentPane().add(textFieldCantidad, gbc_textFieldCantidad);
 		textFieldCantidad.setColumns(10);
 		
-		JButton btnCancelar = new JButton("Cencelar");
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				limpiarFormulario();
+			}
+		});
 		btnCancelar.setFont(new Font("Tahoma", Font.BOLD, 12));
 		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
 		gbc_btnCancelar.insets = new Insets(0, 0, 0, 5);
@@ -128,12 +133,20 @@ public class AgregarTipoPublicacionOfertaLaboralPaquete extends JInternalFrame {
 		gbc_btnAceptar.gridx = 3;
 		gbc_btnAceptar.gridy = 7;
 		getContentPane().add(btnAceptar, gbc_btnAceptar);
+		
+        this.addInternalFrameListener(new InternalFrameAdapter() {
+            @Override
+            public void internalFrameClosing(InternalFrameEvent e) {
+                limpiarFormulario();
+            }
+        });
 	}
 
 	private void limpiarFormulario() {
 		textFieldCantidad.setText("");
 		comboBoxPaquete.removeAllItems();
 		comboBoxTipo.removeAllItems();
+		setVisible(false);
 	}
 	
 	protected void cmdAltaTipoPublicacionOfertaLaboral(ActionEvent arg0) {
