@@ -2,7 +2,9 @@ package com.trabajouy.controllers;
 
 import java.io.IOException;
 
+import com.trabajouy.exceptions.ExisteUnUsuarioYaRegistradoException;
 import com.trabajouy.exceptions.UsuariosNoExistenException;
+import com.trabajouy.model.DTPostulante;
 import com.trabajouy.model.DTUsuario;
 import com.trabajouy.model.Factory;
 import com.trabajouy.model.IUsuario;
@@ -33,11 +35,14 @@ public class ConsultaUsuario extends HttpServlet {
     	Factory fac = Factory.getInstance();
     	IUsuario iu = fac.getIUsuario();
     	String nicknameConsultado = request.getParameter("usuarioConsultado");
-
+    	
     	// Obtén el nickname del usuario en sesión (si hay uno)
     	HttpSession session = request.getSession();
     	Usuario user = (Usuario) session.getAttribute("usuario_logueado");
-    	String nicknameEnSesion = user.getNickname();
+    	String nicknameEnSesion = null;
+    	if(user != null) {
+    		nicknameEnSesion = user.getNickname();
+    	}
     	
     	if (nicknameConsultado == null) {
     	    // No se especificó un nickname para consultar, mostrar la página ListarUsuarios
