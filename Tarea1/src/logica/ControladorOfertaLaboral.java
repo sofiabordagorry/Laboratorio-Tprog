@@ -7,6 +7,8 @@ import excepciones.PaqueteRepetidoException;
 
 import java.util.Map;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Date;
 
 import excepciones.NoHayPaquetesException;
@@ -14,6 +16,7 @@ import excepciones.NoHayTiposException;
 import excepciones.TipoRepetidoException;
 import excepciones.TipoYaAgragadoException;
 
+import java.time.LocalDate;
 import java.time.ZoneId;
 
 public class ControladorOfertaLaboral implements IOfertaLaboral {
@@ -190,7 +193,26 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 		oferta.setEstado(e);
 	}
 
-	
+	public void comprarPaquete(String empresa, String paquete) {
+		ManejadorTipo mt =  ManejadorTipo.getInstancia();
+		ManejadorUsuario mu = ManejadorUsuario.getInstancia();
+		
+		Empresa empresaG = mu.buscarEmpresa(empresa);
+		Paquete paqueteG = mt.buscarPaquete(paquete);
+		
+		LocalDate fechaCompra = LocalDate.now();
+		int periodoValidezPaq = paqueteG.getPeriodoDeValidez();
+		LocalDate vencimiento = fechaCompra.plusDays(periodoValidezPaq);
+		
+		List<PaqueteTipo> paqTip = paqueteG.getPaquetesTipos();
+		List<CompraTipo>  compTip = new LinkedList<>();
+		for(PaqueteTipo p : paqTip) {
+			CompraTipo ct = new CompraTipo(p.getCantidad() , p.getTipo());
+			compTip.add(ct);
+		}
+		Compra compra = new Compra(fechaCompra, vencimiento, paqueteG, empresaG, compTip);
+		
+	}
 	
 }
 
