@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.List;
 
 public class Empresa extends Usuario {
 	
 	private String descripcion;
 	private String link;
 	private Map<String, OfertaLaboral> ofertasLaborales;
+	private List<Compra> paqComprados;
 	
 	public Empresa(String nickname, String nombre, String apellido, String correo, String descripcion, String link) {
 		super(nickname, nombre, apellido, correo);
@@ -60,11 +62,20 @@ public class Empresa extends Usuario {
 		this.ofertasLaborales.put(ol.getNombre(), ol);
 	}
 	
+	public List<Compra> getCompras() {
+		return this.paqComprados;
+	}
+	
+	public void agregarCompra(Compra compra) {
+		this.paqComprados.add(compra);
+	}
+	
 	public DTEmpresa getDataEmpresaALO() {
 		return new DTEmpresa(this.getNickname(), this.getNombre(), this.getApellido(),
 				this.getCorreo(),this.getDescripcion(), 
 				this.getLink());
 	}
+	
 	
 	public ArrayList<DTOfertaLaboral> obtenerOfertasVigentes() {
         ArrayList<DTOfertaLaboral> dof = new ArrayList<>();

@@ -211,7 +211,7 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 			compTip.add(ct);
 		}
 		Compra compra = new Compra(fechaCompra, vencimiento, paqueteG, empresaG, compTip);
-		
+		empresaG.agregarCompra(compra);
 	}
 	
 }
