@@ -19,11 +19,11 @@ public class Compra {
 		empresa= null;
 		comprasTipos = null;
 	}
-	
-	public Compra(LocalDate fComp, LocalDate fVenc, Paquete p, Empresa empre, List<CompraTipo> comprasTipou) {
+
+	public Compra(LocalDate fComp, LocalDate fVenc, Paquete paq, Empresa empre, List<CompraTipo> comprasTipou) {
 		fechaCompra = fComp;
 		fechaVencimiento = fVenc;
-		paqComprado = p;
+		paqComprado = paq;
 		empresa=empre;
 		comprasTipos=comprasTipou;
 	}

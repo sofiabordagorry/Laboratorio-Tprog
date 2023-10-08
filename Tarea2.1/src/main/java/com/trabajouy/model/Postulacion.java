@@ -60,7 +60,7 @@ public class Postulacion {
 	
 	public Boolean verificarOfertaLaboral(String oferta) {
 		String nombre = this.ofertaLaboral.getNombre();
-		return oferta==nombre;
+		 return oferta.equals(nombre);
 	}
 
 	public DTPostulacion getDataPostulacion() {

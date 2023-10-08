@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.time.LocalDate;
@@ -20,7 +21,7 @@ import excepciones.TipoYaAgragadoException;
 
 import excepciones.ExisteUnUsuarioYaRegistradoException;
 import excepciones.OfertaLaboralRepetidaException;
-
+import excepciones.OfertasLaboralesNoExistenNingunaException;
 import excepciones.KeywordsNoExistenException; 
 import excepciones.TipoPubNoExistenException;
 
@@ -36,14 +37,14 @@ import logica.Keyword;
 import logica.Tipo;
 import logica.Paquete;
 import logica.PaqueteTipo;
+
+import logica.Postulacion;
 import logica.Postulante;
 import logica.OfertaLaboral;
 import logica.DTOfertaLaboral;
 import logica.DTPaquete;
 import logica.DTPostulante;
 import logica.DTPaqueteTipo;
-import logica.DTPostulacion;
-import logica.Postulacion;
 import logica.DTTipo;
 import logica.Empresa;
 import logica.EstadoOL;
@@ -52,7 +53,6 @@ import logica.DTKeyword;
 import logica.ManejadorOfertaLaboral;
 import logica.ManejadorTipo;
 import logica.ManejadorUsuario;
-import logica.Empresa;
 
 class ControladorOfertaLaboralTests{
 
@@ -69,7 +69,7 @@ class ControladorOfertaLaboralTests{
 		controladorOfertaLaboral = fabrica.getIOfertaLaboral();
 		controladorUsuario =fabrica.getIUsuario();
 	}
-	
+
 	@AfterEach
 	public void borrar(){
 		mol = ManejadorOfertaLaboral.getInstance();
@@ -288,7 +288,7 @@ class ControladorOfertaLaboralTests{
 		LocalDate fechaDeAlta  = LocalDate.of(2020, 8, 20);
 		DTPaquete 	dtp = new DTPaquete(nombre, descripcion, periodoDeValidez, descuento, costoAsociado, dtpaq, fechaDeAlta);
 		
-		String datos = controladorOfertaLaboral.DatosPaqueteAMostrar(dtp);
+		String datos = controladorOfertaLaboral.datosPaqueteAMostrar(dtp);
 		String respuestaOK = "Nombre: " + nombre + "\nDescripcion: " + descripcion + "\nPeriodo de validez: " + periodoDeValidez + " días\nDescuento: " + descuento + "%\nCosto: $" + costoAsociado;
 		assertEquals(datos, respuestaOK);
 	}
@@ -430,7 +430,6 @@ class ControladorOfertaLaboralTests{
 		 String apellido= "ape1";
 		 String correo= "coe1";
 		 Map<String, DTOfertaLaboral> ofertasLaborales = new HashMap<>();
-		 String nombreDeEmpresa ="nomdee1";
 		 String descripcion = "dese1";
 		 String link = "linke1";
 		 
@@ -597,6 +596,275 @@ class ControladorOfertaLaboralTests{
 		assertThrows(TipoPubNoExistenException.class, ()->{controladorOfertaLaboral.listarTipoPublicacionOfertaLaboral();});
 	}
 	
+
+	@Test 
+	void testAceptarOL() {
+		String nombreK = "nombreKeyword";
+		
+		controladorOfertaLaboral.ingresarKeyword(nombreK);
+		//datos tipo
+		String nombreT = "nombreT3";
+		String descripcionT = "descripcionT3";
+		 int exposicionT = 3;
+		 int duracionT = 300000;
+		 float costoT = 3;
+		 Date fechaAltaT = new Date(1597891200000L); // 20 de agosto 2020
+		 
+		 //datos empresa
+		 String nicknameE ="nicke1";
+		 String nombreE ="nome1";
+		 String apellido= "ape1";
+		 String correo= "coe1";
+		 Map<String, DTOfertaLaboral> ofertasLaborales = new HashMap<>();
+		 String descripcion = "dese1";
+		 String link = "linke1";
+		 
+		 String empresa = nicknameE;
+			String nombreTipo = nombreT;
+			//datos oferta
+			String nombre= "nombreOL1";
+			String descripcionOL= "descOL1";
+			String ciudad = "ciudOL1";
+			String departamento = "depOL1";
+			String horario = "hoeOL1";
+			float remuneracion =1;
+			LocalDate fechaDeAlta = LocalDate.of(2020, 8, 20);
+			float costoAsociado = costoT;
+			DTTipo dataTipo = new DTTipo(nombreT, descripcionT, exposicionT, duracionT, costoT, fechaAltaT.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+			Map<String, DTKeyword> dataKeywords = new HashMap<>();
+			DTKeyword dtk = new DTKeyword(nombreK);
+			dataKeywords.put(nombreK,dtk);
+			List<DTPostulacion> dataPostulaciones = new ArrayList<>();
+		 
+		 DTEmpresa dte = new DTEmpresa(nicknameE, nombreE, apellido, correo, ofertasLaborales, descripcion, link);
+
+		 
+		try {
+			
+			controladorOfertaLaboral.ingresarTipo(nombreT, descripcionT, exposicionT, duracionT, costoT, fechaAltaT);
+			
+			controladorUsuario.ingresarDatosEmpresa(dte); 
+			mt = ManejadorTipo.getInstancia();
+			Tipo tOL = mt.buscarTipo(nombreTipo);
+			DTOfertaLaboral ol = new DTOfertaLaboral(nombre, descripcionOL, ciudad, departamento, horario, remuneracion, fechaDeAlta, costoAsociado, dataTipo, dataKeywords, dataPostulaciones, empresa, EstadoOL.Aceptada);
+			controladorOfertaLaboral.ingresarDatosOL(empresa,  nombreTipo, ol);
+			mol = ManejadorOfertaLaboral.getInstance();
+			OfertaLaboral Ol = mol.buscarOfertaLaboral(nombre);
+			controladorOfertaLaboral.acepRechOL(EstadoOL.Aceptada, nombre);
+			assertEquals(Ol.getNombre(), nombre);
+			assertEquals(Ol.getCiudad(), ciudad);
+			assertEquals(Ol.getDepartamento(), departamento);
+			assertEquals(Ol.getDescripcion(), descripcionOL);
+			assertEquals(Ol.getFechaDeAlta(), fechaDeAlta);
+			assertEquals(Ol.getCostoAsociado(), costoAsociado);
+			assertEquals(Ol.getEstado(), EstadoOL.Aceptada);
+			assertTrue(Ol.getTipoOL().equals(tOL));
+			assertEquals(Ol.getKeywords().keySet().iterator().next(), nombreK);
+			
+		}catch (TipoRepetidoException e) {
+			fail(e.getMessage());
+			e.printStackTrace();
+		}catch (ExisteUnUsuarioYaRegistradoException e) {
+			fail(e.getMessage());
+			e.printStackTrace();
+		}catch (OfertaLaboralRepetidaException e) {
+			fail(e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	@Test 
+	void testRechazarOL() {
+		String nombreK = "nombreKeyword";
+		
+		controladorOfertaLaboral.ingresarKeyword(nombreK);
+		//datos tipo
+		String nombreT = "nombreT3";
+		String descripcionT = "descripcionT3";
+		 int exposicionT = 3;
+		 int duracionT = 300000;
+		 float costoT = 3;
+		 Date fechaAltaT = new Date(1597891200000L); // 20 de agosto 2020
+		 
+		 //datos empresa
+		 String nicknameE ="nicke1";
+		 String nombreE ="nome1";
+		 String apellido= "ape1";
+		 String correo= "coe1";
+		 Map<String, DTOfertaLaboral> ofertasLaborales = new HashMap<>();
+		 String descripcion = "dese1";
+		 String link = "linke1";
+		 
+		 String empresa = nicknameE;
+			String nombreTipo = nombreT;
+			//datos oferta
+			String nombre= "nombreOL1";
+			String descripcionOL= "descOL1";
+			String ciudad = "ciudOL1";
+			String departamento = "depOL1";
+			String horario = "hoeOL1";
+			float remuneracion =1;
+			LocalDate fechaDeAlta = LocalDate.of(2020, 8, 20);
+			float costoAsociado = costoT;
+			DTTipo dataTipo = new DTTipo(nombreT, descripcionT, exposicionT, duracionT, costoT, fechaAltaT.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+			Map<String, DTKeyword> dataKeywords = new HashMap<>();
+			DTKeyword dtk = new DTKeyword(nombreK);
+			dataKeywords.put(nombreK,dtk);
+			List<DTPostulacion> dataPostulaciones = new ArrayList<>();
+		 
+		 DTEmpresa dte = new DTEmpresa(nicknameE, nombreE, apellido, correo, ofertasLaborales, descripcion, link);
+
+		 
+		try {
+			
+			controladorOfertaLaboral.ingresarTipo(nombreT, descripcionT, exposicionT, duracionT, costoT, fechaAltaT);
+			
+			controladorUsuario.ingresarDatosEmpresa(dte); 
+			mt = ManejadorTipo.getInstancia();
+			Tipo tOL = mt.buscarTipo(nombreTipo);
+			DTOfertaLaboral ol = new DTOfertaLaboral(nombre, descripcionOL, ciudad, departamento, horario, remuneracion, fechaDeAlta, costoAsociado, dataTipo, dataKeywords, dataPostulaciones, empresa, EstadoOL.Aceptada);
+			controladorOfertaLaboral.ingresarDatosOL(empresa,  nombreTipo, ol);
+			mol = ManejadorOfertaLaboral.getInstance();
+			OfertaLaboral Ol = mol.buscarOfertaLaboral(nombre);
+			controladorOfertaLaboral.acepRechOL(EstadoOL.Rechazada, nombre);
+			assertEquals(Ol.getNombre(), nombre);
+			assertEquals(Ol.getCiudad(), ciudad);
+			assertEquals(Ol.getDepartamento(), departamento);
+			assertEquals(Ol.getDescripcion(), descripcionOL);
+			assertEquals(Ol.getFechaDeAlta(), fechaDeAlta);
+			assertEquals(Ol.getCostoAsociado(), costoAsociado);
+			assertEquals(Ol.getEstado(), EstadoOL.Rechazada);
+			assertTrue(Ol.getTipoOL().equals(tOL));
+			assertEquals(Ol.getKeywords().keySet().iterator().next(), nombreK);
+			
+		}catch (TipoRepetidoException e) {
+			fail(e.getMessage());
+			e.printStackTrace();
+		}catch (ExisteUnUsuarioYaRegistradoException e) {
+			fail(e.getMessage());
+			e.printStackTrace();
+		}catch (OfertaLaboralRepetidaException e) {
+			fail(e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	void testListarTodasOfertasLaboralesOK() {
+String nombreK = "nombreKeyword";
+		
+		controladorOfertaLaboral.ingresarKeyword(nombreK);
+		//datos tipo
+		String nombreT = "nombreT3";
+		String descripcionT = "descripcionT3";
+		 int exposicionT = 3;
+		 int duracionT = 300000;
+		 float costoT = 3;
+		 Date fechaAltaT = new Date(1597891200000L); // 20 de agosto 2020
+		 
+		 //datos empresa
+		 String nicknameE ="nicke1";
+		 String nombreE ="nome1";
+		 String apellido= "ape1";
+		 String correo= "coe1";
+		 Map<String, DTOfertaLaboral> ofertasLaborales = new HashMap<>();
+		 String descripcion = "dese1";
+		 String link = "linke1";
+		 
+		 String empresa = nicknameE;
+			String nombreTipo = nombreT;
+			//datos oferta
+			String nombre= "nombreOL1";
+			String descripcionOL= "descOL1";
+			String ciudad = "ciudOL1";
+			String departamento = "depOL1";
+			String horario = "hoeOL1";
+			float remuneracion =1;
+			LocalDate fechaDeAlta = LocalDate.of(2020, 8, 20);
+			float costoAsociado = costoT;
+			DTTipo dataTipo = new DTTipo(nombreT, descripcionT, exposicionT, duracionT, costoT, fechaAltaT.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+			Map<String, DTKeyword> dataKeywords = new HashMap<>();
+			DTKeyword dtk = new DTKeyword(nombreK);
+			dataKeywords.put(nombreK,dtk);
+			List<DTPostulacion> dataPostulaciones = new ArrayList<>();
+		 
+		 DTEmpresa dte = new DTEmpresa(nicknameE, nombreE, apellido, correo, ofertasLaborales, descripcion, link);
+
+		 
+		try {
+			
+			controladorOfertaLaboral.ingresarTipo(nombreT, descripcionT, exposicionT, duracionT, costoT, fechaAltaT);
+			
+			controladorUsuario.ingresarDatosEmpresa(dte); 
+			mt = ManejadorTipo.getInstancia();
+			Tipo tOL = mt.buscarTipo(nombreTipo);
+			DTOfertaLaboral ol = new DTOfertaLaboral(nombre, descripcionOL, ciudad, departamento, horario, remuneracion, fechaDeAlta, costoAsociado, dataTipo, dataKeywords, dataPostulaciones, empresa, EstadoOL.Aceptada);
+			controladorOfertaLaboral.ingresarDatosOL(empresa,  nombreTipo, ol);
+			mol = ManejadorOfertaLaboral.getInstance();
+			DTOfertaLaboral[] ols = controladorOfertaLaboral.listarTodasOfertasLaborales();
+			assertEquals(ols[0].getNombre(), nombre);
+			assertEquals(ols[0].getCiudad(), ciudad);
+			assertEquals(ols[0].getDepartamento(), departamento);
+			assertEquals(ols[0].getDescripcion(), descripcionOL);
+			assertEquals(ols[0].getFechaDeAlta(), fechaDeAlta);
+			assertEquals(ols[0].getCostoAsociado(), costoAsociado);
+			assertEquals(ols[0].getKeywords().keySet().iterator().next(), nombreK);
+			
+		}catch (TipoRepetidoException e) {
+			fail(e.getMessage());
+			e.printStackTrace();
+		}catch (ExisteUnUsuarioYaRegistradoException e) {
+			fail(e.getMessage());
+			e.printStackTrace();
+		}catch (OfertaLaboralRepetidaException e) {
+			fail(e.getMessage());
+			e.printStackTrace();
+		} catch(OfertasLaboralesNoExistenNingunaException e) {
+			fail(e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	void testListarTodasOfertasLaboralesNiguna() {
+		assertThrows(OfertasLaboralesNoExistenNingunaException.class, ()->{controladorOfertaLaboral.listarTodasOfertasLaborales();});
+	}
+	
+	@Test 
+	void testComprarPaquetes() {
+		//Datos tipo
+		String nombreT = "nombreT3";
+		String descripcionT = "descripcionT3";
+		 int exposicionT = 3;
+		 int duracionT = 300000;
+		 float costoT = 3;
+		 Tipo tip = new Tipo(nombreT, descripcionT, exposicionT, duracionT, costoT, LocalDate.now());
+		 
+		 //datos empresa
+		 String nicknameE ="nicke1";
+		 String nombreE ="nome1";
+		 String apellido= "ape1";
+		 String correo= "coe1";
+		 String descripcion = "dese1";
+		 String link = "linke1";
+	
+		//Datos paquetes
+		Paquete paq = new Paquete("paq", "desc", 100, 25, 200, LocalDate.now());
+		Paquete paq1 = new Paquete("paqe", "desc", 100, 25, 200, LocalDate.now());
+		mt = ManejadorTipo.getInstancia();
+		mu = ManejadorUsuario.getInstancia();
+		mt.agregarPaquete(paq);
+		mt.agregarPaquete(paq1);
+		mt.agregarTipo(tip);
+		Empresa emp = new Empresa(nicknameE, nombreE, apellido, correo, descripcion, link);
+		mu.agregarEmpresa(emp);
+		PaqueteTipo paqTip = new PaqueteTipo(3, tip);
+		paq.agregarPaqueteTipo(paqTip);
+		paq1.agregarPaqueteTipo(paqTip);
+		
+		controladorOfertaLaboral.comprarPaquete(nicknameE, "paq");
+		controladorOfertaLaboral.comprarPaquete(nicknameE, "paqe");
+	}
 	
 	@Test
 	void testDataPostulacion() {
@@ -686,6 +954,5 @@ String nombreK = "nombreKeyword";
 			fail(e.getMessage());
 			e.printStackTrace();
 		}
-	
 	}
 }

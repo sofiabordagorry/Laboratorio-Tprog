@@ -16,8 +16,8 @@ import excepciones.EmpresasNoExistenException;
 
 
 public interface IUsuario {
-	public abstract void modificarEmpresa(String nick, String nom,String ap, String desc, String l);
-	public abstract void modificarPostulante(String nick, String nom, String ap, LocalDate f, String nac);
+	public abstract void modificarEmpresa(String nick, String nom, String ape, String desc, String link);
+	public abstract void modificarPostulante(String nick, String nom, String ape, LocalDate fecha, String nac);
 	public abstract DTOfertaLaboral[] listarOfertasLaborales(String nomEmpresa) throws OfertasLaboralesNoExistenException;
 	public abstract DTUsuario mostrarInformacionUsuario(String nickname);
 	public abstract DTUsuario[] listarUsuarios() throws UsuariosNoExistenException;

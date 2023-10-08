@@ -1,11 +1,13 @@
 package logica;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 
 public class DTPostulante extends DTUsuario {
 	private LocalDate fechaDeNacimiento;
 	private String nacionalidad;
+	private List<DTPostulacion> postulaciones;
 	
 	public DTPostulante(String nickname, String nombre, String apellido, String correo, LocalDate fechaDeNacimiento, String nacionalidad) {
 		super(nickname, nombre, apellido, correo);
@@ -31,6 +33,12 @@ public class DTPostulante extends DTUsuario {
 		this.nacionalidad = nacionalidad;
 	}
 	
+	public DTPostulante(String nickname, String nombre, String apellido, String correo, LocalDate fechaDeNacimiento, String nacionalidad, Map<String, DTOfertaLaboral> ofLab, List<DTPostulacion> p) {
+		super(nickname, nombre, apellido, correo, ofLab);
+		this.fechaDeNacimiento = fechaDeNacimiento;
+		this.nacionalidad = nacionalidad;
+		this.postulaciones = p;
+	}
 
 	public LocalDate getFechaDeNacimiento() {
 		return this.fechaDeNacimiento;
@@ -42,5 +50,9 @@ public class DTPostulante extends DTUsuario {
 	
 	public String toString() {
 		return this.getNombre() + "(" + this.getCorreo() + ")";
+	}
+	
+	public List<DTPostulacion> getPostulaciones() {
+		return postulaciones;
 	}
 }

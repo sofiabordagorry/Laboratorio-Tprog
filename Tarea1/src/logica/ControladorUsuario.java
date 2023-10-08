@@ -24,7 +24,7 @@ import excepciones.UsuariosNoExistenException;
 public class ControladorUsuario implements IUsuario {
 	public ControladorUsuario() {
 	}
-	
+
 	private boolean existeMail(String mail) {
 		ManejadorUsuario m = ManejadorUsuario.getInstancia();
 		Postulante[] pos = m.getPostulantes();
@@ -127,7 +127,7 @@ public class ControladorUsuario implements IUsuario {
         else { throw new EmpresaSinOfertasException("La empresa seleccionada no tiene ofertas vigentes");}
     }
     
-    
+   
     public  DTOfertaLaboral[] listarOfertasLaboralesIngresadas(String empresa) throws EmpresaSinOfertasException{
         ManejadorUsuario mu = ManejadorUsuario.getInstancia();
             Empresa emp = mu.buscarEmpresa(empresa);
