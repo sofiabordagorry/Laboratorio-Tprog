@@ -854,4 +854,14 @@ class ControladorUsuarioTests {
 		assertEquals(de.getDescripcion(), descripcionNuevo);
 		assertEquals(de.getLink(), linkNuevo);
 	}
+	
+	@Test
+	void listarOfertasPostuladoOK() {
+		String nicknamePostulante = "postulante";
+		String nombrePosulante = "nombre";
+		String apellidoPostulante = "apellido";
+		String correoPostulante = "correo";
+		LocalDate fechaNacPostulante = LocalDate.now();
+		String nacionalidadPostulante = "nacionalidad";
+	}
 }
