@@ -5,6 +5,7 @@ import excepciones.TipoPubNoExistenException;
 import excepciones.OfertaLaboralRepetidaException;
 import excepciones.OfertasLaboralesNoExistenNingunaException;
 import excepciones.PaqueteRepetidoException;
+import excepciones.PaqueteYaCompradoException;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -37,7 +38,7 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 				paq = paquetes[i];
 				dt[i] = paq.getDataPaquete();
 			}
-			
+		
 			return dt;
 		} else {
 			throw new NoHayPaquetesException("No hay paquetes registrados");
@@ -213,25 +214,30 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 		}
 	}
 	
-	public void comprarPaquete(String empresa, String paquete) {
+	public void comprarPaquete(String empresa, String paquete) throws PaqueteYaCompradoException{
 		ManejadorTipo mt =  ManejadorTipo.getInstancia();
 		ManejadorUsuario mu = ManejadorUsuario.getInstancia();
 		
 		Empresa empresaG = mu.buscarEmpresa(empresa);
 		Paquete paqueteG = mt.buscarPaquete(paquete);
 		
-		LocalDate fechaCompra = LocalDate.now();
-		int periodoValidezPaq = paqueteG.getPeriodoDeValidez();
-		LocalDate vencimiento = fechaCompra.plusDays(periodoValidezPaq);
-		
-		List<PaqueteTipo> paqTip = paqueteG.getPaquetesTipos();
-		List<CompraTipo>  compTip = new LinkedList<>();
-		for(PaqueteTipo p : paqTip) {
-			CompraTipo ct = new CompraTipo(p.getCantidad() , p.getTipo());
-			compTip.add(ct);
+		if (empresaG.verificarCompra(paquete)) {
+			
+			LocalDate fechaCompra = LocalDate.now();
+			int periodoValidezPaq = paqueteG.getPeriodoDeValidez();
+			LocalDate vencimiento = fechaCompra.plusDays(periodoValidezPaq);
+			
+			List<PaqueteTipo> paqTip = paqueteG.getPaquetesTipos();
+			List<CompraTipo>  compTip = new LinkedList<>();
+			for(PaqueteTipo p : paqTip) {
+				CompraTipo ct = new CompraTipo(p.getCantidad() , p.getTipo());
+				compTip.add(ct);
+			}
+			Compra compra = new Compra(fechaCompra, vencimiento, paqueteG, empresaG, compTip);
+			empresaG.agregarCompra(compra);
+		}else {
+			throw new PaqueteYaCompradoException("Ya se ha comprado ese paquete");
 		}
-		Compra compra = new Compra(fechaCompra, vencimiento, paqueteG, empresaG, compTip);
-		empresaG.agregarCompra(compra);
 
 	}
 

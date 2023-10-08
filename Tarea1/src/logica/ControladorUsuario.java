@@ -263,4 +263,5 @@ public class ControladorUsuario implements IUsuario {
 			throw new UsuarioSinPostulacionesException("No existen postulaciones."); 
 		}
 	}
+	
 }

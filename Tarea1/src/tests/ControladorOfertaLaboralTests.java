@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import excepciones.NoHayPaquetesException;
 import excepciones.NoHayTiposException;
@@ -35,11 +36,14 @@ import logica.Keyword;
 import logica.Tipo;
 import logica.Paquete;
 import logica.PaqueteTipo;
+import logica.Postulante;
 import logica.OfertaLaboral;
 import logica.DTOfertaLaboral;
 import logica.DTPaquete;
+import logica.DTPostulante;
 import logica.DTPaqueteTipo;
 import logica.DTPostulacion;
+import logica.Postulacion;
 import logica.DTTipo;
 import logica.Empresa;
 import logica.EstadoOL;
@@ -587,8 +591,101 @@ class ControladorOfertaLaboralTests{
 		}
 	}
 	
+	
 	@Test
 	void testVacioListarTipoPublicacionOfertaLaboral() {
 		assertThrows(TipoPubNoExistenException.class, ()->{controladorOfertaLaboral.listarTipoPublicacionOfertaLaboral();});
+	}
+	
+	
+	@Test
+	void testDataPostulacion() {
+String nombreK = "nombreKeyword";
+		
+		controladorOfertaLaboral.ingresarKeyword(nombreK);
+		//datos tipo
+		String nombreT = "nombreT3";
+		String descripcionT = "descripcionT3";
+		 int exposicionT = 3;
+		 int duracionT = 300000;
+		 float costoT = 3;
+		 Date fechaAltaT = new Date(1597891200000L); // 20 de agosto 2020
+		 //datos postulante
+
+		 String nicknameP ="nickp";
+		 String nombreP ="nomp";
+		 String apellidoP= "apep";
+		 String correoP= "cop";
+		 LocalDate fechaNaP = LocalDate.of(1999, 8, 20);
+		 String nacionalidadP = "NacP";
+		 
+		 DTPostulante dtPost = new DTPostulante(nicknameP, nombreP, apellidoP, correoP, fechaNaP, nacionalidadP);
+		 //datos empresa
+		 String nicknameE ="nicke1";
+		 String nombreE ="nome1";
+		 String apellido= "ape1";
+		 String correo= "coe1";
+		 Map<String, DTOfertaLaboral> ofertasLaborales = new HashMap<>();
+		 String descripcion = "dese1";
+		 String link = "linke1";
+		 
+		 String empresa = nicknameE;
+			String nombreTipo = nombreT;
+			//datos oferta
+			String nombre= "nombreOL1";
+			String descripcionOL= "descOL1";
+			String ciudad = "ciudOL1";
+			String departamento = "depOL1";
+			String horario = "hoeOL1";
+			float remuneracion =1;
+			LocalDate fechaDeAlta = LocalDate.of(2023, 8, 20);
+			float costoAsociado = costoT;
+			DTTipo dataTipo = new DTTipo(nombreT, descripcionT, exposicionT, duracionT, costoT, fechaAltaT.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+			Map<String, DTKeyword> dataKeywords = new HashMap<>();
+			DTKeyword dtk = new DTKeyword(nombreK);
+			dataKeywords.put(nombreK,dtk);
+			List<DTPostulacion> dataPostulaciones = new ArrayList<>();
+		 
+		 DTEmpresa dte = new DTEmpresa(nicknameE, nombreE, apellido, correo, ofertasLaborales, descripcion, link);
+
+		 
+		try {
+			controladorOfertaLaboral.ingresarTipo(nombreT, descripcionT, exposicionT, duracionT, costoT, fechaAltaT);
+			controladorUsuario.ingresarDatosPostulante(dtPost);
+			controladorUsuario.ingresarDatosEmpresa(dte); 
+			mt = ManejadorTipo.getInstancia();
+			DTOfertaLaboral ol = new DTOfertaLaboral(nombre, descripcionOL, ciudad, departamento, horario, remuneracion, fechaDeAlta, costoAsociado, dataTipo, dataKeywords, dataPostulaciones, empresa, EstadoOL.Aceptada);
+			controladorOfertaLaboral.ingresarDatosOL(empresa,  nombreTipo, ol);
+			mol = ManejadorOfertaLaboral.getInstance();
+			OfertaLaboral Ol = mol.buscarOfertaLaboral(nombre);
+			mu = ManejadorUsuario.getInstancia();
+			Postulante postu = mu.buscarPostulante(nicknameP);
+			LocalDate local = LocalDate.now();
+			Postulacion pos = new Postulacion(local, "cvReducido","motivacion", postu, Ol);
+			
+			postu.agregarPostulacion(pos);
+			
+			DTPostulacion dtp = controladorOfertaLaboral.dataPostulacion(nicknameP, nombre);
+			
+			LinkedList<Postulacion> posts = postu.getPostulaciones();
+			assertEquals(posts.getFirst().getCVReducido(),  "cvReducido");
+			assertEquals(posts.getFirst().getMotivacion(),  "motivacion");
+			assertEquals(posts.getFirst().getPostulante().getNickname(),  postu.getNickname());
+			assertEquals(posts.getFirst().getOfertaLaboral().getNombre(),  Ol.getNombre());
+			
+			
+			
+			
+		}catch (TipoRepetidoException e) {
+			fail(e.getMessage());
+			e.printStackTrace();
+		}catch (ExisteUnUsuarioYaRegistradoException e) {
+			fail(e.getMessage());
+			e.printStackTrace();
+		}catch (OfertaLaboralRepetidaException e) {
+			fail(e.getMessage());
+			e.printStackTrace();
+		}
+	
 	}
 }

@@ -5,6 +5,7 @@ import excepciones.KeywordsNoExistenException;
 import excepciones.OfertaLaboralRepetidaException;
 import excepciones.OfertasLaboralesNoExistenNingunaException;
 import excepciones.PaqueteRepetidoException;
+import excepciones.PaqueteYaCompradoException;
 
 import java.util.Date;
 import excepciones.TipoRepetidoException;
@@ -34,5 +35,8 @@ public interface IOfertaLaboral {
 	public abstract void agregarTipoAPaquete(int cantidad, String tipPaquete, String tipTipo) throws TipoYaAgragadoException;
 	public abstract DTOfertaLaboral mostrarDatosOfertaLaboral(String OfertaLaboral);
 	public abstract DTOfertaLaboral[] listarTodasOfertasLaborales() throws OfertasLaboralesNoExistenNingunaException;
+	public abstract DTPostulacion dataPostulacion(String nicknameP, String nombre);
+	public abstract void comprarPaquete(String empresa, String paquete) throws PaqueteYaCompradoException;
+
 
 }

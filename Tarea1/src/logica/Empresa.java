@@ -20,7 +20,7 @@ public class Empresa extends Usuario {
 		this.link = link;
 		this.ofertasLaborales = new HashMap<>();
 
-	} 
+	}
 	
 	public Empresa(String nickname, String nombre, String apellido, String correo, String descripcion, String link, String contrasenia) {
 		super(nickname, nombre, apellido, correo, contrasenia);
@@ -145,5 +145,17 @@ public class Empresa extends Usuario {
 		this.setApellido(apellido);
 		this.setDescripcion(desc);
 		this.setLink(l);
+	}
+	
+	public boolean verificarCompra(String paquete) {
+		List<Compra> compras = this.getCompras();
+		boolean sePuede = true;
+		for (int i = 0; i < compras.size(); i++) {
+			if (compras.get(i).getPaqueteComprado().getNombre() == paquete) {
+				//ya se compro el paquete
+				sePuede = false;
+			}
+		}
+		return sePuede;
 	}
 }
