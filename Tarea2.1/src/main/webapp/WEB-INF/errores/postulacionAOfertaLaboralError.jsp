@@ -18,7 +18,7 @@
 						<h2>¡Oops!</h2>
 						<h3>Parece que ya te postulaste a esta oferta laboral, ¿Qué deseas hacer?</h3>
 						<br>
-						<a href="" class="btn btn-secondary">Ver mis postulaciones</a> 
+						<a href="ConsultaPostulacion" class="btn btn-secondary">Ver mis postulaciones</a> 
 						<a href="Home" class="btn btn-secondary">Volver al inicio</a>            	
 						</div>				
 			</div>
