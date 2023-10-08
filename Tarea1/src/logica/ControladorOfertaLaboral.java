@@ -234,6 +234,24 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 		empresaG.agregarCompra(compra);
 
 	}
+
+	public DTPostulacion dataPostulacion(String nickname, String nombreOL) {
+		ManejadorUsuario musu = ManejadorUsuario.getInstancia();
+		Postulante post = musu.buscarPostulante(nickname);
+		LinkedList<Postulacion> postulaciones = post.getPostulaciones();
+		DTPostulacion dataPostulacion = null;
+		for(Postulacion posts : postulaciones) {
+			if(posts.getOfertaLaboral().getNombre().equals(nombreOL)) {
+				dataPostulacion = posts.getDataPostulacion();
+			}
+		}
+		
+		if(dataPostulacion == null) {
+			System.out.println("dtpost null");
+		}
+		
+		return dataPostulacion;
+	}
 	
 }
 

@@ -28,6 +28,7 @@ public interface IUsuario {
 	public abstract DTOfertaLaboral[] listarOfertasLaboralesVigentes(String empresa) throws EmpresaSinOfertasException;
 	public abstract DTOfertaLaboral[] listarOfertasLaboralesIngresadas(String empresa) throws EmpresaSinOfertasException;
 	public abstract void ingresarPostulacion(String CVReducido, String motivacion, LocalDate fecha, String empresa, String oferta, String postulante) throws YaSePostuloException;
+	public abstract DTOfertaLaboral[] listarOfertasPostulado(String nickname) throws UsuarioSinPostulacionesException;
 }
 
 

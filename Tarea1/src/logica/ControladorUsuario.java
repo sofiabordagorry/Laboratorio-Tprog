@@ -243,4 +243,22 @@ public class ControladorUsuario implements IUsuario {
 		Postulante e = iMU.buscarPostulante(nick);
 		e.modificarDatos(nom, ap, f, nac);
 	}
+
+	public DTOfertaLaboral[] listarOfertasPostulado(String nickname) throws UsuarioSinPostulacionesException {
+		ManejadorUsuario musr = ManejadorUsuario.getInstancia();
+		Postulante usr = musr.buscarPostulante(nickname);
+		List<Postulacion> postulaciones = usr.getPostulaciones();
+		if(postulaciones != null) {
+			DTOfertaLaboral[] ofertasPostulado = new DTOfertaLaboral[postulaciones.size()];
+			int iter = 0;
+			for(Postulacion post : postulaciones) {
+				ofertasPostulado[iter] = post.getOfertaLaboral().getDataOfertaLaboral();
+				iter++;
+			}
+			
+			return ofertasPostulado;
+		} else {
+			throw new UsuarioSinPostulacionesException("No existen postulaciones."); 
+		}
+	}
 }
