@@ -57,7 +57,7 @@ public class Login extends HttpServlet {
 		
 		if (usr != null && !usr.getContrasenia().equals(password)) {
 			nuevoEstado = LoginEstado.LOGIN_INCORRECTO;
-			dispatcher = request.getRequestDispatcher("iniciar-sesion");
+			dispatcher = request.getRequestDispatcher("/WEB-INF/home/login.jsp");
 		} else if (usr != null && usr.getContrasenia().equals(password)) {
 			nuevoEstado = LoginEstado.LOGIN_CORRECTO;
 			// setea el usuario logueado
@@ -65,7 +65,7 @@ public class Login extends HttpServlet {
 			dispatcher = request.getRequestDispatcher("/WEB-INF/template/index.jsp");
 		} else {
 			nuevoEstado = LoginEstado.LOGIN_INCORRECTO;
-			dispatcher = request.getRequestDispatcher("iniciar-sesion");
+			dispatcher = request.getRequestDispatcher("/WEB-INF/home/login.jsp");
 		}
 
 		objSesion.setAttribute("estado_sesion", nuevoEstado);

@@ -20,19 +20,14 @@ public interface IOfertaLaboral {
 	public abstract String[] listarKeywords() throws KeywordsNoExistenException;
 	public abstract void ingresarDatosOL(String empresa, String nombreTipo, DTOfertaLaboral ol) throws OfertaLaboralRepetidaException;
 	public abstract void ingresarDatosPaquete(DTPaquete datosPaquete) throws PaqueteRepetidoException;
-	
 	public abstract void AcepRechOL(EstadoOL e, String OL);
-
 	public abstract void ingresarTipo(String nombre, String descripcion, int exposicionT, int duracion, Float costo, Date fechaAlta) throws TipoRepetidoException;
-	
 	public abstract void ingresarKeyword(String nombre);
-	
 	public abstract String[] listarNomPaquetes() throws NoHayPaquetesException;
-	
 	public abstract String[] listarNomTipos() throws NoHayTiposException;
-	
 	public abstract void agregarTipoAPaquete(int cantidad, String tipPaquete, String tipTipo) throws TipoYaAgragadoException;
 	public abstract DTOfertaLaboral mostrarDatosOfertaLaboral(String OfertaLaboral);
 	public abstract DTOfertaLaboral[] listarTodasOfertasLaborales() throws OfertasLaboralesNoExistenNingunaException;
+	public abstract DTPostulacion dataPostulacion(String nickname, String nombreOL);
 
 }

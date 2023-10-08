@@ -28,25 +28,33 @@ public class Home extends HttpServlet {
     
     public static void init(HttpServletRequest request) {
     	HttpSession misesion = request.getSession();
-    	if(misesion.getAttribute("loginEstado") == null) {
+    	if (misesion.getAttribute("loginEstado") == null) {
     		misesion.setAttribute("loginEstado", LoginEstado.NO_LOGIN);
     		
     		Factory fac = Factory.getInstance();
     		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
-    		Empresa emp = new Empresa("nick", "Rodolfo", "Gutierrez", "hola@gmail.com", "purtias", "Desc", "link");
+    		ManejadorUsuario mu = ManejadorUsuario.getInstancia();
+    		LocalDate ldate = LocalDate.now();
+    		Empresa emp = new Empresa("nick", "Rodolfo", "Gutierrez", "hola@gmail.com", "Desc", "link", "123", new byte[0]);
+    		Postulante post = new Postulante("jokin", "joaco", "corbo", "correo@c.com", ldate, "uru", "123", new byte[0]);
+    		mu.agregarEmpresa(emp);
+    		mu.agregarPostulante(post);
     		Keyword k = new Keyword("pato");
     		Map<String, Keyword> keyss = new HashMap<>();
     		keyss.put("pato", k);
-    		LocalDate ldate = LocalDate.now();
     		Tipo t = new Tipo("clean", "tipo clean", 1, 1000, 200000, ldate);
     		OfertaLaboral ol = new OfertaLaboral("Jugador de CS2 Profesional", "Que pegue unos buenos tiros", "Punta Carretas", "Montevideo", "09:20", 20000, ldate, 20, t, keyss, emp);
+    		ol.setEstado(EstadoOL.Aceptada);
     		mol.agregarOfertaLaboral(ol);
+    		Postulacion postu = new Postulacion(ldate, "Me gusta el fortnite", "Tengo monitor", post, ol);
+    		post.agregarPostulacion(postu);
+    		ol.agregarPostulacion(postu);
     		IOfertaLaboral iol = fac.getIOfertaLaboral();
     		try {
     			DTOfertaLaboral dtols[] = iol.listarTodasOfertasLaborales();
     			request.getSession().setAttribute("listaOfertasLaborales", dtols);
     		} catch (OfertasLaboralesNoExistenNingunaException e) {
-    			
+    			e.printStackTrace();
     		}
     		
     		
@@ -65,13 +73,13 @@ public class Home extends HttpServlet {
 			throws ServletException, IOException {
     	init(request);
     	
-    	switch(getLoginEstado(request)) {
+    	switch (getLoginEstado(request)) {
     		case NO_LOGIN:
     			request.getRequestDispatcher("/WEB-INF/template/index.jsp").forward(request, response);
-    		case EMPRESA_LOGIN:
+    		case LOGIN_INCORRECTO:
     			break;
-    		case POSTULANTE_LOGIN:
-    			break;
+    		case LOGIN_CORRECTO:
+    			request.getRequestDispatcher("/WEB-INF/template/index.jsp").forward(request, response);;
     	}
     }
 	

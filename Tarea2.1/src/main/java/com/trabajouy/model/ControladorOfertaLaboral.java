@@ -8,6 +8,9 @@ import com.trabajouy.exceptions.PaqueteRepetidoException;
 
 import java.util.Map;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Date;
 
 import com.trabajouy.exceptions.NoHayPaquetesException;
@@ -91,13 +94,12 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 		
 		ManejadorTipo mt = ManejadorTipo.getInstancia();
 		Tipo t = mt.buscarTipo(nombreTipo);
-		
 		Map<String, Keyword> keys = new HashMap<>();	
 		for(Map.Entry<String, DTKeyword> entry: ol.getKeywords().entrySet()) 
 			keys.put(entry.getKey(), mol.buscarKeyword(entry.getKey()));
 		
 		OfertaLaboral olNueva = new OfertaLaboral(ol.getNombre(), ol.getDescripcion(), ol.getCiudad(), ol.getDepartamento(), 
-															ol.getHorario(), ol.getRemuneracion(), ol.getFechaDeAlta(), ol.getCostoAsociado(), t, keys, e, ol.getImagen());
+												ol.getHorario(), ol.getRemuneracion(), ol.getFechaDeAlta(), ol.getCostoAsociado(), t, keys, e, ol.getImagen());
 		
 		mol.agregarOfertaLaboral(olNueva);
 
@@ -201,7 +203,8 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 			DTOfertaLaboral[] todasOls = new DTOfertaLaboral[ols.size()];
 			int i = 0;
 			for(Map.Entry<String, OfertaLaboral> entry : ols.entrySet()) {
-				todasOls[i] = entry.getValue().getDataOfertaLaboral();
+				if(entry.getValue().getEstado() == EstadoOL.Aceptada)
+					todasOls[i] = entry.getValue().getDataOfertaLaboral();
 				i++;
 			}
 			return todasOls;
@@ -210,6 +213,45 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 		}
 	}
 	
+	public DTPostulacion dataPostulacion(String nickname, String nombreOL) {
+		ManejadorUsuario musu = ManejadorUsuario.getInstancia();
+		Postulante post = musu.buscarPostulante(nickname);
+		LinkedList<Postulacion> postulaciones = post.getPostulaciones();
+		DTPostulacion dataPostulacion = null;
+		for(Postulacion posts : postulaciones) {
+			if(posts.getOfertaLaboral().getNombre().equals(nombreOL)) {
+				dataPostulacion = posts.getDataPostulacion();
+			}
+		}
+		
+		if(dataPostulacion == null) {
+			System.out.println("dtpost null");
+		}
+		
+		return dataPostulacion;
+	}
+	
+	/*public List<Paquete> obtenerPaquetesParaCompraOL(Tipo tipo, Empresa emp) {
+		List<Paquete> paqs = new ArrayList<>();
+		List<Compra> compras = emp.getCompras();
+		for (int i = 0; i < compras.size(); i++) {
+			Paquete paq = compras.get(i).getPaquetesPorTipo(tipo);
+			if (paq != null) {
+				paqs.add(paq);
+			}
+			
+		}
+		return paqs;
+	}
+	
+	public void comprarTipo(Tipo tipo, Empresa emp) {
+		List<Paquete> paqs = new ArrayList<>();
+		List<Compra> compras = emp.getCompras();
+		for (int i = 0; i < compras.size(); i++) {
+			compras.get(i).restarCompraPorTipo(tipo);
+			
+		}
+	}*/
 	
 }
 

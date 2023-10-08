@@ -31,9 +31,9 @@ public class ConsultaUsuario extends HttpServlet {
     private void processRequest(HttpServletRequest request, HttpServletResponse response) 
     		throws ServletException, IOException {
     	// Obtén el nickname del usuario que se consulta de alguna manera
-    	ManejadorUsuario mu = ManejadorUsuario.getInstancia();
+    	ManejadorUsuario murs = ManejadorUsuario.getInstancia();
     	Factory fac = Factory.getInstance();
-    	IUsuario iu = fac.getIUsuario();
+    	IUsuario iurs = fac.getIUsuario();
     	String nicknameConsultado = request.getParameter("usuarioConsultado");
     	
     	// Obtén el nickname del usuario en sesión (si hay uno)
@@ -47,32 +47,34 @@ public class ConsultaUsuario extends HttpServlet {
     	if (nicknameConsultado == null) {
     	    // No se especificó un nickname para consultar, mostrar la página ListarUsuarios
     		try {
-				DTUsuario[] users = iu.listarUsuarios();
+				DTUsuario[] users = iurs.listarUsuarios();
 	    		request.setAttribute("SystemUsers", users);
+				request.setAttribute("NoUsersInSystem_Error", false);
+	    	    request.getRequestDispatcher("/WEB-INF/listar/listarUsuarios.jsp").forward(request, response);
 			} catch (UsuariosNoExistenException e) {
-				e.printStackTrace();
+				request.setAttribute("NoUsersInSystem_Error", true);
+	    		request.getRequestDispatcher("/WEB-INF/listar/listarUsuarios.jsp").forward(request, response);
 			}
 
-    	    request.getRequestDispatcher("/WEB-INF/listar/listarUsuarios.jsp").forward(request, response);
+
     	} else {
-	        DTUsuario userInfo = iu.mostrarInformacionUsuario(nicknameConsultado);
-	        request.setAttribute("userInformation", userInfo);
+	        DTUsuario userInfo = iurs.mostrarInformacionUsuario(nicknameConsultado);
+	        //request.setAttribute("userInformation", userInfo);
 	        request.setAttribute("userData", userInfo);
     	    if (nicknameEnSesion != null && nicknameEnSesion.equals(nicknameConsultado)) {
     	        // El usuario en sesión coincide con el usuario consultado
-    	    	System.out.println("AAAAAAAAA");
-    	        if (mu.existeEmpresa(nicknameConsultado)) {
+    	        if (murs.existeEmpresa(nicknameConsultado)) {
     	            // Es una empresa, mostrar MiPerfilEmpresa
     	            request.getRequestDispatcher("/WEB-INF/consultas/miPerfilEmpresa.jsp").forward(request, response);
-    	        } else if (mu.existePostulante(nicknameConsultado)) {
+    	        } else if (murs.existePostulante(nicknameConsultado)) {
     	            // Es un postulante, mostrar MiPerfilPostulante
     	            request.getRequestDispatcher("/WEB-INF/consultas/miPerfilPostulante.jsp").forward(request, response);
     	        }
     	    } else {
-    	        if (mu.existeEmpresa(nicknameConsultado)) {
+    	        if (murs.existeEmpresa(nicknameConsultado)) {
     	            // Es una empresa, mostrar ConsultarEmpresa
     	            request.getRequestDispatcher("/WEB-INF/consultas/consultarEmpresa.jsp").forward(request, response);
-    	        } else if (mu.existePostulante(nicknameConsultado)) {
+    	        } else if (murs.existePostulante(nicknameConsultado)) {
     	            // Es un postulante, mostrar ConsultarPostulante
     	            request.getRequestDispatcher("/WEB-INF/consultas/consultarPostulante.jsp").forward(request, response);
     	        }

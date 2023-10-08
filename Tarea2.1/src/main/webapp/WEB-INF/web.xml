@@ -49,4 +49,54 @@
     <servlet-name>Login</servlet-name>
     <url-pattern>/Login</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ConsultaPostulacion</display-name>
+    <servlet-name>ConsultaPostulacion</servlet-name>
+    <servlet-class>com.trabajouy.controllers.ConsultaPostulacion</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ConsultaPostulacion</servlet-name>
+    <url-pattern>/ConsultaPostulacion</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AltaDeOfertaLaboral</display-name>
+    <servlet-name>AltaDeOfertaLaboral</servlet-name>
+    <servlet-class>com.trabajouy.controllers.AltaDeOfertaLaboral</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AltaDeOfertaLaboral</servlet-name>
+    <url-pattern>/AltaDeOfertaLaboral</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CerrarSession</display-name>
+    <servlet-name>CerrarSession</servlet-name>
+    <servlet-class>com.trabajouy.controllers.CerrarSession</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CerrarSession</servlet-name>
+    <url-pattern>/CerrarSession</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ConsultaOfertaLaboral</display-name>
+    <servlet-name>ConsultaOfertaLaboral</servlet-name>
+    <servlet-class>com.trabajouy.controllers.ConsultaOfertaLaboral</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ConsultaOfertaLaboral</servlet-name>
+    <url-pattern>/ConsultaOfertaLaboral</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ConsultaTipo</display-name>
+    <servlet-name>ConsultaTipo</servlet-name>
+    <servlet-class>com.trabajouy.controllers.ConsultaTipo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ConsultaTipo</servlet-name>
+    <url-pattern>/ConsultaTipo</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -38,18 +38,18 @@
 			<%	
 					if(usr instanceof Empresa){
 			%>
-			<a class="list-group-item list-group-item-action" href="./ListarUsuarios-visit.html"><i class="fa-solid fa-users"></i> Publicar Oferta Laboral</a>
-			<a class="list-group-item list-group-item-action" href="./ListarTipos-visit.html"><i class="fa-solid fa-square-poll-vertical"></i> Mis Ofertas</a>
+			<a class="list-group-item list-group-item-action" href="AltaDeOfertaLaboral"><i class="fa-solid fa-users"></i> Publicar Oferta Laboral</a>
+			<a class="list-group-item list-group-item-action" href="ConsultaOfertaLaboral"><i class="fa-solid fa-square-poll-vertical"></i> Mis Ofertas</a>
 			<%
 					} else {
 			%>
-			<a class="list-group-item list-group-item-action" href="./ListarTipos-visit.html"><i class="fa-solid fa-square-poll-vertical"></i> Mis Postulaciones</a>
+			<a class="list-group-item list-group-item-action" href="ConsultaPostulacion"><i class="fa-solid fa-square-poll-vertical"></i> Mis Postulaciones</a>
 			<%
 					}
 				}
 			%>
 			<a class="list-group-item list-group-item-action" href="ConsultaUsuario"><i class="fa-solid fa-users"></i> Busqueda de usuarios</a>
-			<a class="list-group-item list-group-item-action" href="./ListarTipos-visit.html"><i class="fa-solid fa-square-poll-vertical"></i> Consultar tipos</a>
+			<a class="list-group-item list-group-item-action" href="ConsultaTipo"><i class="fa-solid fa-square-poll-vertical"></i> Consultar tipos</a>
 			<a class="list-group-item list-group-item-action" href="./ConsultaPaqVisitante.html"><i class="fa-solid fa-box-open"></i> Consultar paquetes</a>
 		</div>
 	</div>

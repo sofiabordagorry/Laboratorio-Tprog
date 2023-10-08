@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class Empresa extends Usuario {
 	
-	private String descripcion;
+	private String descripcion; 
 	private String link;
 	private Map<String, OfertaLaboral> ofertasLaborales;
 	

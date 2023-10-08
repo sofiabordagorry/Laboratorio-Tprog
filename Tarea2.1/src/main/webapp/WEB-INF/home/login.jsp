@@ -6,7 +6,7 @@
 	<head>
 	    <meta charset="UTF-8">
 	    <jsp:include page="../template/head.jsp" />
-	    <link rel="stylesheet" href="../../media/styles/inicioSesion.css" />
+	    <link rel="stylesheet" href="media/styles/inicioSesion.css" />
 	    <title>Trabajo.uy</title>
 	</head>
 	<body>

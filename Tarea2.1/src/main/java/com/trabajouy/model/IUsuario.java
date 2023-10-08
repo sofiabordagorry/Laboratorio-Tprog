@@ -5,6 +5,7 @@ import java.time.LocalDate;
 
 import com.trabajouy.exceptions.EmpresaSinOfertasException;
 import com.trabajouy.exceptions.PostulantesNoExistenException;
+import com.trabajouy.exceptions.UsuarioSinPostulacionesException;
 import com.trabajouy.exceptions.YaSePostuloException;
 import com.trabajouy.exceptions.NoExistenEmpresasOfertasLaboralesException;
 import com.trabajouy.exceptions.OfertasLaboralesNoExistenException;
@@ -28,6 +29,7 @@ public interface IUsuario {
 	public abstract DTOfertaLaboral[] listarOfertasLaboralesVigentes(String empresa) throws EmpresaSinOfertasException;
 	public abstract DTOfertaLaboral[] listarOfertasLaboralesIngresadas(String empresa) throws EmpresaSinOfertasException;
 	public abstract void ingresarPostulacion(String CVReducido, String motivacion, LocalDate fecha, String empresa, String oferta, String postulante) throws YaSePostuloException;
+	public abstract DTOfertaLaboral[] listarOfertasPostulado(String nickname) throws UsuarioSinPostulacionesException;
 }
 
 

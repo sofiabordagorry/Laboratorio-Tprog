@@ -15,6 +15,11 @@
 	            <jsp:include page="../template/sidebar.jsp" />
 				<div class="col col-md-9 col-sm-12" id="main-content">
 					<div id="listarContainer" class="form-row align-items-center justify-content-center contenedor">
+						<% 
+							boolean noUsers = (boolean) request.getAttribute("NoUsersInSystem_Error");
+							if (!noUsers) {
+								DTUsuario[] users = (DTUsuario[]) request.getAttribute("SystemUsers");
+						%>
 						<h1 class="text-center">Busqueda de Usuarios</h1>
 						<div id="barraBusqueda" class="mx-auto">
 							<div class="input-group mb-3">
@@ -23,14 +28,20 @@
 						</div>
 						<ul class="list-group" id="lista-elementos">
 							<%
-								DTUsuario[] users = (DTUsuario[]) request.getAttribute("SystemUsers");
-								for(int i = 0; i < users.length; i++){
+								for (int i = 0; i < users.length; i++) {
 							%>
 							<li class="list-group-item text-center"><a href="?usuarioConsultado=<%=users[i].getNickname()%>"><%=users[i].getNickname()%></a></li>
 							<% 
 								} 
 							%>
 						</ul>
+						<%
+							} else {
+						%>
+	               			<h1>Ooops, en este momento no hay Usuarios en el sistema</h1>
+						<%
+							}
+						%>
                 	</div>
 	        	</div>
         	</div>

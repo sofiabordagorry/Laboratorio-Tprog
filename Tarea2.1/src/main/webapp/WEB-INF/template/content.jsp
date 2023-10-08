@@ -22,7 +22,7 @@
 					<div class="card-body">
 						<h5 class="card-title"><%= ols[i].getNombre() %></h5>
 						<p class="card-text"><%= ols[i].getDescripcion() %></p>
-						<button class="btn"><a href="#">Ver oferta</a></button>
+						<button class="btn"><a href="ConsultaOfertaLaboral?oferta_consultada=<%=ols[i].getNombre()%>">Ver oferta</a></button>
 					</div>
 				</div>
 			</div>
