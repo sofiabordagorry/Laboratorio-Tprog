@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="com.trabajouy.model.*"%>
+<%@ page import="logica.DTPostulacion"%>
+<%@ page import="logica.DTPostulante"%>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -19,7 +20,11 @@
 	                        <div class="row no-gutters">
 	                        	<%
 	                        		DTPostulacion dtpostulacion = (DTPostulacion) request.getAttribute("dataPostulacion");
-	                        		Postulante post = (Postulante) request.getAttribute("usuarioPostulacion");
+	                        		DTPostulante post = (DTPostulante) request.getAttribute("usuarioPostulacion");
+	                        		String nombreOferta = (String) request.getAttribute("nombreOferta");
+	                        		if(nombreOferta == null) {
+	                        			System.out.println("Holi");
+	                        		}
 	                        	%>
 	                          	<div class="col-md-3">
 	                            	<img src="https://imgv3.fotor.com/images/gallery/a-woman-linkedin-picture-with-grey-background-made-by-LinkedIn-Profile-Picture-Maker.jpg" class="card-img" alt="..." >
@@ -33,7 +38,7 @@
 			                            <p class="card-text"><%= dtpostulacion.getCVReducido() %></p>
 			                            <h5 class="card-title">Motivación:</h5>
 		                             	<p class="card-text"><%= dtpostulacion.getMotivacion() %>.</p>
-		                              	<button class="btn"><a href="./consultaOfeLabDFlgarcia.html">Volver a oferta</a></button>
+		                              	<button class="btn"><a href="ConsultaOfertaLaboral?oferta_consultada=<%=nombreOferta%>">Volver a oferta</a></button>
 		                            </div>
 								</div>
 	                        </div>

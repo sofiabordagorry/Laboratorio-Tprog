@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="com.trabajouy.model.*"%>
+<%@page import="logica.DTUsuario"%>
+<%@page import="logica.DTPostulante"%>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -20,7 +21,7 @@
 	                	<div class="row">
 	                		<%
 		                		DTUsuario userInfo = (DTUsuario) request.getAttribute("userData");
-	                			DTPostulante pInfo = new DTPostulante();
+	                			DTPostulante pInfo = null;
 		                		pInfo = (DTPostulante) userInfo;
 	                		%>
                     		<div class="col-md-3" id="postulanteConsultaInfo">

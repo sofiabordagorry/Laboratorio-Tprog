@@ -6,14 +6,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import com.trabajouy.exceptions.UsuarioSinPostulacionesException;
-import com.trabajouy.model.DTOfertaLaboral;
-import com.trabajouy.model.DTPostulacion;
-import com.trabajouy.model.Factory;
-import com.trabajouy.model.IOfertaLaboral;
-import com.trabajouy.model.IUsuario;
-import com.trabajouy.model.ManejadorUsuario;
-import com.trabajouy.model.Usuario;
+import excepciones.UsuarioSinPostulacionesException;
+import logica.DTOfertaLaboral;
+import logica.DTPostulacion;
+import logica.Factory;
+import logica.IOfertaLaboral;
+import logica.IUsuario;
+import logica.ManejadorUsuario;
+import logica.Usuario;
 
 /**
  * Servlet implementation class ConsultaPostulacion
@@ -31,6 +31,7 @@ public class ConsultaPostulacion extends HttpServlet {
     	
     	Usuario usr = (Usuario) request.getSession().getAttribute("usuario_logueado");
     	String nombreOferta = request.getParameter("nombreOfertaConsultada");
+    	request.setAttribute("nombreOferta", nombreOferta);
     	
     	Factory fac = Factory.getInstance();
 		IUsuario cusr = fac.getIUsuario();
@@ -58,7 +59,7 @@ public class ConsultaPostulacion extends HttpServlet {
 		} else { 
 			DTPostulacion dataPostulacion = col.dataPostulacion(nicknameConsultado, nombreOferta);
 			ManejadorUsuario musr = ManejadorUsuario.getInstancia();
-			request.setAttribute("usuarioPostulacion", musr.buscarPostulante(nicknameConsultado));
+			request.setAttribute("usuarioPostulacion", musr.buscarPostulante(nicknameConsultado).getDataPostulante());
 			request.setAttribute("dataPostulacion", dataPostulacion);
 			request.getRequestDispatcher("/WEB-INF/consultas/consultaPostulacion.jsp").forward(request, response);
 		}

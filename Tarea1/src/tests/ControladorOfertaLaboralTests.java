@@ -15,6 +15,7 @@ import java.util.LinkedList;
 import excepciones.NoHayPaquetesException;
 import excepciones.NoHayTiposException;
 import excepciones.PaqueteRepetidoException;
+import excepciones.PaqueteYaCompradoException;
 import excepciones.TipoRepetidoException;
 import excepciones.TipoYaAgragadoException;
 
@@ -45,6 +46,7 @@ import logica.DTOfertaLaboral;
 import logica.DTPaquete;
 import logica.DTPostulante;
 import logica.DTPaqueteTipo;
+import logica.DTPostulacion;
 import logica.DTTipo;
 import logica.Empresa;
 import logica.EstadoOL;
@@ -861,9 +863,13 @@ String nombreK = "nombreKeyword";
 		PaqueteTipo paqTip = new PaqueteTipo(3, tip);
 		paq.agregarPaqueteTipo(paqTip);
 		paq1.agregarPaqueteTipo(paqTip);
+		try {
+			controladorOfertaLaboral.comprarPaquete(nicknameE, "paq");
+		} catch (PaqueteYaCompradoException e) {
+			fail(e.getMessage());
+			e.printStackTrace();
+		}
 		
-		controladorOfertaLaboral.comprarPaquete(nicknameE, "paq");
-		controladorOfertaLaboral.comprarPaquete(nicknameE, "paqe");
 	}
 	
 	@Test

@@ -154,10 +154,12 @@ public class Empresa extends Usuario {
 	public boolean verificarCompra(String paquete) {
 		List<Compra> compras = this.getCompras();
 		boolean sePuede = true;
-		for (int i = 0; i < compras.size(); i++) {
-			if (compras.get(i).getPaqueteComprado().getNombre() == paquete) {
-				//ya se compro el paquete
-				sePuede = false;
+		if(compras != null) {
+			for (int i = 0; i < compras.size(); i++) {
+				if (compras.get(i).getPaqueteComprado().getNombre() == paquete) {
+					//ya se compro el paquete
+					sePuede = false;
+				}
 			}
 		}
 		return sePuede;

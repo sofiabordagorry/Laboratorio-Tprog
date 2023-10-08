@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="com.trabajouy.model.*"%>
+<%@page import="logica.DTUsuario"%>
+<%@page import="logica.DTEmpresa"%>
+<%@page import="logica.DTOfertaLaboral"%>
 <%@page import="java.util.Map"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +24,7 @@
                         	</div>
 	                        <%
 	                        	DTUsuario userInfo = (DTUsuario) request.getAttribute("userData");
-	                        	DTEmpresa eInfo = new DTEmpresa();
+	                        	DTEmpresa eInfo = null;
 	                        	eInfo = (DTEmpresa) userInfo;
 	                        	Map<String, DTOfertaLaboral> offers = eInfo.getDTOfertasLaborales();
 	                        %>

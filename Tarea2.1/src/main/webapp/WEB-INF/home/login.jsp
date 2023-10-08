@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="com.trabajouy.model.LoginEstado" %>
-<%@ page import="com.trabajouy.model.Usuario" %>
+<%@ page import="logica.LoginEstado" %>
+<%@ page import="logica.Usuario" %>
 <!DOCTYPE html>
 <html lang="en">
 	<head>

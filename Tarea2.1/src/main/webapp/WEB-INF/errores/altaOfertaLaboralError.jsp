@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="com.trabajouy.model.*"%>
+<%@page import="logica.DTOfertaLaboral"%>
+<%@page import="logica.DTKeyword"%>
 <%@page import="java.util.Map"%>
 
 <!DOCTYPE html>

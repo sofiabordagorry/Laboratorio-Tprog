@@ -9,12 +9,12 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
-import com.trabajouy.exceptions.NoHayTiposException;
-import com.trabajouy.exceptions.TipoRepetidoException;
-import com.trabajouy.model.DTTipo;
-import com.trabajouy.model.Factory;
-import com.trabajouy.model.IOfertaLaboral;
-import com.trabajouy.model.ManejadorTipo;
+import excepciones.NoHayTiposException;
+import excepciones.TipoRepetidoException;
+import logica.DTTipo;
+import logica.Factory;
+import logica.IOfertaLaboral;
+import logica.ManejadorTipo;
 
 /**
  * Servlet implementation class ConsultaTipo

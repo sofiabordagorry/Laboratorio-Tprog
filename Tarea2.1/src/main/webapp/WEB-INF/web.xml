@@ -99,4 +99,34 @@
     <servlet-name>ConsultaTipo</servlet-name>
     <url-pattern>/ConsultaTipo</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ConsultaPaquete</display-name>
+    <servlet-name>ConsultaPaquete</servlet-name>
+    <servlet-class>com.trabajouy.controllers.ConsultaPaquete</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ConsultaPaquete</servlet-name>
+    <url-pattern>/ConsultaPaquete</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CompraPaquete</display-name>
+    <servlet-name>CompraPaquete</servlet-name>
+    <servlet-class>com.trabajouy.controllers.CompraPaquete</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CompraPaquete</servlet-name>
+    <url-pattern>/CompraPaquete</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PostulacionAOfertaLaboral</display-name>
+    <servlet-name>PostulacionAOfertaLaboral</servlet-name>
+    <servlet-class>com.trabajouy.controllers.PostulacionAOfertaLaboral</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PostulacionAOfertaLaboral</servlet-name>
+    <url-pattern>/PostulacionAOfertaLaboral</url-pattern>
+  </servlet-mapping>
 </web-app>

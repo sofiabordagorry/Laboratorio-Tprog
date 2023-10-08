@@ -9,18 +9,16 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDate;
 
-import com.trabajouy.exceptions.ExisteUnUsuarioYaRegistradoException;
-import com.trabajouy.exceptions.YaSePostuloException;
-import com.trabajouy.model.DTUsuario;
-import com.trabajouy.model.Empresa;
-import com.trabajouy.model.Factory;
-import com.trabajouy.model.IUsuario;
-import com.trabajouy.model.LoginEstado;
-import com.trabajouy.model.ManejadorOfertaLaboral;
-import com.trabajouy.model.ManejadorUsuario;
-import com.trabajouy.model.OfertaLaboral;
-import com.trabajouy.model.Postulante;
-import com.trabajouy.model.Usuario;
+import excepciones.YaSePostuloException;
+import logica.Empresa;
+import logica.Factory;
+import logica.IUsuario;
+import logica.LoginEstado;
+import logica.ManejadorOfertaLaboral;
+import logica.ManejadorUsuario;
+import logica.OfertaLaboral;
+import logica.Postulante;
+import logica.Usuario;
 
 @WebServlet("/PostularAOfertaLaboral")
 public class PostulacionAOfertaLaboral extends HttpServlet {

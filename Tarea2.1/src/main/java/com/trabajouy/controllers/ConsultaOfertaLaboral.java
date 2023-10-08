@@ -8,9 +8,9 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-import com.trabajouy.model.Usuario;
-import com.trabajouy.model.DTOfertaLaboral;
-import com.trabajouy.model.ManejadorOfertaLaboral;
+import logica.Usuario;
+import logica.DTOfertaLaboral;
+import logica.ManejadorOfertaLaboral;
 
 /**
  * Servlet implementation class consultaOferta

@@ -1,4 +1,4 @@
-<%@page import="com.trabajouy.model.*"%>
+<%@page import="logica.DTOfertaLaboral"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.time.LocalDate"%>

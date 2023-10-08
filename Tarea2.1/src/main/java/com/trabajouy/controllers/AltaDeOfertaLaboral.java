@@ -5,26 +5,28 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import com.trabajouy.model.DTKeyword;
-import com.trabajouy.model.DTOfertaLaboral;
+import logica.DTKeyword;
+import logica.DTOfertaLaboral;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Map;
 import java.util.HashMap;
 
-import com.trabajouy.model.ManejadorUsuario;
-import com.trabajouy.model.OfertaLaboral;
-import com.trabajouy.model.ManejadorOfertaLaboral;
-import com.trabajouy.model.Tipo;
-import com.trabajouy.model.ManejadorTipo;
-import com.trabajouy.model.Empresa;
-import com.trabajouy.model.Factory;
-import com.trabajouy.model.IOfertaLaboral;
-import com.trabajouy.model.Keyword;
-import com.trabajouy.model.Usuario;
+import logica.ManejadorOfertaLaboral;
+import logica.ManejadorUsuario;
+import logica.OfertaLaboral;
+import logica.Tipo;
+import logica.ManejadorTipo;
+import logica.Empresa;
+import logica.Factory;
+import logica.IOfertaLaboral;
+import logica.Keyword;
+//import com.trabajouy.model.Usuario;
+import logica.Usuario;
+import excepciones.OfertaLaboralRepetidaException;
+ 
 
-import com.trabajouy.exceptions.OfertaLaboralRepetidaException;
 
 /**
  * Servlet implementation class AltaDeOL

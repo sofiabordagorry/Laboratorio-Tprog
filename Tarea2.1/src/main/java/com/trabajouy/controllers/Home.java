@@ -13,8 +13,8 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.trabajouy.exceptions.OfertasLaboralesNoExistenNingunaException;
-import com.trabajouy.model.*;
+import excepciones.OfertasLaboralesNoExistenNingunaException;
+import logica.*;
 
 @WebServlet ("/home")
 public class Home extends HttpServlet {
@@ -34,6 +34,7 @@ public class Home extends HttpServlet {
     		Factory fac = Factory.getInstance();
     		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
     		ManejadorUsuario mu = ManejadorUsuario.getInstancia();
+    		ManejadorTipo mt = ManejadorTipo.getInstancia();
     		LocalDate ldate = LocalDate.now();
     		Empresa emp = new Empresa("nick", "Rodolfo", "Gutierrez", "hola@gmail.com", "Desc", "link", "123", new byte[0]);
     		Postulante post = new Postulante("jokin", "joaco", "corbo", "correo@c.com", ldate, "uru", "123", new byte[0]);
@@ -49,6 +50,7 @@ public class Home extends HttpServlet {
     		Postulacion postu = new Postulacion(ldate, "Me gusta el fortnite", "Tengo monitor", post, ol);
     		post.agregarPostulacion(postu);
     		ol.agregarPostulacion(postu);
+    		emp.agregarOfertaLaboral(ol);
     		IOfertaLaboral iol = fac.getIOfertaLaboral();
     		try {
     			DTOfertaLaboral dtols[] = iol.listarTodasOfertasLaborales();
@@ -62,6 +64,12 @@ public class Home extends HttpServlet {
     		Keyword[] keys = mol.getKeywords();
     		ServletContext context = request.getServletContext();
     		context.setAttribute("keywords", keys);
+    		
+    		Paquete paq = new Paquete("Paquete", "desc", 20, 32, 32, LocalDate.now());
+    		mt.agregarPaquete(paq);
+    		mt.agregarTipo(t);
+    		PaqueteTipo paqTip = new PaqueteTipo(20, t);
+    		paq.agregarPaqueteTipo(paqTip);
     	} 
     }
     

@@ -80,8 +80,8 @@ public class ManejadorUsuario {
 		return mapEmpresas.containsKey(nickname);
 	}
 	
-	public void existePostulante(String nickname) {//VERIFICAR EXISTENCIA DE POSTULANTE
-		mapPostulantes.remove(nickname);
+	public boolean existePostulante(String nickname) {//VERIFICAR EXISTENCIA DE POSTULANTE
+		return this.mapPostulantes.containsKey(nickname);
 	}
 	
 	public Postulante buscarPostulante(String nickname) {//BUSCAR POSTULANTE

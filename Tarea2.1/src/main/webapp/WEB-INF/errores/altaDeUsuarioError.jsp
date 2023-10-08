@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="com.trabajouy.model.*"%>
+<%@page import="logica.DTUsuario"%>
+<%@page import="logica.DTEmpresa"%>
+<%@page import="logica.DTPostulante"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -172,7 +174,7 @@
 											<label for="descripcion" class="form-label">Descripcion de la Empresa</label>
 											<div class="input-group">
 												<%
-													DTEmpresa dtemp = new DTEmpresa();
+													DTEmpresa dtemp = null;
 													if (dtusr instanceof DTEmpresa) {
 														dtemp = (DTEmpresa) dtusr;
 												%>
@@ -228,7 +230,7 @@
 											<label for="nacionalidad" class="form-label">Nacionalidad</label>
 											<div class="input-group">
 												<%
-													DTPostulante dtpost = new DTPostulante();
+													DTPostulante dtpost = null;
 													if(dtusr instanceof DTPostulante) {
 														dtpost = (DTPostulante) dtusr;
 												%>

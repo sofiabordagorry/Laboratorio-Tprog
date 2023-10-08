@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="com.trabajouy.model.*"%>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -17,7 +16,7 @@
 					<div id="listarContainer" class="form-row align-items-center justify-content-center contenedor">
 						
 						<%
-						if ((boolean) request.getAttribute("hayPaqs")){
+							if ((boolean) request.getAttribute("hayPaqs")){
 						%>
 						
 						
@@ -30,7 +29,7 @@
 						</div>
 						<ul class="list-group" id="lista-elementos">
 							<%
-								String[] paqs = (String[]) request.getAttribute("paqs");
+								String[] paqs = (String[]) request.getAttribute("paquetes");
 								for (int i = 0; i < paqs.length; i++){
 							%>
 							<li class="list-group-item text-center"><a href="?paqueteConsultado=<%=paqs[i]%>"><%=paqs[i]%></a></li>
@@ -40,9 +39,11 @@
 						</ul>
 						
 						<% 
-							} else {%>
-								<h1 class="text-center">Oops, en este momento no hay ningun paquete para consultar.</h1>
-							<%}
+							} else {
+						%>
+						<h1 class="text-center">Oops, en este momento no hay ningun paquete para consultar.</h1>
+						<%
+							}
 						%>
                 	</div>
 	        	</div>

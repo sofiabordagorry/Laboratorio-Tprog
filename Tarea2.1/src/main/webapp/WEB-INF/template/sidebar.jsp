@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="com.trabajouy.model.*"%>
+<%@ page import="logica.Usuario"%>
+<%@ page import="logica.Empresa"%>
+<%@ page import="logica.Keyword"%>
 <%@ page import="jakarta.servlet.ServletContext" %>
 <%@ page import="jakarta.servlet.ServletException" %>
 <%@ page import="jakarta.servlet.http.HttpServletRequest" %>
@@ -50,7 +52,7 @@
 			%>
 			<a class="list-group-item list-group-item-action" href="ConsultaUsuario"><i class="fa-solid fa-users"></i> Busqueda de usuarios</a>
 			<a class="list-group-item list-group-item-action" href="ConsultaTipo"><i class="fa-solid fa-square-poll-vertical"></i> Consultar tipos</a>
-			<a class="list-group-item list-group-item-action" href="./ConsultaPaqVisitante.html"><i class="fa-solid fa-box-open"></i> Consultar paquetes</a>
+			<a class="list-group-item list-group-item-action" href="ConsultaPaquete"><i class="fa-solid fa-box-open"></i> Consultar paquetes</a>
 		</div>
 	</div>
 	<div class="list-group m-2">
@@ -71,16 +73,6 @@
 			<%
 				}
 			%>
-			<!--  <a class="list-group-item list-group-item-action">Tiempo completo</a>
-			<a class="list-group-item list-group-item-action">Medio tiempo</a>
-			<a class="list-group-item list-group-item-action">Remoto</a>
-			<a class="list-group-item list-group-item-action">Freelance</a>
-			<a class="list-group-item list-group-item-action">Temporal</a>
-			<a class="list-group-item list-group-item-action">Permanente</a>
-			<a class="list-group-item list-group-item-action">Computación</a>
-			<a class="list-group-item list-group-item-action">Administración</a>
-			<a class="list-group-item list-group-item-action">Logística</a>
-			<a class="list-group-item list-group-item-action">Contabilidad</a>-->
 		</div>
 	</div>
 </div>

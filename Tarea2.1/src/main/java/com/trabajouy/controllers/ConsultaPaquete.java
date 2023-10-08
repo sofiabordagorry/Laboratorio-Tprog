@@ -2,21 +2,21 @@ package com.trabajouy.controllers;
 
 import java.io.IOException;
 
-import com.trabajouy.exceptions.NoHayPaquetesException;
-import com.trabajouy.exceptions.UsuariosNoExistenException;
-import com.trabajouy.model.DTPaquete;
-import com.trabajouy.model.Factory;
-import com.trabajouy.model.IOfertaLaboral;
-import com.trabajouy.model.ManejadorTipo;
-import com.trabajouy.model.ManejadorUsuario;
-import com.trabajouy.model.Paquete;
-import com.trabajouy.model.Usuario;
+import excepciones.NoHayPaquetesException;
+import logica.DTPaquete;
+import logica.Factory;
+import logica.IOfertaLaboral;
+import logica.ManejadorTipo;
+import logica.ManejadorUsuario;
+import logica.Paquete;
+import logica.Usuario;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+
 
 /**
  * Servlet implementation class ConsultaUsuario
@@ -68,12 +68,9 @@ public class ConsultaPaquete extends HttpServlet {
 	        Paquete paq = mtip.buscarPaquete(nombrePaq);
 	        DTPaquete paquete = paq.getDataPaquete();
 	        request.setAttribute("dataPaquete", paquete);
-	        request.getRequestDispatcher("/WEB-INF/consultas/consultarPaquete.jsp").forward(request, response);
+	        request.getRequestDispatcher("/WEB-INF/consultas/consultaPaquete.jsp").forward(request, response);
     	    
     	}
-
-	   
-    	 
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

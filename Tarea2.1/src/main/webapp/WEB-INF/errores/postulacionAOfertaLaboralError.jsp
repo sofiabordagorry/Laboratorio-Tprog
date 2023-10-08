@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="com.trabajouy.model.*"%>
 <!DOCTYPE html>
 <html>
 	<head>

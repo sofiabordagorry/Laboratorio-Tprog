@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="com.trabajouy.model.*"%>
+<%@page import="logica.DTPaquete"%>
+<%@page import="logica.DTPaqueteTipo"%>
 <!DOCTYPE html>
 <html lang="en">
 	<head>

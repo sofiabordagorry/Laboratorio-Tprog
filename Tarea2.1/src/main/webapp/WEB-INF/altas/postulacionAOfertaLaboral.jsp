@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="com.trabajouy.model.*"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -84,11 +83,8 @@
 				</div>
 			</div>
 		</div>
-		
 		<jsp:include page="../template/footer.jsp" /> 
 		<script src="media/javaScript/postulacionValidacion.js"></script>
 		<script src="media/javaScript/redireccionar.js"></script>
-
-		
 	</body>
 </html>

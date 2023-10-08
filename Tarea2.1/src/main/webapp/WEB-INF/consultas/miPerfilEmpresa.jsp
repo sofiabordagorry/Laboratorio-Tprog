@@ -1,4 +1,6 @@
-<%@page import="com.trabajouy.model.*"%>
+<%@page import="logica.DTUsuario"%>
+<%@page import="logica.DTEmpresa"%>
+<%@page import="logica.DTOfertaLaboral"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.time.LocalDate"%>
@@ -21,7 +23,7 @@
 	                	<div class="row">
 		                	<%
 		                		DTUsuario userInfo = (DTUsuario) request.getAttribute("userData");
-		                		DTEmpresa eInfo = new DTEmpresa();
+		                		DTEmpresa eInfo = null;
 		                		eInfo = (DTEmpresa) userInfo;
 		                		Map<String, DTOfertaLaboral> offers = eInfo.getDTOfertasLaborales();
 		                	%>
@@ -45,7 +47,7 @@
 			                        <%
 			                        	for(Map.Entry<String, DTOfertaLaboral> entry : offers.entrySet()){
 			                        %>
-			                        <li class="list-group-item text-center"><a href="./ConsultaOfeLabDFemp.html"><%=entry.getValue().getNombre() + "(" + entry.getValue().getEstado() + ")" %></a></li>
+			                        <li class="list-group-item text-center"><a href="ConsultaOfertaLaboral?oferta_consultada=<%=entry.getValue().getNombre()%>"><%=entry.getValue().getNombre() + " (" + entry.getValue().getEstado() + ")" %></a></li>
 									<%
 										}
 									%>

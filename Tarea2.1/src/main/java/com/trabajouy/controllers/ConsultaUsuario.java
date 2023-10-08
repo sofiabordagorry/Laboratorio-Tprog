@@ -2,14 +2,8 @@ package com.trabajouy.controllers;
 
 import java.io.IOException;
 
-import com.trabajouy.exceptions.ExisteUnUsuarioYaRegistradoException;
-import com.trabajouy.exceptions.UsuariosNoExistenException;
-import com.trabajouy.model.DTPostulante;
-import com.trabajouy.model.DTUsuario;
-import com.trabajouy.model.Factory;
-import com.trabajouy.model.IUsuario;
-import com.trabajouy.model.ManejadorUsuario;
-import com.trabajouy.model.Usuario;
+import excepciones.UsuariosNoExistenException;
+import logica.*;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -81,7 +75,7 @@ public class ConsultaUsuario extends HttpServlet {
     	    }
     	}
     }
-
+  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		processRequest(request, response);
 	}

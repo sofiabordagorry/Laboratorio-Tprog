@@ -1,4 +1,6 @@
-<%@page import="com.trabajouy.model.*"%>
+<%@page import="logica.DTUsuario"%>
+<%@page import="logica.DTPostulante"%>
+<%@page import="logica.DTPostulacion"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.time.LocalDate"%>
@@ -25,7 +27,7 @@
 							</div>
 							<%
 	                    		DTUsuario userInfo = (DTUsuario) request.getAttribute("userData");
-								DTPostulante pInfo = new DTPostulante();
+								DTPostulante pInfo = null;
 	                    		pInfo = (DTPostulante) userInfo;
 	                    		List<DTPostulacion> posts = pInfo.getPostulaciones();
 							%>
@@ -56,7 +58,7 @@
 											for(DTPostulacion p : posts){
 										%>
 									    <tr>
-									      	<td><a href="./consultaOfeLabDFlgarcia.html"><%=p.getOferta() %></a></td>
+									      	<td><a href="ConsultaOfertaLaboral?oferta_consultada=<%=p.getOferta()%>"><%=p.getOferta() %></a></td>
 									      	<td><%=p.getFecha() %></td>
 									    </tr>
 										<%

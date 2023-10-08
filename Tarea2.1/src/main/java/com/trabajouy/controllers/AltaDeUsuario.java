@@ -9,16 +9,16 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import com.trabajouy.exceptions.ExisteUnUsuarioYaRegistradoException;
-import com.trabajouy.model.DTEmpresa;
-import com.trabajouy.model.DTPostulante;
-import com.trabajouy.model.DTUsuario;
-import com.trabajouy.model.Empresa;
-import com.trabajouy.model.Factory;
-import com.trabajouy.model.IUsuario;
-import com.trabajouy.model.ManejadorUsuario;
-import com.trabajouy.model.Usuario;
-import com.trabajouy.model.Postulante;	
+import excepciones.ExisteUnUsuarioYaRegistradoException;
+import logica.DTEmpresa;
+import logica.DTPostulante;
+import logica.DTUsuario;
+import logica.Empresa;
+import logica.Factory;
+import logica.IUsuario;
+import logica.ManejadorUsuario;
+import logica.Usuario;
+import logica.Postulante;	
 
 /**
  * Servlet implementation class AltaDeUsuario

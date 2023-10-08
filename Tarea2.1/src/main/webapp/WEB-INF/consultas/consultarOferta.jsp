@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="com.trabajouy.model.*"%>
+<%@ page import="logica.DTOfertaLaboral"%>
+<%@ page import="logica.DTKeyword"%>
+<%@ page import="logica.Usuario"%>
+<%@ page import="logica.DTPostulacion"%>
+<%@ page import="logica.Empresa"%>
+<%@ page import="logica.Postulante"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.List"%>
 <%
