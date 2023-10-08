@@ -6,10 +6,12 @@ import excepciones.ExisteUnUsuarioYaRegistradoException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import excepciones.EmpresaSinOfertasException;
 import excepciones.EmpresasNoExistenException;
 import excepciones.PostulantesNoExistenException;
+import excepciones.UsuarioSinPostulacionesException;
 import excepciones.YaSePostuloException;
 
 import java.util.Map;

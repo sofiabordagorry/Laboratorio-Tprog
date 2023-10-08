@@ -1,4 +1,4 @@
-package com.trabajouy.model;
+package logica;
 
 public enum LoginEstado {
 	NO_LOGIN,	

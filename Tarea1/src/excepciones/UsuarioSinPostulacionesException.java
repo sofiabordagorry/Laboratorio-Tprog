@@ -1,4 +1,4 @@
-package com.trabajouy.exceptions;
+package excepciones;
 
 @SuppressWarnings("serial")
 public class UsuarioSinPostulacionesException extends Exception {

@@ -5,6 +5,7 @@ import java.time.LocalDate;
 
 import excepciones.EmpresaSinOfertasException;
 import excepciones.PostulantesNoExistenException;
+import excepciones.UsuarioSinPostulacionesException;
 import excepciones.YaSePostuloException;
 import excepciones.NoExistenEmpresasOfertasLaboralesException;
 import excepciones.OfertasLaboralesNoExistenException;
