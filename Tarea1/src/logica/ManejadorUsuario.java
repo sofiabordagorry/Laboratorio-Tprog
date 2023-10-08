@@ -101,6 +101,23 @@ public class ManejadorUsuario {
 	public void eliminarPostulante(String nickname) {//ELIMINAR POSTULANTE DE LA COLECCCION
 		mapPostulantes.remove(nickname);
 	}
+
+	public Usuario buscarUsuarioPorMail(String login) {
+		Usuario usr = null;
+		for (Usuario user : mapEmpresas.values()) {
+            if (user.getCorreo().equals(login)) {
+                usr = user ;
+            }
+        }
+		if (usr == null) {
+			for (Usuario user : mapPostulantes.values()) {
+	            if (user.getCorreo().equals(login)) {
+	                usr = user ;
+	            }
+	        }
+		}
+		return usr;
+	}
 	
 	public void borrarUsuarios() {
         this.mapEmpresas.clear();
