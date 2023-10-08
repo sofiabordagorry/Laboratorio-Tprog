@@ -17,6 +17,8 @@ import logica.IOfertaLaboral;
 import logica.IUsuario;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -24,10 +26,9 @@ import java.awt.Insets;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.util.List;
-import java.util.Map;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class AceptarORechazarOL extends JInternalFrame {
 	
 	
@@ -124,8 +125,20 @@ public class AceptarORechazarOL extends JInternalFrame {
 		gbc_btnNewButtonAceptar.gridx = 3;
 		gbc_btnNewButtonAceptar.gridy = 4;
 		getContentPane().add(btnNewButtonAceptar, gbc_btnNewButtonAceptar);
+		
+        this.addInternalFrameListener(new InternalFrameAdapter() {
+            @Override
+            public void internalFrameClosing(InternalFrameEvent e) {
+                limpiarFormulario();
+            }
+        });
 	}
 	
+	protected void limpiarFormulario() {
+		comboBoxEmpresas.setSelectedIndex(-1);
+		comboBoxOL.setSelectedIndex(-1);
+		setVisible(false);
+	}
 	
 	protected void cmdRechazar(ActionEvent e) {
 		DTOfertaLaboral tipOL = (DTOfertaLaboral) this.comboBoxOL.getSelectedItem();
@@ -151,9 +164,7 @@ public class AceptarORechazarOL extends JInternalFrame {
             JOptionPane.showMessageDialog(this, "La oferta laboral se ha sido rechazada", "Aceptar o Rechazar Oferta Laboral",
                     JOptionPane.INFORMATION_MESSAGE);
 			
-			comboBoxEmpresas.setSelectedIndex(-1);
-			comboBoxOL.setSelectedIndex(-1);
-			setVisible(false);
+            limpiarFormulario();
 		}
 		
 	}
@@ -182,9 +193,7 @@ public class AceptarORechazarOL extends JInternalFrame {
             JOptionPane.showMessageDialog(this, "La oferta laboral se ha sido aceptada", "Aceptar o Rechazar Oferta Laboral",
                     JOptionPane.INFORMATION_MESSAGE);
 			
-			comboBoxEmpresas.setSelectedIndex(-1);
-			comboBoxOL.setSelectedIndex(-1);
-			setVisible(false);
+            limpiarFormulario();
 		}
 		
 	}
@@ -228,3 +237,4 @@ public class AceptarORechazarOL extends JInternalFrame {
 	}
 	
 }
+

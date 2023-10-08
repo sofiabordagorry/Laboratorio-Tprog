@@ -19,6 +19,22 @@ public class Postulante extends Usuario {
 
 	}
 	
+	public Postulante(String nickname, String nombre, String apellido, String correo, LocalDate fechaNacimiento, String nacionalidad, String contrasenia) {
+		super(nickname, nombre, apellido, correo, contrasenia);
+		this.fechaNacimiento = fechaNacimiento;
+		this.nacionalidad = nacionalidad;
+		this.postulaciones = new LinkedList<>();
+
+	}
+	
+	public Postulante(String nickname, String nombre, String apellido, String correo, LocalDate fechaNacimiento, String nacionalidad, String contrasenia, byte[] image) {
+		super(nickname, nombre, apellido, correo, contrasenia,image);
+		this.fechaNacimiento = fechaNacimiento;
+		this.nacionalidad = nacionalidad;
+		this.postulaciones = new LinkedList<>();
+
+	}
+	
 	public LocalDate getFechaNacimiento() {
 		return this.fechaNacimiento;
 	}

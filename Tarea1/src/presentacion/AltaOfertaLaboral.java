@@ -29,6 +29,8 @@ import javax.swing.*;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 import javax.swing.JButton;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -384,6 +386,13 @@ public class AltaOfertaLaboral extends JInternalFrame {
         gbc_btnAceptar.gridx = 6;
         gbc_btnAceptar.gridy = 15;
         getContentPane().add(btnAceptar, gbc_btnAceptar);
+        
+        this.addInternalFrameListener(new InternalFrameAdapter() {
+            @Override
+            public void internalFrameClosing(InternalFrameEvent e) {
+                limpiarFormulario();
+            }
+        });
 	}
 	
 	protected void cmdAltaOfertaLaboralActionPerformed(ActionEvent arg0) {
@@ -471,11 +480,11 @@ public class AltaOfertaLaboral extends JInternalFrame {
 			return false;
 		}
 		
-		if (!this.validar(nombreU)) {
-			JOptionPane.showMessageDialog(this, "Debe ser un Nombre válido",
-					"Alta de Oferta Laboral", JOptionPane.ERROR_MESSAGE);
-			return false;
-		}
+//		if (!this.validar(nombreU)) {
+//			JOptionPane.showMessageDialog(this, "Debe ser un Nombre válido",
+//					"Alta de Oferta Laboral", JOptionPane.ERROR_MESSAGE);
+//			return false;
+//		}
 		
 		try {
 			Float.parseFloat(remuneracionU);

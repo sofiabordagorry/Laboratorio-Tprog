@@ -6,12 +6,31 @@ public class Usuario {
 	private String nombre;
 	private String apellido;
 	private String correo;
+	private String contrasenia;
+	private byte[] image;
 	
 	public Usuario(String nickname, String nombre, String apellido, String correo) {
 		this.nickname = nickname;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.correo = correo;
+	}
+	
+	public Usuario(String nickname, String nombre, String apellido, String correo, String contrasenia) {
+		this.nickname = nickname;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.correo = correo;
+		this.contrasenia = contrasenia;
+	}
+	
+	public Usuario(String nickname, String nombre, String apellido, String correo, String contrasenia, byte[] image) {
+		this.nickname = nickname;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.correo = correo;
+		this.contrasenia = contrasenia;
+		this.image = image;
 	}
 	
 	public String getNickname() {
@@ -48,5 +67,21 @@ public class Usuario {
 	
 	public DTUsuario getDataUsuario() {
 		return null;
+	}
+
+	public String getContrasenia() {
+		return contrasenia;
+	}
+
+	public void setContrasenia(String contrasenia) {
+		this.contrasenia = contrasenia;
+	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 }

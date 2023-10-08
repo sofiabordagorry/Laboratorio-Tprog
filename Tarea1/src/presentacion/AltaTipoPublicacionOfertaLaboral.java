@@ -19,6 +19,9 @@ import javax.swing.JButton;
 
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
+
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
@@ -219,6 +222,13 @@ public class AltaTipoPublicacionOfertaLaboral extends JInternalFrame {
 	     gbc_btnAceptar.gridx = 2;
 	     gbc_btnAceptar.gridy = 8;
 	     getContentPane().add(btnAceptar, gbc_btnAceptar);
+	     
+        this.addInternalFrameListener(new InternalFrameAdapter() {
+            @Override
+            public void internalFrameClosing(InternalFrameEvent e) {
+                limpiarFormulario();
+            }
+        });
 	}
 	private void limpiarFormulario() {
 		textFieldNombre.setText("");
@@ -276,11 +286,11 @@ public class AltaTipoPublicacionOfertaLaboral extends JInternalFrame {
             return false;
         }
 		
-		if(!validar(nombreT)) {
-			JOptionPane.showMessageDialog(this, "El Nombre solo puede tener letras", "Alta de Tipo de Publicacion de Oferta Laboral",
-                    JOptionPane.ERROR_MESSAGE);
-            return false;
-		}
+//		if(!validar(nombreT)) {
+//			JOptionPane.showMessageDialog(this, "El Nombre solo puede tener letras", "Alta de Tipo de Publicacion de Oferta Laboral",
+//                    JOptionPane.ERROR_MESSAGE);
+//            return false;
+//		}
         try {
             Integer.parseInt(exposicionT);
         } catch (NumberFormatException e) {
@@ -332,11 +342,11 @@ public class AltaTipoPublicacionOfertaLaboral extends JInternalFrame {
         return true;
 }
 	
-	private boolean validar(String s) {
-        // Expresión regular que permite letras, espacios, la letra 'ñ' y caracteres acentuados
-        String regex = "^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(s);
-        return matcher.matches();
-    }
+//	private boolean validar(String s) {
+//        // Expresión regular que permite letras, espacios, la letra 'ñ' y caracteres acentuados
+//        String regex = "^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*$";
+//        Pattern pattern = Pattern.compile(regex);
+//        Matcher matcher = pattern.matcher(s);
+//        return matcher.matches();
+//    }
 }

@@ -18,6 +18,19 @@ public class DTPostulante extends DTUsuario {
 		this.fechaDeNacimiento = fechaDeNacimiento;
 		this.nacionalidad = nacionalidad;
 	}
+	
+	public DTPostulante(String nickname, String nombre, String apellido, String correo, LocalDate fechaDeNacimiento, String nacionalidad,String contrasenia) {
+		super(nickname, nombre, apellido, correo, contrasenia);
+		this.fechaDeNacimiento = fechaDeNacimiento;
+		this.nacionalidad = nacionalidad;
+	}
+	
+	public DTPostulante(String nickname, String nombre, String apellido, String correo, LocalDate fechaDeNacimiento, String nacionalidad,String contrasenia, byte[] image) {
+		super(nickname, nombre, apellido, correo,null, contrasenia, image);
+		this.fechaDeNacimiento = fechaDeNacimiento;
+		this.nacionalidad = nacionalidad;
+	}
+	
 
 	public LocalDate getFechaDeNacimiento() {
 		return this.fechaDeNacimiento;

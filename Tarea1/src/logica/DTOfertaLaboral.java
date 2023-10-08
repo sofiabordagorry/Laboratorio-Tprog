@@ -19,6 +19,7 @@ public class DTOfertaLaboral {
 	private Map<String, DTKeyword> dataKeywords;
 	private List<DTPostulacion> dataPostulaciones;
 	private String dataEmpresa;//CAMBIADO
+	private byte[] imagen;
 	//private DTCompra dataCompra;
 	
 	public DTOfertaLaboral(String nombre, String descripcion, String ciudad, String departamento, String horario, float remuneracion, LocalDate fechaDeAlta, float costoAsociado, DTTipo dataTipo, Map<String, DTKeyword> dataKeywords, List<DTPostulacion> dataPostulaciones, String dataEmpresa, EstadoOL e) {
@@ -59,6 +60,19 @@ public class DTOfertaLaboral {
 		this.remuneracion = remuneracion;
 		this.fechaDeAlta = fechaDeAlta;
 		this.dataTipo = null;
+	}
+	
+	public DTOfertaLaboral(String nombre, String descripcion, String ciudad, String departamento, String horario, float remuneracion, LocalDate fechaDeAlta, Map<String, DTKeyword> keys, byte[] image) {
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.ciudad = ciudad;
+		this.departamento = departamento;
+		this.horario = horario;
+		this.remuneracion = remuneracion;
+		this.fechaDeAlta = fechaDeAlta;
+		this.dataTipo = null;
+		this.dataKeywords = keys;
+		this.imagen = image;
 	}
 	
 	public String getNombre() {
@@ -111,5 +125,15 @@ public class DTOfertaLaboral {
 	
 	public String toString() {
 		return this.nombre;
+	}
+
+
+	public EstadoOL getEstado() {
+		return estado;
+	}
+
+
+	public byte[] getImagen() {
+		return imagen;
 	}
 }
