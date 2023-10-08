@@ -14,18 +14,18 @@ public class ManejadorUsuario {
 	}
 	
 	public static ManejadorUsuario getInstancia() {//OBTENER INSTANCIA
-		if(instancia == null) {
+		if (instancia == null) {
 			instancia = new ManejadorUsuario();
 		}
 		return instancia;
 	}
-	
-	public void agregarEmpresa(Empresa e) {//AGREAR UNA EMPRESA A LA COLECCION
-		mapEmpresas.put(e.getNickname(), e);
+
+	public void agregarEmpresa(Empresa emp) {//AGREAR UNA EMPRESA A LA COLECCION
+		mapEmpresas.put(emp.getNickname(), emp);
 	}
 	
-	public void agregarPostulante(Postulante p) {//AGREGAR UN POSTULANTE A LA COLECCION
-		mapPostulantes.put(p.getNickname(), p);
+	public void agregarPostulante(Postulante post) {//AGREGAR UN POSTULANTE A LA COLECCION
+		mapPostulantes.put(post.getNickname(), post);
 	}
 	
 	public Empresa[] getEmpresas(){//OBTENER COLECCIONES DE EMPRESAS
@@ -33,10 +33,10 @@ public class ManejadorUsuario {
             return null;
         else {
             Collection<Empresa> emps = this.mapEmpresas.values();
-            Object[] o = emps.toArray();
-            Empresa[] empresas = new Empresa[o.length];
-            for (int i = 0; i < o.length; i++) {
-                empresas[i] = (Empresa) o[i];
+            Object[] obj = emps.toArray();
+            Empresa[] empresas = new Empresa[obj.length];
+            for (int i = 0; i < obj.length; i++) {
+                empresas[i] = (Empresa) obj[i];
             }
 
             return empresas;
@@ -48,10 +48,10 @@ public class ManejadorUsuario {
             return null;
         else {
             Collection<Postulante> post = this.mapPostulantes.values();
-            Object[] o = post.toArray();
-            Postulante[] postulantes = new Postulante[o.length];
-            for (int i = 0; i < o.length; i++) {
-                postulantes[i] = (Postulante) o[i];
+            Object[] obj = post.toArray();
+            Postulante[] postulantes = new Postulante[obj.length];
+            for (int i = 0; i < obj.length; i++) {
+                postulantes[i] = (Postulante) obj[i];
             }
 
             return postulantes;
@@ -68,12 +68,12 @@ public class ManejadorUsuario {
 
 	
 	public Usuario buscarUsuario(String nickname) {//BUSCAR UN USUARIO
-		Usuario u = mapEmpresas.get(nickname);
-		if(u != null) {
-			return u;
+		Usuario usr = mapEmpresas.get(nickname);
+		if (usr != null) {
+			return usr;
 		}
-		u = mapPostulantes.get(nickname);
-		return u;
+		usr = mapPostulantes.get(nickname);
+		return usr;
 	}
 	
 	public boolean existeEmpresa(String nickname) {//VERIFICAR EXISTENCIA DE EMPRESA
@@ -85,13 +85,13 @@ public class ManejadorUsuario {
 	}
 	
 	public Postulante buscarPostulante(String nickname) {//BUSCAR POSTULANTE
-		Postulante p = mapPostulantes.get(nickname);
-		return p;
+		Postulante post = mapPostulantes.get(nickname);
+		return post;
 	}
 	
 	public Empresa buscarEmpresa(String nickname) {//BUSCAR EMPRESA
-		Empresa e = mapEmpresas.get(nickname);
-		return e;
+		Empresa emp = mapEmpresas.get(nickname);
+		return emp;
 	}
 	
 	public void eliminarEmpresa(String nickname) {//ELIMINAR EMPRESA DE LA COLECION

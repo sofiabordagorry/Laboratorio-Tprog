@@ -24,44 +24,44 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 	public ControladorOfertaLaboral() {
 		
 	}
-	
+
 	public DTPaquete[] listarPaquetes() throws NoHayPaquetesException {
-		ManejadorTipo mt = ManejadorTipo.getInstancia();
-		Paquete[] paquetes = mt.getPaquetes();
+		ManejadorTipo mtip = ManejadorTipo.getInstancia();
+		Paquete[] paquetes = mtip.getPaquetes();
 		
 		if (paquetes != null) {
-			DTPaquete[] dt = new DTPaquete[paquetes.length];
+			DTPaquete[] dtpaq = new DTPaquete[paquetes.length];
 			Paquete paq;
 			
-			for(int i = 0; i <paquetes.length; i++) {
+			for (int i = 0; i <paquetes.length; i++) {
 				paq = paquetes[i];
-				dt[i] = paq.getDataPaquete();
+				dtpaq[i] = paq.getDataPaquete();
 			}
 			
-			return dt;
+			return dtpaq;
 		} else {
 			throw new NoHayPaquetesException("No hay paquetes registrados");
 		}
 	}
 	
-    public String DatosPaqueteAMostrar(DTPaquete p) {
-    	return "Nombre: " + p.getNombre() + "\nDescripcion: " + p.getDescripcion() + "\nPeriodo de validez: " + p.getPeriodoDeValidez() + " días\nDescuento: " + p.getDescuento() + "%\nCosto: $" + p.getCostoAsociado();
+    public String DatosPaqueteAMostrar(DTPaquete paq) {
+    	return "Nombre: " + paq.getNombre() + "\nDescripcion: " + paq.getDescripcion() + "\nPeriodo de validez: " + paq.getPeriodoDeValidez() + " días\nDescuento: " + paq.getDescuento() + "%\nCosto: $" + paq.getCostoAsociado();
     }
 
 	public DTTipo[] listarTipoPublicacionOfertaLaboral() throws TipoPubNoExistenException {
-		ManejadorTipo mt = ManejadorTipo.getInstancia();
-		Tipo[] tipos = mt.getTipos();
+		ManejadorTipo mtip = ManejadorTipo.getInstancia();
+		Tipo[] tipos = mtip.getTipos();
 		
 		if (tipos != null) {
-			DTTipo[] dt = new DTTipo[tipos.length];
+			DTTipo[] dtip = new DTTipo[tipos.length];
 			Tipo tipo;
 			
-			for(int i = 0; i <tipos.length; i++) {
+			for (int i = 0; i <tipos.length; i++) {
 				tipo = tipos[i];
-				dt[i] = tipo.getDataTipo();
+				dtip[i] = tipo.getDataTipo();
 			}
 			
-			return dt;
+			return dtip;
 		} else 
 			throw new TipoPubNoExistenException("No existen Tipos de Publicaciones de Ofertas Laborales registradas");
 	}
@@ -70,115 +70,115 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
 		Keyword[] keys = mol.getKeywords();
 		
-		if(keys != null) {
-			String[] k = new String[keys.length];
+		if (keys != null) {
+			String[] kArray = new String[keys.length];
 			Keyword key;
 			
-			for(int i = 0; i < keys.length; i++) {
+			for (int i = 0; i < keys.length; i++) {
 				key = keys[i];
-				k[i] = key.getNombre();
+				kArray[i] = key.getNombre();
 			}
 			
-			return k;
+			return kArray;
 		} else 
 			throw new KeywordsNoExistenException("No existen Keywords registradas");
 	}
 	
-	public void ingresarDatosOL(String empresa, String nombreTipo, DTOfertaLaboral ol) throws OfertaLaboralRepetidaException {
+	public void ingresarDatosOL(String empresa, String nombreTipo, DTOfertaLaboral ofl) throws OfertaLaboralRepetidaException {
 		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
-		OfertaLaboral olExiste = mol.buscarOfertaLaboral(ol.getNombre());
-		ManejadorUsuario mu = ManejadorUsuario.getInstancia();
-		Empresa e = mu.buscarEmpresa(empresa);
-		if(olExiste != null) 
+		OfertaLaboral olExiste = mol.buscarOfertaLaboral(ofl.getNombre());
+		ManejadorUsuario musr = ManejadorUsuario.getInstancia();
+		Empresa emp = musr.buscarEmpresa(empresa);
+		if (olExiste != null) 
 			throw new OfertaLaboralRepetidaException("Ya existe la Oferta Laboral %s".formatted(olExiste.getNombre()));
 		
-		ManejadorTipo mt = ManejadorTipo.getInstancia();
-		Tipo t = mt.buscarTipo(nombreTipo);
+		ManejadorTipo mtTip = ManejadorTipo.getInstancia();
+		Tipo tip = mtTip.buscarTipo(nombreTipo);
 		
 		Map<String, Keyword> keys = new HashMap<>();	
-		for(Map.Entry<String, DTKeyword> entry: ol.getKeywords().entrySet()) 
+		for (Map.Entry<String, DTKeyword> entry: ofl.getKeywords().entrySet()) 
 			keys.put(entry.getKey(), mol.buscarKeyword(entry.getKey()));
 		
-		OfertaLaboral olNueva = new OfertaLaboral(ol.getNombre(), ol.getDescripcion(), ol.getCiudad(), ol.getDepartamento(), 
-															ol.getHorario(), ol.getRemuneracion(), ol.getFechaDeAlta(), ol.getCostoAsociado(), t, keys, e, ol.getImagen());
+		OfertaLaboral olNueva = new OfertaLaboral(ofl.getNombre(), ofl.getDescripcion(), ofl.getCiudad(), ofl.getDepartamento(), 
+															ofl.getHorario(), ofl.getRemuneracion(), ofl.getFechaDeAlta(), ofl.getCostoAsociado(), tip, keys, emp, ofl.getImagen());
 		
 		mol.agregarOfertaLaboral(olNueva);
 
-		e.agregarOfertaLaboral(olNueva);
+		emp.agregarOfertaLaboral(olNueva);
 	}
 	
 	public void ingresarDatosPaquete(DTPaquete datosPaquete) throws PaqueteRepetidoException {
-		ManejadorTipo mt = ManejadorTipo.getInstancia();
-		Paquete p = mt.buscarPaquete(datosPaquete.getNombre());
+		ManejadorTipo mtTip = ManejadorTipo.getInstancia();
+		Paquete paq = mtTip.buscarPaquete(datosPaquete.getNombre());
 		
-		if(p != null)
+		if (paq != null)
 			throw new PaqueteRepetidoException("Ya existe el Paquete %s".formatted(datosPaquete.getNombre())); 
 		
 		Paquete nuevoPaquete = new Paquete(datosPaquete.getNombre(), datosPaquete.getDescripcion(), datosPaquete.getPeriodoDeValidez(), 
 		datosPaquete.getDescuento(), 0, datosPaquete.getFechaDeAlta(), datosPaquete.getImagen());
 		
-		mt.agregarPaquete(nuevoPaquete);
+		mtTip.agregarPaquete(nuevoPaquete);
 	}
 
 	public void ingresarTipo(String nombre, String descripcion, int exposicionT, int duracion, Float costo, Date fechaAlta) throws TipoRepetidoException{
-		ManejadorTipo mt = ManejadorTipo.getInstancia();
-        Tipo t = mt.buscarTipo(nombre);
-        if (t != null)
+		ManejadorTipo mtTip = ManejadorTipo.getInstancia();
+        Tipo tip = mtTip.buscarTipo(nombre);
+        if (tip != null)
             throw new TipoRepetidoException("El Tipo " + nombre + " ya esta registrado");
 
-        t = new Tipo(nombre, descripcion, exposicionT, duracion, costo, fechaAlta.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-        mt.agregarTipo(t);
+        tip = new Tipo(nombre, descripcion, exposicionT, duracion, costo, fechaAlta.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        mtTip.agregarTipo(tip);
 		}
 	
 	public void ingresarKeyword(String nombre){
 		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
-        Keyword k = mol.buscarKeyword(nombre);
-        if (k == null) {
+        Keyword key = mol.buscarKeyword(nombre);
+        if (key == null) {
         //    throw new TipoRepetidoException("El Tipo " + nombre + " ya esta registrado");
 
-        k = new Keyword(nombre);
-        mol.agregarKeyword(k);
+        key = new Keyword(nombre);
+        mol.agregarKeyword(key);
         }
 }
 	
 	public String[] listarNomPaquetes() throws NoHayPaquetesException{
-		ManejadorTipo mt = ManejadorTipo.getInstancia();
-		Map<String, Paquete> mapPaquetes = mt.getMapPaquete();
-		if(mapPaquetes.size() == 0)
+		ManejadorTipo mtTip = ManejadorTipo.getInstancia();
+		Map<String, Paquete> mapPaquetes = mtTip.getMapPaquete();
+		if (mapPaquetes.size() == 0)
 			throw new NoHayPaquetesException("No hay paquetes registrados");
 		
-		String[] dp = new String[mapPaquetes.size()];
-		int i =0;
+		String[] dpa = new String[mapPaquetes.size()];
+		int iter =0;
 		for (Map.Entry<String, Paquete> entry : mapPaquetes.entrySet()) {
-			if(entry.getValue().getCompra() == null) {
-				dp[i] = entry.getKey();
-				i++;
+			if (entry.getValue().getCompra() == null) {
+				dpa[iter] = entry.getKey();
+				iter++;
 			}
 		}
-		return dp;
+		return dpa;
 	}
 	
 	public String[] listarNomTipos() throws NoHayTiposException{
-		ManejadorTipo mt = ManejadorTipo.getInstancia();
-		Map<String, Tipo> mapTipos = mt.getMapTipo();
-		if(mapTipos.size() == 0)
+		ManejadorTipo mtTip = ManejadorTipo.getInstancia();
+		Map<String, Tipo> mapTipos = mtTip.getMapTipo();
+		if (mapTipos.size() == 0)
 			throw new NoHayTiposException("No hay tipos registrados");
 		
-		String[] dt = new String[mapTipos.size()];
-		int i =0;
+		String[] dtTip = new String[mapTipos.size()];
+		int iter =0;
 		for (Map.Entry<String, Tipo> entry : mapTipos.entrySet()) {
-			dt[i] = entry.getKey();
-			i++;
+			dtTip[iter] = entry.getKey();
+			iter++;
 		}
-		return dt;
+		return dtTip;
 	}
 	
 	
 	public void agregarTipoAPaquete(int cantidad, String tipPaquete, String tipTipo) throws TipoYaAgragadoException{
-		ManejadorTipo mt = ManejadorTipo.getInstancia();
-		Tipo t = mt.buscarTipo(tipTipo);
-		Paquete p = mt.buscarPaquete(tipPaquete);
-		if(!p.agregarTipo(cantidad, t))
+		ManejadorTipo mtTip = ManejadorTipo.getInstancia();
+		Tipo tip = mtTip.buscarTipo(tipTipo);
+		Paquete paq = mtTip.buscarPaquete(tipPaquete);
+		if (!paq.agregarTipo(cantidad, tip))
 			throw new TipoYaAgragadoException("Ya se habia agregado el tipo " + tipTipo + " al paquete " + tipPaquete);
 	}
 		
@@ -188,21 +188,21 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 		return ofLabRes;
 	}
 	
-	public void AcepRechOL(EstadoOL e, String OL) {
+	public void AcepRechOL(EstadoOL est, String nomOL) {
 		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
-		OfertaLaboral oferta = mol.buscarOfertaLaboral(OL);
-		oferta.setEstado(e);
+		OfertaLaboral oferta = mol.buscarOfertaLaboral(nomOL);
+		oferta.setEstado(est);
 	}
 
 	public DTOfertaLaboral[] listarTodasOfertasLaborales() throws OfertasLaboralesNoExistenNingunaException{
 		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
 		Map<String, OfertaLaboral> ols = mol.getOfertasLaborales();
-		if(ols.size() != 0) {
+		if (ols.size() != 0) {
 			DTOfertaLaboral[] todasOls = new DTOfertaLaboral[ols.size()];
-			int i = 0;
-			for(Map.Entry<String, OfertaLaboral> entry : ols.entrySet()) {
-				todasOls[i] = entry.getValue().getDataOfertaLaboral();
-				i++;
+			int iter = 0;
+			for (Map.Entry<String, OfertaLaboral> entry : ols.entrySet()) {
+				todasOls[iter] = entry.getValue().getDataOfertaLaboral();
+				iter++;
 			}
 			return todasOls;
 		} else {
@@ -211,11 +211,11 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 	}
 	
 	public void comprarPaquete(String empresa, String paquete) {
-		ManejadorTipo mt =  ManejadorTipo.getInstancia();
-		ManejadorUsuario mu = ManejadorUsuario.getInstancia();
+		ManejadorTipo mtTip =  ManejadorTipo.getInstancia();
+		ManejadorUsuario musr = ManejadorUsuario.getInstancia();
 		
-		Empresa empresaG = mu.buscarEmpresa(empresa);
-		Paquete paqueteG = mt.buscarPaquete(paquete);
+		Empresa empresaG = musr.buscarEmpresa(empresa);
+		Paquete paqueteG = mtTip.buscarPaquete(paquete);
 		
 		LocalDate fechaCompra = LocalDate.now();
 		int periodoValidezPaq = paqueteG.getPeriodoDeValidez();
@@ -223,9 +223,9 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 		
 		List<PaqueteTipo> paqTip = paqueteG.getPaquetesTipos();
 		List<CompraTipo>  compTip = new LinkedList<>();
-		for(PaqueteTipo p : paqTip) {
-			CompraTipo ct = new CompraTipo(p.getCantidad() , p.getTipo());
-			compTip.add(ct);
+		for (PaqueteTipo p : paqTip) {
+			CompraTipo ctip = new CompraTipo(p.getCantidad() , p.getTipo());
+			compTip.add(ctip);
 		}
 		Compra compra = new Compra(fechaCompra, vencimiento, paqueteG, empresaG, compTip);
 		empresaG.agregarCompra(compra);
@@ -234,15 +234,15 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 	public DTPostulacion dataPostulacion(String nickname, String nombreOL) {
 		ManejadorUsuario musu = ManejadorUsuario.getInstancia();
 		Postulante post = musu.buscarPostulante(nickname);
-		LinkedList<Postulacion> postulaciones = post.getPostulaciones();
+		List<Postulacion> postulaciones = post.getPostulaciones();
 		DTPostulacion dataPostulacion = null;
-		for(Postulacion posts : postulaciones) {
+		for (Postulacion posts : postulaciones) {
 			if(posts.getOfertaLaboral().getNombre().equals(nombreOL)) {
 				dataPostulacion = posts.getDataPostulacion();
 			}
 		}
 		
-		if(dataPostulacion == null) {
+		if (dataPostulacion == null) {
 			System.out.println("dtpost null");
 		}
 		

@@ -21,9 +21,9 @@ public class OfertaLaboral {
 	private Map<String, Keyword> keywords;
 	private EstadoOL estado;
 	private byte[] imagen;
-	private Empresa empresaCreadora;//nuevo atributo agregado
+	private Empresa empresaCreadora; //nuevo atributo agregado
 	
-	
+
 	public OfertaLaboral(String nombre, String descripcion, String ciudad, String departamento, String horario,
 								float remuneracion, LocalDate fechaDeAlta, float costoAsociado, Tipo tipoOL, Map<String, Keyword> keywords, Empresa empCreadora) {
 		this.nombre = nombre;
@@ -59,8 +59,8 @@ public class OfertaLaboral {
 		this.setImagen(image);
 	}
 	
-	public void setEstado(EstadoOL e) {
-		this.estado = e;
+	public void setEstado(EstadoOL est) {
+		this.estado = est;
 	}
 	
 	//Getters
@@ -123,7 +123,7 @@ public class OfertaLaboral {
 
 	public Boolean estaVigente() {
 		LocalDate venc = this.tipoOL.calcularVencimiento(this.fechaDeAlta);
-		return  (venc.isAfter(LocalDate.now()));
+		return venc.isAfter(LocalDate.now());
 	}
 
 	public String getEmpresaCreadora(){
@@ -141,11 +141,11 @@ public class OfertaLaboral {
 		}
 		}
 		List<DTPostulacion> dataPostulaciones = new LinkedList<>();
-		for(Postulacion p : this.getPostulaciones()) {
+		for (Postulacion p : this.getPostulaciones()) {
 			dataPostulaciones.add(p.getDataPostulacion());
 		}
 		
-		DTOfertaLaboral dtOL = new DTOfertaLaboral(this.getNombre(),this.getDescripcion(),this.getCiudad(),this.getDepartamento(),this.getHorario(),this.getRemuneracion(),this.getFechaDeAlta(),this.getCostoAsociado(),dataTipoOL, dataKeyWords, dataPostulaciones,this.getEmpresaCreadora(), this.getEstado());
+		DTOfertaLaboral dtOL = new DTOfertaLaboral(this.getNombre(), this.getDescripcion(), this.getCiudad(), this.getDepartamento(), this.getHorario(), this.getRemuneracion(), this.getFechaDeAlta(), this.getCostoAsociado(), dataTipoOL, dataKeyWords, dataPostulaciones, this.getEmpresaCreadora(), this.getEstado());
 		return dtOL;
 	}
 

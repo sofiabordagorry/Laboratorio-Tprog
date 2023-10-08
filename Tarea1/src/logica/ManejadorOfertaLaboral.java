@@ -8,7 +8,7 @@ import java.util.Collection;
 
 public class ManejadorOfertaLaboral {
 	
-	private Map<String,OfertaLaboral> ofertasLaborales;
+	private Map<String, OfertaLaboral> ofertasLaborales;
 	private Map<String, Keyword> keywords;
 	
 	private static ManejadorOfertaLaboral instance = null;
@@ -17,7 +17,7 @@ public class ManejadorOfertaLaboral {
 		this.ofertasLaborales = new HashMap<>();
 		this.keywords = new HashMap<>();
 	}
-	
+
 	public static ManejadorOfertaLaboral getInstance() {
 		if (instance == null) {
             instance = new ManejadorOfertaLaboral();
@@ -42,10 +42,10 @@ public class ManejadorOfertaLaboral {
             return null;
         else {
             Collection<Keyword> key = this.keywords.values();
-            Object[] o = key.toArray();
-            Keyword[] keys = new Keyword[o.length];
-            for (int i = 0; i < o.length; i++) {
-                keys[i] = (Keyword) o[i];
+            Object[] obj = key.toArray();
+            Keyword[] keys = new Keyword[obj.length];
+            for (int i = 0; i < obj.length; i++) {
+                keys[i] = (Keyword) obj[i];
             }
 
             return keys;
@@ -53,8 +53,8 @@ public class ManejadorOfertaLaboral {
 	}
 
 	
-	public void agregarOfertaLaboral(OfertaLaboral ol) {
-		this.ofertasLaborales.put(ol.getNombre(), ol);
+	public void agregarOfertaLaboral(OfertaLaboral ofl) {
+		this.ofertasLaborales.put(ofl.getNombre(), ofl);
 	}
 	
 	public void agregarKeyword(Keyword key) {
