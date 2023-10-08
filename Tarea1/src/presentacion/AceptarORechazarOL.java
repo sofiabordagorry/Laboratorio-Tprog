@@ -158,7 +158,7 @@ public class AceptarORechazarOL extends JInternalFrame {
         }
 		if(correcto) {
 			
-			contOfertaLaboral.AcepRechOL(EstadoOL.Rechazada, tipOL.getNombre());
+			contOfertaLaboral.acepRechOL(EstadoOL.Rechazada, tipOL.getNombre());
 			
 			 // Muestro éxito de la operación
             JOptionPane.showMessageDialog(this, "La oferta laboral se ha sido rechazada", "Aceptar o Rechazar Oferta Laboral",
@@ -166,7 +166,6 @@ public class AceptarORechazarOL extends JInternalFrame {
 			
             limpiarFormulario();
 		}
-		
 	}
 	
 	protected void cmdAceptar(ActionEvent e) {
@@ -187,7 +186,7 @@ public class AceptarORechazarOL extends JInternalFrame {
         }
 		if(correcto) {
 			
-			contOfertaLaboral.AcepRechOL(EstadoOL.Aceptada, tipOL.getNombre());
+			contOfertaLaboral.acepRechOL(EstadoOL.Aceptada, tipOL.getNombre());
 			
 			 // Muestro éxito de la operación
             JOptionPane.showMessageDialog(this, "La oferta laboral se ha sido aceptada", "Aceptar o Rechazar Oferta Laboral",

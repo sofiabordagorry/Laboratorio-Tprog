@@ -44,7 +44,7 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 		}
 	}
 	
-    public String DatosPaqueteAMostrar(DTPaquete paq) {
+    public String datosPaqueteAMostrar(DTPaquete paq) {
     	return "Nombre: " + paq.getNombre() + "\nDescripcion: " + paq.getDescripcion() + "\nPeriodo de validez: " + paq.getPeriodoDeValidez() + " días\nDescuento: " + paq.getDescuento() + "%\nCosto: $" + paq.getCostoAsociado();
     }
 
@@ -188,7 +188,7 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 		return ofLabRes;
 	}
 	
-	public void AcepRechOL(EstadoOL est, String nomOL) {
+	public void acepRechOL(EstadoOL est, String nomOL) {
 		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
 		OfertaLaboral oferta = mol.buscarOfertaLaboral(nomOL);
 		oferta.setEstado(est);

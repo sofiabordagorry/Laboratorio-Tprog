@@ -69,7 +69,7 @@ class ControladorOfertaLaboralTests{
 		controladorOfertaLaboral = fabrica.getIOfertaLaboral();
 		controladorUsuario =fabrica.getIUsuario();
 	}
-	
+
 	@AfterEach
 	public void borrar(){
 		mol = ManejadorOfertaLaboral.getInstance();
@@ -288,7 +288,7 @@ class ControladorOfertaLaboralTests{
 		LocalDate fechaDeAlta  = LocalDate.of(2020, 8, 20);
 		DTPaquete 	dtp = new DTPaquete(nombre, descripcion, periodoDeValidez, descuento, costoAsociado, dtpaq, fechaDeAlta);
 		
-		String datos = controladorOfertaLaboral.DatosPaqueteAMostrar(dtp);
+		String datos = controladorOfertaLaboral.datosPaqueteAMostrar(dtp);
 		String respuestaOK = "Nombre: " + nombre + "\nDescripcion: " + descripcion + "\nPeriodo de validez: " + periodoDeValidez + " días\nDescuento: " + descuento + "%\nCosto: $" + costoAsociado;
 		assertEquals(datos, respuestaOK);
 	}
@@ -648,7 +648,7 @@ class ControladorOfertaLaboralTests{
 			controladorOfertaLaboral.ingresarDatosOL(empresa,  nombreTipo, ol);
 			mol = ManejadorOfertaLaboral.getInstance();
 			OfertaLaboral Ol = mol.buscarOfertaLaboral(nombre);
-			controladorOfertaLaboral.AcepRechOL(EstadoOL.Aceptada, nombre);
+			controladorOfertaLaboral.acepRechOL(EstadoOL.Aceptada, nombre);
 			assertEquals(Ol.getNombre(), nombre);
 			assertEquals(Ol.getCiudad(), ciudad);
 			assertEquals(Ol.getDepartamento(), departamento);
@@ -724,7 +724,7 @@ class ControladorOfertaLaboralTests{
 			controladorOfertaLaboral.ingresarDatosOL(empresa,  nombreTipo, ol);
 			mol = ManejadorOfertaLaboral.getInstance();
 			OfertaLaboral Ol = mol.buscarOfertaLaboral(nombre);
-			controladorOfertaLaboral.AcepRechOL(EstadoOL.Rechazada, nombre);
+			controladorOfertaLaboral.acepRechOL(EstadoOL.Rechazada, nombre);
 			assertEquals(Ol.getNombre(), nombre);
 			assertEquals(Ol.getCiudad(), ciudad);
 			assertEquals(Ol.getDepartamento(), departamento);

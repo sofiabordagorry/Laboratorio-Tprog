@@ -15,13 +15,13 @@ import excepciones.TipoYaAgragadoException;
 
 public interface IOfertaLaboral {
 	public abstract DTPaquete[] listarPaquetes() throws NoHayPaquetesException;
-	public abstract String DatosPaqueteAMostrar(DTPaquete p);
+	public abstract String datosPaqueteAMostrar(DTPaquete p);
 	public abstract DTTipo[] listarTipoPublicacionOfertaLaboral() throws TipoPubNoExistenException;
 	public abstract String[] listarKeywords() throws KeywordsNoExistenException;
-	public abstract void ingresarDatosOL(String empresa, String nombreTipo, DTOfertaLaboral ol) throws OfertaLaboralRepetidaException;
+	public abstract void ingresarDatosOL(String empresa, String nombreTipo, DTOfertaLaboral ofl) throws OfertaLaboralRepetidaException;
 	public abstract void ingresarDatosPaquete(DTPaquete datosPaquete) throws PaqueteRepetidoException;
 	
-	public abstract void AcepRechOL(EstadoOL e, String OL);
+	public abstract void acepRechOL(EstadoOL e, String OL);
 
 	public abstract void ingresarTipo(String nombre, String descripcion, int exposicionT, int duracion, Float costo, Date fechaAlta) throws TipoRepetidoException;
 	
