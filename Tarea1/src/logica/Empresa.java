@@ -27,6 +27,7 @@ public class Empresa extends Usuario {
 		this.descripcion = descripcion;
 		this.link = link;
 		this.ofertasLaborales = new HashMap<>();
+		this.paqComprados = new ArrayList<>();
 
 	} 
 	
@@ -35,7 +36,7 @@ public class Empresa extends Usuario {
 		this.descripcion = descripcion;
 		this.link = link;
 		this.ofertasLaborales = new HashMap<>();
-
+		this.paqComprados = new ArrayList<>();
 	} 
 	
 	public String getDescripcion() {
@@ -67,6 +68,9 @@ public class Empresa extends Usuario {
 	}
 	
 	public void agregarCompra(Compra compra) {
+		if(this.paqComprados == null) {
+			this.paqComprados = new ArrayList<>();
+		}
 		this.paqComprados.add(compra);
 	}
 	

@@ -197,9 +197,6 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 	public DTOfertaLaboral[] listarTodasOfertasLaborales() throws OfertasLaboralesNoExistenNingunaException{
 		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
 		Map<String, OfertaLaboral> ols = mol.getOfertasLaborales();
-		if(ols.size() == 0) {
-			System.out.println("ninguna ol");
-		}
 		if(ols.size() != 0) {
 			DTOfertaLaboral[] todasOls = new DTOfertaLaboral[ols.size()];
 			int i = 0;
@@ -232,7 +229,6 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 		}
 		Compra compra = new Compra(fechaCompra, vencimiento, paqueteG, empresaG, compTip);
 		empresaG.agregarCompra(compra);
-
 	}
 
 	public DTPostulacion dataPostulacion(String nickname, String nombreOL) {

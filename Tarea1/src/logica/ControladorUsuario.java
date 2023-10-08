@@ -127,7 +127,7 @@ public class ControladorUsuario implements IUsuario {
         else { throw new EmpresaSinOfertasException("La empresa seleccionada no tiene ofertas vigentes");}
     }
     
-    
+   
     public  DTOfertaLaboral[] listarOfertasLaboralesIngresadas(String empresa) throws EmpresaSinOfertasException{
         ManejadorUsuario mu = ManejadorUsuario.getInstancia();
             Empresa emp = mu.buscarEmpresa(empresa);

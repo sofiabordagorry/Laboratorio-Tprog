@@ -3,6 +3,7 @@ package logica;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 public class Postulante extends Usuario {
@@ -71,16 +72,17 @@ public class Postulante extends Usuario {
 	
 	public DTPostulante getDataPostulante() {
 		Map<String, DTOfertaLaboral> ofertasLab = new HashMap<>();
+		List<DTPostulacion> postulaciones = new LinkedList<>();
 		LinkedList<Postulacion> post = this.getPostulaciones();
 		if(post != null) {
 			for(Postulacion p : post) {
+				postulaciones.add(p.getDataPostulacion());
 				OfertaLaboral dtOL = p.getOfertaLaboral();
 				ofertasLab.put(dtOL.getNombre(), dtOL.getDataOfertaLaboral());
 			}
 		}
-		DTPostulante dtP = new DTPostulante(this.getNickname(),this.getNombre(),this.getApellido(),this.getCorreo(),this.getFechaNacimiento(),this.getNacionalidad(), ofertasLab);
+		DTPostulante dtP = new DTPostulante(this.getNickname(),this.getNombre(),this.getApellido(),this.getCorreo(),this.getFechaNacimiento(),this.getNacionalidad(), ofertasLab, postulaciones);
 		return dtP;
-
 	}
 	
 	public DTUsuario getDataUsuario() {
