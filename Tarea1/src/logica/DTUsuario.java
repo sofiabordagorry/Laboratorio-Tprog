@@ -26,7 +26,7 @@ public class DTUsuario {
 		this.correo = correo;
 	}
 	
-	public DTUsuario(String nickname, String nombre, String apellido, String correo,String contrasenia) {
+	public DTUsuario(String nickname, String nombre, String apellido, String correo, String contrasenia) {
 		this.nickname = nickname;
 		this.nombre = nombre;
 		this.apellido = apellido;
