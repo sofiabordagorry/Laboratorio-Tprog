@@ -74,7 +74,7 @@ public class Paquete {
     	PaqueteTipo paq;
     	PaqueteTipo[] paqarr = this.paquetesTipos.toArray(new PaqueteTipo[0]);
     	DTPaqueteTipo[] dtpaq = new DTPaqueteTipo[this.paquetesTipos.size()];
-    	for(int i = 0; i < this.paquetesTipos.size(); i++) {
+    	for (int i = 0; i < this.paquetesTipos.size(); i++) {
 			paq = paqarr[i];
 			dtpaq[i] = paq.getDTPaqueteTipo();
 		}
@@ -82,24 +82,25 @@ public class Paquete {
 				this.getDescuento(), this.getCostoAsociado(), dtpaq, this.fechaDeAlta);
     } 	
 
-    public boolean agregarTipo(int cantidad, Tipo t) {
+    public boolean agregarTipo(int cantidad, Tipo tip) {
         List<PaqueteTipo> paqT = this.getPaquetesTipos();
-        PaqueteTipo pt;
+        PaqueteTipo paqti;
         for (int i = 0; i < paqT.size(); i++) {
-            pt = paqT.get(i);
-            if(pt.getTipo().getNombre() == t.getNombre())
+            paqti = paqT.get(i);
+            if (paqti.getTipo().getNombre() == tip.getNombre())
                 return false;
         }
         //No hay link entre Paquete y Tipo
-        pt = new PaqueteTipo(cantidad, t);
-        this.agregarPaqueteTipo(pt);
+        paqti = new PaqueteTipo(cantidad, tip);
+        this.agregarPaqueteTipo(paqti);
         //arrglo del costoAsociado
-        float costo = (t.getCosto() * cantidad) *((100-this.descuento)/100);
+        float costo = (tip.getCosto() * cantidad) *((100-this.descuento)/100);
         sumarACosto(costo);
         return true;
     }
-    public void sumarACosto(float c) {
-        this.costoAsociado = this.costoAsociado + c;
+    
+    public void sumarACosto(float cost) {
+        this.costoAsociado = this.costoAsociado + cost;
     }
 
 	public byte[] getImagen() {
