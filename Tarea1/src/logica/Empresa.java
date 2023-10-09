@@ -59,8 +59,8 @@ public class Empresa extends Usuario {
 		this.link = link;
 	}
 	
-	public void agregarOfertaLaboral(OfertaLaboral ol) {
-		this.ofertasLaborales.put(ol.getNombre(), ol);
+	public void agregarOfertaLaboral(OfertaLaboral ofertal) {
+		this.ofertasLaborales.put(ofertal.getNombre(), ofertal);
 	}
 	
 	public List<Compra> getCompras() {
@@ -68,7 +68,7 @@ public class Empresa extends Usuario {
 	}
 	
 	public void agregarCompra(Compra compra) {
-		if(this.paqComprados == null) {
+		if (this.paqComprados == null) {
 			this.paqComprados = new ArrayList<>();
 		}
 		this.paqComprados.add(compra);
@@ -76,24 +76,24 @@ public class Empresa extends Usuario {
 	
 	public DTEmpresa getDataEmpresaALO() {
 		return new DTEmpresa(this.getNickname(), this.getNombre(), this.getApellido(),
-				this.getCorreo(),this.getDescripcion(), 
+				this.getCorreo(), this.getDescripcion(), 
 				this.getLink());
 	}
 	
 	
-	public ArrayList<DTOfertaLaboral> obtenerOfertasVigentes() {
-        ArrayList<DTOfertaLaboral> dof = new ArrayList<>();
+	public List<DTOfertaLaboral> obtenerOfertasVigentes() {
+        List<DTOfertaLaboral> dof = new ArrayList<>();
 		Map<String, OfertaLaboral> ofertasLaborales = this.ofertasLaborales;
 	    if (ofertasLaborales.isEmpty()) { //consigo el array
 	        dof= null;
 	    } else {
 	        Collection<OfertaLaboral> ofs = ofertasLaborales.values();
-	        Object[] o = ofs.toArray();
+	        Object[] ofertas = ofs.toArray();
 	        OfertaLaboral oferta;
 	        
-	        for (int i = 0; i < o.length; i++) {
-	        	oferta = (OfertaLaboral) o[i];
-	        	if(oferta.estaVigente()) {
+	        for (int i = 0; i < ofertas.length; i++) {
+	        	oferta = (OfertaLaboral) ofertas[i];
+	        	if (oferta.estaVigente()) {
                 dof.add(new DTOfertaLaboral(oferta.getNombre(), oferta.getDescripcion(), oferta.getCiudad(), oferta.getDepartamento(), oferta.getHorario(), oferta.getRemuneracion(), oferta.getFechaDeAlta()));
 	        	}
 	        }
@@ -107,16 +107,16 @@ public class Empresa extends Usuario {
 	        return null;
 	    } else {
 	    	OfertaLaboral oferta;
-	    	int i =0;
+	    	int cont =0;
 	    	DTOfertaLaboral[] dof = new DTOfertaLaboral[ofertasLaborales.size()];
 	    	for (Map.Entry<String, OfertaLaboral> entry : ofertasLaborales.entrySet()) {
 	        	oferta = entry.getValue();
-	        	if(oferta.getEstado() == EstadoOL.Ingresada) {
-                dof[i] = new DTOfertaLaboral(oferta.getNombre(), oferta.getDescripcion(), oferta.getCiudad(), oferta.getDepartamento(), oferta.getHorario(), oferta.getRemuneracion(), oferta.getFechaDeAlta());
-	        	i++;
+	        	if (oferta.getEstado() == EstadoOL.Ingresada) {
+                dof[cont] = new DTOfertaLaboral(oferta.getNombre(), oferta.getDescripcion(), oferta.getCiudad(), oferta.getDepartamento(), oferta.getHorario(), oferta.getRemuneracion(), oferta.getFechaDeAlta());
+	        	cont++;
 	        	}
 	        }
-	    	if(i==0)
+	    	if (cont==0)
 	    		return null;
 	    	return dof;
 	    }
@@ -129,9 +129,9 @@ public class Empresa extends Usuario {
 
 	public DTEmpresa getDataEmpresa() {
 		Map<String, DTOfertaLaboral> ofertasLab = new HashMap<>();
-		Map<String, OfertaLaboral> ol = this.getOfertasLaborales();
-		if(ol != null) {
-			for(Map.Entry<String, OfertaLaboral> entry : ol.entrySet()) {
+		Map<String, OfertaLaboral> oferl = this.getOfertasLaborales();
+		if (oferl != null) {
+			for (Map.Entry<String, OfertaLaboral> entry : oferl.entrySet()) {
 				ofertasLab.put(entry.getKey(), entry.getValue().getDataOfertaLaboral());
 			}
 		}
@@ -144,17 +144,17 @@ public class Empresa extends Usuario {
 
 	}
 	
-	public void modificarDatos(String nombre, String apellido, String desc, String l) {
+	public void modificarDatos(String nombre, String apellido, String desc, String link) {
 		this.setNombre(nombre);
 		this.setApellido(apellido);
 		this.setDescripcion(desc);
-		this.setLink(l);
+		this.setLink(link);
 	}
 	
 	public boolean verificarCompra(String paquete) {
 		List<Compra> compras = this.getCompras();
 		boolean sePuede = true;
-		if(compras != null) {
+		if (compras != null) {
 			for (int i = 0; i < compras.size(); i++) {
 				if (compras.get(i).getPaqueteComprado().getNombre().equals(paquete)) {
 					//ya se compro el paquete
