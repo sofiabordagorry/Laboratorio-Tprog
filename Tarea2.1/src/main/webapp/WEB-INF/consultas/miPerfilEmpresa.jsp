@@ -1,9 +1,8 @@
-<%@page import="logica.DTUsuario"%>
-<%@page import="logica.DTEmpresa"%>
-<%@page import="logica.DTOfertaLaboral"%>
+<%@page import="com.trabajouy.model.*"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.time.LocalDate"%>
+<%@page import="java.util.List" %>
 <%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +22,7 @@
 	                	<div class="row">
 		                	<%
 		                		DTUsuario userInfo = (DTUsuario) request.getAttribute("userData");
-		                		DTEmpresa eInfo = null;
+		                		DTEmpresa eInfo = new DTEmpresa();
 		                		eInfo = (DTEmpresa) userInfo;
 		                		Map<String, DTOfertaLaboral> offers = eInfo.getDTOfertasLaborales();
 		                	%>
@@ -47,7 +46,7 @@
 			                        <%
 			                        	for(Map.Entry<String, DTOfertaLaboral> entry : offers.entrySet()){
 			                        %>
-			                        <li class="list-group-item text-center"><a href="ConsultaOfertaLaboral?oferta_consultada=<%=entry.getValue().getNombre()%>"><%=entry.getValue().getNombre() + " (" + entry.getValue().getEstado() + ")" %></a></li>
+			                        <li class="list-group-item text-center"><a href="./ConsultaOfeLabDFemp.html"><%=entry.getValue().getNombre() + "(" + entry.getValue().getEstado() + ")" %></a></li>
 									<%
 										}
 									%>
@@ -65,22 +64,24 @@
 								  	</thead>
 									<tbody>
 										<%
+											List<DTCompra> paquetesComprados = eInfo.getPaqComprados();
+											for(DTCompra compra : paquetesComprados){
 										  	//ACA TENDRIA QUE PONER LA LOGICA DE LOS PAQUETES COMPRADOS
 										%>
 									    <tr>
-									    	<td><a href="./PaqBasEmp.html">Básico</a></td>
-											<td>240</td>
-											<td>Se calcula la fecha que corresponde(30dias)</td>
+									    	<td><a href="#"><%=compra.getPaqueteComprado().getNombre()%></a></td>
+											<td><%=compra.getPaqueteComprado().getCostoAsociado()%></td>
+											<td><%=compra.getFechaVencimiento() %></td>
 									    </tr>
 										<%
-									  		//ACA TERMINAN LOS PAQUETES COMPRADOS
+											}
 										%>
 									</tbody>
 								</table>
 								<%
 									//POR CADA PAQUETE COMPRADO TENGO QUE ARMAR UNA TABLA DE LOS TIPOS QUE TIENE Y OCULTARLAS TODAS
 								%>
-		                        <table class="table" id="tablaSecundaria1">
+		                        <!--<table class="table" id="tablaSecundaria1">
 									<thead>
 									    <tr>
 									      <th>Tipo</th>
@@ -101,7 +102,7 @@
 		  							      	<td>2</td>
 									    </tr>
 									</tbody>
-								</table>
+								</table>-->
 								<%
 									//ACA TERMINA LA TABLA	
 								%>
