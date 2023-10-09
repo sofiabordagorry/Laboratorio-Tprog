@@ -31,7 +31,7 @@
 	                    		List<DTPostulacion> posts = pInfo.getPostulaciones();
 							%>
 							<div class="col">
-                                <h2><%=pInfo.getNickname() %>></h2>
+                                <h2><%=pInfo.getNickname() %></h2>
                                 <p><i class="" style="color: #000000;"></i> <b>Nombre:</b><%=pInfo.getNombre() %></p>
                                 <p><i class=""></i> <b>Apellido:</b><%=pInfo.getApellido() %></p>
                                 <p><i class=""></i> <b>Correo: </b><%=pInfo.getCorreo() %></p>

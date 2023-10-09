@@ -35,10 +35,10 @@
 									<option selected disabled value="">Elija alguno de los tipos...</option>
 									
 									<%
-										String[] tipos = (String[]) request.getSession().getAttribute("tiposOL");
+										String[] tipos = (String[]) request.getAttribute("tiposOL");
 										for (int iter = 0; iter < tipos.length; iter++) { %>
 										   
-										    <option value="<%= iter %>" <%= tipos[iter].equals(nomT) ? "selected" : "" %>><%= tipos[iter] %></option>
+										    <option value="<%= tipos[iter] %>"><%= tipos[iter] %></option>
 										  
 									<%	}	%>
 
@@ -117,11 +117,11 @@
 										<select multiple class="form-select form-control custom-select" aria-label="Multiple select example" name="keywords" id="keywords">
 										
 											<%
-											String[] nomKeys = (String[]) request.getSession().getAttribute("keywords");
+											String[] nomKeys = (String[]) request.getAttribute("keywords");
 							    			for (int iter = 0; iter < nomKeys.length; iter++) {
 											%>
 											
-											<option value="<%=iter%>"<%=keys.containsKey(nomKeys[iter]) ? "selected" : "" %>><%=nomKeys[iter]%></option>
+											<option value="<%=nomKeys[iter]%>"><%=nomKeys[iter]%></option>
 											
 											<%}%>
 										</select>

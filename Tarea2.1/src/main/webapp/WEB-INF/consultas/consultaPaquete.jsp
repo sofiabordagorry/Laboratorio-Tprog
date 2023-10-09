@@ -23,7 +23,7 @@
 		                		DTPaquete paq = (DTPaquete) request.getAttribute("dataPaquete");
 	                		%>
                     		<div class="col-md-3" id="postulanteConsultaInfo">
-                        		<img class="card-img" src="https://imgv3.fotor.com/images/gallery/a-woman-linkedin-picture-with-grey-background-made-by-LinkedIn-Profile-Picture-Maker.jpg" style="max-width: 550px; max-height: 550px;"/>
+                        		<img class="card-img" src="media/imagenes/paquete.jpg" style="max-width: 550px; max-height: 550px;"/>
                             </div>
                             <div class="col">
                                 <h2><%= paq.getNombre()%></h2>
@@ -40,7 +40,7 @@
 								        <li class="listarPaq">No se pueden comprar ofertas de ningún tipo</li>
 								    <% } else {
 								        for (int i = 0; i < paqTs.length; i++) { %>
-								            <li class="listarPaq"><%= paqTs[i].getTipo().getNombre()%>: <%= paqTs[i].getCantidad()%></li>
+								            <li class="listarPaq"><a href="ConsultaTipo?tipo_consultado=<%=paqTs[i].getTipo().getNombre()%>"><%= paqTs[i].getTipo().getNombre()%>: <%= paqTs[i].getCantidad()%></a></li>
 								        <% }
 								    }
 								    %>

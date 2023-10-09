@@ -2,6 +2,7 @@
 <%@page import="logica.DTUsuario"%>
 <%@page import="logica.DTEmpresa"%>
 <%@page import="logica.DTOfertaLaboral"%>
+<%@page import="logica.EstadoOL"%>
 <%@page import="java.util.Map"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,13 +50,16 @@
 										</thead>
 										<tbody>
 											<%	
+											
 												for(Map.Entry<String, DTOfertaLaboral> entry : offers.entrySet()){
+													if (entry.getValue().getEstado() == EstadoOL.Confirmada) {
 											%>
 											<tr>
 												<td><a href="ConsultaOfertaLaboral?oferta_consultada=<%=entry.getValue().getNombre() %>"><%=entry.getValue().getNombre() %></a></td>
 												<td><%=entry.getValue().getDepartamento() %></td>
 											</tr>
 											<%
+													}
 												}
 											%>
 										</tbody>

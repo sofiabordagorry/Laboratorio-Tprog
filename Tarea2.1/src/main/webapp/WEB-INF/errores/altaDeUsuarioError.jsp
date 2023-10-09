@@ -46,7 +46,7 @@
 										<%
 											if (nickRepetido != null) {
 										%>
-										<p class="formulario__input-error3">Ya existe este nickname.</p>
+										<p class="formulario__input-error3">Ya existe un usuario con este nickname.</p>
 										<%
 											}
 										%>
@@ -66,7 +66,7 @@
 										<%
 											if (emailRepetido != null) {
 										%>
-										<p class="formulario__input-error3">Ya existe este email.</p>
+										<p class="formulario__input-error3">Ya existe un usuario con este email.</p>
 										<%
 											}
 										%>

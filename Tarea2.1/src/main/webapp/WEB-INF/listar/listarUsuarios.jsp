@@ -47,6 +47,6 @@
         	</div>
     	</div>
     	<jsp:include page="../template/footer.jsp" />
-		<script src="media/javaScripts/listadosBusquedas.js"></script>
+		<script src="media/javaScript/listadosBusquedas.js"></script>
 	</body>
 </html>

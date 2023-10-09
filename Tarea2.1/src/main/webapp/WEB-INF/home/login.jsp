@@ -31,14 +31,14 @@
 	                          	<input type="password" class="form-control" name="password" id="InputPasswordLogin" placeholder="Contraseña" required>
 	                        </div>
 							<button type="submit" class="btn">Iniciar sesión</button>
-						</form>
-		                    <%
+							<%
 		                      	LoginEstado error = (LoginEstado) session.getAttribute("estado_sesion");
 		                        if (error != null) {
 		                    %>
 		                    <div class="error-message">
 		                      	<%= error %>
 		                    </div>
+						</form>
 		                    <%
 		                      	session.removeAttribute("loginError");
 		                        }

@@ -50,7 +50,9 @@ public class Postulante extends Usuario {
 		postulaciones = this.postulaciones;
 		Boolean existe=false;
         for (int i = 0; i < postulaciones.size(); i++) {
-        	existe=postulaciones.get(i).verificarOfertaLaboral(oferta);
+        	if (postulaciones.get(i).verificarOfertaLaboral(oferta)) {
+        		existe = true;
+        	}
         }
         return existe;
 	}

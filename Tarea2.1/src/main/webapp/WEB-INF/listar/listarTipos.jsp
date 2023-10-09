@@ -53,5 +53,6 @@
         </div>
     </div>
     <jsp:include page="../template/footer.jsp" />
+    <script src="media/javaScript/listadosBusquedas.js"></script>
   </body>
 </html>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="logica.DTOfertaLaboral"%>
 <%@ page import="logica.Usuario"%>
+<%@ page import="logica.DTPaquete"%>
 <%@ page import="logica.DTKeyword"%>
 <%@ page import="logica.Empresa"%>
 <%@ page import="logica.DTPostulacion"%>
@@ -30,7 +31,7 @@
                     <div class="col-md-8 col-sm-12" id="ofertaInfo">
                         <div>
                             <img class="imagenOferta mx-auto d-block p-2"
-                                src="https://www.hubspot.com/hubfs/media/estrategianegocio.jpeg" />
+                                src="media/imagenes/ofertaSinFoto.jpg" />
                             <h2 class="text-center p-2"><%= ofertaConsultada.getNombre() %></h2>
                             <p class="text-center p-2"><%= ofertaConsultada.getDescripcion() %></p>
                         </div>
@@ -55,12 +56,13 @@
                             <%
                                 Usuario user = (Usuario) session.getAttribute("usuario_logueado");
                                 if (user instanceof Postulante) {
-                                	System.out.println(ofertaConsultada.getNombre());
+                                	if(!((Postulante) user).existePostulacion(ofertaConsultada.getNombre())) {
                             %>
                             <button class="btn mx-auto d-block">
                                 <a href="PostulacionAOfertaLaboral?oferta=<%= ofertaConsultada.getNombre() %>">Postularse</a>
                             </button>
                             <%
+                                	}
                                 }
                             %>
                         </div>
@@ -89,29 +91,33 @@
                                 %>
                                     <div class="postulante">
                                         <img width="50" height="50" class="img-fluid img-thumbnail"
-                                            src="https://imgv3.fotor.com/images/gallery/a-woman-linkedin-picture-with-grey-background-made-by-LinkedIn-Profile-Picture-Maker.jpg" />
+                                            src="media/imagenes/NoImageUser.png" />
                                         <a href="ConsultaPostulacion?nombreOfertaConsultada=<%=ofertaConsultada.getNombre()%>&postulanteConsultado=<%=elem.getPostulante()%>"><%= elem.getPostulante() %></a>
                                     </div>
                                 <%
-                                }
+                                	}
+                                
+                                	DTPaquete paq = (DTPaquete) request.getAttribute("paquete");
+                                	if (paq != null) {
                                 %>
                                 <h2 class="mt-5">Paquete</h2>
                                 <div class="paquete">
                                     <img width="50" height="50" class="img-fluid img-thumbnail"
-                                        src="./public/files/paquete.png" />
-                                    <a href="ConsultaPaquete?paqueteConsultado=<%=ofertaConsultada%>"><%= ofertaConsultada.getTipo() %></a>
+                                        src="/media/imagenes/paquete.jpg" />
+                                    <a href="ConsultaPaquete?paqueteConsultado=<%=paq.getNombre()%>"><%= paq.getNombre() %></a>
                                 </div>
                             </div>
-                            <%
-                                        }
-                                    } else if (user instanceof Postulante) {
-                                        if (((Postulante) user).existePostulacion(ofertaConsultada.getNombre())) {
+                            <% 			
+	                                	}
+	                                 }
+	                             } else if (user instanceof Postulante) {
+	                                 if (((Postulante) user).existePostulacion(ofertaConsultada.getNombre())) {
                             %>
                             <div class="postulante">
                                 <h2>Postulacion</h2>
                                 <div class="postulante">
                                     <img width="50" height="50" class="img-fluid img-thumbnail"
-                                        src="https://imgv3.fotor.com/images/gallery/a-woman-linkedin-picture-with-grey-background-made-by-LinkedIn-Profile-Picture-Maker.jpg" />
+                                        src="/media/imagenes/NoImageUser.png" />
                                     <a href="ConsultaPostulacion?postulanteConsultado=<%=user.getNickname()%>&nombreOfertaConsultada=<%=ofertaConsultada.getNombre()%>">Mi Postulación</a>
                                 </div>
                             </div>

@@ -1,6 +1,7 @@
 <%@page import="logica.DTOfertaLaboral"%>
 <%@page import="java.util.Map"%>
 <%@page import="logica.Usuario"%>
+<%@page import="logica.EstadoOL"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.time.LocalDate"%>
 <%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
@@ -28,12 +29,13 @@
 			String keywordFiltro = (String) request.getAttribute("filtro");
 			String misOfertasBool = (String) request.getAttribute("misofertas");
 			for(int i = 0; i < ols.length; i++) {
-				if (keywordFiltro == null || (keywordFiltro != null && ols[i].getKeywords().containsKey(keywordFiltro))) {			
+				if(ols[i].getEstado() == EstadoOL.Confirmada) {
+					if (keywordFiltro == null || (keywordFiltro != null && ols[i].getKeywords().containsKey(keywordFiltro))) {	
 		%>
 		<div class="card mb-3" style="max-width: 650px;">
 			<div class="row no-gutters">
 				<div class="col-md-4">
-					<img src="https://kinsta.com/es/wp-content/uploads/sites/8/2021/12/front-end-developer-1024x512.png" class="card-img" alt="...">
+					<img src="media/imagenes/ofertaSinFoto.jpg" class="card-img" alt="...">
 				</div>
 				<div class="col-md-8">
 					<div class="card-body">
@@ -45,7 +47,8 @@
 			</div>
 		</div>
 		<%
-				}
+					}
+				}	
 			}
 		%>
 	</div>

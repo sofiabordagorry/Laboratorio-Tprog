@@ -7,10 +7,14 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.List;
 
 import logica.Usuario;
+import logica.Compra;
 import logica.DTOfertaLaboral;
+import logica.Empresa;
 import logica.ManejadorOfertaLaboral;
+import logica.ManejadorUsuario;
 
 /**
  * Servlet implementation class consultaOferta
@@ -29,7 +33,22 @@ public class ConsultaOfertaLaboral extends HttpServlet {
     	Usuario user = (Usuario) session.getAttribute("usuario_logueado");
     	String ofertaConsultada = (String) request.getParameter("oferta_consultada");
     	DTOfertaLaboral oferta = ManejadorOfertaLaboral.getInstance().buscarOfertaLaboral(ofertaConsultada).getDataOfertaLaboral();
-    	
+        ManejadorUsuario murs = ManejadorUsuario.getInstancia();
+        
+        if(user != null) {
+	        Empresa emp = murs.buscarEmpresa(user.getNickname());
+	        if (emp != null && emp.getNickname() == oferta.getDTEmpresa()) {
+	            List<Compra> compras = emp.getCompras();
+	
+	            if (compras != null) {
+	                for (int i = 0; i < compras.size(); i++) {
+	                    if (compras.get(i).getOfertas().get(oferta.getNombre()) != null) {
+	                         request.setAttribute("paquete", compras.get(i).getPaqueteComprado().getDataPaquete());
+	                    }
+	                }
+	            }
+	        }
+        }
     	 // Set job offer as an attribute to pass it to the JSP.
         request.setAttribute("oferta_laboral", oferta);
 

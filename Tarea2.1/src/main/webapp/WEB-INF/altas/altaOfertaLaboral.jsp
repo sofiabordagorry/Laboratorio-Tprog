@@ -14,7 +14,7 @@
                 <jsp:include page="../template/sidebar.jsp" />
                 <div class="col-md-9 col-sm-12" id="main-content">
                 <%
-					if ((boolean) request.getSession().getAttribute("hayTipos") == true){
+					if ((boolean) request.getAttribute("hayTipos") == true){
 						if ((boolean) request.getAttribute("hayKeys") == true){
 				%>
 					<form action="AltaDeOfertaLaboral" method="POST" class="formulario" id="formulario">
@@ -30,7 +30,7 @@
 									<option selected disabled value="">Elija alguno de los tipos...</option>
 									
 									<%
-										String[] tipos = (String[]) request.getSession().getAttribute("tiposOL");
+										String[] tipos = (String[]) request.getAttribute("tiposOL");
 						    			for (int i = 0; i < tipos.length; i++) {
 					    			%>
 									

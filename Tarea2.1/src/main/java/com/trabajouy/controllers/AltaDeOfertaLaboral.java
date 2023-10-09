@@ -53,14 +53,14 @@ public class AltaDeOfertaLaboral extends HttpServlet {
 				//ManejadorTipo mt = ManejadorTipo.getInstancia();
 				Tipo[] tipo = mtip.getTipos();
 				if (tipo == null) {
-					session.setAttribute("hayTipos", false);
+					request.setAttribute("hayTipos", false);
 				}else {
 					String[] tipos = new String[tipo.length];
 					for (int i = 0; i < tipo.length; i++) {
 		                tipos[i] =  tipo[i].getNombre();
 		            }
-					session.setAttribute("tiposOL", tipos);
-					session.setAttribute("hayTipos", true);
+					request.setAttribute("tiposOL", tipos);
+					request.setAttribute("hayTipos", true);
 
 				}
 				
@@ -100,6 +100,8 @@ public class AltaDeOfertaLaboral extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		Usuario usuario = (Usuario) session.getAttribute("usuario_logueado");
+
+		ManejadorTipo mtip = ManejadorTipo.getInstancia();
 		
 		String nombre, horario, descripcion, tipo, ciudad, departamento;
 		nombre = request.getParameter("nombre");
@@ -116,6 +118,34 @@ public class AltaDeOfertaLaboral extends HttpServlet {
 		for (int i =0; i < nombreKey.length; i++){
 			DTKeyword key = new DTKeyword(nombreKey[i]);
 			keys.put(nombreKey[i], key);
+		}
+		
+		Tipo[] tipoSS = mtip.getTipos();
+		if (tipoSS == null) {
+			request.setAttribute("hayTipos", false);
+		}else {
+			String[] tipos = new String[tipoSS.length];
+			for (int i = 0; i < tipoSS.length; i++) {
+                tipos[i] =  tipoSS[i].getNombre();
+            }
+			request.setAttribute("tiposOL", tipos);
+			request.setAttribute("hayTipos", true);
+
+		}
+		
+		//obtengo las keywords
+		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
+		Keyword[] key = mol.getKeywords();
+		if (key == null) {
+			request.setAttribute("hayKeys", false);
+		}else {
+			String[] keywords = new String[key.length];
+			for (int j = 0; j < key.length; j++) {
+				keywords[j] =  key[j].getNombre();
+            }
+			request.setAttribute("keywords", keywords);
+			request.setAttribute("hayKeys", true);
+
 		}
 		
 		LocalDate fechaDeAlta =  LocalDate.now();

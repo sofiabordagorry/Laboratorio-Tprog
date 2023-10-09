@@ -35,7 +35,7 @@
                                 <p><i class=""></i> <b>Apellido:</b><%=eInfo.getApellido() %></p>
                                 <p><i class=""></i> <b>Correo: </b><%=eInfo.getCorreo() %></p>
                                 <p><i class=""></i> <b>Descripcion: </b><%=eInfo.getDescripcion() %></p>
-                                <p><i class=""></i> <b>Link: </b> <a href="#"><%=eInfo.getLink() %>></a></p>
+                                <p><i class=""></i> <b>Link: </b> <a href="#"><%=eInfo.getLink() %></a></p>
 							</div>
 	                    </div>
 	                    <div class ="row" style="margin-top: 1%;">
@@ -45,7 +45,7 @@
 			                        <%
 			                        	for(Map.Entry<String, DTOfertaLaboral> entry : offers.entrySet()){
 			                        %>
-			                        <li class="list-group-item text-center"><a href="./ConsultaOfeLabDFemp.html"><%=entry.getValue().getNombre() + "(" + entry.getValue().getEstado() + ")" %></a></li>
+			                        <li class="list-group-item text-center"><a href="ConsultaOfertaLaboral?oferta_consultada=<%=entry.getValue().getNombre()%>"><%=entry.getValue().getNombre() + "(" + entry.getValue().getEstado() + ")" %></a></li>
 									<%
 										}
 									%>
@@ -68,7 +68,7 @@
 										  	//ACA TENDRIA QUE PONER LA LOGICA DE LOS PAQUETES COMPRADOS
 										%>
 									    <tr>
-									    	<td><a href="#"><%=compra.getPaqueteComprado().getNombre()%></a></td>
+									    	<td><a href="ConsultaPaquete?paqueteConsultado=<%=compra.getPaqueteComprado().getNombre()%>"><%=compra.getPaqueteComprado().getNombre()%></a></td>
 											<td><%=compra.getPaqueteComprado().getCostoAsociado()%></td>
 											<td><%=compra.getFechaVencimiento() %></td>
 									    </tr>
