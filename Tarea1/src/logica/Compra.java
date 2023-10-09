@@ -59,4 +59,10 @@ public class Compra {
 	public Map<String, OfertaLaboral> getOfertas(){
 		return this.ofertas;
 	}
+
+	public DTCompra getDataCompra() {
+		DTPaquete paqueteCompra = this.paqComprado.getDataPaquete();
+		DTCompra compra = new DTCompra(this.fechaCompra, this.fechaVencimiento, paqueteCompra, null);
+		return compra;
+	}
 }
