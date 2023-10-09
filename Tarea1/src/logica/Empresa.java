@@ -156,7 +156,7 @@ public class Empresa extends Usuario {
 		boolean sePuede = true;
 		if(compras != null) {
 			for (int i = 0; i < compras.size(); i++) {
-				if (compras.get(i).getPaqueteComprado().getNombre() == paquete) {
+				if (compras.get(i).getPaqueteComprado().getNombre().equals(paquete)) {
 					//ya se compro el paquete
 					sePuede = false;
 				}

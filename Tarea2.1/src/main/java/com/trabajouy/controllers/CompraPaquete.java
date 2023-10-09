@@ -6,16 +6,19 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-import java.io.IOException;
-
+import logica.DTPaquete;
+import logica.Factory;
+import logica.IOfertaLaboral;
+import logica.ManejadorOfertaLaboral;
 import logica.ManejadorTipo;
 import logica.Paquete;
 import logica.Usuario;
-import logica.IOfertaLaboral;
-import logica.Factory;
-import logica.DTPaquete;
+
+import java.io.IOException;
 
 import excepciones.PaqueteYaCompradoException;
+
+
 
 /**
  * Servlet implementation class CompraPaquete
@@ -47,20 +50,20 @@ public class CompraPaquete extends HttpServlet {
      	
      	request.setAttribute("paqComprado", true);
      	
+     	
      	//Empresa emp = murs.buscarEmpresa(user.getNickname());
      	String nombrePaq = request.getParameter("paquete");
-     	
      	try {
-     		col.comprarPaquete(nombrePaq,user.getNickname());
+     		col.comprarPaquete(user.getNickname(),nombrePaq);
      		request.setAttribute("compraExitosa", true);
-     	}catch(PaqueteYaCompradoException e) {
+     	}catch (PaqueteYaCompradoException e) {
      		request.setAttribute("compraExitosa", false);
      	}
      	
      	Paquete paq = mtip.buscarPaquete(nombrePaq);
         DTPaquete paquete = paq.getDataPaquete();
         request.setAttribute("dataPaquete", paquete);
-        request.getRequestDispatcher("/WEB-INF/consultas/consultarPaquete.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/consultas/consultaPaquete.jsp").forward(request, response);
 	}
 
 }

@@ -37,10 +37,10 @@
 								    <%
 								    DTPaqueteTipo[] paqTs = paq.getPaqueteTipos();
 								    if (paqTs == null) { %>
-								        <li>No se pueden comprar ofertas de ningún tipo</li>
+								        <li class="listarPaq">No se pueden comprar ofertas de ningún tipo</li>
 								    <% } else {
 								        for (int i = 0; i < paqTs.length; i++) { %>
-								            <li><%= paqTs[i].getTipo().getNombre()%>: <%= paqTs[i].getCantidad()%></li>
+								            <li class="listarPaq"><%= paqTs[i].getTipo().getNombre()%>: <%= paqTs[i].getCantidad()%></li>
 								        <% }
 								    }
 								    %>
