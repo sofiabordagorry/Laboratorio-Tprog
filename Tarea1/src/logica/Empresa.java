@@ -135,7 +135,11 @@ public class Empresa extends Usuario {
 				ofertasLab.put(entry.getKey(), entry.getValue().getDataOfertaLaboral());
 			}
 		}
-			DTEmpresa dtE = new DTEmpresa(this.getNickname(), this.getNombre(), this.getApellido(), this.getCorreo(), ofertasLab/*, this.getNombreEmpresa()*/, this.getDescripcion(), this.getLink());
+		List<DTCompra> paquetesComprados = new LinkedList<DTCompra>();
+		for(Compra comp : this.paqComprados) {
+			paquetesComprados.add(comp.getDataCompra());
+		}
+			DTEmpresa dtE = new DTEmpresa(this.getNickname(), this.getNombre(), this.getApellido(), this.getCorreo(), ofertasLab/*, this.getNombreEmpresa()*/, this.getDescripcion(), this.getLink(),paquetesComprados);
 			return dtE;
 	}
 	
