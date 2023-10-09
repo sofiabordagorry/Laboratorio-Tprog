@@ -140,7 +140,7 @@ public class Empresa extends Usuario {
 		for (Compra comp : this.paqComprados) {
 			paquetesComprados.add(comp.getDataCompra());
 		}
-			DTEmpresa dtE = new DTEmpresa(this.getNickname(), this.getNombre(), this.getApellido(), this.getCorreo(), ofertasLab/*, this.getNombreEmpresa()*/, this.getDescripcion(), this.getLink(),paquetesComprados);
+			DTEmpresa dtE = new DTEmpresa(this.getNickname(), this.getNombre(), this.getApellido(), this.getCorreo(), ofertasLab/*, this.getNombreEmpresa()*/, this.getDescripcion(), this.getLink(), paquetesComprados);
 			return dtE;
 	}
 	

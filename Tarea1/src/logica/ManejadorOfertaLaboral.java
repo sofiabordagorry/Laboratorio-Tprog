@@ -3,7 +3,6 @@ package logica;
 import java.util.Map;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Collection;
 
 
 public class ManejadorOfertaLaboral {

@@ -5,7 +5,6 @@ package logica;
 import excepciones.ExisteUnUsuarioYaRegistradoException;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import excepciones.EmpresaSinOfertasException;
@@ -30,16 +29,16 @@ public class ControladorUsuario implements IUsuario {
 		Postulante[] pos = musr.getPostulantes();
 		Empresa[] emp = musr.getEmpresas();
 		boolean existemail = false;
-		if(pos != null) {
-			for (int i = 0; i < pos.length;i++) {
+		if (pos != null) {
+			for (int i = 0; i < pos.length; i++) {
 				existemail = existemail || (pos[i].getCorreo().equals(mail));
 			}
 		}
-		if(emp != null) {
-			if(existemail) {
+		if (emp != null) {
+			if (existemail) {
 				return existemail;
-			}else{
-				for (int j = 0; j < emp.length;j++) {
+			}else {
+				for (int j = 0; j < emp.length; j++) {
 					existemail = existemail || (emp[j].getCorreo().equals(mail));
 				}
 			}
@@ -51,7 +50,7 @@ public class ControladorUsuario implements IUsuario {
 		ManejadorUsuario musr = ManejadorUsuario.getInstancia();
 		Usuario user = musr.buscarUsuario(post.getNickname());
 		if (user == null) {
-			if(this.existeMail(post.getCorreo()) == false) {
+			if (this.existeMail(post.getCorreo()) == false) {
 				Postulante new_user = new Postulante(post.getNickname(), post.getNombre(), post.getApellido(), post.getCorreo(), post.getFechaDeNacimiento(), post.getNacionalidad(), post.getContrasenia(), post.getImagen());
 				musr.agregarPostulante(new_user);
 			} else {
@@ -66,7 +65,7 @@ public class ControladorUsuario implements IUsuario {
 		ManejadorUsuario musr = ManejadorUsuario.getInstancia();
 		Usuario user = musr.buscarUsuario(emp.getNickname());
 		if (user == null) {
-			if(this.existeMail(emp.getCorreo()) == false) {
+			if (this.existeMail(emp.getCorreo()) == false) {
 				Empresa new_user = new Empresa(emp.getNickname(), emp.getNombre(), emp.getApellido(), emp.getCorreo(), emp.getDescripcion(), emp.getLink(), emp.getContrasenia(), emp.getImagen());
 				musr.agregarEmpresa(new_user);
 			} else {
@@ -85,7 +84,7 @@ public class ControladorUsuario implements IUsuario {
 			DTEmpresa[] dtemp = new DTEmpresa[empresas.length];
 			Empresa empresa;
 			 
-			for(int i = 0; i < empresas.length; i++) {
+			for (int i = 0; i < empresas.length; i++) {
 				empresa = empresas[i];
 				dtemp[i] = empresa.getDataEmpresaALO();
 			}
@@ -124,7 +123,9 @@ public class ControladorUsuario implements IUsuario {
         if (dtofertas != null) { 
         	return  dtofertas;
         }
-        else { throw new EmpresaSinOfertasException("La empresa seleccionada no tiene ofertas vigentes");}
+        else {
+        	throw new EmpresaSinOfertasException("La empresa seleccionada no tiene ofertas vigentes");
+        	}
     }
     
    
@@ -132,8 +133,12 @@ public class ControladorUsuario implements IUsuario {
         ManejadorUsuario musr = ManejadorUsuario.getInstancia();
             Empresa emp = musr.buscarEmpresa(empresa);
             DTOfertaLaboral[] ofertas = emp.obtenerOfertasIngresadas();
-            if (ofertas != null){ return  ofertas;}
-            else { throw new EmpresaSinOfertasException("La empresa seleccionada no tiene ofertas ingresadas");}
+            if (ofertas != null){
+            	return  ofertas;
+            	}
+            else {
+            	throw new EmpresaSinOfertasException("La empresa seleccionada no tiene ofertas ingresadas");
+            	}
         }
     
     public void ingresarPostulacion(String CVReducido, String motivacion, LocalDate fecha, String empresa, String oferta, String postulante) throws YaSePostuloException {
@@ -148,7 +153,9 @@ public class ControladorUsuario implements IUsuario {
         	pos.agregarPostulacion(postu);
         	ofl.agregarPostulacion(postu);	
         }
-        else  { throw new YaSePostuloException("El postulante seleccionado ya se ha postulado a esta oferta laboral");}
+        else  {
+        	throw new YaSePostuloException("El postulante seleccionado ya se ha postulado a esta oferta laboral");
+        	}
         		
     }
 
@@ -156,30 +163,30 @@ public class ControladorUsuario implements IUsuario {
 		 ManejadorUsuario iMU =  ManejadorUsuario.getInstancia();
 		 Empresa[] empresas = iMU.getEmpresas();
 		 Postulante[] postulantes = iMU.getPostulantes();
-		 if(empresas != null || postulantes != null) {
+		 if (empresas != null || postulantes != null) {
 			 DTUsuario[] arrUsu;
-			 if(empresas == null) {
+			 if (empresas == null) {
 				 arrUsu = new DTUsuario[postulantes.length];
-				 for(int j = 0; j < postulantes.length; j++) {
+				 for (int j = 0; j < postulantes.length; j++) {
 					 arrUsu[j] = postulantes[j].getDataPostulante();
 				 }
-			 }else if(postulantes == null) {
+			 }else if (postulantes == null) {
 				 arrUsu = new DTUsuario[empresas.length];
-				 for(int i = 0; i < empresas.length; i++) {
+				 for (int i = 0; i < empresas.length; i++) {
 					 arrUsu[i] = empresas[i].getDataEmpresa();
 				 }
 			 }else {
 				 arrUsu = new DTUsuario[postulantes.length + empresas.length];
-				 for(int i = 0; i < empresas.length; i++) {
+				 for (int i = 0; i < empresas.length; i++) {
 					 arrUsu[i] = empresas[i].getDataEmpresa();
 				 }
 				 
-				 for(int j = 0; j < postulantes.length; j++) {
+				 for (int j = 0; j < postulantes.length; j++) {
 					 arrUsu[empresas.length + j] = postulantes[j].getDataPostulante();
 				 }
 			 }
 			 return arrUsu;
-		 }else{
+		 }else {
 			 throw new UsuariosNoExistenException("No existen Usuarios registradas");
 		 }
 	}
@@ -191,19 +198,19 @@ public class ControladorUsuario implements IUsuario {
 		return dtU;
 	}
 	
-	public DTEmpresa[] listarEmpresas() throws EmpresasNoExistenException,NoExistenEmpresasOfertasLaboralesException {
+	public DTEmpresa[] listarEmpresas() throws EmpresasNoExistenException, NoExistenEmpresasOfertasLaboralesException {
 
 		 ManejadorUsuario iMU =  ManejadorUsuario.getInstancia();
 		 Empresa[] empresas = iMU.getEmpresas();
 		 boolean hayOL = false;
 
 		 if (empresas != null ) {
-			 for(int i = 0; i < empresas.length; i++) {
-				 hayOL = hayOL || (empresas[i].getOfertasLaborales().size() != 0);
+			 for (int i = 0; i < empresas.length; i++) {
+				 hayOL = hayOL || empresas[i].getOfertasLaborales().size() != 0;
 			 }
-			 if(hayOL) {
+			 if (hayOL) {
 				 DTEmpresa[] arrEmp = new DTEmpresa[empresas.length];
-				 for(int i = 0; i < empresas.length; i++) {
+				 for (int i = 0; i < empresas.length; i++) {
 					 arrEmp[i] = empresas[i].getDataEmpresa();
 				 }
 				return arrEmp;
@@ -221,10 +228,10 @@ public class ControladorUsuario implements IUsuario {
 
 		Empresa emp = iMU.buscarEmpresa(nickEmpresa);
 		Map<String, OfertaLaboral> ofLab = emp.getOfertasLaborales();
-		if(ofLab.size() != 0) {
+		if (ofLab.size() != 0) {
 			DTOfertaLaboral[] ofertasRes = new DTOfertaLaboral[ofLab.size()];
 			int iter = 0;
-			for(Map.Entry<String, OfertaLaboral> entry : ofLab.entrySet()) {
+			for (Map.Entry<String, OfertaLaboral> entry : ofLab.entrySet()) {
 				ofertasRes[iter] = entry.getValue().getDataOfertaLaboral();
 				iter++;
 			}
@@ -250,10 +257,10 @@ public class ControladorUsuario implements IUsuario {
 		ManejadorUsuario musr = ManejadorUsuario.getInstancia();
 		Postulante usr = musr.buscarPostulante(nickname);
 		List<Postulacion> postulaciones = usr.getPostulaciones();
-		if(postulaciones != null) {
+		if (postulaciones != null) {
 			DTOfertaLaboral[] ofertasPostulado = new DTOfertaLaboral[postulaciones.size()];
 			int iter = 0;
-			for(Postulacion post : postulaciones) {
+			for (Postulacion post : postulaciones) {
 				ofertasPostulado[iter] = post.getOfertaLaboral().getDataOfertaLaboral();
 				iter++;
 			}

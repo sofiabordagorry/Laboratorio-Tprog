@@ -19,7 +19,6 @@ public class Compra {
 		paqComprado = null;
 		empresa= null;
 		comprasTipos = null;
-		Map<String, OfertaLaboral> ofertas = new HashMap<>();
 	}
 
 	public Compra(LocalDate fComp, LocalDate fVenc, Paquete paq, Empresa empre, List<CompraTipo> comprasTipou) {
@@ -28,10 +27,12 @@ public class Compra {
 		paqComprado = paq;
 		empresa=empre;
 		comprasTipos=comprasTipou;
-		Map<String, OfertaLaboral> ofertas = new HashMap<>();
 	}
 	
 	public void agregarOferta(OfertaLaboral Oferta) {
+		if(this.ofertas == null) {
+			this.ofertas = new HashMap<>();
+		}
 		this.ofertas.put(Oferta.getNombre(), Oferta);
 	}
 	

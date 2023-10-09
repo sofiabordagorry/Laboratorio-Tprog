@@ -227,7 +227,7 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 			
 			List<PaqueteTipo> paqTip = paqueteG.getPaquetesTipos();
 			List<CompraTipo>  compTip = new LinkedList<>();
-			for(PaqueteTipo p : paqTip) {
+			for (PaqueteTipo p : paqTip) {
 				CompraTipo ctip = new CompraTipo(p.getCantidad() , p.getTipo());
 				compTip.add(ctip);
 			}
@@ -245,7 +245,7 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 		List<Postulacion> postulaciones = post.getPostulaciones();
 		DTPostulacion dataPostulacion = null;
 		for (Postulacion posts : postulaciones) {
-			if(posts.getOfertaLaboral().getNombre().equals(nombreOL)) {
+			if (posts.getOfertaLaboral().getNombre().equals(nombreOL)) {
 				dataPostulacion = posts.getDataPostulacion();
 			}
 		}
