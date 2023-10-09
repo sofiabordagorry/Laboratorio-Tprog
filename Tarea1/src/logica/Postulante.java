@@ -10,7 +10,7 @@ public class Postulante extends Usuario {
 	
 	private LocalDate fechaNacimiento;
 	private String nacionalidad;
-	private LinkedList<Postulacion> postulaciones;
+	private List<Postulacion> postulaciones;
 
 	public Postulante(String nickname, String nombre, String apellido, String correo, LocalDate fechaNacimiento, String nacionalidad) {
 		super(nickname, nombre, apellido, correo);
@@ -29,7 +29,7 @@ public class Postulante extends Usuario {
 	}
 	
 	public Postulante(String nickname, String nombre, String apellido, String correo, LocalDate fechaNacimiento, String nacionalidad, String contrasenia, byte[] image) {
-		super(nickname, nombre, apellido, correo, contrasenia,image);
+		super(nickname, nombre, apellido, correo, contrasenia, image);
 		this.fechaNacimiento = fechaNacimiento;
 		this.nacionalidad = nacionalidad;
 		this.postulaciones = new LinkedList<>();
@@ -46,7 +46,8 @@ public class Postulante extends Usuario {
 	
 
 	public Boolean existePostulacion(String oferta) {
-		LinkedList<Postulacion> postulaciones = this.postulaciones;
+		List<Postulacion> postulaciones = new LinkedList<Postulacion>();
+		postulaciones = this.postulaciones;
 		Boolean existe=false;
         for (int i = 0; i < postulaciones.size(); i++) {
         	existe=postulaciones.get(i).verificarOfertaLaboral(oferta);
@@ -58,7 +59,7 @@ public class Postulante extends Usuario {
 		this.postulaciones.add(postulacion);
 	}
 
-	public LinkedList<Postulacion> getPostulaciones(){
+	public List<Postulacion> getPostulaciones(){
 		return this.postulaciones;
 	}
 	
@@ -73,15 +74,16 @@ public class Postulante extends Usuario {
 	public DTPostulante getDataPostulante() {
 		Map<String, DTOfertaLaboral> ofertasLab = new HashMap<>();
 		List<DTPostulacion> postulaciones = new LinkedList<>();
-		LinkedList<Postulacion> post = this.getPostulaciones();
-		if(post != null) {
-			for(Postulacion p : post) {
+		List<Postulacion> post = new LinkedList<>();
+		post = this.getPostulaciones();
+		if (post != null) {
+			for (Postulacion p : post) {
 				postulaciones.add(p.getDataPostulacion());
 				OfertaLaboral dtOL = p.getOfertaLaboral();
 				ofertasLab.put(dtOL.getNombre(), dtOL.getDataOfertaLaboral());
 			}
 		}
-		DTPostulante dtP = new DTPostulante(this.getNickname(),this.getNombre(),this.getApellido(),this.getCorreo(),this.getFechaNacimiento(),this.getNacionalidad(), ofertasLab, postulaciones);
+		DTPostulante dtP = new DTPostulante(this.getNickname(), this.getNombre(), this.getApellido(), this.getCorreo(), this.getFechaNacimiento(), this.getNacionalidad(), ofertasLab, postulaciones);
 		return dtP;
 	}
 	
