@@ -21,23 +21,23 @@ public class DTPostulante extends DTUsuario {
 		this.nacionalidad = nacionalidad;
 	}
 	
-	public DTPostulante(String nickname, String nombre, String apellido, String correo, LocalDate fechaDeNacimiento, String nacionalidad,String contrasenia) {
+	public DTPostulante(String nickname, String nombre, String apellido, String correo, LocalDate fechaDeNacimiento, String nacionalidad, String contrasenia) {
 		super(nickname, nombre, apellido, correo, contrasenia);
 		this.fechaDeNacimiento = fechaDeNacimiento;
 		this.nacionalidad = nacionalidad;
 	}
 	
-	public DTPostulante(String nickname, String nombre, String apellido, String correo, LocalDate fechaDeNacimiento, String nacionalidad,String contrasenia, byte[] image) {
-		super(nickname, nombre, apellido, correo,null, contrasenia, image);
+	public DTPostulante(String nickname, String nombre, String apellido, String correo, LocalDate fechaDeNacimiento, String nacionalidad, String contrasenia, byte[] image) {
+		super(nickname, nombre, apellido, correo, null, contrasenia, image);
 		this.fechaDeNacimiento = fechaDeNacimiento;
 		this.nacionalidad = nacionalidad;
 	}
 	
-	public DTPostulante(String nickname, String nombre, String apellido, String correo, LocalDate fechaDeNacimiento, String nacionalidad, Map<String, DTOfertaLaboral> ofLab, List<DTPostulacion> p) {
+	public DTPostulante(String nickname, String nombre, String apellido, String correo, LocalDate fechaDeNacimiento, String nacionalidad, Map<String, DTOfertaLaboral> ofLab, List<DTPostulacion> posts) {
 		super(nickname, nombre, apellido, correo, ofLab);
 		this.fechaDeNacimiento = fechaDeNacimiento;
 		this.nacionalidad = nacionalidad;
-		this.postulaciones = p;
+		this.postulaciones = posts;
 	}
 
 	public LocalDate getFechaDeNacimiento() {

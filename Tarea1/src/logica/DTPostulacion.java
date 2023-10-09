@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class DTPostulacion {
 	private LocalDate fecha;
-	private String CVReducido;
+	private String cVReducido;
 	private String motivacion;
 	private String postulante;
 	private String oferta;
@@ -12,7 +12,7 @@ public class DTPostulacion {
 	
 	public DTPostulacion(LocalDate fecha, String CVReducido, String motivacion, String postulante, String oferta) {
 		this.fecha = fecha;
-		this.CVReducido = CVReducido;
+		this.cVReducido = CVReducido;
 		this.motivacion = motivacion;
 		this.postulante = postulante;
 		this.oferta=oferta;
@@ -23,7 +23,7 @@ public class DTPostulacion {
 	}
 	
 	public String getCVReducido() {
-		return this.CVReducido;
+		return this.cVReducido;
 	}
 	
 	public String getMotivacion() {

@@ -18,11 +18,11 @@ public class DTOfertaLaboral {
 	private EstadoOL estado;
 	private Map<String, DTKeyword> dataKeywords;
 	private List<DTPostulacion> dataPostulaciones;
-	private String dataEmpresa;//CAMBIADO
+	private String dataEmpresa;
 	private byte[] imagen;
 	//private DTCompra dataCompra;
 	
-	public DTOfertaLaboral(String nombre, String descripcion, String ciudad, String departamento, String horario, float remuneracion, LocalDate fechaDeAlta, float costoAsociado, DTTipo dataTipo, Map<String, DTKeyword> dataKeywords, List<DTPostulacion> dataPostulaciones, String dataEmpresa, EstadoOL e) {
+	public DTOfertaLaboral(String nombre, String descripcion, String ciudad, String departamento, String horario, float remuneracion, LocalDate fechaDeAlta, float costoAsociado, DTTipo dataTipo, Map<String, DTKeyword> dataKeywords, List<DTPostulacion> dataPostulaciones, String dataEmpresa, EstadoOL estado) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.ciudad = ciudad;
@@ -32,7 +32,7 @@ public class DTOfertaLaboral {
 		this.fechaDeAlta = fechaDeAlta;
 		this.costoAsociado = costoAsociado;
 		this.dataTipo = dataTipo;
-		this.estado = e;
+		this.estado = estado;
 		this.dataKeywords = dataKeywords;
 		this.dataPostulaciones = dataPostulaciones;
 		this.dataEmpresa = dataEmpresa;
