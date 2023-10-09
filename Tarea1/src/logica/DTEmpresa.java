@@ -5,6 +5,7 @@ import java.util.Map;
 public class DTEmpresa extends DTUsuario {
 	private String descripcion;
 	private String link;
+	private List<DTCompra>  paqComprados;
 	
 	public DTEmpresa(String nickname, String nombre, String apellido, String correo, Map<String, DTOfertaLaboral> ofertasLaborales, String descripcion, String link) {
 		super(nickname, nombre, apellido, correo, ofertasLaborales);
@@ -29,6 +30,13 @@ public class DTEmpresa extends DTUsuario {
 		this.descripcion = descripcion;
 		this.link = link;
 	}
+
+		public DTEmpresa(String nickname, String nombre, String apellido, String correo, Map<String, DTOfertaLaboral> ofertasLaborales, String descripcion, String link, List<DTCompra> paquetesComprados) {
+		super(nickname, nombre, apellido, correo, ofertasLaborales);
+		this.descripcion = descripcion;
+		this.link = link;
+		this.paqComprados = paquetesComprados;
+	}
 	
 	public String toString() {
 		return this.getNombre() + this.getApellido() + "(" + this.getCorreo() + ")";
@@ -40,5 +48,9 @@ public class DTEmpresa extends DTUsuario {
 	
 	public String getLink() {
 		return this.link;
+	}
+	
+	public List<DTCompra> getPaqComprados() {
+		return paqComprados;
 	}
 }
