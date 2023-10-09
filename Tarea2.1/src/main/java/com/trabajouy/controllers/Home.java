@@ -27,22 +27,31 @@ public class Home extends HttpServlet {
     	if (misesion.getAttribute("loginEstado") == null) {
     		misesion.setAttribute("loginEstado", LoginEstado.NO_LOGIN);
     		misesion.setAttribute("filtro", null);
-    		misesion.setAttribute("filterType", "AllOffers");
     		
     		Factory fac = Factory.getInstance();
     		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
     		
-    		IOfertaLaboral iol = fac.getIOfertaLaboral();
+    		/*IOfertaLaboral iol = fac.getIOfertaLaboral();
     		try {
     			DTOfertaLaboral dtols[] = iol.listarTodasOfertasLaborales();
     			request.getSession().setAttribute("listaOfertasLaborales", dtols);
     		} catch (OfertasLaboralesNoExistenNingunaException e) {
     			e.printStackTrace();
-    		}
+    		}*/
     		
     		Keyword[] keys = mol.getKeywords();
     		request.getSession().setAttribute("keywords", keys);
-    	} 
+    	}
+    	misesion.setAttribute("filterType", "AllOffers");
+    	Factory fac = Factory.getInstance();
+		
+		IOfertaLaboral iol = fac.getIOfertaLaboral();
+		try {
+			DTOfertaLaboral dtols[] = iol.listarTodasOfertasLaborales();
+			request.getSession().setAttribute("listaOfertasLaborales", dtols);
+		} catch (OfertasLaboralesNoExistenNingunaException e) {
+			e.printStackTrace();
+		}
     }
     
     public static LoginEstado getLoginEstado(HttpServletRequest request) {
@@ -52,7 +61,7 @@ public class Home extends HttpServlet {
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
     	init(request);
-    	
+  
     	switch (getLoginEstado(request)) {
     		case NO_LOGIN:
     			request.getRequestDispatcher("/WEB-INF/template/index.jsp").forward(request, response);

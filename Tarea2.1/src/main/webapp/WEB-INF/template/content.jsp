@@ -29,8 +29,8 @@
 			String keywordFiltro = (String) request.getSession().getAttribute("filtro");
 			String misOfertasBool = (String) request.getSession().getAttribute("filterType");
 			for(int i = 0; i < ols.length; i++) {
-				if(!misOfertasBool.equals("MyOffers")) {
-					if(ols[i].getEstado() == EstadoOL.Confirmada) {
+				if(misOfertasBool.equals("AllOffers")) {
+					if(ols[i].getEstado().equals(EstadoOL.Confirmada)) {
 						if (keywordFiltro == null || (keywordFiltro != null && ols[i].getKeywords().containsKey(keywordFiltro))) {	
 		%>
 		<div class="card mb-3" style="max-width: 650px;">
@@ -50,7 +50,7 @@
 		<%
 						}
 					}	
-				} else {
+				} else if(misOfertasBool.equals("MyOffers")) {
 					if (keywordFiltro == null || (keywordFiltro != null && ols[i].getKeywords().containsKey(keywordFiltro))) {
 		%>
 		<div class="card mb-3" style="max-width: 650px;">

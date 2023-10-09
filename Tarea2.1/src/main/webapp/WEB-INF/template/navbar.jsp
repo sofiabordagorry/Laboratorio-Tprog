@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="logica.Usuario"%>
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-	<a class="navbar-brand" href="Ofertas?filterType=AllOffers">
+	<a class="navbar-brand" href="Home">
 		<img src="media/imagenes/logo.png" width="150" height="auto" />
 	</a>
 	<div class="ml-auto mr-auto custom-search">

@@ -24,7 +24,7 @@
 	                    <div class="card mb-3" style="max-width: 650px;">
 	                        <div class="row no-gutters">
 	                          	<div class="col-md-4">
-	                            	<img src="https://kinsta.com/es/wp-content/uploads/sites/8/2021/12/front-end-developer-1024x512.png" class="card-img" alt="...">
+	                            	<img src="media/imagenes/ofertaSinFoto.jpg" class="card-img" alt="...">
 	                          	</div>
 	                          	<div class="col-md-8">
 	                            	<div class="card-body">

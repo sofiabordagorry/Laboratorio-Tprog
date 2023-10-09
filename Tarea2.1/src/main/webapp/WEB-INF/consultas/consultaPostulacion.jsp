@@ -27,7 +27,7 @@
 	                        		}
 	                        	%>
 	                          	<div class="col-md-3">
-	                            	<img src="https://imgv3.fotor.com/images/gallery/a-woman-linkedin-picture-with-grey-background-made-by-LinkedIn-Profile-Picture-Maker.jpg" class="card-img" alt="..." >
+	                            	<img src="media/imagenes/NoImageUser.png" class="card-img" alt="..." >
 	                          	</div>
 	                          	<div class="col-md-9">
 		                            <div class="card-body">

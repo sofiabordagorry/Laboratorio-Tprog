@@ -42,7 +42,7 @@ public class ConsultaOfertaLaboral extends HttpServlet {
 	
 	            if (compras != null) {
 	                for (int i = 0; i < compras.size(); i++) {
-	                    if (compras.get(i).getOfertas().get(oferta.getNombre()) != null) {
+	                    if (compras.get(i).getOfertas() != null && compras.get(i).getOfertas().get(oferta.getNombre()) != null) {
 	                         request.setAttribute("paquete", compras.get(i).getPaqueteComprado().getDataPaquete());
 	                    }
 	                }

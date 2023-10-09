@@ -103,7 +103,7 @@
                                 <h2 class="mt-5">Paquete</h2>
                                 <div class="paquete">
                                     <img width="50" height="50" class="img-fluid img-thumbnail"
-                                        src="/media/imagenes/paquete.jpg" />
+                                        src="media/imagenes/paquete.jpg" />
                                     <a href="ConsultaPaquete?paqueteConsultado=<%=paq.getNombre()%>"><%= paq.getNombre() %></a>
                                 </div>
                             </div>
@@ -117,7 +117,7 @@
                                 <h2>Postulacion</h2>
                                 <div class="postulante">
                                     <img width="50" height="50" class="img-fluid img-thumbnail"
-                                        src="/media/imagenes/NoImageUser.png" />
+                                        src="media/imagenes/NoImageUser.png" />
                                     <a href="ConsultaPostulacion?postulanteConsultado=<%=user.getNickname()%>&nombreOfertaConsultada=<%=ofertaConsultada.getNombre()%>">Mi Postulación</a>
                                 </div>
                             </div>
