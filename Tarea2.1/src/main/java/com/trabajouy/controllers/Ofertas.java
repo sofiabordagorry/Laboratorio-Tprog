@@ -60,6 +60,7 @@ public class Ofertas extends HttpServlet {
 				}
 				DTOfertaLaboral filtArr[] = ofertasFiltradas.toArray(new DTOfertaLaboral[ofertasFiltradas.size()]);
 				request.getSession().setAttribute("listaOfertasLaborales", filtArr);
+				request.getSession().setAttribute("filterType", "MyOffers");
 			}
 		} catch (OfertasLaboralesNoExistenNingunaException e) {
 			

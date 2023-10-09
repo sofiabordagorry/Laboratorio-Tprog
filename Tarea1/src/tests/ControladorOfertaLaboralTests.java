@@ -50,6 +50,8 @@ import logica.DTPostulacion;
 import logica.DTTipo;
 import logica.Empresa;
 import logica.EstadoOL;
+import logica.Compra;
+import logica.DTCompra;
 import logica.DTEmpresa;
 import logica.DTKeyword;
 import logica.ManejadorOfertaLaboral;
@@ -1000,4 +1002,51 @@ String nombreK = "nombreKeyword";
 			e.printStackTrace();
 		}
 	}
+	
+	@Test
+	void testDataCompra() {
+        //Datos tipo
+        String nombreT = "nombreT3";
+        String descripcionT = "descripcionT3";
+         int exposicionT = 3;
+         int duracionT = 300000;
+         float costoT = 3;
+         Tipo tip = new Tipo(nombreT, descripcionT, exposicionT, duracionT, costoT, LocalDate.now());
+
+         //datos empresa
+         String nicknameE ="nicke1";
+         String nombreE ="nome1";
+         String apellido= "ape1";
+         String correo= "coe1";
+         String descripcion = "dese1";
+         String link = "linke1";
+
+        //Datos paquetes
+        Paquete paq = new Paquete("paq", "desc", 100, 25, 200, LocalDate.now());
+        Paquete paq1 = new Paquete("paqe", "desc", 100, 25, 200, LocalDate.now());
+        mt = ManejadorTipo.getInstancia();
+        mu = ManejadorUsuario.getInstancia();
+        mt.agregarPaquete(paq);
+        mt.agregarPaquete(paq1);
+        mt.agregarTipo(tip);
+        Empresa emp = new Empresa(nicknameE, nombreE, apellido, correo, descripcion, link);
+        mu.agregarEmpresa(emp);
+        PaqueteTipo paqTip = new PaqueteTipo(3, tip);
+        paq.agregarPaqueteTipo(paqTip);
+        paq1.agregarPaqueteTipo(paqTip);
+        try {
+            controladorOfertaLaboral.comprarPaquete(nicknameE, "paq");
+            Compra comp = emp.getCompras().get(0);
+            DTCompra dtc = comp.getDataCompra();
+            assertEquals(comp.getFechaCompra(), dtc.getFechaCompra());
+            assertEquals(comp.getFechaVencimiento(), dtc.getFechaVencimiento());
+
+        } catch (PaqueteYaCompradoException e) {
+            fail(e.getMessage());
+            e.printStackTrace();
+        }
+
+
+
+    }
 }
