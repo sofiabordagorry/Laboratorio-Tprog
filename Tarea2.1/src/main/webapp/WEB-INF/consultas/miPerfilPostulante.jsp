@@ -22,8 +22,7 @@
 	                <div class="container-fluid" id="main-container">
 	                	<div class="row">
 	                    	<div class="col-md-3" id="postulantePerfilInfo">
-                        		<img class="card-img" src="https://imgv3.fotor.com/images/gallery/a-woman-linkedin-picture-with-grey-background-made-by-LinkedIn-Profile-Picture-Maker.jpg" style="max-width: 550px; max-height: 550px;"/>
-								<button><i class="fas fa-pencil"></i></button>
+                        		<img class="card-img" src="media/imagenes/NoImageUser.png" style="max-width: 550px; max-height: 550px;"/>
 							</div>
 							<%
 	                    		DTUsuario userInfo = (DTUsuario) request.getAttribute("userData");
@@ -33,11 +32,11 @@
 							%>
 							<div class="col">
                                 <h2><%=pInfo.getNickname() %>></h2>
-                                <p><i class="" style="color: #000000;"></i> <b>Nombre:</b><%=pInfo.getNombre() %><button><i class="fas fa-pencil"></i></button></p>
-                                <p><i class=""></i> <b>Apellido:</b><%=pInfo.getApellido() %><button><i class="fas fa-pencil"></i></button></p>
+                                <p><i class="" style="color: #000000;"></i> <b>Nombre:</b><%=pInfo.getNombre() %></p>
+                                <p><i class=""></i> <b>Apellido:</b><%=pInfo.getApellido() %></p>
                                 <p><i class=""></i> <b>Correo: </b><%=pInfo.getCorreo() %></p>
-                                <p><i class=""></i> <b>Fecha de Nacimiento: </b><%=pInfo.getFechaDeNacimiento() %><button><i class="fas fa-pencil"></i></button></p>
-                                <p><i class=""></i> <b>Nacionalidad: </b><%=pInfo.getNacionalidad() %><button><i class="fas fa-pencil"></i></button></p>
+                                <p><i class=""></i> <b>Fecha de Nacimiento: </b><%=pInfo.getFechaDeNacimiento() %></p>
+                                <p><i class=""></i> <b>Nacionalidad: </b><%=pInfo.getNacionalidad() %></p>
 
 	                               
 							</div>

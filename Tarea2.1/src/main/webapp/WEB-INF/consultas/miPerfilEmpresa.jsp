@@ -27,16 +27,15 @@
 		                		Map<String, DTOfertaLaboral> offers = eInfo.getDTOfertasLaborales();
 		                	%>
 	                    	<div class="col-md-3" id="empresaPefilInfo">
-                        		<img class="card-img" src="https://i.pinimg.com/originals/14/8b/db/148bdbafbb2acf7c02b4ac507e4adacb.jpg" style="max-width: 550px; max-height: 550px;"/>
-								<button><i class="fas fa-pencil"></i></button>
+                        		<img class="card-img" src="media/imagenes/NoImageUser.png" style="max-width: 550px; max-height: 550px;"/>
                             </div>
                             <div class="col">
                                 <h2><%=eInfo.getNickname() %></h2>
-                                <p><i class="" style="color: #000000;"></i> <b>Nombre:</b><%=eInfo.getNombre() %><button><i class="fas fa-pencil"></i></button></p>
-                                <p><i class=""></i> <b>Apellido:</b><%=eInfo.getApellido() %><button><i class="fas fa-pencil"></i></button></p>
+                                <p><i class="" style="color: #000000;"></i> <b>Nombre:</b><%=eInfo.getNombre() %></p>
+                                <p><i class=""></i> <b>Apellido:</b><%=eInfo.getApellido() %></p>
                                 <p><i class=""></i> <b>Correo: </b><%=eInfo.getCorreo() %></p>
-                                <p><i class=""></i> <b>Descripcion: </b><%=eInfo.getDescripcion() %><button><i class="fas fa-pencil"></i></button></p>
-                                <p><i class=""></i> <b>Link: </b> <a href="#"><%=eInfo.getLink() %>></a><button><i class="fas fa-pencil"></i></button></p>
+                                <p><i class=""></i> <b>Descripcion: </b><%=eInfo.getDescripcion() %></p>
+                                <p><i class=""></i> <b>Link: </b> <a href="#"><%=eInfo.getLink() %>></a></p>
 							</div>
 	                    </div>
 	                    <div class ="row" style="margin-top: 1%;">

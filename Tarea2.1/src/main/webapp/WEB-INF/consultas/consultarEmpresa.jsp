@@ -20,7 +20,7 @@
 	            	<div class="container-fluid" id="main-container">
                 		<div class="row">
                 			<div class="col-md-3" id="empresaConsultaInfo">
-                    			<img class="card-img" src="https://i.pinimg.com/originals/14/8b/db/148bdbafbb2acf7c02b4ac507e4adacb.jpg" style="max-width: 550px; max-height: 550px;"/>
+                    			<img class="card-img" src="media/imagenes/NoImageUser.png" style="max-width: 550px; max-height: 550px;"/>
                         	</div>
 	                        <%
 	                        	DTUsuario userInfo = (DTUsuario) request.getAttribute("userData");

@@ -25,7 +25,7 @@
 		                		pInfo = (DTPostulante) userInfo;
 	                		%>
                     		<div class="col-md-3" id="postulanteConsultaInfo">
-                        		<img class="card-img" src="https://imgv3.fotor.com/images/gallery/a-woman-linkedin-picture-with-grey-background-made-by-LinkedIn-Profile-Picture-Maker.jpg" style="max-width: 550px; max-height: 550px;"/>
+                        		<img class="card-img" src="media/imagenes/NoImageUser.png" style="max-width: 550px; max-height: 550px;"/>
                             </div>
                             <div class="col">
                                 <h2><%= pInfo.getNickname()%></h2>
