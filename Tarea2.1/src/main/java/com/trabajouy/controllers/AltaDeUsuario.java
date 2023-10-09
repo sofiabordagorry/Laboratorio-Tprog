@@ -59,7 +59,6 @@ public class AltaDeUsuario extends HttpServlet {
 			tipoUsuario = request.getParameter("tipoUsuario");
 			/*Part filePart = request.getPart("imagen");
 			byte[] imagen = this.deImgAByte(filePart);*/
-			System.out.println("Datos ingresados: " + nickname + " " + correo + " " + nombre + " " + apellido + " " + contrasenia + " " + tipoUsuario);
 			boolean seCumpleExcepcion = false;
 			
 			//Si es tipo empresa pido los datos de la empresa
@@ -73,6 +72,7 @@ public class AltaDeUsuario extends HttpServlet {
 					//Ingreso los datos de la empresa
 					icu.ingresarDatosEmpresa(dtemp);
 				} catch (ExisteUnUsuarioYaRegistradoException e) {
+					System.out.println("usuario repetido");
 					DTUsuario dtusr = dtemp;
 					request.setAttribute("datosIngresados", dtusr);
 					request.setAttribute("tipoUsuario", tipoUsuario);
@@ -107,18 +107,6 @@ public class AltaDeUsuario extends HttpServlet {
 					}
 					seCumpleExcepcion = true;
 				}
-			}
-			
-			ManejadorUsuario musr = ManejadorUsuario.getInstancia();
-			Postulante[] post = musr.getPostulantes();
-			Empresa[] emp = musr.getEmpresas();
-			
-			if (post != null) {
-				System.out.println("Cantidad de postulantes: " + post.length);
-			}
-			
-			if (emp != null) {
-				System.out.println("Cantidad de empresas: " + emp.length);
 			}
 			
 			if (seCumpleExcepcion) {

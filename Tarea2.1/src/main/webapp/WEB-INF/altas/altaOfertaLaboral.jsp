@@ -15,7 +15,7 @@
                 <div class="col-md-9 col-sm-12" id="main-content">
                 <%
 					if ((boolean) request.getSession().getAttribute("hayTipos") == true){
-						if ((boolean) request.getSession().getAttribute("hayKeys") == true){
+						if ((boolean) request.getAttribute("hayKeys") == true){
 				%>
 					<form action="AltaDeOfertaLaboral" method="POST" class="formulario" id="formulario">
 						<h3>Alta de Oferta Laboral</h3>
@@ -112,7 +112,7 @@
 										<select multiple class="form-select form-control custom-select" aria-label="Multiple select example" name="keywords" id="keywords">
 										
 											<%
-											String[] k = (String[]) request.getSession().getAttribute("keywords");
+											String[] k = (String[]) request.getAttribute("keywords");
 							    			for (int j = 0; j < k.length; j++) {
 											%>
 											

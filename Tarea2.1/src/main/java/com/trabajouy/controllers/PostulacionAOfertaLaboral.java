@@ -30,7 +30,10 @@ public class PostulacionAOfertaLaboral extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+    	System.out.println((String) request.getParameter("oferta"));
+    	String nomOL = (String) request.getParameter("oferta");
+		request.getSession().setAttribute("oferta", nomOL);
+    	request.getRequestDispatcher("/WEB-INF/altas/postulacionAOfertaLaboral.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -60,7 +63,8 @@ public class PostulacionAOfertaLaboral extends HttpServlet {
                 String CVReducido, motivacion;
                 CVReducido = request.getParameter("CVReducido");
                 motivacion = request.getParameter("motivacion");
-                String ofertaL = request.getParameter("oferta");
+                String ofertaL = (String) session.getAttribute("oferta");
+                System.out.println(ofertaL);
                 OfertaLaboral ofertaBuscada = manejadorOf.buscarOfertaLaboral(ofertaL);
                 String postulante = user.getNickname();
                 
@@ -87,7 +91,6 @@ public class PostulacionAOfertaLaboral extends HttpServlet {
     }
 
     public static LoginEstado getLoginEstado(HttpServletRequest request) {
-    	System.out.println(request.getSession().getAttribute("loginEstado"));
         return (LoginEstado) request.getSession().getAttribute("loginEstado");
     }
 

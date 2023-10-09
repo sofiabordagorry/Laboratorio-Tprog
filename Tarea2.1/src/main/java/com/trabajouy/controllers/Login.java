@@ -39,12 +39,6 @@ public class Login extends HttpServlet {
 		String password = request.getParameter("password");
 		LoginEstado nuevoEstado = LoginEstado.NO_LOGIN;
 		RequestDispatcher dispatcher;
-		
-		/*System.out.println(login);
-		System.out.println(password);
-		
-		Postulante testPost = new Postulante("nickname","nombre", "apellido", "correo", LocalDate.now(), "nacionalidad", "password");
-		ManejadorUsuario.getInstancia().agregarPostulante(testPost);*/
 
 		// chequea contraseña
 		Usuario usr = ManejadorUsuario.getInstancia().buscarUsuario(login);

@@ -52,7 +52,7 @@
 												for(Map.Entry<String, DTOfertaLaboral> entry : offers.entrySet()){
 											%>
 											<tr>
-												<td><a href="./ConsultaOfertaLaboralDFVisitante.html"><%=entry.getValue().getNombre() %></a></td>
+												<td><a href="ConsultaOfertaLaboral?oferta_consultada=<%=entry.getValue().getNombre() %>"><%=entry.getValue().getNombre() %></a></td>
 												<td><%=entry.getValue().getDepartamento() %></td>
 											</tr>
 											<%

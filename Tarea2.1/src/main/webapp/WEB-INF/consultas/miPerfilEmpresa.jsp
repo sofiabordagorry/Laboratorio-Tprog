@@ -1,4 +1,4 @@
-<%@page import="com.trabajouy.model.*"%>
+<%@page import="logica.*"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.time.LocalDate"%>
@@ -22,7 +22,7 @@
 	                	<div class="row">
 		                	<%
 		                		DTUsuario userInfo = (DTUsuario) request.getAttribute("userData");
-		                		DTEmpresa eInfo = new DTEmpresa();
+		                		DTEmpresa eInfo = null;
 		                		eInfo = (DTEmpresa) userInfo;
 		                		Map<String, DTOfertaLaboral> offers = eInfo.getDTOfertasLaborales();
 		                	%>

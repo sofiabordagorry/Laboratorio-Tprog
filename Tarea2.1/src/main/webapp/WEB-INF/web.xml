@@ -129,4 +129,24 @@
     <servlet-name>PostulacionAOfertaLaboral</servlet-name>
     <url-pattern>/PostulacionAOfertaLaboral</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CargarDatos</display-name>
+    <servlet-name>CargarDatos</servlet-name>
+    <servlet-class>com.trabajouy.controllers.CargarDatos</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CargarDatos</servlet-name>
+    <url-pattern>/CargarDatos</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Ofertas</display-name>
+    <servlet-name>Ofertas</servlet-name>
+    <servlet-class>com.trabajouy.controllers.Ofertas</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Ofertas</servlet-name>
+    <url-pattern>/Ofertas</url-pattern>
+  </servlet-mapping>
 </web-app>

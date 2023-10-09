@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +23,7 @@ import excepciones.NoExistenEmpresasOfertasLaboralesException;
 import excepciones.OfertaLaboralRepetidaException;
 import excepciones.OfertasLaboralesNoExistenException;
 import excepciones.TipoRepetidoException;
+import excepciones.UsuarioSinPostulacionesException;
 import excepciones.YaSePostuloException;
 import logica.DTEmpresa;
 import logica.DTPostulacion;
@@ -29,12 +31,13 @@ import logica.DTKeyword;
 import logica.DTOfertaLaboral;
 import logica.DTTipo;
 import logica.DTUsuario;
+import logica.EstadoOL;
 import logica.Factory;
 import logica.IOfertaLaboral;
 import logica.IUsuario;
 import logica.Keyword;
 import logica.ManejadorUsuario;
-
+import logica.Tipo;
 import logica.DTPostulante;
 
 
@@ -857,11 +860,86 @@ class ControladorUsuarioTests {
 	
 	@Test
 	void listarOfertasPostuladoOK() {
+		//POSTULANTE
 		String nicknamePostulante = "postulante";
-		String nombrePosulante = "nombre";
+		String nombrePostulante = "nombre";
 		String apellidoPostulante = "apellido";
 		String correoPostulante = "correo";
 		LocalDate fechaNacPostulante = LocalDate.now();
 		String nacionalidadPostulante = "nacionalidad";
+		DTPostulante post = new DTPostulante(nicknamePostulante, nombrePostulante, apellidoPostulante, correoPostulante, fechaNacPostulante, nacionalidadPostulante);
+		//EMPRESA
+		String nicknameEmpresa = "empresa";
+		String nombreEmpresa = "nomEmpresa";
+		String apellidoEmpresa = "apeEmpresa";
+		String correoEmpresa = "correoEmpresa";
+		String descripcionEmpresa = "descEmpresa";
+		String linkEmpresa = "linkEmpresa";
+		DTEmpresa emp = new DTEmpresa(nicknameEmpresa, nombreEmpresa, apellidoEmpresa, correoEmpresa,null, descripcionEmpresa, linkEmpresa);
+		
+		try {
+			cu.ingresarDatosPostulante(post);
+			cu.ingresarDatosEmpresa(emp);
+		}catch(ExisteUnUsuarioYaRegistradoException e) {
+			e.printStackTrace();		
+		}
+		
+		//TIPO
+		String nombreTipo = "nombreTipo";
+		String descTipo = "descripcionTipo";
+		int exposicionTipo = 3;
+		int duracionTipo = 15;
+		Float costoTipo = 330f;
+		LocalDate fechaAlta = LocalDate.now();
+		Date fechaAltaTipo = Date.from(fechaAlta.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		Tipo t = new Tipo(nombreTipo, descripcionEmpresa, exposicionTipo, duracionTipo, costoTipo, fechaAlta);
+		try {
+			col.ingresarTipo(nombreTipo, descripcionEmpresa, exposicionTipo, duracionTipo, costoTipo, fechaAltaTipo);
+		} catch (TipoRepetidoException e) {
+			e.printStackTrace();
+		}
+		
+		String nombreOferta = "nomOferta";
+		String descripcionOferta = "descOferta";
+		String ciudadOferta = "ciudadOferta";
+		String departamentoOferta = "departamentoOferta";
+		String horarioOferta = "10:00-15:30";
+		float remuneracionOferta = 8447f;
+		LocalDate fechaAltaOferta = LocalDate.now();
+		float costoOferta = 330f;
+		DTTipo tipoOferta = t.getDataTipo();
+		Map<String, DTKeyword> keysOferta = new HashMap<>();
+		List<DTPostulacion> postulacionesOferta = new LinkedList<>();
+		EstadoOL estadoOferta = EstadoOL.Confirmada;
+		DTOfertaLaboral ofLab = new DTOfertaLaboral(nombreOferta, descripcionOferta, ciudadOferta, departamentoOferta, horarioOferta, remuneracionOferta, fechaAltaOferta, costoOferta, tipoOferta, keysOferta, postulacionesOferta,nicknameEmpresa, estadoOferta);
+		try {
+			col.ingresarDatosOL(nicknameEmpresa, nombreTipo, ofLab);
+		} catch (OfertaLaboralRepetidaException e) {
+			e.printStackTrace();
+		}
+		
+		String cvReducido = "CVReducido";
+		String motivacion = "Motivacion";
+		LocalDate fechaPostulacion = LocalDate.now();
+		try {
+			cu.ingresarPostulacion(cvReducido, motivacion, fechaPostulacion, nicknameEmpresa, nombreOferta, nicknamePostulante);
+		} catch (YaSePostuloException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			DTOfertaLaboral[] offers = cu.listarOfertasPostulado(nicknamePostulante);
+			assertEquals(offers[0].getCiudad(), ciudadOferta);
+			assertEquals(offers[0].getCostoAsociado(), costoOferta);
+			assertEquals(offers[0].getDepartamento(), departamentoOferta);
+			assertEquals(offers[0].getDescripcion(), descripcionOferta);
+			//assertEquals(offers[0].getEstado(), estadoOferta);
+			assertEquals(offers[0].getFechaDeAlta(), fechaAltaOferta);
+			assertEquals(offers[0].getHorario(), horarioOferta);
+			assertEquals(offers[0].getNombre(), nombreOferta);
+			assertEquals(offers[0].getRemuneracion(), remuneracionOferta);
+		} catch (UsuarioSinPostulacionesException e) {
+			e.printStackTrace();
+		}
 	}
 }

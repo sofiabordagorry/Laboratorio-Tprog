@@ -34,13 +34,7 @@ public class ConsultaTipo extends HttpServlet {
     	IOfertaLaboral iol = fac.getIOfertaLaboral();
     	ManejadorTipo mti = ManejadorTipo.getInstancia();
     	String tipoConsultado = request.getParameter("tipo_consultado");
-    	LocalDate fecha = LocalDate.now();
-    	try {
-			iol.ingresarTipo("nombre", "descripcion", 10, 3, 547.8f,Date.from(fecha.atStartOfDay(ZoneId.systemDefault()).toInstant()));
-		} catch (TipoRepetidoException e) {
-		}
-    	
-    	
+ 	
     	if(tipoConsultado == null) {
     		String[] types = null;
     		try {

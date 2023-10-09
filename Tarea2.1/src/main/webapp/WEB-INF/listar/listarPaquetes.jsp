@@ -31,6 +31,7 @@
 							<%
 								String[] paqs = (String[]) request.getAttribute("paquetes");
 								for (int i = 0; i < paqs.length; i++){
+									System.out.println(paqs[i]);
 							%>
 							<li class="list-group-item text-center"><a href="?paqueteConsultado=<%=paqs[i]%>"><%=paqs[i]%></a></li>
 							<% 

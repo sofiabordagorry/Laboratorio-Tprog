@@ -28,7 +28,6 @@ public class ConsultaOfertaLaboral extends HttpServlet {
     	HttpSession session = request.getSession();
     	Usuario user = (Usuario) session.getAttribute("usuario_logueado");
     	String ofertaConsultada = (String) request.getParameter("oferta_consultada");
-    	System.out.println(ofertaConsultada);
     	DTOfertaLaboral oferta = ManejadorOfertaLaboral.getInstance().buscarOfertaLaboral(ofertaConsultada).getDataOfertaLaboral();
     	
     	 // Set job offer as an attribute to pass it to the JSP.

@@ -228,8 +228,8 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 			List<PaqueteTipo> paqTip = paqueteG.getPaquetesTipos();
 			List<CompraTipo>  compTip = new LinkedList<>();
 			for(PaqueteTipo p : paqTip) {
-				CompraTipo ct = new CompraTipo(p.getCantidad() , p.getTipo());
-				compTip.add(ct);
+				CompraTipo ctip = new CompraTipo(p.getCantidad() , p.getTipo());
+				compTip.add(ctip);
 			}
 			Compra compra = new Compra(fechaCompra, vencimiento, paqueteG, empresaG, compTip);
 			empresaG.agregarCompra(compra);

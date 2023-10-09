@@ -1,6 +1,5 @@
 package com.trabajouy.controllers;
 
-import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -9,9 +8,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
 
 import excepciones.OfertasLaboralesNoExistenNingunaException;
 import logica.*;
@@ -30,27 +26,12 @@ public class Home extends HttpServlet {
     	HttpSession misesion = request.getSession();
     	if (misesion.getAttribute("loginEstado") == null) {
     		misesion.setAttribute("loginEstado", LoginEstado.NO_LOGIN);
+    		misesion.setAttribute("filtro", null);
+    		misesion.setAttribute("filterType", "AllOffers");
     		
     		Factory fac = Factory.getInstance();
     		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
-    		ManejadorUsuario mu = ManejadorUsuario.getInstancia();
-    		ManejadorTipo mt = ManejadorTipo.getInstancia();
-    		LocalDate ldate = LocalDate.now();
-    		Empresa emp = new Empresa("nick", "Rodolfo", "Gutierrez", "hola@gmail.com", "Desc", "link", "123", new byte[0]);
-    		Postulante post = new Postulante("jokin", "joaco", "corbo", "correo@c.com", ldate, "uru", "123", new byte[0]);
-    		mu.agregarEmpresa(emp);
-    		mu.agregarPostulante(post);
-    		Keyword k = new Keyword("pato");
-    		Map<String, Keyword> keyss = new HashMap<>();
-    		keyss.put("pato", k);
-    		Tipo t = new Tipo("clean", "tipo clean", 1, 1000, 200000, ldate);
-    		OfertaLaboral ol = new OfertaLaboral("Jugador de CS2 Profesional", "Que pegue unos buenos tiros", "Punta Carretas", "Montevideo", "09:20", 20000, ldate, 20, t, keyss, emp);
-    		ol.setEstado(EstadoOL.Aceptada);
-    		mol.agregarOfertaLaboral(ol);
-    		Postulacion postu = new Postulacion(ldate, "Me gusta el fortnite", "Tengo monitor", post, ol);
-    		post.agregarPostulacion(postu);
-    		ol.agregarPostulacion(postu);
-    		emp.agregarOfertaLaboral(ol);
+    		
     		IOfertaLaboral iol = fac.getIOfertaLaboral();
     		try {
     			DTOfertaLaboral dtols[] = iol.listarTodasOfertasLaborales();
@@ -59,17 +40,8 @@ public class Home extends HttpServlet {
     			e.printStackTrace();
     		}
     		
-    		
-    		mol.agregarKeyword(k);
     		Keyword[] keys = mol.getKeywords();
-    		ServletContext context = request.getServletContext();
-    		context.setAttribute("keywords", keys);
-    		
-    		Paquete paq = new Paquete("Paquete", "desc", 20, 32, 32, LocalDate.now());
-    		mt.agregarPaquete(paq);
-    		mt.agregarTipo(t);
-    		PaqueteTipo paqTip = new PaqueteTipo(20, t);
-    		paq.agregarPaqueteTipo(paqTip);
+    		request.getSession().setAttribute("keywords", keys);
     	} 
     }
     

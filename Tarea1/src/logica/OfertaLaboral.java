@@ -42,6 +42,24 @@ public class OfertaLaboral {
 	}
 	
 	public OfertaLaboral(String nombre, String descripcion, String ciudad, String departamento, String horario,
+            float remuneracion, LocalDate fechaDeAlta, float costoAsociado, Tipo tipoOL, Map<String, Keyword> keywords, EstadoOL estado, Empresa empCreadora, byte[] image) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.ciudad = ciudad;
+        this.departamento = departamento;
+        this.horario = horario;
+        this.remuneracion = remuneracion;
+        this.fechaDeAlta = fechaDeAlta;
+        this.costoAsociado = tipoOL.getCosto();
+        this.tipoOL = tipoOL;
+        this.postulaciones = new ArrayList<>();
+        this.keywords = keywords;
+        this.estado = estado;
+        this.empresaCreadora = empCreadora;
+        this.setImagen(image);
+    }
+
+	public OfertaLaboral(String nombre, String descripcion, String ciudad, String departamento, String horario,
 			float remuneracion, LocalDate fechaDeAlta, float costoAsociado, Tipo tipoOL, Map<String, Keyword> keywords, Empresa empCreadora, byte[] image) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;

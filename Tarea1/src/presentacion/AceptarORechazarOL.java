@@ -43,7 +43,7 @@ public class AceptarORechazarOL extends JInternalFrame {
 		contOfertaLaboral = IOL;
 
 		getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 12));
-		
+	
 		 setResizable(true);
 	     setIconifiable(true);
 	     setMaximizable(true);
@@ -186,7 +186,7 @@ public class AceptarORechazarOL extends JInternalFrame {
         }
 		if(correcto) {
 			
-			contOfertaLaboral.acepRechOL(EstadoOL.Aceptada, tipOL.getNombre());
+			contOfertaLaboral.acepRechOL(EstadoOL.Confirmada, tipOL.getNombre());
 			
 			 // Muestro éxito de la operación
             JOptionPane.showMessageDialog(this, "La oferta laboral se ha sido aceptada", "Aceptar o Rechazar Oferta Laboral",

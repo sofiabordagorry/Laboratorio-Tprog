@@ -41,7 +41,7 @@
 					if(usr instanceof Empresa){
 			%>
 			<a class="list-group-item list-group-item-action" href="AltaDeOfertaLaboral"><i class="fa-solid fa-users"></i> Publicar Oferta Laboral</a>
-			<a class="list-group-item list-group-item-action" href="ConsultaOfertaLaboral"><i class="fa-solid fa-square-poll-vertical"></i> Mis Ofertas</a>
+			<a class="list-group-item list-group-item-action" href="Ofertas?filterType=MyOffers"><i class="fa-solid fa-square-poll-vertical"></i> Mis Ofertas</a>
 			<%
 					} else {
 			%>
@@ -64,12 +64,10 @@
 		</a>
 		<div id="keywordList" class="collapse">
 			<%
-				jakarta.servlet.ServletContext context = application;
-			
-				Keyword[] keys = (Keyword[]) context.getAttribute("keywords");
+				Keyword[] keys = (Keyword[]) request.getSession().getAttribute("keywords");
 				for(int i = 0; i < keys.length; i++) {
 			%>
-			<a class="list-group-item list-group-item-action"><%= keys[i].getNombre() %></a>
+			<a class="list-group-item list-group-item-action" href="Ofertas?filtro=<%= keys[i].getNombre() %>"><%= keys[i].getNombre() %></a>
 			<%
 				}
 			%>

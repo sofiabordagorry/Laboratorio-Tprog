@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Empresa extends Usuario {
@@ -136,7 +137,7 @@ public class Empresa extends Usuario {
 			}
 		}
 		List<DTCompra> paquetesComprados = new LinkedList<DTCompra>();
-		for(Compra comp : this.paqComprados) {
+		for (Compra comp : this.paqComprados) {
 			paquetesComprados.add(comp.getDataCompra());
 		}
 			DTEmpresa dtE = new DTEmpresa(this.getNickname(), this.getNombre(), this.getApellido(), this.getCorreo(), ofertasLab/*, this.getNombreEmpresa()*/, this.getDescripcion(), this.getLink(),paquetesComprados);

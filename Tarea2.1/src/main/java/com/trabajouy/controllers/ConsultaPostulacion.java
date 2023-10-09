@@ -38,8 +38,7 @@ public class ConsultaPostulacion extends HttpServlet {
 		IOfertaLaboral col = fac.getIOfertaLaboral();
     	
 		String nicknameConsultado = request.getParameter("postulanteConsultado");
-		
-		System.out.println(nicknameConsultado + " " + nombreOferta);
+	
 		String nicknameEnSesion = null;
 		if (usr != null) {
 			nicknameEnSesion = usr.getNickname();

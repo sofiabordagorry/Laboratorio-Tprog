@@ -45,13 +45,7 @@ public class CompraPaquete extends HttpServlet {
     	
 		HttpSession session = request.getSession();
      	Usuario user = (Usuario) session.getAttribute("usuario_logueado");
-     	
-     	//ManejadorUsuario murs = ManejadorUsuario.getInstancia();
-     	
      	request.setAttribute("paqComprado", true);
-     	
-     	
-     	//Empresa emp = murs.buscarEmpresa(user.getNickname());
      	String nombrePaq = request.getParameter("paquete");
      	try {
      		col.comprarPaquete(user.getNickname(),nombrePaq);

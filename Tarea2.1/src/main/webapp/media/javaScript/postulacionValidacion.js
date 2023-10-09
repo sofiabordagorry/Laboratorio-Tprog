@@ -14,7 +14,7 @@ const mostrarError = (grupo, mensaje, mostrar) => {
 const validarCampo = (valor, campo) => {
   const grupo = document.getElementById(`grupo__${campo}`);
 
-  if (valor.trim() === "") {
+  if (valor === "") {
     mostrarError(grupo, `Debe ingresar ${campo}.`, true);
     return false;
   } else {
@@ -23,24 +23,25 @@ const validarCampo = (valor, campo) => {
   }
 };
 
-// Agrega un evento al formulario para la validación
-formulario.addEventListener("submit", function(event) {
-  event.preventDefault();
-
+// Agregar un evento al botón "Postularme" para la validación
+const botonPostularme = document.getElementById("botonPostularme");
+	formulario.addEventListener("submit", function(event) {
+	event.preventDefault();
   // Variables para validación de datos
   const CVReducidoValido = validarCampo(CVReducido.value, 'CVReducido');
   const motivacionValido = validarCampo(motivacion.value, 'motivacion');
-  
+  console.log(CVReducidoValido);
+  console.log(motivacionValido);
   // Elemento para el mensaje de éxito
   const mensajeExito = document.getElementById("formulario__mensaje-exitoso");
 
-  // Verificar si todos los campos son válidos antes de enviar el formulario
+  // Verificar si todos los campos son válidos antes de realizar la acción
   if (CVReducidoValido && motivacionValido) {
     // Mostrar el mensaje de éxito
     mensajeExito.style.display = 'block';
     
-    // Aquí puedes enviar el formulario si es válido
-    // Ejemplo: formulario.submit();
+    // Realiza aquí la acción que deseas (por ejemplo, enviar el formulario)
+    formulario.submit();
   } else {
     // Si hay errores en algún campo, muestra un mensaje de error general o realiza alguna otra acción.
     alert("Hay errores en el formulario. Por favor, corrígelos.");

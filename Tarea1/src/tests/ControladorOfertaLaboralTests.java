@@ -345,7 +345,7 @@ class ControladorOfertaLaboralTests{
 			controladorUsuario.ingresarDatosEmpresa(dte); 
 			mt = ManejadorTipo.getInstancia();
 			Tipo tOL = mt.buscarTipo(nombreTipo);
-			DTOfertaLaboral ol = new DTOfertaLaboral(nombre, descripcionOL, ciudad, departamento, horario, remuneracion, fechaDeAlta, costoAsociado, dataTipo, dataKeywords, dataPostulaciones, empresa, EstadoOL.Aceptada);
+			DTOfertaLaboral ol = new DTOfertaLaboral(nombre, descripcionOL, ciudad, departamento, horario, remuneracion, fechaDeAlta, costoAsociado, dataTipo, dataKeywords, dataPostulaciones, empresa, EstadoOL.Confirmada);
 			controladorOfertaLaboral.ingresarDatosOL(empresa,  nombreTipo, ol);
 			mol = ManejadorOfertaLaboral.getInstance();
 			OfertaLaboral Ol = mol.buscarOfertaLaboral(nombre);
@@ -461,7 +461,7 @@ class ControladorOfertaLaboralTests{
 			controladorUsuario.ingresarDatosEmpresa(dte); 
 			mt = ManejadorTipo.getInstancia();
 			Tipo tOL = mt.buscarTipo(nombreTipo);
-			DTOfertaLaboral ol = new DTOfertaLaboral(nombre, descripcionOL, ciudad, departamento, horario, remuneracion, fechaDeAlta, costoAsociado, dataTipo, dataKeywords, dataPostulaciones, empresa, EstadoOL.Aceptada);
+			DTOfertaLaboral ol = new DTOfertaLaboral(nombre, descripcionOL, ciudad, departamento, horario, remuneracion, fechaDeAlta, costoAsociado, dataTipo, dataKeywords, dataPostulaciones, empresa, EstadoOL.Confirmada);
 			controladorOfertaLaboral.ingresarDatosOL(empresa,  nombreTipo, ol);
 			mol = ManejadorOfertaLaboral.getInstance();
 			OfertaLaboral Ol = mol.buscarOfertaLaboral(nombre);
@@ -484,7 +484,7 @@ class ControladorOfertaLaboralTests{
 			fail(e.getMessage());
 			e.printStackTrace();
 		}
-		DTOfertaLaboral ol = new DTOfertaLaboral(nombre, descripcionOL, ciudad, departamento, horario, remuneracion, fechaDeAlta, costoAsociado, dataTipo, dataKeywords, dataPostulaciones, empresa, EstadoOL.Aceptada);
+		DTOfertaLaboral ol = new DTOfertaLaboral(nombre, descripcionOL, ciudad, departamento, horario, remuneracion, fechaDeAlta, costoAsociado, dataTipo, dataKeywords, dataPostulaciones, empresa, EstadoOL.Confirmada);
 		assertThrows(OfertaLaboralRepetidaException.class, ()->{controladorOfertaLaboral.ingresarDatosOL(empresa,  nombreTipo, ol);});
 	}
 	
@@ -648,18 +648,18 @@ class ControladorOfertaLaboralTests{
 			controladorUsuario.ingresarDatosEmpresa(dte); 
 			mt = ManejadorTipo.getInstancia();
 			Tipo tOL = mt.buscarTipo(nombreTipo);
-			DTOfertaLaboral ol = new DTOfertaLaboral(nombre, descripcionOL, ciudad, departamento, horario, remuneracion, fechaDeAlta, costoAsociado, dataTipo, dataKeywords, dataPostulaciones, empresa, EstadoOL.Aceptada);
+			DTOfertaLaboral ol = new DTOfertaLaboral(nombre, descripcionOL, ciudad, departamento, horario, remuneracion, fechaDeAlta, costoAsociado, dataTipo, dataKeywords, dataPostulaciones, empresa, EstadoOL.Confirmada);
 			controladorOfertaLaboral.ingresarDatosOL(empresa,  nombreTipo, ol);
 			mol = ManejadorOfertaLaboral.getInstance();
 			OfertaLaboral Ol = mol.buscarOfertaLaboral(nombre);
-			controladorOfertaLaboral.acepRechOL(EstadoOL.Aceptada, nombre);
+			controladorOfertaLaboral.acepRechOL(EstadoOL.Confirmada, nombre);
 			assertEquals(Ol.getNombre(), nombre);
 			assertEquals(Ol.getCiudad(), ciudad);
 			assertEquals(Ol.getDepartamento(), departamento);
 			assertEquals(Ol.getDescripcion(), descripcionOL);
 			assertEquals(Ol.getFechaDeAlta(), fechaDeAlta);
 			assertEquals(Ol.getCostoAsociado(), costoAsociado);
-			assertEquals(Ol.getEstado(), EstadoOL.Aceptada);
+			assertEquals(Ol.getEstado(), EstadoOL.Confirmada);
 			assertTrue(Ol.getTipoOL().equals(tOL));
 			assertEquals(Ol.getKeywords().keySet().iterator().next(), nombreK);
 			
@@ -724,7 +724,7 @@ class ControladorOfertaLaboralTests{
 			controladorUsuario.ingresarDatosEmpresa(dte); 
 			mt = ManejadorTipo.getInstancia();
 			Tipo tOL = mt.buscarTipo(nombreTipo);
-			DTOfertaLaboral ol = new DTOfertaLaboral(nombre, descripcionOL, ciudad, departamento, horario, remuneracion, fechaDeAlta, costoAsociado, dataTipo, dataKeywords, dataPostulaciones, empresa, EstadoOL.Aceptada);
+			DTOfertaLaboral ol = new DTOfertaLaboral(nombre, descripcionOL, ciudad, departamento, horario, remuneracion, fechaDeAlta, costoAsociado, dataTipo, dataKeywords, dataPostulaciones, empresa, EstadoOL.Confirmada);
 			controladorOfertaLaboral.ingresarDatosOL(empresa,  nombreTipo, ol);
 			mol = ManejadorOfertaLaboral.getInstance();
 			OfertaLaboral Ol = mol.buscarOfertaLaboral(nombre);
@@ -800,7 +800,7 @@ String nombreK = "nombreKeyword";
 			controladorUsuario.ingresarDatosEmpresa(dte); 
 			mt = ManejadorTipo.getInstancia();
 			Tipo tOL = mt.buscarTipo(nombreTipo);
-			DTOfertaLaboral ol = new DTOfertaLaboral(nombre, descripcionOL, ciudad, departamento, horario, remuneracion, fechaDeAlta, costoAsociado, dataTipo, dataKeywords, dataPostulaciones, empresa, EstadoOL.Aceptada);
+			DTOfertaLaboral ol = new DTOfertaLaboral(nombre, descripcionOL, ciudad, departamento, horario, remuneracion, fechaDeAlta, costoAsociado, dataTipo, dataKeywords, dataPostulaciones, empresa, EstadoOL.Confirmada);
 			controladorOfertaLaboral.ingresarDatosOL(empresa,  nombreTipo, ol);
 			mol = ManejadorOfertaLaboral.getInstance();
 			DTOfertaLaboral[] ols = controladorOfertaLaboral.listarTodasOfertasLaborales();
@@ -969,7 +969,7 @@ String nombreK = "nombreKeyword";
 			controladorUsuario.ingresarDatosPostulante(dtPost);
 			controladorUsuario.ingresarDatosEmpresa(dte); 
 			mt = ManejadorTipo.getInstancia();
-			DTOfertaLaboral ol = new DTOfertaLaboral(nombre, descripcionOL, ciudad, departamento, horario, remuneracion, fechaDeAlta, costoAsociado, dataTipo, dataKeywords, dataPostulaciones, empresa, EstadoOL.Aceptada);
+			DTOfertaLaboral ol = new DTOfertaLaboral(nombre, descripcionOL, ciudad, departamento, horario, remuneracion, fechaDeAlta, costoAsociado, dataTipo, dataKeywords, dataPostulaciones, empresa, EstadoOL.Confirmada);
 			controladorOfertaLaboral.ingresarDatosOL(empresa,  nombreTipo, ol);
 			mol = ManejadorOfertaLaboral.getInstance();
 			OfertaLaboral Ol = mol.buscarOfertaLaboral(nombre);
@@ -982,13 +982,11 @@ String nombreK = "nombreKeyword";
 			
 			DTPostulacion dtp = controladorOfertaLaboral.dataPostulacion(nicknameP, nombre);
 			
-			LinkedList<Postulacion> posts = postu.getPostulaciones();
-			assertEquals(posts.getFirst().getCVReducido(),  "cvReducido");
-			assertEquals(posts.getFirst().getMotivacion(),  "motivacion");
-			assertEquals(posts.getFirst().getPostulante().getNickname(),  postu.getNickname());
-			assertEquals(posts.getFirst().getOfertaLaboral().getNombre(),  Ol.getNombre());
-			
-			
+			List<Postulacion> posts = postu.getPostulaciones();
+			assertEquals(posts.get(0).getCVReducido(),  "cvReducido");
+			assertEquals(posts.get(0).getMotivacion(),  "motivacion");
+			assertEquals(posts.get(0).getPostulante().getNickname(),  postu.getNickname());
+			assertEquals(posts.get(0).getOfertaLaboral().getNombre(),  Ol.getNombre());
 			
 			
 		}catch (TipoRepetidoException e) {

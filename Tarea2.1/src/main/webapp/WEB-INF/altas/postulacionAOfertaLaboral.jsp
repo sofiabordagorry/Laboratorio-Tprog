@@ -68,16 +68,15 @@
 							</div>
 							<br>
 							
-							
-	
 							<div class="formulario__grupo formulario__grupo-btn-registrarse">
-								<button type="submit" class="btn">Postularme</button>              
-								
-								<p class="formulario__mensaje-exitoso" id="formulario__mensaje-exitoso">
-									Postulación realizada con éxito, redirigendo a la página de inicio, aguarde.
-								</p>
-							
+							    <!-- Cambia el tipo de botón a "button" y agrega un id -->
+							    <button type="submit" class="btn" id="botonPostularme">Postularme</button>
+							    <p class="formulario__mensaje-exitoso" id="formulario__mensaje-exitoso">
+							        Postulación realizada con éxito, redirigendo a la página de inicio, aguarde.
+							    </p>
 							</div>
+
+							
 						</form>
 		           	</div>				
 				</div>
@@ -85,6 +84,6 @@
 		</div>
 		<jsp:include page="../template/footer.jsp" /> 
 		<script src="media/javaScript/postulacionValidacion.js"></script>
-		<script src="media/javaScript/redireccionar.js"></script>
+		<!--  <script src="media/javaScript/redireccionar.js"></script>-->
 	</body>
 </html>

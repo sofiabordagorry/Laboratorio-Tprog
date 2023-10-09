@@ -27,7 +27,7 @@
 									<div class="col-md-6 formulario__grupo" id="grupo__nickname">
 										<label for="nickname">Nickname</label>
 										<div class="input-group">
-											<input type="text" class="form-control" name="nickname" id="nickname" placeholder="Ingresar nickname" value="jokin">
+											<input type="text" class="form-control" name="nickname" id="nickname" placeholder="Ingresar nickname">
 											<div class="input-group-append">
 												<i class="formulario__validacion-estado formulario__validacion-estado-input fa-solid fa-circle-xmark"></i>
 											</div>
@@ -39,7 +39,7 @@
 									<div class="col-md-6 formulario__grupo" id="grupo__correo">
 										<label for="correo">Email</label>
 										<div class="input-group">
-											<input type="text" class="form-control" name="correo" id="correo" placeholder="correo@correo.com" value="Jokin@gmail.com">
+											<input type="text" class="form-control" name="correo" id="correo" placeholder="correo@correo.com">
 											<div class="input-group-append">
 												<i class="formulario__validacion-estado formulario__validacion-estado-input fa-solid fa-circle-xmark"></i>
 											</div>
@@ -58,7 +58,7 @@
 									<div class="col-md-6 formulario__grupo" id="grupo__nombre">
 										<label for="nombre">Nombre</label>
 										<div class="input-group">
-											<input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" value="Joaquin">
+											<input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre">
 											<div class="input-group-append">
 												<i class="formulario__validacion-estado formulario__validacion-estado-input fa-solid fa-circle-xmark"></i>
 											</div>
@@ -70,7 +70,7 @@
 									<div class="col-md-6 formulario__grupo" id="grupo__apellido">
 										<label for="apellido">Apellido</label>
 										<div class="input-group">
-											<input type="text" class="form-control" name="apellido" id="apellido" placeholder="Apellido" value="Corbo">
+											<input type="text" class="form-control" name="apellido" id="apellido" placeholder="Apellido">
 											<div class="input-group-append">
 												<i class="formulario__validacion-estado formulario__validacion-estado-input fa-solid fa-circle-xmark"></i>											
 											</div>
@@ -88,7 +88,7 @@
 									<div class="col-md-6 formulario__grupo" id="grupo__contrasenia">
 										<label for="contrasenia">Contraseña</label>
 										<div class="input-group">
-											<input type="password" class="form-control" name="contrasenia" id="contrasenia" placeholder="Contraseña" value="123">
+											<input type="password" class="form-control" name="contrasenia" id="contrasenia" placeholder="Contraseña">
 											<div class="input-group-append">
 												<i class="formulario__validacion-estado formulario__validacion-estado-input fa-solid fa-circle-xmark"></i>
 											</div>
@@ -100,7 +100,7 @@
 									<div class="col-md-6 formulario__grupo" id="grupo__confirmarContrasenia">
 										<label for="confirmarContrasenia">Confirmar contraseña</label>
 										<div class="input-group">
-											<input type="password" class="form-control" name="contrasenia" id="confirmarContrasenia" placeholder="Confirmar contraseña" value="123">
+											<input type="password" class="form-control" name="contrasenia" id="confirmarContrasenia" placeholder="Confirmar contraseña">
 											<div class="input-group-append">
 												<i class="formulario__validacion-estado formulario__validacion-estado-input fa-solid fa-circle-xmark"></i>
 											</div>
@@ -149,7 +149,7 @@
 										<div class="col-md-7" id="grupo__descripcion">
 											<label for="descripcion" class="form-label">Descripcion de la Empresa</label>
 											<div class="input-group">
-												<textarea class="form-control" name="descripcion" id="descripcion">Pro player del CS2 y el VALORANT</textarea>
+												<textarea class="form-control" name="descripcion" id="descripcion"></textarea>
 												<div class="input-group-append">
 													<i class="formulario__validacion-estado formulario__validacion-estado-caja fa-solid fa-circle-xmark"></i>
 												</div>

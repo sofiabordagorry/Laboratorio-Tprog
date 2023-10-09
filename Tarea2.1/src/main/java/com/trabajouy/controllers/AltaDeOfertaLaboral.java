@@ -43,10 +43,7 @@ public class AltaDeOfertaLaboral extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		Usuario usuario = (Usuario) session.getAttribute("usuario_logueado");
-		//Tipo tip = new Tipo("Oro", "desc", 1, 20, 20000, LocalDate.now());
 		ManejadorTipo mtip = ManejadorTipo.getInstancia();
-		//mtip.agregarTipo(tip);
-		System.out.println("Entre");
 		if (usuario != null) {
 			ManejadorUsuario musr = ManejadorUsuario.getInstancia();
 			Map<String, Empresa> emp = musr.getMapEmpresas();
@@ -71,23 +68,20 @@ public class AltaDeOfertaLaboral extends HttpServlet {
 				ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
 				Keyword[] key = mol.getKeywords();
 				if (key == null) {
-					session.setAttribute("hayKeys", false);
+					request.setAttribute("hayKeys", false);
 				}else {
 					String[] keywords = new String[key.length];
 					for (int j = 0; j < key.length; j++) {
 						keywords[j] =  key[j].getNombre();
 		            }
-					session.setAttribute("keywords", keywords);
-					session.setAttribute("hayKeys", true);
+					request.setAttribute("keywords", keywords);
+					request.setAttribute("hayKeys", true);
 
 				}
 				
 				//obtener los paquetes
 				Factory fac = Factory.getInstance();
 				IOfertaLaboral icol = fac.getIOfertaLaboral();
-				
-				
-				
 				
 				request.getRequestDispatcher("/WEB-INF/altas/altaOfertaLaboral.jsp").forward(request, response);
 			}else {
@@ -140,14 +134,6 @@ public class AltaDeOfertaLaboral extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/errores/altaOfertaLaboralError.jsp").forward(request, response);
 
 		}
-		
-		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
-		Map<String, OfertaLaboral> ols = mol.getOfertasLaborales();
-		if (ols != null) {
-			System.out.println("Cantidad de ols: " + ols.size());
-		}
-		
-		
 	}
 
 }
