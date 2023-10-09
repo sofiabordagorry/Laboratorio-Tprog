@@ -114,7 +114,7 @@ public class ControladorUsuario implements IUsuario {
     public  DTOfertaLaboral[] listarOfertasLaboralesVigentes(String empresa) throws EmpresaSinOfertasException{
     ManejadorUsuario mu = ManejadorUsuario.getInstancia();
         Empresa emp = mu.buscarEmpresa(empresa);
-        ArrayList<DTOfertaLaboral> ofertas = emp.obtenerOfertasVigentes();
+        List<DTOfertaLaboral> ofertas = emp.obtenerOfertasVigentes();
       DTOfertaLaboral[] dtofertas;
         if (ofertas != null) {
         	 dtofertas = ofertas.toArray(new DTOfertaLaboral[ofertas.size()]);
@@ -263,5 +263,4 @@ public class ControladorUsuario implements IUsuario {
 			throw new UsuarioSinPostulacionesException("No existen postulaciones."); 
 		}
 	}
-	
 }
