@@ -1,6 +1,6 @@
 #Ignorar archivos de configuración de Eclipse
 .classpath
-
+.project
 
 #Ignorar archivos generados por Maven y Gradle
 target/
