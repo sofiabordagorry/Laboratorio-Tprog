@@ -1,7 +1,14 @@
 Oferta;Keyword
-O1;K1, K2, K3, K4, K5, K6
-O2;K5
-O3;K2, K3, K6
-O4;K2
-O5;K4
-O6;K1
+O1;Tiempo completo; Medio tiempo; Remoto; Freelance; Temporal; Permanente
+O2;Temporal
+O3;Medio tiempo; Remoto; Permanente
+O4;Medio tiempo
+O5;Freelance
+O6;Tiempo completo
+O7;Freelance
+O8;Tiempo completo
+O9;Temporal
+O10;Tiempo completo; Permanente; Logística
+O11;Remoto
+O12;Remoto; Permanente
+O13;Tiempo completo; Contabilidad
