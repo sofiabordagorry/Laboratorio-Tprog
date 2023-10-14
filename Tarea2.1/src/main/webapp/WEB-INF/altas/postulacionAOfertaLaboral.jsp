@@ -25,7 +25,7 @@
 					
 										
 						<!-- Formulario -->
-						<form action="PostularAOfertaLaboral" method="POST" class="formulario" id="formulario">
+						<form action="PostularAOfertaLaboral" method="POST" class="formulario" id="formularioPos">
 							<h3>Ingrese sus datos para la postulación</h3>
 							<br>
 							
