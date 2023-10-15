@@ -58,7 +58,7 @@
                             <%
                                 Usuario user = (Usuario) session.getAttribute("usuario_logueado");
                                 if (user instanceof Postulante) {
-                                	if(!((Postulante) user).existePostulacion(ofertaConsultada.getNombre())) {
+                                	if(!((Postulante) user).existePostulacion(ofertaConsultada.getNombre()) && ofertaConsultada.estaVigente()) {
                             %>
                             <button class="btn mx-auto d-block">
                                 <a href="PostulacionAOfertaLaboral?oferta=<%= ofertaConsultada.getNombre() %>">Postularse</a>
