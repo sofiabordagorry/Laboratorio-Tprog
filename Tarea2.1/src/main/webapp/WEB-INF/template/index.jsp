@@ -11,7 +11,19 @@
 		<div class="container-fluid" id="web-content">
 			<div class="row justify-content-md-center">
 				<jsp:include page="sidebar.jsp" />
-				<jsp:include page="content.jsp" />
+			<%
+				String of = (String) request.getSession().getAttribute("filterType");
+				if (of.equals("AllOffers")) {
+			%>
+				<jsp:include page="../listar/TodasLasOfertas.jsp" />
+				
+			<%
+				} else {
+			%>
+				<jsp:include page="../listar/MisOfertas.jsp" />
+			<%
+				}
+			%>
 			</div>
 		</div>
 	

@@ -47,21 +47,8 @@ public class Ofertas extends HttpServlet {
 		try {
 			DTOfertaLaboral dtols[] = iol.listarTodasOfertasLaborales();
 			String filterType = request.getParameter("filterType");
-			request.setAttribute("filterType", filterType);
-			if ("AllOffers".equals(filterType)) {
-				request.getSession().setAttribute("listaOfertasLaborales", dtols);
-			} else if ("MyOffers".equals(filterType)) {
-				Usuario user = (Usuario) request.getSession().getAttribute("usuario_logueado");
-				ArrayList<DTOfertaLaboral> ofertasFiltradas = new ArrayList<>();
-				for (DTOfertaLaboral oferta: dtols) {
-					if (oferta.getDTEmpresa().equals(user.getNickname())) {
-						ofertasFiltradas.add(oferta);
-					}
-				}
-				DTOfertaLaboral filtArr[] = ofertasFiltradas.toArray(new DTOfertaLaboral[ofertasFiltradas.size()]);
-				request.getSession().setAttribute("listaOfertasLaborales", filtArr);
-				request.getSession().setAttribute("filterType", "MyOffers");
-			}
+			request.getSession().setAttribute("filterType", filterType);
+			request.getSession().setAttribute("listaOfertasLaborales", dtols);
 		} catch (OfertasLaboralesNoExistenNingunaException e) {
 			
 		}
