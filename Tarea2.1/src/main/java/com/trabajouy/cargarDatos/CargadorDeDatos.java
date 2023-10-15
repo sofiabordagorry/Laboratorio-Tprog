@@ -257,8 +257,23 @@ public class CargadorDeDatos {
 				EstadoOL estado = EstadoOL.valueOf(parts[10]);
 				
 				OfertaLaboral of = new OfertaLaboral(parts[1], parts[2], parts[4], parts[3], parts[5], Float.parseFloat(parts[6]), LocalDate.parse(parts[9], formatter), 0, tipos.get(parts[8]), keywords, estado, empresas.get(parts[7]), null);
+				String nompaquete = parts[11];
+				Empresa emp = empresas.get(parts[7]);
+				List<Compra> compras = emp.getCompras();
+				System.out.println(nompaquete);
+				if (!nompaquete.equals("SP")) {
+					int i = 0;
+					while (i < compras.size() && !compras.get(i).getPaqueteComprado().getNombre().equals(nompaquete)) {
+						i++;
+					}
+					if (i < compras.size()) {
+						Compra comp = compras.get(i);
+						System.out.println("Compra encontrada: " + comp);
+						comp.agregarOferta(of);
+					}
+				}
 				mof.agregarOfertaLaboral(of);
-				empresas.get(parts[7]).agregarOfertaLaboral(of);
+				emp.agregarOfertaLaboral(of);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -365,7 +380,6 @@ public class CargadorDeDatos {
 				}
 				Compra compra = new Compra(fecha, vencimiento, paq, emp, compTip);
 				emp.agregarCompra(compra);
-				
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

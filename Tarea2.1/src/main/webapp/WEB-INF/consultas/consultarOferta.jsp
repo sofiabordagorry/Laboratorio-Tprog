@@ -78,7 +78,7 @@
                                 if (user != null) {
                                     if (user instanceof Empresa && user.getNickname() == ofertaConsultada.getDTEmpresa()) {
                                         if (postulaciones.size() == 0) {
-                            %>
+                            %>				
                             <div class="postulante">
                                 <h2>Postulaciones</h2>
                                 <p>Aún no existen postulaciones</p>
@@ -89,7 +89,7 @@
                             <div class="postulante">
                                 <h2>Postulaciones</h2>
                                 <%
-                                for (DTPostulacion elem : postulaciones) {
+                                		for (DTPostulacion elem : postulaciones) {
                                 %>
                                     <div class="postulante">
                                         <img width="50" height="50" class="img-fluid img-thumbnail"
@@ -97,7 +97,8 @@
                                         <a href="ConsultaPostulacion?nombreOfertaConsultada=<%=ofertaConsultada.getNombre()%>&postulanteConsultado=<%=elem.getPostulante()%>"><%= elem.getPostulante() %></a>
                                     </div>
                                 <%
-                                	}
+                                		}
+                                    }
                                 
                                 	String paqString = (String) request.getAttribute("paquete");
                                 	System.out.println(paqString);
@@ -134,13 +135,12 @@
                             <div class="postulante">
                                 <h2>Postulacion</h2>
                                 <div class="postulante">
-                                    <p>A�n no te has postulado a esta oferta laboral</p>
+                                    <p>Aún no te has postulado a esta oferta laboral</p>
                                 </div>
                             </div>
                             <%
                                         }
                                     }
-                                }
                             %>
                         </div>
                     </div>
