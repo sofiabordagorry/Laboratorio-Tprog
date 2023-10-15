@@ -6,6 +6,8 @@
 <%@ page import="logica.Empresa"%>
 <%@ page import="logica.DTPostulacion"%>
 <%@ page import="logica.Postulante"%>
+<%@ page import="logica.ManejadorTipo" %>
+<%@ page import="logica.Paquete" %>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.List"%>
 <%
@@ -97,18 +99,23 @@
                                 <%
                                 	}
                                 
-                                	DTPaquete paq = (DTPaquete) request.getAttribute("paquete");
-                                	if (paq != null) {
+                                	String paqString = (String) request.getAttribute("paquete");
+                                	System.out.println(paqString);
+                                	if (paqString != null) {
+                                    	Paquete paqObj = ManejadorTipo.getInstancia().buscarPaquete(paqString);
+                                		DTPaquete paq = paqObj.getDataPaquete();
+                                		System.out.println("Paquete no es null");
                                 %>
                                 <h2 class="mt-5">Paquete</h2>
-                                <div class="paquete">
-                                    <img width="50" height="50" class="img-fluid img-thumbnail"
-                                        src="media/imagenes/paquete.jpg" />
-                                    <a href="ConsultaPaquete?paqueteConsultado=<%=paq.getNombre()%>"><%= paq.getNombre() %></a>
-                                </div>
-                            </div>
+	                                <div class="paquete">
+	                                    <img width="50" height="50" class="img-fluid img-thumbnail"
+	                                        src="media/imagenes/paquete.jpg" />
+	                                    <a href="ConsultaPaquete?paqueteConsultado=<%=paq.getNombre()%>"><%= paq.getNombre() %></a>
+	                                </div>
+                            	</div>
                             <% 			
 	                                	}
+                                	else { System.out.println("Paquete es null"); }
 	                                 }
 	                             } else if (user instanceof Postulante) {
 	                                 if (((Postulante) user).existePostulacion(ofertaConsultada.getNombre())) {
