@@ -91,7 +91,7 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 		ManejadorUsuario musr = ManejadorUsuario.getInstancia();
 		Empresa emp = musr.buscarEmpresa(empresa);
 		if (olExiste != null) 
-			throw new OfertaLaboralRepetidaException("Ya existe la Oferta Laboral %s".formatted(olExiste.getNombre()));
+			throw new OfertaLaboralRepetidaException("Ya existe la Oferta Laboral " + olExiste.getNombre());
 		
 		ManejadorTipo mtTip = ManejadorTipo.getInstancia();
 		Tipo tip = mtTip.buscarTipo(nombreTipo);
@@ -113,7 +113,7 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 		Paquete paq = mtTip.buscarPaquete(datosPaquete.getNombre());
 		
 		if (paq != null)
-			throw new PaqueteRepetidoException("Ya existe el Paquete %s".formatted(datosPaquete.getNombre())); 
+			throw new PaqueteRepetidoException("Ya existe el Paquete " + datosPaquete.getNombre()); 
 		
 		Paquete nuevoPaquete = new Paquete(datosPaquete.getNombre(), datosPaquete.getDescripcion(), datosPaquete.getPeriodoDeValidez(), 
 		datosPaquete.getDescuento(), 0, datosPaquete.getFechaDeAlta(), datosPaquete.getImagen());

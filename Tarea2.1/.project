@@ -3,6 +3,7 @@
 	<name>Tarea2.1</name>
 	<comment></comment>
 	<projects>
+		<project>Tarea1G18</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
