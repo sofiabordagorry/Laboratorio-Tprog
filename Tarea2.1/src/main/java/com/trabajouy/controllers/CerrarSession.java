@@ -30,6 +30,7 @@ public class CerrarSession extends HttpServlet {
     	if (usrLogueado != null) {
     		request.getSession().setAttribute("usuario_logueado", null);
     		request.getSession().setAttribute("estado_sesion", null);
+    		request.getSession().setAttribute("filterType", "AllOffers");
     		request.getRequestDispatcher("/WEB-INF/template/index.jsp").forward(request, response);
     	} else {
     		response.sendError(403);

@@ -44,16 +44,16 @@ public class ConsultaOfertaLaboral extends HttpServlet {
 	        if (emp != null && emp.getNickname() == oferta.getDTEmpresa()) {
 	            List<Compra> compras = emp.getCompras();
 	
-	            if (compras != null) {
+	             if (compras != null) {
 	                for (int i = 0; i < compras.size(); i++) {
 	                    if (compras.get(i).getOfertas() != null && compras.get(i).getOfertas().get(oferta.getNombre()) != null) {
-	                         request.setAttribute("paquete", compras.get(i).getPaqueteComprado().getDataPaquete());
+	                        request.setAttribute("paquete", compras.get(i).getPaqueteComprado().getDataPaquete().getNombre());
 	                    }
 	                }
 	            }
 	        }
         }
-    	 // Set job offer as an attribute to pass it to the JSP.
+        
         request.setAttribute("oferta_laboral", oferta);
 
         // Forward the request to the JSP for rendering.

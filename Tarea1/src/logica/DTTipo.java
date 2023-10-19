@@ -47,4 +47,7 @@ public class DTTipo {
 		return this.fechaDeAlta;
 	}
 	
+    public LocalDate calcularVencimiento(LocalDate fecha) {
+    	return fecha.plusDays(this.duracion);
+    }
 }

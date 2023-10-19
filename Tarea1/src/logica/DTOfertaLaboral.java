@@ -136,4 +136,9 @@ public class DTOfertaLaboral {
 	public byte[] getImagen() {
 		return imagen;
 	}
+	
+	public boolean estaVigente() {
+		LocalDate venc = this.dataTipo.calcularVencimiento(this.fechaDeAlta);
+		return venc.isAfter(LocalDate.now());
+	}
 }
