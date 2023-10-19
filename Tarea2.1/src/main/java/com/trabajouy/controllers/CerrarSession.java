@@ -6,7 +6,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import logica.Keyword;
 import logica.LoginEstado;
+import logica.ManejadorOfertaLaboral;
 import logica.Usuario;
 
 /**
@@ -22,6 +24,9 @@ public class CerrarSession extends HttpServlet {
     
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	Usuario usrLogueado = (Usuario) request.getSession().getAttribute("usuario_logueado");
+    	ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
+		Keyword[] keys = mol.getKeywords();
+		request.setAttribute("keywords", keys);
     	if (usrLogueado != null) {
     		request.getSession().setAttribute("usuario_logueado", null);
     		request.getSession().setAttribute("estado_sesion", null);

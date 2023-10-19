@@ -112,7 +112,7 @@
 										<select multiple class="form-select form-control custom-select" aria-label="Multiple select example" name="keywords" id="keywords">
 										
 											<%
-											String[] k = (String[]) request.getAttribute("keywords");
+											String[] k = (String[]) request.getAttribute("nomKeywords");
 							    			for (int j = 0; j < k.length; j++) {
 											%>
 											

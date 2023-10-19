@@ -13,6 +13,7 @@ import excepciones.YaSePostuloException;
 import logica.Empresa;
 import logica.Factory;
 import logica.IUsuario;
+import logica.Keyword;
 import logica.LoginEstado;
 import logica.ManejadorOfertaLaboral;
 import logica.ManejadorUsuario;
@@ -47,6 +48,9 @@ public class PostulacionAOfertaLaboral extends HttpServlet {
         // Obtén el nickname del usuario en sesión (si hay uno)
         HttpSession session = request.getSession();
         Usuario user = (Usuario) session.getAttribute("usuario_logueado");
+        ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
+		Keyword[] keys = mol.getKeywords();
+		request.setAttribute("keywords", keys);
 		boolean seCumpleExcepcion = false;
 
         if (user == null) {

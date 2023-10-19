@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpSession;
 import logica.DTPaquete;
 import logica.Factory;
 import logica.IOfertaLaboral;
+import logica.Keyword;
 import logica.ManejadorOfertaLaboral;
 import logica.ManejadorTipo;
 import logica.Paquete;
@@ -42,6 +43,9 @@ public class CompraPaquete extends HttpServlet {
     	Factory fac = Factory.getInstance();
     	IOfertaLaboral col = fac.getIOfertaLaboral();
     	ManejadorTipo mtip = ManejadorTipo.getInstancia();
+    	ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
+		Keyword[] keys = mol.getKeywords();
+		request.setAttribute("keywords", keys);
     	
 		HttpSession session = request.getSession();
      	Usuario user = (Usuario) session.getAttribute("usuario_logueado");
@@ -49,9 +53,9 @@ public class CompraPaquete extends HttpServlet {
      	String nombrePaq = request.getParameter("paquete");
      	try {
      		col.comprarPaquete(user.getNickname(),nombrePaq);
-     		request.setAttribute("compraExitosa", true);
+     		request.getSession().setAttribute("compraExitosa", true);
      	}catch (PaqueteYaCompradoException e) {
-     		request.setAttribute("compraExitosa", false);
+     		request.getSession().setAttribute("compraExitosa", false);
      	}
      	
      	Paquete paq = mtip.buscarPaquete(nombrePaq);

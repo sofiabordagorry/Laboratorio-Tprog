@@ -29,6 +29,9 @@ public class ConsultaUsuario extends HttpServlet {
     	Factory fac = Factory.getInstance();
     	IUsuario iurs = fac.getIUsuario();
     	String nicknameConsultado = request.getParameter("usuarioConsultado");
+    	ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
+		Keyword[] keys = mol.getKeywords();
+		request.setAttribute("keywords", keys);
     	
     	// Obtén el nickname del usuario en sesión (si hay uno)
     	HttpSession session = request.getSession();

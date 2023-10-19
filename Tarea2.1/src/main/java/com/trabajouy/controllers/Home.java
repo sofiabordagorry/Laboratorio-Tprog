@@ -27,21 +27,11 @@ public class Home extends HttpServlet {
     	if (misesion.getAttribute("loginEstado") == null) {
     		misesion.setAttribute("loginEstado", LoginEstado.NO_LOGIN);
     		misesion.setAttribute("filtro", null);
-    		
-    		Factory fac = Factory.getInstance();
-    		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
-    		
-    		/*IOfertaLaboral iol = fac.getIOfertaLaboral();
-    		try {
-    			DTOfertaLaboral dtols[] = iol.listarTodasOfertasLaborales();
-    			request.getSession().setAttribute("listaOfertasLaborales", dtols);
-    		} catch (OfertasLaboralesNoExistenNingunaException e) {
-    			e.printStackTrace();
-    		}*/
-    		
-    		Keyword[] keys = mol.getKeywords();
-    		request.getSession().setAttribute("keywords", keys);
     	}
+		
+		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
+		Keyword[] keys = mol.getKeywords();
+		request.setAttribute("keywords", keys);
     	misesion.setAttribute("filterType", "AllOffers");
     	Factory fac = Factory.getInstance();
 		

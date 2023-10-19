@@ -6,6 +6,8 @@ import excepciones.NoHayPaquetesException;
 import logica.DTPaquete;
 import logica.Factory;
 import logica.IOfertaLaboral;
+import logica.Keyword;
+import logica.ManejadorOfertaLaboral;
 import logica.ManejadorTipo;
 import logica.ManejadorUsuario;
 import logica.Paquete;
@@ -36,6 +38,9 @@ public class ConsultaPaquete extends HttpServlet {
     	Factory fac = Factory.getInstance();
     	IOfertaLaboral col = fac.getIOfertaLaboral();
     	String nombrePaq = request.getParameter("paqueteConsultado");
+    	ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
+		Keyword[] keys = mol.getKeywords();
+		request.setAttribute("keywords", keys);
     	
     	request.setAttribute("paqComprado", false);
     	request.setAttribute("esEmpresa", false);
@@ -48,7 +53,7 @@ public class ConsultaPaquete extends HttpServlet {
      		nicknameEnSesion = user.getNickname();
      		if (murs.existeEmpresa(nicknameEnSesion)) {
  	            // Es una empresa, puede comprar
-  	        request.setAttribute("esEmpresa", true);
+     			request.setAttribute("esEmpresa", true);
  	       }
      
      	}

@@ -14,6 +14,8 @@ import excepciones.TipoRepetidoException;
 import logica.DTTipo;
 import logica.Factory;
 import logica.IOfertaLaboral;
+import logica.Keyword;
+import logica.ManejadorOfertaLaboral;
 import logica.ManejadorTipo;
 
 /**
@@ -34,6 +36,9 @@ public class ConsultaTipo extends HttpServlet {
     	IOfertaLaboral iol = fac.getIOfertaLaboral();
     	ManejadorTipo mti = ManejadorTipo.getInstancia();
     	String tipoConsultado = request.getParameter("tipo_consultado");
+    	ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
+		Keyword[] keys = mol.getKeywords();
+		request.setAttribute("keywords", keys);
  	
     	if(tipoConsultado == null) {
     		String[] types = null;

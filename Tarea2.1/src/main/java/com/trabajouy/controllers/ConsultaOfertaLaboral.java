@@ -13,6 +13,7 @@ import logica.Usuario;
 import logica.Compra;
 import logica.DTOfertaLaboral;
 import logica.Empresa;
+import logica.Keyword;
 import logica.ManejadorOfertaLaboral;
 import logica.ManejadorUsuario;
 
@@ -34,6 +35,9 @@ public class ConsultaOfertaLaboral extends HttpServlet {
     	String ofertaConsultada = (String) request.getParameter("oferta_consultada");
     	DTOfertaLaboral oferta = ManejadorOfertaLaboral.getInstance().buscarOfertaLaboral(ofertaConsultada).getDataOfertaLaboral();
         ManejadorUsuario murs = ManejadorUsuario.getInstancia();
+        ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
+		Keyword[] keys = mol.getKeywords();
+		request.setAttribute("keywords", keys);
         
         if(user != null) {
 	        Empresa emp = murs.buscarEmpresa(user.getNickname());

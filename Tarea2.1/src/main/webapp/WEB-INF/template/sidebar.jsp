@@ -64,7 +64,7 @@
 		</a>
 		<div id="keywordList" class="collapse">
 			<%
-				Keyword[] keys = (Keyword[]) request.getSession().getAttribute("keywords");
+				Keyword[] keys = (Keyword[]) request.getAttribute("keywords");
 				for(int i = 0; i < keys.length; i++) {
 			%>
 			<a class="list-group-item list-group-item-action" href="Ofertas?filtro=<%= keys[i].getNombre() %>"><%= keys[i].getNombre() %></a>

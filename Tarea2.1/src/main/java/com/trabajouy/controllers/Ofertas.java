@@ -11,6 +11,8 @@ import excepciones.OfertasLaboralesNoExistenNingunaException;
 import logica.DTOfertaLaboral;
 import logica.Factory;
 import logica.IOfertaLaboral;
+import logica.Keyword;
+import logica.ManejadorOfertaLaboral;
 import logica.Usuario;
 
 /**
@@ -29,6 +31,9 @@ public class Ofertas extends HttpServlet {
     
     public static void aplicarFiltros(HttpServletRequest request) {
     	String keywordFiltro = request.getParameter("filtro");
+    	ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
+		Keyword[] keys = mol.getKeywords();
+		request.setAttribute("keywords", keys);
     	if (keywordFiltro != null) {
     		request.setAttribute("filtro", keywordFiltro);
     	} else {

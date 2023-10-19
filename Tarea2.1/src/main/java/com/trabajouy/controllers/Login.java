@@ -39,6 +39,7 @@ public class Login extends HttpServlet {
 		String password = request.getParameter("password");
 		LoginEstado nuevoEstado = LoginEstado.NO_LOGIN;
 		RequestDispatcher dispatcher;
+		
 
 		// chequea contraseña
 		Usuario usr = ManejadorUsuario.getInstancia().buscarUsuario(login);
@@ -61,6 +62,9 @@ public class Login extends HttpServlet {
 			dispatcher = request.getRequestDispatcher("/WEB-INF/home/login.jsp");
 		}
 
+		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
+		Keyword[] keys = mol.getKeywords();
+		request.setAttribute("keywords", keys);
 		objSesion.setAttribute("estado_sesion", nuevoEstado);
 		dispatcher.forward(request, response);
 	}

@@ -44,6 +44,7 @@ public class AltaDeOfertaLaboral extends HttpServlet {
 		HttpSession session = request.getSession();
 		Usuario usuario = (Usuario) session.getAttribute("usuario_logueado");
 		ManejadorTipo mtip = ManejadorTipo.getInstancia();
+		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
 		if (usuario != null) {
 			ManejadorUsuario musr = ManejadorUsuario.getInstancia();
 			Map<String, Empresa> emp = musr.getMapEmpresas();
@@ -65,8 +66,8 @@ public class AltaDeOfertaLaboral extends HttpServlet {
 				}
 				
 				//obtengo las keywords
-				ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
 				Keyword[] key = mol.getKeywords();
+				request.setAttribute("keywords", key);
 				if (key == null) {
 					request.setAttribute("hayKeys", false);
 				}else {
@@ -74,7 +75,7 @@ public class AltaDeOfertaLaboral extends HttpServlet {
 					for (int j = 0; j < key.length; j++) {
 						keywords[j] =  key[j].getNombre();
 		            }
-					request.setAttribute("keywords", keywords);
+					request.setAttribute("nomKeywords", keywords);
 					request.setAttribute("hayKeys", true);
 
 				}
@@ -100,6 +101,7 @@ public class AltaDeOfertaLaboral extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		Usuario usuario = (Usuario) session.getAttribute("usuario_logueado");
+		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
 
 		ManejadorTipo mtip = ManejadorTipo.getInstancia();
 		
@@ -134,7 +136,6 @@ public class AltaDeOfertaLaboral extends HttpServlet {
 		}
 		
 		//obtengo las keywords
-		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
 		Keyword[] key = mol.getKeywords();
 		if (key == null) {
 			request.setAttribute("hayKeys", false);
