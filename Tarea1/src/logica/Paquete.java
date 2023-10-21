@@ -13,7 +13,7 @@ public class Paquete {
 	private List<PaqueteTipo> paquetesTipos;
 	private LocalDate fechaDeAlta;
 	private byte[] imagen;
-	private Compra compra;
+	private List<Compra> compras;
 	
 	public Paquete(String nombre, String descripcion, int periodoDeValidez, float descuento, float costoAsociado, LocalDate fechaDeAlta) {
 		this.nombre = nombre;
@@ -83,6 +83,10 @@ public class Paquete {
     } 	
 
     public boolean agregarTipo(int cantidad, Tipo tip) {
+    	if (!this.getCompra().isEmpty()) {
+    		return false;
+    	}
+    	else {
         List<PaqueteTipo> paqT = this.getPaquetesTipos();
         PaqueteTipo paqti;
         for (int i = 0; i < paqT.size(); i++) {
@@ -97,8 +101,8 @@ public class Paquete {
         float costo = (tip.getCosto() * cantidad) *((100-this.descuento)/100);
         sumarACosto(costo);
         return true;
+    	}
     }
-    
     public void sumarACosto(float cost) {
         this.costoAsociado = this.costoAsociado + cost;
     }
@@ -111,11 +115,11 @@ public class Paquete {
 		this.imagen = imagen;
 	}
 
-	public Compra getCompra() {
-		return compra;
+	public List<Compra> getCompra() {
+		return compras;
 	}
 
-	public void setCompra(Compra compra) {
-		this.compra = compra;
+	public void setCompra(List<Compra> compra) {
+		this.compras = compra;
 	}
 }
