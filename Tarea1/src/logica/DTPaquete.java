@@ -1,6 +1,10 @@
 package logica;
 
 import java.time.LocalDate;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 
 public class DTPaquete {
 	private String nombre;
@@ -13,6 +17,9 @@ public class DTPaquete {
 	private LocalDate fechaDeAlta;
 	private byte[] imagen;
 	
+	public DTPaquete() {
+		
+	}
 	
 	public DTPaquete(String nombre, String descripcion, int periodoDeValidez, float descuento, float costoAsociado, DTPaqueteTipo[] dtpaq, LocalDate fechaDeAlta) {
 		this.nombre = nombre;
@@ -43,6 +50,8 @@ public class DTPaquete {
 		this.fechaDeAlta = fechaDeAlta;
 		this.imagen = image;
 	}
+	
+	// --- getters ---
 	
 	public String getNombre() {
 		return this.nombre;
@@ -83,5 +92,44 @@ public class DTPaquete {
 	public byte[] getImagen() {
 		return imagen;
 	}
-}
+	
+	// --- setters ---
+	
+	public void setNombre(String nombre) {
+	    this.nombre = nombre;
+	}
 
+	public void setDescripcion(String descripcion) {
+	    this.descripcion = descripcion;
+	}
+
+	public void setPeriodoDeValidez(int periodoDeValidez) {
+	    this.periodoDeValidez = periodoDeValidez;
+	}
+
+	public void setDescuento(float descuento) {
+	    this.descuento = descuento;
+	}
+
+	public void setFecha(LocalDate fecha) {
+	    this.fecha = fecha;
+	}
+
+	public void setCostoAsociado(float costoAsociado) {
+	    this.costoAsociado = costoAsociado;
+	}
+
+	public void setPaquetesTipos(DTPaqueteTipo[] paquetesTipos) {
+	    this.paquetesTipos = paquetesTipos;
+	}
+
+	public void setFechaDeAlta(LocalDate fechaDeAlta) {
+	    this.fechaDeAlta = fechaDeAlta;
+	}
+
+	public void setImagen(byte[] imagen) {
+	    this.imagen = imagen;
+	}
+
+	
+}
