@@ -2,6 +2,11 @@ package logica;
 
 import java.util.Map;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DTUsuario {
 	private String nickname;
 	private String nombre;
@@ -10,6 +15,11 @@ public class DTUsuario {
 	private String contrasenia;
 	private byte[] imagen;
 	private Map<String, DTOfertaLaboral> ofertasLaborales;
+	
+	//CONSTRUCTORES
+	public DTUsuario() {
+		
+	}
 	
 	public DTUsuario(String nickname, String nombre, String apellido, String correo, Map<String, DTOfertaLaboral> ofertasLaborales) {
 		this.nickname = nickname;
@@ -52,7 +62,7 @@ public class DTUsuario {
 		this.contrasenia = contrasenia;
 		this.imagen = image;
 	}
-	
+	//GETTERS
 	public String getNickname() {
 		return this.nickname;
 	}
@@ -72,10 +82,6 @@ public class DTUsuario {
 	public Map<String, DTOfertaLaboral> getDTOfertasLaborales() {
 		return this.ofertasLaborales;
 	}
-	
-	public String toString() {
-		return this.nickname;
-	}
 
 	public String getContrasenia() {
 		return contrasenia;
@@ -83,5 +89,39 @@ public class DTUsuario {
 
 	public byte[] getImagen() {
 		return imagen;
+	}
+	
+	//SETTERS
+	public void setNickname(String nickname) {
+	    this.nickname = nickname;
+	}
+
+	public void setNombre(String nombre) {
+	    this.nombre = nombre;
+	}
+
+	public void setApellido(String apellido) {
+	    this.apellido = apellido;
+	}
+
+	public void setCorreo(String correo) {
+	    this.correo = correo;
+	}
+
+	public void setContrasenia(String contrasenia) {
+	    this.contrasenia = contrasenia;
+	}
+
+	public void setImagen(byte[] imagen) {
+	    this.imagen = imagen;
+	}
+
+	public void setOfertasLaborales(Map<String, DTOfertaLaboral> ofertasLaborales) {
+	    this.ofertasLaborales = ofertasLaborales;
+	}
+
+	//OTRAS FUNCIONES
+	public String toString() {
+		return this.nickname;
 	}
 }

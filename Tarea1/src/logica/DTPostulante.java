@@ -4,10 +4,20 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DTPostulante extends DTUsuario {
 	private LocalDate fechaDeNacimiento;
 	private String nacionalidad;
 	private List<DTPostulacion> postulaciones;
+	
+	//CONSTRUCTORES
+	public DTPostulante() {
+		
+	}
 	
 	public DTPostulante(String nickname, String nombre, String apellido, String correo, LocalDate fechaDeNacimiento, String nacionalidad) {
 		super(nickname, nombre, apellido, correo);
@@ -40,6 +50,7 @@ public class DTPostulante extends DTUsuario {
 		this.postulaciones = posts;
 	}
 
+	//GETTERS
 	public LocalDate getFechaDeNacimiento() {
 		return this.fechaDeNacimiento;
 	}
@@ -48,11 +59,27 @@ public class DTPostulante extends DTUsuario {
 		return this.nacionalidad;
 	}
 	
+	public List<DTPostulacion> getPostulaciones() {
+		return postulaciones;
+	}
+	
+	//SETTERS
+	public void setFechaDeNacimiento(LocalDate fechaDeNacimiento) {
+	    this.fechaDeNacimiento = fechaDeNacimiento;
+	}
+
+	public void setNacionalidad(String nacionalidad) {
+	    this.nacionalidad = nacionalidad;
+	}
+
+	public void setPostulaciones(List<DTPostulacion> postulaciones) {
+	    this.postulaciones = postulaciones;
+	}
+	
+	//OTRAS FUNCIONES
 	public String toString() {
 		return this.getNombre() + "(" + this.getCorreo() + ")";
 	}
 	
-	public List<DTPostulacion> getPostulaciones() {
-		return postulaciones;
-	}
+
 }
