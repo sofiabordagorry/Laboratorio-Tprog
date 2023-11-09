@@ -8,7 +8,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="C:/Users/Usuario/git/tpgr18/Tarea1/jcalendar-1.4.jar"/>
 	<classpathentry kind="lib" path="/Tarea2.1/src/main/webapp/WEB-INF/lib/angus-activation.jar"/>
 	<classpathentry kind="lib" path="/Tarea2.1/src/main/webapp/WEB-INF/lib/angus-mail.jar"/>
 	<classpathentry kind="lib" path="/Tarea2.1/src/main/webapp/WEB-INF/lib/FastInfoset.jar"/>
@@ -33,5 +32,6 @@
 	<classpathentry kind="lib" path="/Tarea2.1/src/main/webapp/WEB-INF/lib/stax-ex.jar"/>
 	<classpathentry kind="lib" path="/Tarea2.1/src/main/webapp/WEB-INF/lib/streambuffer.jar"/>
 	<classpathentry kind="lib" path="/Tarea2.1/src/main/webapp/WEB-INF/lib/woodstox-core.jar"/>
+	<classpathentry kind="lib" path="jcalendar-1.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
