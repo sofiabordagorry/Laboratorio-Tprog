@@ -1,6 +1,7 @@
 package logica;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
@@ -63,7 +64,12 @@ public class Compra {
 
 	public DTCompra getDataCompra() {
 		DTPaquete paqueteCompra = this.paqComprado.getDataPaquete();
-		DTCompra compra = new DTCompra(this.fechaCompra, this.fechaVencimiento, paqueteCompra, null);
+		LocalDate fechaCompra = this.fechaCompra;
+		LocalDate fechaVencimiento = this.fechaVencimiento;
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		String fechaCompraString = fechaCompra.format(formatter);
+		String fechaVencimientoString = fechaVencimiento.format(formatter);
+		DTCompra compra = new DTCompra(fechaCompraString, fechaVencimientoString, paqueteCompra, null);
 		return compra;
 	}
 }

@@ -1,6 +1,7 @@
 package logica;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,6 +12,7 @@ public class Postulante extends Usuario {
 	private LocalDate fechaNacimiento;
 	private String nacionalidad;
 	private List<Postulacion> postulaciones;
+	private List<OfertaLaboral> ofertasFavoritas = new LinkedList<>();//nuevo atributo tarea3
 
 	public Postulante(String nickname, String nombre, String apellido, String correo, LocalDate fechaNacimiento, String nacionalidad) {
 		super(nickname, nombre, apellido, correo);
@@ -33,7 +35,6 @@ public class Postulante extends Usuario {
 		this.fechaNacimiento = fechaNacimiento;
 		this.nacionalidad = nacionalidad;
 		this.postulaciones = new LinkedList<>();
-
 	}
 	
 	public LocalDate getFechaNacimiento() {
@@ -74,18 +75,24 @@ public class Postulante extends Usuario {
 	}
 	
 	public DTPostulante getDataPostulante() {
-		Map<String, DTOfertaLaboral> ofertasLab = new HashMap<>();
+		DTOfertaLaboral[] dtsOL;
 		List<DTPostulacion> postulaciones = new LinkedList<>();
 		List<Postulacion> post = new LinkedList<>();
 		post = this.getPostulaciones();
 		if (post != null) {
+			dtsOL = new DTOfertaLaboral[post.size()];
+			int i = 0;
 			for (Postulacion p : post) {
 				postulaciones.add(p.getDataPostulacion());
-				OfertaLaboral dtOL = p.getOfertaLaboral();
-				ofertasLab.put(dtOL.getNombre(), dtOL.getDataOfertaLaboral());
+				dtsOL[i] = p.getOfertaLaboral().getDataOfertaLaboral();
+				i++;
 			}
-		}
-		DTPostulante dtP = new DTPostulante(this.getNickname(), this.getNombre(), this.getApellido(), this.getCorreo(), this.getFechaNacimiento(), this.getNacionalidad(), ofertasLab, postulaciones);
+		} else
+			dtsOL = new DTOfertaLaboral[0];
+		LocalDate fechaNacimiento = this.getFechaNacimiento();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		String fechaNacimientoString = fechaNacimiento.format(formatter);
+		DTPostulante dtP = new DTPostulante(this.getNickname(), this.getNombre(), this.getApellido(), this.getCorreo(), this.getContrasenia(), fechaNacimientoString, this.getNacionalidad(), dtsOL, postulaciones, this.getImage());
 		return dtP;
 	}
 	
@@ -99,5 +106,17 @@ public class Postulante extends Usuario {
 		this.setApellido(apellido);
 		this.setFechaNacimiento(fechaNac);
 		this.setNacionalidad(nacionalidad);
+	}
+	
+	public boolean esFavorito(OfertaLaboral oferta) {
+		return this.ofertasFavoritas.contains(oferta);
+	}
+	
+	public void agregarOfertaFav(OfertaLaboral oferta) {
+		this.ofertasFavoritas.add(oferta);
+	}
+	
+	public void quitarOfertaFav(OfertaLaboral oferta) {
+		this.ofertasFavoritas.remove(oferta);
 	}
 }

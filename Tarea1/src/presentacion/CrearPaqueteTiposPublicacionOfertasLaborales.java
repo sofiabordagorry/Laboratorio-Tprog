@@ -23,6 +23,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JFrame;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
@@ -217,7 +218,8 @@ public class CrearPaqueteTiposPublicacionOfertasLaborales extends JInternalFrame
 		Date fechaDeAltaU = dateChooserFechaDeAlta.getDate();
 		
 		if(checkForm()) {
-			LocalDate fechaDeAlta = this.convertirDateALocalDate(fechaDeAltaU);
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+			String fechaDeAlta = dateFormat.format(fechaDeAltaU);
 			DTPaquete datosPaquete = new DTPaquete(nombreU, descripcionU, Integer.parseInt(periodoValidezU), Float.parseFloat(descuentoU), 
 																	null, fechaDeAlta);
 			

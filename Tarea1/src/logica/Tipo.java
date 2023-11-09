@@ -1,6 +1,7 @@
 package logica;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Tipo {
 	private String nombre;
@@ -45,8 +46,11 @@ public class Tipo {
     }
     
     public DTTipo getDataTipo() {
+    	LocalDate fechaDeAlta = this.getFechaDeAlta();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		String fechaDeAltaString = fechaDeAlta.format(formatter);
     	return new DTTipo(this.getNombre(), this.getDescripcion(), this.getExposicion(), 
-										this.getDuracion(), this.getCosto(), this.getFechaDeAlta());
+										this.getDuracion(), this.getCosto(), fechaDeAltaString);
     } 
     
     public LocalDate calcularVencimiento(LocalDate fecha) {

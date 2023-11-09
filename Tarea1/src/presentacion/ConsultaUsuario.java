@@ -301,16 +301,16 @@ public class ConsultaUsuario extends JInternalFrame {
 		textNombre.setText(u.getNombre());
 		textApellido.setText(u.getApellido());
 		textCorreo.setText(u.getCorreo());
-		Map<String, DTOfertaLaboral> ofLab = u.getDTOfertasLaborales();
+		DTOfertaLaboral[] ofLab = u.getDTOfertasLaborales();
 		DTOfertaLaboral[] arrOfertas;
 		if(ofLab != null) {
-			arrOfertas = new DTOfertaLaboral[ofLab.size()];
-			int i = 0;
-			for(Map.Entry<String, DTOfertaLaboral> entry : u.getDTOfertasLaborales().entrySet()) {
-				arrOfertas[i] = entry.getValue();
-				i++;
-			}
-			DefaultComboBoxModel<DTOfertaLaboral> modelOL = new DefaultComboBoxModel<DTOfertaLaboral>(arrOfertas);
+			//arrOfertas = new DTOfertaLaboral[ofLab.length];
+//			int i = 0;
+//			for(Map.Entry<String, DTOfertaLaboral> entry : u.getDTOfertasLaborales().entrySet()) {
+//				arrOfertas[i] = entry.getValue();
+//				i++;
+//			}
+			DefaultComboBoxModel<DTOfertaLaboral> modelOL = new DefaultComboBoxModel<DTOfertaLaboral>(ofLab);
 			comboBoxOL.setModel(modelOL);
 		}
 		

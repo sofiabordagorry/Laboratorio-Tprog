@@ -50,8 +50,11 @@ public class ManejadorOfertaLaboral {
             return keys;
         }
 	}
-
 	
+	public Map<String, Keyword> getMapKeywords() {
+		return keywords;
+	}
+
 	public void agregarOfertaLaboral(OfertaLaboral ofl) {
 		this.ofertasLaborales.put(ofl.getNombre(), ofl);
 	}

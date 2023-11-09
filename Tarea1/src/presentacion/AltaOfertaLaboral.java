@@ -410,13 +410,17 @@ public class AltaOfertaLaboral extends JInternalFrame {
 		
 		
 		if(checkForm()) {
-			LocalDate fechaDeAltaU = this.convertirDateALocalDate(fechaAltaU);
-			Map<String, DTKeyword> keys = new HashMap<>();
-			for(String k : keysSeleccionadas) 
-				keys.put(k, new DTKeyword(k));
+			DTKeyword[] keys = new DTKeyword[keysSeleccionadas.size()];
+			int i = 0;
+			for(String k : keysSeleccionadas) { 
+				keys[i] = new DTKeyword(k);
+				i++;
+			}
 			
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			String fechaDeAltaU = dateFormat.format(fechaAltaU);
 			DTOfertaLaboral datosOL = new DTOfertaLaboral(nombreU, descripcionU, ciudadU, departamentoU, horarioU, 
-																		Float.parseFloat(remuneracionU), fechaDeAltaU, keys);
+																		Float.parseFloat(remuneracionU), fechaDeAltaU.toString(), keys);
 			try {
 				col.ingresarDatosOL(empresaU.getNickname(), tipPubOLU.getNombre(), datosOL);
 				

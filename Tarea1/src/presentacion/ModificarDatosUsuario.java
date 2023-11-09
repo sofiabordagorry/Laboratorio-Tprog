@@ -7,6 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.time.ZoneId;
 import java.util.Date;
 //import java.util.Map;
@@ -325,7 +326,14 @@ public class ModificarDatosUsuario extends JInternalFrame {
         	textFechaNomEmp.setVisible(false);
         	textFechaNomEmp.setText(".");
         	dateChooser.setVisible(true);
-        	Date date = Date.from(selectedPost.getFechaDeNacimiento().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        	String dateString = selectedPost.getFechaDeNacimiento();
+        	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        	Date date = new Date();
+        	try {
+        		date = dateFormat.parse(dateString);
+        	} catch (Exception e) {
+                e.printStackTrace();
+            }
         	dateChooser.setDate(date);
         	dateChooser.setEnabled(true);
         	textNacLink.setText(selectedPost.getNacionalidad());

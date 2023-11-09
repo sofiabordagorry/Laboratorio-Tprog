@@ -1,43 +1,30 @@
 package logica;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DTEmpresa extends DTUsuario {
 	private String descripcion;
 	private String link;
-	private List<DTCompra>  paqComprados;
+	private List<DTCompra>  paqComprados = new ArrayList<>();
 	
-	public DTEmpresa(String nickname, String nombre, String apellido, String correo, Map<String, DTOfertaLaboral> ofertasLaborales, String descripcion, String link) {
-		super(nickname, nombre, apellido, correo, ofertasLaborales);
-		this.descripcion = descripcion;
-		this.link = link;
-	}
-
-	public DTEmpresa(String nickname, String nombre, String apellido, String correo, String descripcion, String link) {
-		super(nickname, nombre, apellido, correo);
-		this.descripcion = descripcion;
-		this.link = link;
+	public DTEmpresa() {
+		super();
 	}
 	
-	public DTEmpresa(String nickname, String nombre, String apellido, String correo, Map<String, DTOfertaLaboral> ofertasLaborales, String descripcion, String link, String contrasenia) {
-		super(nickname, nombre, apellido, correo, ofertasLaborales, contrasenia);
-		this.descripcion = descripcion;
-		this.link = link;
-	}
+	// ---------------- Constructores ------------------
 	
-	public DTEmpresa(String nickname, String nombre, String apellido, String correo, Map<String, DTOfertaLaboral> ofertasLaborales, String descripcion, String link, String contrasenia, byte[] image) {
-		super(nickname, nombre, apellido, correo, ofertasLaborales, contrasenia, image);
-		this.descripcion = descripcion;
-		this.link = link;
-	}
-
-		public DTEmpresa(String nickname, String nombre, String apellido, String correo, Map<String, DTOfertaLaboral> ofertasLaborales, String descripcion, String link, List<DTCompra> paquetesComprados) {
-		super(nickname, nombre, apellido, correo, ofertasLaborales);
+	public DTEmpresa(String nickname, String nombre, String apellido, String correo, String contrasenia, DTOfertaLaboral[] ofertasLaborales, String descripcion, String link, List<DTCompra> paquetesComprados, byte[] image) {
+		super(nickname, nombre, apellido, correo, ofertasLaborales, contrasenia, null);
 		this.descripcion = descripcion;
 		this.link = link;
 		this.paqComprados = paquetesComprados;
 	}
+		
+	// ------------ Getters --------------
 	
 	public String toString() {
 		return this.getNombre() + this.getApellido() + "(" + this.getCorreo() + ")";
@@ -53,5 +40,19 @@ public class DTEmpresa extends DTUsuario {
 	
 	public List<DTCompra> getPaqComprados() {
 		return paqComprados;
+	}
+	
+	// ------------ Setters --------------
+	
+	public void setDescripcion(String descripcion) {
+	    this.descripcion = descripcion;
+	}
+
+	public void setLink(String link) {
+	    this.link = link;
+	}
+
+	public void setPaqComprados(List<DTCompra> paqComprados) {
+	    this.paqComprados = paqComprados;
 	}
 }

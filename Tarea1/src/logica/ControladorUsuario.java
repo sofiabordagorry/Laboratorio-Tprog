@@ -5,6 +5,10 @@ package logica;
 import excepciones.ExisteUnUsuarioYaRegistradoException;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 import excepciones.EmpresaSinOfertasException;
@@ -24,7 +28,7 @@ public class ControladorUsuario implements IUsuario {
 	public ControladorUsuario() {
 	}
 	
-	private boolean existeMail(String mail) {
+	public boolean existeMail(String mail) {
 		ManejadorUsuario musr = ManejadorUsuario.getInstancia();
 		Postulante[] pos = musr.getPostulantes();
 		Empresa[] emp = musr.getEmpresas();
@@ -51,7 +55,10 @@ public class ControladorUsuario implements IUsuario {
 		Usuario user = musr.buscarUsuario(post.getNickname());
 		if (user == null) {
 			if (this.existeMail(post.getCorreo()) == false) {
-				Postulante new_user = new Postulante(post.getNickname(), post.getNombre(), post.getApellido(), post.getCorreo(), post.getFechaDeNacimiento(), post.getNacionalidad(), post.getContrasenia(), post.getImagen());
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+				String fechaDeNacimiento = post.getFechaDeNacimiento();
+				LocalDate fechaNacimientoLocalDate = LocalDate.parse(fechaDeNacimiento, formatter);
+				Postulante new_user = new Postulante(post.getNickname(), post.getNombre(), post.getApellido(), post.getCorreo(), fechaNacimientoLocalDate, post.getNacionalidad(), post.getContrasenia(), post.getImagen());
 				musr.agregarPostulante(new_user);
 			} else {
 				throw new ExisteUnUsuarioYaRegistradoException("Existe un usuario ya registrado con ese mail");
@@ -104,7 +111,10 @@ public class ControladorUsuario implements IUsuario {
 
             for (int i = 0; i < postulantes.length; i++) {
                 postulante = postulantes[i];
-                dtpost[i] = new DTPostulante(postulante.getNickname(), postulante.getNombre(), postulante.getApellido(), postulante.getCorreo(), postulante.getFechaNacimiento(), postulante.getNacionalidad());
+                LocalDate fechaNacimiento = postulantes[i].getFechaNacimiento();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                String fechaNacimientoString = fechaNacimiento.format(formatter);
+                dtpost[i] = new DTPostulante(postulante.getNickname(), postulante.getNombre(), postulante.getApellido(), postulante.getCorreo(), postulante.getContrasenia(), fechaNacimientoString, postulante.getNacionalidad(), null, null, postulante.getImage());
             }
             return dtpost; 
         }  else throw new PostulantesNoExistenException("No existen postulantes");
@@ -141,7 +151,7 @@ public class ControladorUsuario implements IUsuario {
             	}
         }
     
-    public void ingresarPostulacion(String CVReducido, String motivacion, LocalDate fecha, String empresa, String oferta, String postulante) throws YaSePostuloException {
+    public void ingresarPostulacion(String CVReducido, String motivacion, LocalDate fecha, String empresa, String oferta, String postulante, String video) throws YaSePostuloException {
         ManejadorUsuario musr = ManejadorUsuario.getInstancia();
         Postulante pos = musr.buscarPostulante(postulante);
         Boolean existe =  pos.existePostulacion(oferta);
@@ -149,7 +159,7 @@ public class ControladorUsuario implements IUsuario {
         OfertaLaboral ofl = emp.buscarOferta(oferta);
         
         if (!existe) {
-        	Postulacion postu = new Postulacion(fecha, CVReducido, motivacion, pos, ofl);
+        	Postulacion postu = new Postulacion(fecha, CVReducido, motivacion, pos, ofl, video);
         	pos.agregarPostulacion(postu);
         	ofl.agregarPostulacion(postu);	
         }
@@ -270,4 +280,162 @@ public class ControladorUsuario implements IUsuario {
 			throw new UsuarioSinPostulacionesException("No existen postulaciones."); 
 		}
 	}
-}
+
+	public DTEmpresa buscarEmpresa(String nickname) {
+		ManejadorUsuario musr = ManejadorUsuario.getInstancia();
+		Empresa emp = musr.buscarEmpresa(nickname);
+		if (emp != null)
+			return emp.getDataEmpresa();
+		else 
+			return new DTEmpresa();
+	}
+	
+	public DTUsuario buscarDTUsuario(String nickname) {
+		Empresa usr = ManejadorUsuario.getInstancia().buscarEmpresa(nickname);
+		if (usr != null) {
+			DTEmpresa emp = usr.getDataEmpresa();
+			return emp;
+		}
+		Postulante usrp = ManejadorUsuario.getInstancia().buscarPostulante(nickname);
+		if (usrp != null) {
+			DTPostulante dtp = usrp.getDataPostulante();
+			return dtp;
+		}
+		return new DTUsuario();
+		//return new DTUsuario("h", "sadf", "asdf", "asdf", "cd",new byte[0]);
+	}
+	
+	public DTUsuario buscarDTUsuarioPorMail(String nickname) {
+		ManejadorUsuario musr = ManejadorUsuario.getInstancia();
+		Usuario usr = musr.buscarUsuarioPorMail(nickname);
+		if (usr != null)
+			return usr.getDataUsuario();
+		else
+			return new DTUsuario();
+	}
+	
+	public boolean verificacionDePostulantePostulacion(String nicknameConsultado, String nombreOferta, String nombreEmp) {
+    	ManejadorUsuario musr = ManejadorUsuario.getInstancia();
+    	Postulante usr = musr.buscarPostulante(nicknameConsultado);
+    	List<Postulacion> postulaciones = usr.getPostulaciones();
+    	boolean correcto = false;
+    	for(Postulacion post : postulaciones) {
+    		if(post.getOfertaLaboral().getNombre().equals(nombreOferta) && 
+    				post.getOfertaLaboral().getEmpresaCreadora().equals(nombreEmp))
+    			correcto = true;
+    	}
+    	
+    	return correcto;
+    }
+	
+	public DTPostulante dataPostulante(String nickname) {
+		ManejadorUsuario cusr = ManejadorUsuario.getInstancia();
+		Postulante post = cusr.buscarPostulante(nickname);
+		DTPostulante dtpost = post.getDataPostulante();
+		return dtpost;
+	}
+	
+	public boolean verificacionCompraPaq(String emp, String nombrePaq) {
+		ManejadorUsuario cusr = ManejadorUsuario.getInstancia();
+		Empresa empresa = cusr.buscarEmpresa(emp);
+		return empresa.verificarCompra(nombrePaq);
+	}
+	
+
+	public boolean estaSiguiendo(String seguidor, String seguido) {
+		ManejadorUsuario musr = ManejadorUsuario.getInstancia();
+		Usuario usr = musr.buscarUsuario(seguidor);
+		return usr.sigue(seguido);
+	}
+	
+	public void seguirUsuario(String seguidor, String seguido) {
+		ManejadorUsuario musr = ManejadorUsuario.getInstancia();
+		Usuario usr1 = musr.buscarUsuario(seguidor);
+		Usuario usr2 = musr.buscarUsuario(seguido);
+		usr1.seguirUsuario(usr2);
+	}
+	
+	
+	public void dejarSeguimiento(String seguidor, String seguido) {
+		ManejadorUsuario musr = ManejadorUsuario.getInstancia();
+		Usuario usr1 = musr.buscarUsuario(seguidor);
+		Usuario usr2 = musr.buscarUsuario(seguido);
+		usr1.dejarSeguir(usr2);
+	}
+	
+	public DTPostulante crearDTPostulante(String nickname, String nom, String apellido, String correo, String contrasenia, String nacionalidad, 
+			String fechaDeNacimiento, byte[] image) {
+//		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");	
+//		LocalDate fechaNacimientoLocalDate = LocalDate.parse(fechaDeNacimiento, formatter);
+		DTPostulante dtpost = new DTPostulante(nickname, nom, apellido, correo, contrasenia, fechaDeNacimiento, nacionalidad, null, null, image);
+		return dtpost;
+	}
+	
+	public DTEmpresa crearDTEmpresa(String nickname, String nom, String apellido, String correo, String contrasenia, 
+			String descripcion, String link, byte[] image) {
+	DTEmpresa dtemp = new DTEmpresa(nickname, nom, apellido, correo, contrasenia, null, descripcion, link, null, image);
+	return dtemp;
+	}
+	
+	public String[] obtenerSeguidores(String nickname) {
+		ManejadorUsuario musr = ManejadorUsuario.getInstancia();
+		Usuario user = musr.buscarUsuario(nickname);
+		List<Usuario> listSeguidores = user.getSeguidores();
+		String[] seguidores = new String[listSeguidores.size()];
+		int i = 0;
+		for(Usuario u: listSeguidores) {
+			seguidores[i] = u.getNickname();
+			i++;
+		}
+		return seguidores;
+	}
+	
+	public String[] obtenerSeguidos(String nickname) {
+		ManejadorUsuario musr = ManejadorUsuario.getInstancia();
+		Usuario user = musr.buscarUsuario(nickname);
+		List<Usuario> listSeguidos = user.getUsuariosSeguidos();
+		String[] seguidos = new String[listSeguidos.size()];
+		int i = 0;
+		for(Usuario u: listSeguidos) {
+			seguidos[i] = u.getNickname();
+			i++;
+		}
+		return seguidos;
+	}
+
+	public boolean esFavorito(String nickname, String oferta) {
+		ManejadorUsuario musr = ManejadorUsuario.getInstancia();
+		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
+		OfertaLaboral ofta = mol.buscarOfertaLaboral(oferta);
+		Postulante pos = musr.buscarPostulante(nickname);
+		return pos.esFavorito(ofta);
+	}
+	
+	public void quitarOfertaFav(String nickname, String oferta) {
+		ManejadorUsuario musr = ManejadorUsuario.getInstancia();
+		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
+		OfertaLaboral ofta = mol.buscarOfertaLaboral(oferta);
+		Postulante pos = musr.buscarPostulante(nickname);
+		pos.quitarOfertaFav(ofta);
+		ofta.quitarFavorito();
+	}
+	
+	public void agregarOfertaFav(String nickname, String oferta) {
+		ManejadorUsuario musr = ManejadorUsuario.getInstancia();
+		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
+		OfertaLaboral ofta = mol.buscarOfertaLaboral(oferta);
+		Postulante pos = musr.buscarPostulante(nickname);
+		pos.agregarOfertaFav(ofta);
+		ofta.agregarFavorito();
+	}
+
+	public boolean existePostulante(String nickname) {
+    	ManejadorUsuario murs = ManejadorUsuario.getInstancia();
+    	return murs.existePostulante(nickname);
+	}
+	public boolean existeEmpresa(String nickname) {
+    	ManejadorUsuario murs = ManejadorUsuario.getInstancia();
+    	return murs.existeEmpresa(nickname);
+	}
+
+ }

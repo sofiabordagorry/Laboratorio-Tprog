@@ -1,6 +1,7 @@
 package logica;
 
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
@@ -77,8 +78,8 @@ public class Empresa extends Usuario {
 	
 	public DTEmpresa getDataEmpresaALO() {
 		return new DTEmpresa(this.getNickname(), this.getNombre(), this.getApellido(),
-				this.getCorreo(), this.getDescripcion(), 
-				this.getLink());
+				this.getCorreo(), null, null, this.getDescripcion(), 
+				this.getLink(), null, null);
 	}
 	
 	
@@ -95,7 +96,12 @@ public class Empresa extends Usuario {
 	        for (int i = 0; i < ofertas.length; i++) {
 	        	oferta = (OfertaLaboral) ofertas[i];
 	        	if (oferta.estaVigente()) {
-                dof.add(new DTOfertaLaboral(oferta.getNombre(), oferta.getDescripcion(), oferta.getCiudad(), oferta.getDepartamento(), oferta.getHorario(), oferta.getRemuneracion(), oferta.getFechaDeAlta()));
+	        	      // Crea un objeto DateTimeFormatter con el formato deseado
+	                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+	                // Convierte el LocalDate a una cadena
+	                String dateString = oferta.getFechaDeAlta().format(formatter);
+	                dof.add(new DTOfertaLaboral(oferta.getNombre(), oferta.getDescripcion(), oferta.getCiudad(), oferta.getDepartamento(), oferta.getHorario(), oferta.getRemuneracion(), dateString));
 	        	}
 	        }
 	    }
@@ -113,8 +119,13 @@ public class Empresa extends Usuario {
 	    	for (Map.Entry<String, OfertaLaboral> entry : ofertasLaborales.entrySet()) {
 	        	oferta = entry.getValue();
 	        	if (oferta.getEstado() == EstadoOL.Ingresada) {
-                dof[cont] = new DTOfertaLaboral(oferta.getNombre(), oferta.getDescripcion(), oferta.getCiudad(), oferta.getDepartamento(), oferta.getHorario(), oferta.getRemuneracion(), oferta.getFechaDeAlta());
-	        	cont++;
+	        		// Crea un objeto DateTimeFormatter con el formato deseado
+	                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+	                // Convierte el LocalDate a una cadena
+	                String dateString = oferta.getFechaDeAlta().format(formatter);
+	                dof[cont] = new DTOfertaLaboral(oferta.getNombre(), oferta.getDescripcion(), oferta.getCiudad(), oferta.getDepartamento(), oferta.getHorario(), oferta.getRemuneracion(), dateString);
+		        	cont++;
 	        	}
 	        }
 	    	if (cont==0)
@@ -129,18 +140,22 @@ public class Empresa extends Usuario {
 	}
 
 	public DTEmpresa getDataEmpresa() {
-		Map<String, DTOfertaLaboral> ofertasLab = new HashMap<>();
 		Map<String, OfertaLaboral> oferl = this.getOfertasLaborales();
+		DTOfertaLaboral[] dtsOL;
 		if (oferl != null) {
+			dtsOL = new DTOfertaLaboral[oferl.size()];
+			int i = 0;
 			for (Map.Entry<String, OfertaLaboral> entry : oferl.entrySet()) {
-				ofertasLab.put(entry.getKey(), entry.getValue().getDataOfertaLaboral());
+				dtsOL[i] = entry.getValue().getDataOfertaLaboral();
+				i++;
 			}
-		}
+		} else 
+			dtsOL = new DTOfertaLaboral[0];
 		List<DTCompra> paquetesComprados = new LinkedList<DTCompra>();
 		for (Compra comp : this.paqComprados) {
 			paquetesComprados.add(comp.getDataCompra());
 		}
-			DTEmpresa dtE = new DTEmpresa(this.getNickname(), this.getNombre(), this.getApellido(), this.getCorreo(), ofertasLab/*, this.getNombreEmpresa()*/, this.getDescripcion(), this.getLink(), paquetesComprados);
+			DTEmpresa dtE = new DTEmpresa(this.getNickname(), this.getNombre(), this.getApellido(), this.getCorreo(), this.getContrasenia(), dtsOL, this.getDescripcion(), this.getLink(), paquetesComprados, this.getImage());
 			return dtE;
 	}
 	

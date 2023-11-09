@@ -1,10 +1,7 @@
 package logica;
 
-import java.util.Map;
-
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
-
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class DTUsuario {
@@ -14,14 +11,11 @@ public class DTUsuario {
 	private String correo;
 	private String contrasenia;
 	private byte[] imagen;
-	private Map<String, DTOfertaLaboral> ofertasLaborales;
+	private DTOfertaLaboral[] ofertasLaborales = null;
 	
-	//CONSTRUCTORES
-	public DTUsuario() {
-		
-	}
+	public DTUsuario() {}
 	
-	public DTUsuario(String nickname, String nombre, String apellido, String correo, Map<String, DTOfertaLaboral> ofertasLaborales) {
+	/* public DTUsuario(String nickname, String nombre, String apellido, String correo, Map<String, DTOfertaLaboral> ofertasLaborales) {
 		this.nickname = nickname;
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -51,9 +45,9 @@ public class DTUsuario {
 		this.correo = correo;
 		this.ofertasLaborales = ofertasLaborales;
 		this.contrasenia = contrasenia;
-	}
+	} */
 	
-	public DTUsuario(String nickname, String nombre, String apellido, String correo, Map<String, DTOfertaLaboral> ofertasLaborales, String contrasenia, byte[] image) {
+	public DTUsuario(String nickname, String nombre, String apellido, String correo, DTOfertaLaboral[] ofertasLaborales, String contrasenia, byte[] image) {
 		this.nickname = nickname;
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -62,7 +56,7 @@ public class DTUsuario {
 		this.contrasenia = contrasenia;
 		this.imagen = image;
 	}
-	//GETTERS
+	
 	public String getNickname() {
 		return this.nickname;
 	}
@@ -79,19 +73,24 @@ public class DTUsuario {
 		return this.correo;
 	}
 	
-	public Map<String, DTOfertaLaboral> getDTOfertasLaborales() {
+	public DTOfertaLaboral[] getDTOfertasLaborales() {
 		return this.ofertasLaborales;
+	}
+	
+	public String toString() {
+		return this.nickname;
 	}
 
 	public String getContrasenia() {
-		return contrasenia;
+		return this.contrasenia;
 	}
 
 	public byte[] getImagen() {
-		return imagen;
+		return this.imagen;
 	}
 	
-	//SETTERS
+	//Setters
+	
 	public void setNickname(String nickname) {
 	    this.nickname = nickname;
 	}
@@ -116,12 +115,8 @@ public class DTUsuario {
 	    this.imagen = imagen;
 	}
 
-	public void setOfertasLaborales(Map<String, DTOfertaLaboral> ofertasLaborales) {
+	public void setOfertasLaborales(DTOfertaLaboral[] ofertasLaborales) {
 	    this.ofertasLaborales = ofertasLaborales;
 	}
-
-	//OTRAS FUNCIONES
-	public String toString() {
-		return this.nickname;
-	}
+	
 }

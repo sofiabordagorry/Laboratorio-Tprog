@@ -1,6 +1,7 @@
 package logica;
 
 import excepciones.KeywordsNoExistenException;
+import excepciones.NoExistenOfertasSeleccionarPostulanteException;
 import excepciones.TipoPubNoExistenException;
 import excepciones.OfertaLaboralRepetidaException;
 import excepciones.OfertasLaboralesNoExistenNingunaException;
@@ -20,6 +21,7 @@ import excepciones.TipoYaAgragadoException;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 public class ControladorOfertaLaboral implements IOfertaLaboral {
 	public ControladorOfertaLaboral() {
@@ -96,12 +98,19 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 		ManejadorTipo mtTip = ManejadorTipo.getInstancia();
 		Tipo tip = mtTip.buscarTipo(nombreTipo);
 		
-		Map<String, Keyword> keys = new HashMap<>();	
-		for (Map.Entry<String, DTKeyword> entry: ofl.getKeywords().entrySet()) 
-			keys.put(entry.getKey(), mol.buscarKeyword(entry.getKey()));
+		DTKeyword[] dtk = ofl.getKeywords();
 		
+		Map<String, Keyword> keys = new HashMap<>();	
+		for (int i = 0 ; i < dtk.length ; i++) 
+			keys.put(dtk[i].getNombre(), mol.buscarKeyword(dtk[i].getNombre()));
+		
+		 // Crea un objeto DateTimeFormatter con el formato de tu cadena
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        // Parsea la cadena a LocalDate sin bloque try-catch
+        LocalDate date = LocalDate.parse(ofl.getFechaDeAlta(), formatter);
 		OfertaLaboral olNueva = new OfertaLaboral(ofl.getNombre(), ofl.getDescripcion(), ofl.getCiudad(), ofl.getDepartamento(), 
-															ofl.getHorario(), ofl.getRemuneracion(), ofl.getFechaDeAlta(), ofl.getCostoAsociado(), tip, keys, emp, ofl.getImagen());
+															ofl.getHorario(), ofl.getRemuneracion(), date, ofl.getCostoAsociado(), tip, keys, emp, ofl.getImagen());
 		
 		mol.agregarOfertaLaboral(olNueva);
 
@@ -115,8 +124,12 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 		if (paq != null)
 			throw new PaqueteRepetidoException("Ya existe el Paquete " + datosPaquete.getNombre()); 
 		
+		String fechaDeAltaString = datosPaquete.getFechaDeAlta();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		LocalDate fechaDeAlta = LocalDate.parse(fechaDeAltaString, formatter);
+		
 		Paquete nuevoPaquete = new Paquete(datosPaquete.getNombre(), datosPaquete.getDescripcion(), datosPaquete.getPeriodoDeValidez(), 
-		datosPaquete.getDescuento(), 0, datosPaquete.getFechaDeAlta(), datosPaquete.getImagen());
+		datosPaquete.getDescuento(), 0, fechaDeAlta, datosPaquete.getImagen());
 		
 		mtTip.agregarPaquete(nuevoPaquete);
 	}
@@ -151,10 +164,10 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 		String[] dpa = new String[mapPaquetes.size()];
 		int iter =0;
 		for (Map.Entry<String, Paquete> entry : mapPaquetes.entrySet()) {
-			if (entry.getValue().getCompra() == null) {
-				dpa[iter] = entry.getKey();
-				iter++;
-			}
+			//if (entry.getValue().getCompra() == null) {
+			dpa[iter] = entry.getKey();
+			iter++;
+			//}
 		}
 		return dpa;
 	}
@@ -250,12 +263,84 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 			}
 		}
 		
-		if (dataPostulacion == null) {
-			System.out.println("dtpost null");
-		}
-		
 		return dataPostulacion;
 	}
 	
+	public DTOfertaLaboral obtenerDTOfertaLaboral(String oferta) {
+		DTOfertaLaboral dtoferta = ManejadorOfertaLaboral.getInstance().buscarOfertaLaboral(oferta).getDataOfertaLaboral();
+		return dtoferta;
+	}
+
+	public DTEmpresa buscarEmpresa(String nickname) {
+		return ManejadorUsuario.getInstancia().buscarEmpresa(nickname).getDataEmpresa();
+	}
+
+	public DTKeyword[] getDTKeywords(){
+		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
+		Keyword[] keys = mol.getKeywords();
+		DTKeyword[] dtkeys = new DTKeyword[keys.length];
+		for(int i = 0; i < keys.length; i++)
+			dtkeys[i] = new DTKeyword(keys[i].getNombre());
+		
+		return dtkeys;
+	}
+	
+	public DTPaquete buscarPaquete(String nombre) {
+		return ManejadorTipo.getInstancia().buscarPaquete(nombre).getDataPaquete();
+	}
+	
+	public DTOfertaLaboral[] getOfertasSeleccionarPosutlante(String nick) throws NoExistenOfertasSeleccionarPostulanteException {
+		ManejadorUsuario musr = ManejadorUsuario.getInstancia();
+		Empresa emp = musr.buscarEmpresa(nick);
+		Map<String, OfertaLaboral> ofertas = emp.getOfertasLaborales();
+		int cantOfertas = 0;
+		for(Map.Entry<String, OfertaLaboral> entry : ofertas.entrySet()) {
+			if(!entry.getValue().estaVigente() && entry.getValue().getEstado() == EstadoOL.Confirmada)
+				cantOfertas++;
+		}
+		if (cantOfertas == 0)
+			throw new NoExistenOfertasSeleccionarPostulanteException("No existen ofertas para selccionar postulaciones");
+		else {
+			int i = 0;
+			DTOfertaLaboral[] dtsOL = new DTOfertaLaboral[cantOfertas];
+			for(Map.Entry<String, OfertaLaboral> entry : ofertas.entrySet()) {
+				if(!entry.getValue().estaVigente() && entry.getValue().getEstado() == EstadoOL.Confirmada) {
+					dtsOL[i] = entry.getValue().getDataOfertaLaboral();
+					i++;
+				}
+			}
+			
+			return dtsOL;
+		}
+	}
+	
+	public DTOfertaLaboral buscarOfertaLaboral(String nombre) {
+		ManejadorOfertaLaboral col = ManejadorOfertaLaboral.getInstance();
+		OfertaLaboral oflab = col.buscarOfertaLaboral(nombre);
+		return oflab.getDataOfertaLaboral();
+	}
+	
+	public boolean estaVigenteOferta(String nombreOferta) {
+    	ManejadorOfertaLaboral mofe = ManejadorOfertaLaboral.getInstance();
+    	OfertaLaboral oferta = mofe.buscarOfertaLaboral(nombreOferta);
+    	return oferta.estaVigente();
+	}
+	
+	public void realizarSeleccion(String nombreOL, String[] rankings) {
+    	ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
+    	OfertaLaboral oferta = mol.buscarOfertaLaboral(nombreOL);
+    	oferta.realizarSeleccion(rankings);
+	}
+	
+	public DTTipo buscarTipo(String nombre) {
+    	ManejadorTipo mti = ManejadorTipo.getInstancia();
+    	return mti.buscarTipo(nombre).getDataTipo();
+	}
+	
+	public String obtenerVideoPostulacion(String nickname, String oferta) {
+		DTPostulacion pos = dataPostulacion(nickname, oferta);
+		return pos.obtenerIDDeVideo();
+	};
+
 }
 

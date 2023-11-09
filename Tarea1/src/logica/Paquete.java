@@ -2,6 +2,7 @@ package logica;
 
 import java.util.List;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Paquete {
@@ -23,6 +24,7 @@ public class Paquete {
 		this.costoAsociado = costoAsociado;
 		this.paquetesTipos = new ArrayList<>();
 		this.fechaDeAlta = fechaDeAlta;
+		this.compras = new ArrayList<>();
 	}
 	
 	public Paquete(String nombre, String descripcion, int periodoDeValidez, float descuento, float costoAsociado, LocalDate fechaDeAlta, byte[] image) {
@@ -32,6 +34,7 @@ public class Paquete {
 		this.descuento = descuento;
 		this.costoAsociado = costoAsociado;
 		this.paquetesTipos = new ArrayList<>();
+		this.compras = new ArrayList<>();
 		this.fechaDeAlta = fechaDeAlta;
 		this.setImagen(image);
 	}
@@ -71,36 +74,40 @@ public class Paquete {
     
 
     public DTPaquete getDataPaquete() {
-    	PaqueteTipo paq;
-    	PaqueteTipo[] paqarr = this.paquetesTipos.toArray(new PaqueteTipo[0]);
-    	DTPaqueteTipo[] dtpaq = new DTPaqueteTipo[this.paquetesTipos.size()];
-    	for (int i = 0; i < this.paquetesTipos.size(); i++) {
-			paq = paqarr[i];
-			dtpaq[i] = paq.getDTPaqueteTipo();
+
+    	List<PaqueteTipo> paquetes = this.paquetesTipos;
+    	DTPaqueteTipo[] dtpaq = new DTPaqueteTipo[paquetes.size()];
+    	for (int i = 0; i < paquetes.size(); i++) {
+			dtpaq[i] = paquetes.get(i).getDTPaqueteTipo();
 		}
+    	
+    	LocalDate fechaDeAlta = this.fechaDeAlta;
+    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    	String fechaDeAltaString = fechaDeAlta.format(formatter);
+    	
     	return new DTPaquete(this.getNombre(), this.getDescripcion(), this.getPeriodoDeValidez(), 
-				this.getDescuento(), this.getCostoAsociado(), dtpaq, this.fechaDeAlta);
+				this.getDescuento(), this.getCostoAsociado(), dtpaq, fechaDeAltaString);
     } 	
 
     public boolean agregarTipo(int cantidad, Tipo tip) {
-    	if (!this.getCompra().isEmpty()) {
+    	if (this.getCompra() != null && this.getCompra().size() > 0) {
     		return false;
-    	}
-    	else {
-        List<PaqueteTipo> paqT = this.getPaquetesTipos();
-        PaqueteTipo paqti;
-        for (int i = 0; i < paqT.size(); i++) {
-            paqti = paqT.get(i);
-            if (paqti.getTipo().getNombre() == tip.getNombre())
-                return false;
-        }
-        //No hay link entre Paquete y Tipo
-        paqti = new PaqueteTipo(cantidad, tip);
-        this.agregarPaqueteTipo(paqti);
-        //arrglo del costoAsociado
-        float costo = (tip.getCosto() * cantidad) *((100-this.descuento)/100);
-        sumarACosto(costo);
-        return true;
+    	} else {
+	        List<PaqueteTipo> paqT = this.getPaquetesTipos();
+	        PaqueteTipo paqti;
+	        for (int i = 0; i < paqT.size(); i++) {
+	            paqti = paqT.get(i);
+	            if (paqti.getTipo().getNombre() == tip.getNombre())
+	                return false;
+	        }
+	        //No hay link entre Paquete y Tipo
+	        paqti = new PaqueteTipo(cantidad, tip);
+	        this.agregarPaqueteTipo(paqti);
+	        //arrglo del costoAsociado
+	        float costo = (tip.getCosto() * cantidad) *((100-this.descuento)/100);
+	        System.out.println("costo = " + costo);
+	        sumarACosto(costo);
+	        return true;
     	}
     }
     public void sumarACosto(float cost) {

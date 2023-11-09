@@ -1,34 +1,31 @@
 package logica;
 
-import java.time.LocalDate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-
-
-@XmlAccessorType(XmlAccessType.FIELD)
 public class DTPostulacion {
-	private LocalDate fecha;
+	private String fecha;
 	private String cVReducido;
 	private String motivacion;
 	private String postulante;
 	private String oferta;
+	private int rank;
+	private String video;
 
-	//CONSTRUCTORES
 	public DTPostulacion() {
-		
 	}
 	
-	public DTPostulacion(LocalDate fecha, String CVReducido, String motivacion, String postulante, String oferta) {
+	public DTPostulacion(String fecha, String CVReducido, String motivacion, String postulante, String oferta, int rank, String video) {
 		this.fecha = fecha;
 		this.cVReducido = CVReducido;
 		this.motivacion = motivacion;
 		this.postulante = postulante;
-		this.oferta=oferta;
+		this.oferta = oferta;
+		this.rank = rank;
+		this.video=video;
 	}
 	
-	//GETTERS
-	public LocalDate getFecha() {
+	public String getFecha() {
 		return this.fecha;
 	}
 	
@@ -48,9 +45,16 @@ public class DTPostulacion {
 		return this.oferta;
 	}
 	
-	//SETTERS
-	public void setFecha(LocalDate fecha) {
+	public int getRank() {
+		return this.rank;
+	}
+	
+	public void setFecha(String fecha) {
 	    this.fecha = fecha;
+	}
+	
+	public String getVideo() {
+		return this.video;
 	}
 
 	public void setCVReducido(String cVReducido) {
@@ -68,4 +72,30 @@ public class DTPostulacion {
 	public void setOferta(String oferta) {
 	    this.oferta = oferta;
 	}
+	
+	public void setRank(int rank) {
+		this.rank = rank;
+	}
+	
+	public void setVideo(String video) {
+		this.video=video;
+	}
+	
+    public String obtenerIDDeVideo() {
+    	String videoURL = this.video;
+        String videoID = null;
+
+        if (videoURL != null && !videoURL.isEmpty()) {
+            String regex = "(?<=watch\\?v=|/videos/|embed\\/|youtu.be\\/|\\/v\\/|\\/e\\/|watch\\?v%3D|%2Fvideos%2F|%2Fv%2F|%2Fe%2F|%2F|%3Fv%3D|%26v%3D)[^#\\?\\&\\s]*";
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(videoURL);
+            
+            if (matcher.find()) {
+                videoID = matcher.group();
+            }
+        }
+
+        return videoID;
+    }
+
 }

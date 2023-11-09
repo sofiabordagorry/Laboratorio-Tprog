@@ -11,17 +11,17 @@ public class DTPaquete {
 	private String descripcion;
 	private int periodoDeValidez;
 	private float descuento;
-	private LocalDate fecha;
+	private String fecha;
 	private float costoAsociado;
 	private DTPaqueteTipo[] paquetesTipos;
-	private LocalDate fechaDeAlta;
+	private String fechaDeAlta;
 	private byte[] imagen;
 	
 	public DTPaquete() {
 		
 	}
 	
-	public DTPaquete(String nombre, String descripcion, int periodoDeValidez, float descuento, float costoAsociado, DTPaqueteTipo[] dtpaq, LocalDate fechaDeAlta) {
+	public DTPaquete(String nombre, String descripcion, int periodoDeValidez, float descuento, float costoAsociado, DTPaqueteTipo[] dtpaq, String fechaDeAlta) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.periodoDeValidez = periodoDeValidez;
@@ -32,7 +32,7 @@ public class DTPaquete {
 
 	}
 	
-	public DTPaquete(String nombre, String descripcion, int periodoDeValidez, float descuento, DTPaqueteTipo[] dtpaq, LocalDate fechaDeAlta) {
+	public DTPaquete(String nombre, String descripcion, int periodoDeValidez, float descuento, DTPaqueteTipo[] dtpaq, String fechaDeAlta) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.periodoDeValidez = periodoDeValidez;
@@ -41,7 +41,7 @@ public class DTPaquete {
 		this.fechaDeAlta = fechaDeAlta;
 	}
 	
-	public DTPaquete(String nombre, String descripcion, int periodoDeValidez, float descuento, DTPaqueteTipo[] dtpaq, LocalDate fechaDeAlta, byte[] image) {
+	public DTPaquete(String nombre, String descripcion, int periodoDeValidez, float descuento, DTPaqueteTipo[] dtpaq, String fechaDeAlta, byte[] image) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.periodoDeValidez = periodoDeValidez;
@@ -50,7 +50,7 @@ public class DTPaquete {
 		this.fechaDeAlta = fechaDeAlta;
 		this.imagen = image;
 	}
-	
+
 	// --- getters ---
 	
 	public String getNombre() {
@@ -69,7 +69,7 @@ public class DTPaquete {
 		return this.descuento;
 	}
 	
-	public LocalDate getFecha() {
+	public String getFecha() {
 		return this.fecha;
 	}
 	
@@ -85,7 +85,7 @@ public class DTPaquete {
 		return this.paquetesTipos;
 	}
 	
-	public LocalDate getFechaDeAlta() {
+	public String getFechaDeAlta() {
 		return this.fechaDeAlta;
 	}
 
@@ -111,7 +111,7 @@ public class DTPaquete {
 	    this.descuento = descuento;
 	}
 
-	public void setFecha(LocalDate fecha) {
+	public void setFecha(String fecha) {
 	    this.fecha = fecha;
 	}
 
@@ -123,7 +123,7 @@ public class DTPaquete {
 	    this.paquetesTipos = paquetesTipos;
 	}
 
-	public void setFechaDeAlta(LocalDate fechaDeAlta) {
+	public void setFechaDeAlta(String fechaDeAlta) {
 	    this.fechaDeAlta = fechaDeAlta;
 	}
 

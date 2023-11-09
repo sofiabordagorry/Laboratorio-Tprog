@@ -2,6 +2,7 @@ package logica;
 
 import excepciones.TipoPubNoExistenException;
 import excepciones.KeywordsNoExistenException;
+import excepciones.NoExistenOfertasSeleccionarPostulanteException;
 import excepciones.OfertaLaboralRepetidaException;
 import excepciones.OfertasLaboralesNoExistenNingunaException;
 import excepciones.PaqueteRepetidoException;
@@ -37,6 +38,13 @@ public interface IOfertaLaboral {
 	public abstract DTOfertaLaboral[] listarTodasOfertasLaborales() throws OfertasLaboralesNoExistenNingunaException;
 	public abstract DTPostulacion dataPostulacion(String nicknameP, String nombre);
 	public abstract void comprarPaquete(String empresa, String paquete) throws PaqueteYaCompradoException;
-
-
+	public abstract DTOfertaLaboral obtenerDTOfertaLaboral(String ofertaConsultada);
+	public abstract DTKeyword[] getDTKeywords();
+	public abstract DTPaquete buscarPaquete(String nombre);
+	public abstract DTOfertaLaboral[] getOfertasSeleccionarPosutlante(String nick) throws NoExistenOfertasSeleccionarPostulanteException;
+	public abstract DTOfertaLaboral buscarOfertaLaboral(String nombre);
+	public abstract boolean estaVigenteOferta(String nombreOferta);
+	public abstract void realizarSeleccion(String nombreOL, String[] rankings);
+	public abstract DTTipo buscarTipo(String nombre);
+	public abstract String obtenerVideoPostulacion(String nickname, String oferta);
 }

@@ -9,16 +9,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 //import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.toedter.calendar.JDateChooser;
 
 import excepciones.ExisteUnUsuarioYaRegistradoException;
+import logica.DTCompra;
 import logica.DTEmpresa;
+import logica.DTOfertaLaboral;
+import logica.DTPostulacion;
 import logica.DTPostulante;
 //import logica.Factory;
 import logica.IUsuario;
@@ -428,10 +435,11 @@ public class RegistrarUsuario extends JInternalFrame {
         if(checkForm()) {
     		String contrasenia = new String(passwordField.getPassword());
         	if (esPostulante) {
-
-        		DTPostulante postInfo = new DTPostulante(textField.getText(), textFieldNombre.getText(), textFieldApellido.getText(), textFieldMail.getText(), dateChooser.getDate().toInstant()
-        			      .atZone(ZoneId.systemDefault())
-        			      .toLocalDate(), textFieldNacionalidad.getText(), contrasenia);
+        		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        		String dateString = sdf.format(dateChooser.getDate());
+        		DTPostulante postInfo = new DTPostulante(textField.getText(), textFieldNombre.getText(), textFieldApellido.getText(), textFieldMail.getText(), contrasenia, dateString, 
+        				textFieldNacionalidad.getText(), null, null, null);
+        		
         		try {
             		iUsuario.ingresarDatosPostulante(postInfo);
             		JOptionPane.showMessageDialog(this, "Usuario registrado con éxito", "Registrar Usuario",
@@ -443,7 +451,7 @@ public class RegistrarUsuario extends JInternalFrame {
         					JOptionPane.ERROR_MESSAGE);
         		}
         	} else {
-        		DTEmpresa empInfo = new DTEmpresa(textField.getText(), textFieldNombre.getText(), textFieldApellido.getText(), textFieldMail.getText(), null, textPane.getText(), textField_2.getText(), contrasenia);
+        		DTEmpresa empInfo = new DTEmpresa(textField.getText(), textFieldNombre.getText(), textFieldApellido.getText(), textFieldMail.getText(), contrasenia, null, textPane.getText(), textField_2.getText(), null, null);
         		try {
         			iUsuario.ingresarDatosEmpresa(empInfo);
             		JOptionPane.showMessageDialog(this, "Usuario registrado con éxito", "Registrar Usuario",
@@ -507,12 +515,6 @@ public class RegistrarUsuario extends JInternalFrame {
 		}
 		if(contraseniaRepetida.length == 0) {
 			JOptionPane.showMessageDialog(this, "Debe repetir la contraseña", "Registrar Usuario", 
-					JOptionPane.ERROR_MESSAGE);
-			return false;
-		}
-		
-		if(contrasenia.length < 8) {
-			JOptionPane.showMessageDialog(this, "La contraseña debe tener al menos 8 caracteres", "Registrar Usuario", 
 					JOptionPane.ERROR_MESSAGE);
 			return false;
 		}

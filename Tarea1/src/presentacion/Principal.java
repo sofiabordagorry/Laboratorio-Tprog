@@ -11,6 +11,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import publicar.WebServices;
 import logica.IUsuario;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -60,6 +61,8 @@ public class Principal {
 		Factory fac = Factory.getInstance();
 		IOL = fac.getIOfertaLaboral();
 		IU = fac.getIUsuario();
+		WebServices p = new WebServices();
+        p.publicar();
 		 
 		creConPaqTipOLInternalFrame = new ConsultaPaqueteDeTiposDeOfertaLaboral(IOL);
 		creConPaqTipOLInternalFrame.setLocation(25,25);

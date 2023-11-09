@@ -34,6 +34,7 @@ import logica.DTOfertaLaboral;
 	public class PostularAOfertaLaboral  extends JInternalFrame {
 		private JTextArea textAreaCV;
 		private JTextArea textAreaMotivacion;
+	    private JTextField textFieldVideo;
 		private JComboBox<DTEmpresa> comboBoxEmpresas;
 		private JComboBox<DTOfertaLaboral> comboBoxOfertaLaboral;
 		private JComboBox<DTPostulante> comboBoxPostulante;
@@ -174,13 +175,34 @@ import logica.DTOfertaLaboral;
 	        getContentPane().add(textAreaMotivacion, gbc_textAreaMotivacion);
 	        textAreaMotivacion.setColumns(10);
 	        
+
+	        JLabel lblNewLabel_6 = new JLabel("Video (opcional): ");
+	        lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 12));
+	        GridBagConstraints gbc_lblNewLabel_6 = new GridBagConstraints();
+	        gbc_lblNewLabel_6.anchor = GridBagConstraints.EAST;
+	        gbc_lblNewLabel_6.insets = new Insets(5, 5, 5, 5);
+	        gbc_lblNewLabel_6.gridx = 0;
+	        gbc_lblNewLabel_6.gridy = 11;
+	        getContentPane().add(lblNewLabel_6, gbc_lblNewLabel_6);
+	        
+	   
+	        textFieldVideo = new JTextField();
+	        GridBagConstraints gbc_textFieldVideo = new GridBagConstraints();
+	        gbc_textFieldVideo.gridwidth = 3;
+	        gbc_textFieldVideo.insets = new Insets(0, 0, 5, 0);
+	        gbc_textFieldVideo.fill = GridBagConstraints.HORIZONTAL;
+	        gbc_textFieldVideo.gridx = 1;
+	        gbc_textFieldVideo.gridy = 11;
+	        getContentPane().add(textFieldVideo, gbc_textFieldVideo);
+	        textFieldVideo.setColumns(10);
+	        
 	        JLabel lblNewLabel_9 = new JLabel("Fecha de postulación:");
 	        lblNewLabel_9.setFont(new Font("Tahoma", Font.PLAIN, 12));
 	        GridBagConstraints gbc_lblNewLabel_9 = new GridBagConstraints();
 	        gbc_lblNewLabel_9.anchor = GridBagConstraints.EAST;
 	        gbc_lblNewLabel_9.insets = new Insets(5, 5, 5, 5);
 	        gbc_lblNewLabel_9.gridx = 1;
-	        gbc_lblNewLabel_9.gridy = 11;
+	        gbc_lblNewLabel_9.gridy = 12;
 	        getContentPane().add(lblNewLabel_9, gbc_lblNewLabel_9);
 	        
 	        dateChooser = new JDateChooser();
@@ -188,7 +210,7 @@ import logica.DTOfertaLaboral;
 	        gbc_dateChooser.insets = new Insets(0, 0, 5, 5);
 	        gbc_dateChooser.fill = GridBagConstraints.BOTH;
 	        gbc_dateChooser.gridx = 2;
-	        gbc_dateChooser.gridy = 11;
+	        gbc_dateChooser.gridy = 12;
 	        getContentPane().add(dateChooser, gbc_dateChooser);
 	        
 	        JButton btnCancelar = new JButton("Cancelar");
@@ -204,7 +226,7 @@ import logica.DTOfertaLaboral;
 	        gbc_btnCancelar.anchor = GridBagConstraints.WEST;
 	        gbc_btnCancelar.insets = new Insets(0, 110, 5, 5);
 	        gbc_btnCancelar.gridx = 1;
-	        gbc_btnCancelar.gridy = 12;
+	        gbc_btnCancelar.gridy = 14;
 	        getContentPane().add(btnCancelar, gbc_btnCancelar);
 	        
 	        JButton btnAceptar = new JButton("Aceptar");
@@ -219,7 +241,8 @@ import logica.DTOfertaLaboral;
 	        gbc_btnAceptar.anchor = GridBagConstraints.WEST;
 	        gbc_btnAceptar.insets = new Insets(0, 20, 5, 5);
 	        gbc_btnAceptar.gridx = 2;
-	        gbc_btnAceptar.gridy = 12;
+
+	        gbc_btnAceptar.gridy = 14;
 	        getContentPane().add(btnAceptar, gbc_btnAceptar);
 	        
 	        this.addInternalFrameListener(new InternalFrameAdapter() {
@@ -234,6 +257,7 @@ import logica.DTOfertaLaboral;
 			
 			String CVReducidoU = this.textAreaCV.getText();
 			String motivacionU = this.textAreaMotivacion.getText();
+			String videoU = this.textFieldVideo.getText();
 			Date fechaAltaU = this.dateChooser.getDate();
 			DTEmpresa empresaU = (DTEmpresa) this.comboBoxEmpresas.getSelectedItem();
 			DTPostulante postulanteU = (DTPostulante) this.comboBoxPostulante.getSelectedItem();
@@ -244,7 +268,7 @@ import logica.DTOfertaLaboral;
 				LocalDate fechaDeAltaU = this.convertirDateALocalDate(fechaAltaU);
 				
 				try {
-					controlUsr.ingresarPostulacion(CVReducidoU, motivacionU, fechaDeAltaU, empresaU.getNickname(), ofertaLaboralU.getNombre(), postulanteU.getNickname());
+					controlUsr.ingresarPostulacion(CVReducidoU, motivacionU, fechaDeAltaU, empresaU.getNickname(), ofertaLaboralU.getNombre(), postulanteU.getNickname(), videoU);
 					
 					JOptionPane.showMessageDialog(this, "El postulante se ha postulado con éxito", "Postular a Oferta Laboral",
 	                        JOptionPane.INFORMATION_MESSAGE);
@@ -366,6 +390,7 @@ import logica.DTOfertaLaboral;
 		private void limpiarFormulario() {
 			textAreaCV.setText("");
 			textAreaMotivacion.setText("");
+			textFieldVideo.setText("");
 			dateChooser.setDate(null);
 			comboBoxEmpresas.setSelectedIndex(-1);
 			comboBoxOfertaLaboral.setSelectedIndex(-1);

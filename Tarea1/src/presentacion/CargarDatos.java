@@ -1,5 +1,10 @@
 package presentacion;
 
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,6 +18,8 @@ import java.util.Map;
 
 import logica.Compra;
 import logica.CompraTipo;
+import logica.ControladorOfertaLaboral;
+import logica.ControladorUsuario;
 import logica.Empresa;
 import logica.EstadoOL;
 import logica.Keyword;
@@ -31,6 +38,19 @@ public class CargarDatos {
 	
 	public CargarDatos() {
 	}
+	
+    public static byte[] downloadImageAsByteArray(String imageUrl) throws IOException {
+        URL url = new URL(imageUrl);
+        try (InputStream in = url.openStream();
+             ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = in.read(buffer)) != -1) {
+                out.write(buffer, 0, bytesRead);
+            }
+            return out.toByteArray();
+        }
+    }
 	
 	public static void ingresarPaquetes() {
 		ManejadorTipo m = ManejadorTipo.getInstancia();
@@ -120,7 +140,8 @@ public class CargarDatos {
 				}
 				
 				String[] parts = line.split(";");
-				Usuario user = new Usuario(parts[2], parts[3], parts[4], parts[5], parts[6]);
+				byte[] img = downloadImageAsByteArray(parts[7]);
+				Usuario user = new Usuario(parts[2], parts[3], parts[4], parts[5], parts[6], img);
 				usuarios.add(user);
 			}
 		} catch (IOException e) {
@@ -252,7 +273,7 @@ public class CargarDatos {
 				Map<String, Keyword> keywords = new HashMap<>();
 				EstadoOL estado = EstadoOL.valueOf(parts[10]);
 				
-				OfertaLaboral of = new OfertaLaboral(parts[1], parts[2], parts[4], parts[3], parts[5], Float.parseFloat(parts[6]), LocalDate.parse(parts[9], formatter), 0, tipos.get(parts[8]), keywords, estado, empresas.get(parts[7]), null);
+				OfertaLaboral of = new OfertaLaboral(parts[1], parts[2], parts[4], parts[3], parts[5], Float.parseFloat(parts[6]), LocalDate.parse(parts[9], formatter), 0.0f, tipos.get(parts[8]), keywords, estado, empresas.get(parts[7]), new byte[0], Integer.parseInt(parts[13]));
 				mof.agregarOfertaLaboral(of);
 				empresas.get(parts[7]).agregarOfertaLaboral(of);
 			}
@@ -263,7 +284,7 @@ public class CargarDatos {
 	
 	public static void ingresarKeywordsOfertas() {
 		ManejadorOfertaLaboral mof = ManejadorOfertaLaboral.getInstance();
-		Keyword[] keywords = mof.getKeywords();
+		Map<String, Keyword> keywords = mof.getMapKeywords();
 		
 		Map<String,OfertaLaboral> ofertasLaborales = mof.getOfertasLaborales();
 		for (Map.Entry<String, OfertaLaboral> entry : ofertasLaborales.entrySet()) {
@@ -272,30 +293,43 @@ public class CargarDatos {
             
             // Now you can work with the key and value as needed
         }
-		ofertasLaborales.get("Desarrollador Frontend").agregarKeyword(keywords[0]);
-		ofertasLaborales.get("Desarrollador Frontend").agregarKeyword(keywords[1]);
-		ofertasLaborales.get("Desarrollador Frontend").agregarKeyword(keywords[2]);
-		ofertasLaborales.get("Desarrollador Frontend").agregarKeyword(keywords[3]);
-		ofertasLaborales.get("Desarrollador Frontend").agregarKeyword(keywords[4]);
-		ofertasLaborales.get("Desarrollador Frontend").agregarKeyword(keywords[5]);
-		ofertasLaborales.get("Estratega de Negocios").agregarKeyword(keywords[4]);
-		ofertasLaborales.get("Diseñador UX/UI").agregarKeyword(keywords[1]);
-		ofertasLaborales.get("Diseñador UX/UI").agregarKeyword(keywords[2]);
-		ofertasLaborales.get("Diseñador UX/UI").agregarKeyword(keywords[5]);
-		ofertasLaborales.get("Analista de Datos").agregarKeyword(keywords[1]);
-		ofertasLaborales.get("Content Manager").agregarKeyword(keywords[3]);
-		ofertasLaborales.get("Soporte Técnico").agregarKeyword(keywords[0]);
-		ofertasLaborales.get("A. de Marketing Digital").agregarKeyword(keywords[3]);
-		ofertasLaborales.get("Contador Senior").agregarKeyword(keywords[0]);
-		ofertasLaborales.get("Técnico/a Básico Red").agregarKeyword(keywords[4]);
-		ofertasLaborales.get("Desarrollador de Software Senior").agregarKeyword(keywords[0]);
-		ofertasLaborales.get("Desarrollador de Software Senior").agregarKeyword(keywords[5]);
-		ofertasLaborales.get("Desarrollador de Software Senior").agregarKeyword(keywords[8]);
-		ofertasLaborales.get("Desarrollador de Software Full Stack").agregarKeyword(keywords[2]);
-		ofertasLaborales.get("Gerente de Proyecto").agregarKeyword(keywords[2]);
-		ofertasLaborales.get("Gerente de Proyecto").agregarKeyword(keywords[5]);
-		ofertasLaborales.get("Ingeniero de Calidad de Software").agregarKeyword(keywords[0]);
-		ofertasLaborales.get("Ingeniero de Calidad de Software").agregarKeyword(keywords[9]);
+		
+		ofertasLaborales.get("Desarrollador Frontend").agregarKeyword(keywords.get("Tiempo completo"));
+		ofertasLaborales.get("Desarrollador Frontend").agregarKeyword(keywords.get("Medio tiempo"));
+		ofertasLaborales.get("Desarrollador Frontend").agregarKeyword(keywords.get("Remoto"));
+		ofertasLaborales.get("Desarrollador Frontend").agregarKeyword(keywords.get("Freelance"));
+		ofertasLaborales.get("Desarrollador Frontend").agregarKeyword(keywords.get("Temporal"));
+		ofertasLaborales.get("Desarrollador Frontend").agregarKeyword(keywords.get("Permanente"));
+
+		ofertasLaborales.get("Estratega de Negocios").agregarKeyword(keywords.get("Temporal"));
+
+		ofertasLaborales.get("Diseñador UX/UI").agregarKeyword(keywords.get("Medio tiempo"));
+		ofertasLaborales.get("Diseñador UX/UI").agregarKeyword(keywords.get("Remoto"));
+		ofertasLaborales.get("Diseñador UX/UI").agregarKeyword(keywords.get("Permanente"));
+
+		ofertasLaborales.get("Analista de Datos").agregarKeyword(keywords.get("Medio tiempo"));
+
+		ofertasLaborales.get("Content Manager").agregarKeyword(keywords.get("Freelance"));
+
+		ofertasLaborales.get("Soporte Técnico").agregarKeyword(keywords.get("Tiempo completo"));
+
+		ofertasLaborales.get("A. de Marketing Digital").agregarKeyword(keywords.get("Freelance"));
+
+		ofertasLaborales.get("Contador Senior").agregarKeyword(keywords.get("Tiempo completo"));
+
+		ofertasLaborales.get("Técnico/a Básico Red").agregarKeyword(keywords.get("Temporal"));
+
+		ofertasLaborales.get("Desarrollador de Software Senior").agregarKeyword(keywords.get("Tiempo completo"));
+		ofertasLaborales.get("Desarrollador de Software Senior").agregarKeyword(keywords.get("Permanente"));
+		ofertasLaborales.get("Desarrollador de Software Senior").agregarKeyword(keywords.get("Logística"));
+
+		ofertasLaborales.get("Desarrollador de Software Full Stack").agregarKeyword(keywords.get("Remoto"));
+
+		ofertasLaborales.get("Gerente de Proyecto").agregarKeyword(keywords.get("Remoto"));
+		ofertasLaborales.get("Gerente de Proyecto").agregarKeyword(keywords.get("Permanente"));
+
+		ofertasLaborales.get("Ingeniero de Calidad de Software").agregarKeyword(keywords.get("Tiempo completo"));
+		ofertasLaborales.get("Ingeniero de Calidad de Software").agregarKeyword(keywords.get("Contabilidad"));
 	}
 	
 	public static void ingresarPostulaciones() {
@@ -319,7 +353,7 @@ public class CargarDatos {
 				OfertaLaboral lof = mof.buscarOfertaLaboral(parts[5]);
 				Postulante upost = mu.buscarPostulante(parts[1]);
 				
-				Postulacion post = new Postulacion(LocalDate.parse(parts[4], formatter), parts[2], parts[3], upost, lof);
+				Postulacion post = new Postulacion(LocalDate.parse(parts[4], formatter), parts[2], parts[3], upost, lof, parts[4]);
 				upost.agregarPostulacion(post);
 				lof.agregarPostulacion(post);
 			}
@@ -366,4 +400,52 @@ public class CargarDatos {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void cargarSeguidores() {
+		ControladorUsuario cu = new ControladorUsuario();
+		
+		String csvFilePath = ".src/CSV/Usuarios-Seguidores.csv";
+		
+		try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
+			String line;
+			boolean isFirstLine = true;
+			
+			while ((line = br.readLine()) != null) {
+				if (isFirstLine) {
+					isFirstLine = false;
+					continue;
+				}
+				
+				String[] parts = line.split(";");
+				cu.seguirUsuario(parts[1], parts[2]);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/* public static void cargarOfertasFavoritas() {
+		ControladorOfertaLaboral cof = new ControladorOfertaLaboral();
+		
+		String csvFilePath = ".src/CSV/PostulantesOfertasLaboralesFavoritas.csv";
+		
+		try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
+			String line;
+			boolean isFirstLine = true;
+			
+			while ((line = br.readLine()) != null) {
+				if (isFirstLine) {
+					isFirstLine = false;
+					continue;
+				}
+				
+				String[] parts = line.split(";");
+				
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	} */
+	
+	
 }

@@ -2,25 +2,18 @@ package logica;
 
 import java.time.LocalDate;
 
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
 
-
-@XmlAccessorType(XmlAccessType.FIELD)
 public class DTTipo {
 	private String nombre;
 	private String descripcion;
 	private int exposicion;
 	private int duracion;
 	private float costo;
-	private LocalDate fechaDeAlta;
+	private String fechaDeAlta;
 	
-	//CONSTRUCTORES
-	public DTTipo() {
-		
-	}
+	public DTTipo() {}
 	
-	public DTTipo(String nombre, String descripcion, int exposicion, int duracion, float costo, LocalDate fechaDeAlta) {
+	public DTTipo(String nombre, String descripcion, int exposicion, int duracion, float costo, String fechaDeAlta) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.exposicion = exposicion;
@@ -28,60 +21,72 @@ public class DTTipo {
 		this.costo = costo;
 		this.fechaDeAlta = fechaDeAlta;
 	}
-	//GETTERS
-	public String getNombre() {
-		return this.nombre;
-	}
 	
-	public String getDescripcion() {
-		return this.descripcion;
-	}
-	
-	public int getExposicion() {
-		return this.exposicion;
-	}
-	
-	public int getDuracion() {
-		return this.duracion;
-	}
-	
-	public float getCosto() {
-		return this.costo;
-	}
-	
-	public LocalDate getFechaDeAlta() {
-		return this.fechaDeAlta;
-	}
-	//SETTERS
-	public void setNombre(String nombre) {
-	    this.nombre = nombre;
-	}
-
-	public void setDescripcion(String descripcion) {
-	    this.descripcion = descripcion;
-	}
-
-	public void setExposicion(int exposicion) {
-	    this.exposicion = exposicion;
-	}
-
-	public void setDuracion(int duracion) {
-	    this.duracion = duracion;
-	}
-
-	public void setCosto(float costo) {
-	    this.costo = costo;
-	}
-
-	public void setFechaDeAlta(LocalDate fechaDeAlta) {
-	    this.fechaDeAlta = fechaDeAlta;
-	}
-	//OTRAS FUNCIONES
-    public LocalDate calcularVencimiento(LocalDate fecha) {
-    	return fecha.plusDays(this.duracion);
-    }
-    
 	public String toString() {
 		return this.nombre;
 	}
+
+    // Getter para nombre
+    public String getNombre() {
+        return nombre;
+    }
+
+    // Setter para nombre
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    // Getter para descripcion
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    // Setter para descripcion
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    // Getter para exposicion
+    public int getExposicion() {
+        return exposicion;
+    }
+
+    // Setter para exposicion
+    public void setExposicion(int exposicion) {
+        this.exposicion = exposicion;
+    }
+
+    // Getter para duracion
+    public int getDuracion() {
+        return duracion;
+    }
+
+    // Setter para duracion
+    public void setDuracion(int duracion) {
+        this.duracion = duracion;
+    }
+
+    // Getter para costo
+    public float getCosto() {
+        return costo;
+    }
+
+    // Setter para costo
+    public void setCosto(float costo) {
+        this.costo = costo;
+    }
+
+    // Getter para fechaDeAlta
+    public String getFechaDeAlta() {
+        return this.fechaDeAlta;
+    }
+
+    // Setter para fechaDeAlta
+    public void setFechaDeAlta(String fechaDeAlta) {
+        this.fechaDeAlta = fechaDeAlta;
+    }
+
+    public LocalDate calcularVencimiento(LocalDate fecha) {
+    	return fecha.plusDays(this.duracion);
+    }
 }

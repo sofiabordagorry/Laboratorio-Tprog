@@ -449,17 +449,17 @@ public class ConsultaOfertaLaboral extends JInternalFrame {
 		textFieldRemuneracion.setText(String.valueOf(datosOL.getRemuneracion()));
 		textFieldFechaDeAlta.setText(datosOL.getFechaDeAlta().toString());
 		textFieldCosto.setText(String.valueOf(datosOL.getCostoAsociado()));
-		Map<String, DTKeyword> keys = datosOL.getKeywords();
-		DTKeyword[] arrKeys = new DTKeyword[keys.size()];
-		if(keys.size() > 0) {
-			int i = 0;
-			for(Map.Entry<String, DTKeyword> entry : keys.entrySet()) {
-				arrKeys[i] = entry.getValue();
-				i++;
-			}
-			DefaultComboBoxModel<DTKeyword> modelKeys = new DefaultComboBoxModel<DTKeyword>(arrKeys);
+		DTKeyword[] keys = datosOL.getKeywords();
+//		DTKeyword[] arrKeys = new DTKeyword[keys.size()];
+//		if(keys.size() > 0) {
+//			int i = 0;
+//			for(Map.Entry<String, DTKeyword> entry : keys.entrySet()) {
+//				arrKeys[i] = entry.getValue();
+//				i++;
+//			}
+			DefaultComboBoxModel<DTKeyword> modelKeys = new DefaultComboBoxModel<DTKeyword>(keys);
 			comboBoxKeywords.setModel(modelKeys);
-		}
+//		}
 		List<DTPostulacion> postulaciones = datosOL.getPostulaciones();
 
 		for(DTPostulacion p : postulaciones) {
