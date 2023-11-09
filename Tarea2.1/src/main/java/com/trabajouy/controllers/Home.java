@@ -9,8 +9,10 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-import excepciones.OfertasLaboralesNoExistenNingunaException;
-import logica.*;
+import publicar.DtKeywordWS;
+import publicar.DtOfertaLaboralWS;
+import publicar.LoginEstado;
+import publicar.OfertasLaboralesNoExistenNingunaException_Exception;
 
 @WebServlet ("/home")
 public class Home extends HttpServlet {
@@ -29,17 +31,20 @@ public class Home extends HttpServlet {
     		misesion.setAttribute("filtro", null);
     	}
 		
-		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
-		Keyword[] keys = mol.getKeywords();
-		request.setAttribute("keywords", keys);
-    	misesion.setAttribute("filterType", "AllOffers");
-    	Factory fac = Factory.getInstance();
+		publicar.WebServicesService service = new publicar.WebServicesService();
+		publicar.WebServices port = service.getWebServicesPort();
+    	
+    	// Factory fac = Factory.getInstance();
+    	// IOfertaLaboral iol = fac.getIOfertaLaboral();
+    	
+		DtKeywordWS keys = port.getDTKeyword();
+		request.setAttribute("keywords", keys.getKeys());
+    	request.getSession().setAttribute("filterType", "AllOffers");
 		
-		IOfertaLaboral iol = fac.getIOfertaLaboral();
 		try {
-			DTOfertaLaboral dtols[] = iol.listarTodasOfertasLaborales();
-			request.getSession().setAttribute("listaOfertasLaborales", dtols);
-		} catch (OfertasLaboralesNoExistenNingunaException e) {
+			DtOfertaLaboralWS dtols = port.getDTOfertasLaborales();
+			request.getSession().setAttribute("listaOfertasLaborales", dtols.getOfs());
+		} catch (OfertasLaboralesNoExistenNingunaException_Exception e) {
 			e.printStackTrace();
 		}
     }
@@ -51,14 +56,28 @@ public class Home extends HttpServlet {
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
     	init(request);
-  
-    	switch (getLoginEstado(request)) {
+    	String userAgent = request.getHeader("User-Agent");
+
+    	if (userAgent != null && userAgent.toLowerCase().contains("mobile")) {
+    	    // Es un dispositivo móvil
+    		switch (getLoginEstado(request)) {
     		case NO_LOGIN:
-    			request.getRequestDispatcher("/WEB-INF/template/index.jsp").forward(request, response);
+    			request.getRequestDispatcher("/WEB-INF/mobile/template/index.jsp").forward(request, response);
     		case LOGIN_INCORRECTO:
     			break;
     		case LOGIN_CORRECTO:
-    			request.getRequestDispatcher("/WEB-INF/template/index.jsp").forward(request, response);;
+    			request.getRequestDispatcher("/WEB-INF/mobile/template/index.jsp").forward(request, response);;
+    		}
+    	} else {
+    	    // Es un dispositivo de escritorio
+    		switch (getLoginEstado(request)) {
+    		case NO_LOGIN:
+    			request.getRequestDispatcher("/WEB-INF/desktop/template/index.jsp").forward(request, response);
+    		case LOGIN_INCORRECTO:
+    			break;
+    		case LOGIN_CORRECTO:
+    			request.getRequestDispatcher("/WEB-INF/desktop/template/index.jsp").forward(request, response);;
+    		}
     	}
     }
 	

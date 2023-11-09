@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" version="6.0">
+  <servlet>
+    <description></description>
+    <display-name>Home</display-name>
+    <servlet-name>Home</servlet-name>
+    <servlet-class>com.trabajouy.controllers.Home</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Home</servlet-name>
+    <url-pattern>/Home</url-pattern>
+  </servlet-mapping>
   <display-name>Tarea2.1</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
@@ -11,36 +21,6 @@
   </welcome-file-list>
   <servlet>
     <description></description>
-    <display-name>Home</display-name>
-    <servlet-name>Home</servlet-name>
-    <servlet-class>com.trabajouy.controllers.Home</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Home</servlet-name>
-    <url-pattern>/Home</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>AltaDeUsuario</display-name>
-    <servlet-name>AltaDeUsuario</servlet-name>
-    <servlet-class>com.trabajouy.controllers.AltaDeUsuario</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AltaDeUsuario</servlet-name>
-    <url-pattern>/AltaDeUsuario</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>ConsultaUsuario</display-name>
-    <servlet-name>ConsultaUsuario</servlet-name>
-    <servlet-class>com.trabajouy.controllers.ConsultaUsuario</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ConsultaUsuario</servlet-name>
-    <url-pattern>/ConsultaUsuario</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>Login</display-name>
     <servlet-name>Login</servlet-name>
     <servlet-class>com.trabajouy.controllers.Login</servlet-class>
@@ -48,36 +28,6 @@
   <servlet-mapping>
     <servlet-name>Login</servlet-name>
     <url-pattern>/Login</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>ConsultaPostulacion</display-name>
-    <servlet-name>ConsultaPostulacion</servlet-name>
-    <servlet-class>com.trabajouy.controllers.ConsultaPostulacion</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ConsultaPostulacion</servlet-name>
-    <url-pattern>/ConsultaPostulacion</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>AltaDeOfertaLaboral</display-name>
-    <servlet-name>AltaDeOfertaLaboral</servlet-name>
-    <servlet-class>com.trabajouy.controllers.AltaDeOfertaLaboral</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AltaDeOfertaLaboral</servlet-name>
-    <url-pattern>/AltaDeOfertaLaboral</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>CerrarSession</display-name>
-    <servlet-name>CerrarSession</servlet-name>
-    <servlet-class>com.trabajouy.controllers.CerrarSession</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>CerrarSession</servlet-name>
-    <url-pattern>/CerrarSession</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -91,6 +41,36 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>AltaDeUsuario</display-name>
+    <servlet-name>AltaDeUsuario</servlet-name>
+    <servlet-class>com.trabajouy.controllers.AltaDeUsuario</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AltaDeUsuario</servlet-name>
+    <url-pattern>/AltaDeUsuario</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CerrarSession</display-name>
+    <servlet-name>CerrarSession</servlet-name>
+    <servlet-class>com.trabajouy.controllers.CerrarSession</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CerrarSession</servlet-name>
+    <url-pattern>/CerrarSession</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ConsultaUsuario</display-name>
+    <servlet-name>ConsultaUsuario</servlet-name>
+    <servlet-class>com.trabajouy.controllers.ConsultaUsuario</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ConsultaUsuario</servlet-name>
+    <url-pattern>/ConsultaUsuario</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>ConsultaTipo</display-name>
     <servlet-name>ConsultaTipo</servlet-name>
     <servlet-class>com.trabajouy.controllers.ConsultaTipo</servlet-class>
@@ -98,6 +78,16 @@
   <servlet-mapping>
     <servlet-name>ConsultaTipo</servlet-name>
     <url-pattern>/ConsultaTipo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ConsultaPostulacion</display-name>
+    <servlet-name>ConsultaPostulacion</servlet-name>
+    <servlet-class>com.trabajouy.controllers.ConsultaPostulacion</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ConsultaPostulacion</servlet-name>
+    <url-pattern>/ConsultaPostulacion</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -121,23 +111,43 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>PostulacionAOfertaLaboral</display-name>
-    <servlet-name>PostulacionAOfertaLaboral</servlet-name>
-    <servlet-class>com.trabajouy.controllers.PostulacionAOfertaLaboral</servlet-class>
+    <display-name>CheckUsername</display-name>
+    <servlet-name>CheckUsername</servlet-name>
+    <servlet-class>com.trabajouy.controllers.CheckUsername</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>PostulacionAOfertaLaboral</servlet-name>
-    <url-pattern>/PostulacionAOfertaLaboral</url-pattern>
+    <servlet-name>CheckUsername</servlet-name>
+    <url-pattern>/CheckUsername</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>CargarDatos</display-name>
-    <servlet-name>CargarDatos</servlet-name>
-    <servlet-class>com.trabajouy.controllers.CargarDatos</servlet-class>
+    <display-name>CheckEmail</display-name>
+    <servlet-name>CheckEmail</servlet-name>
+    <servlet-class>com.trabajouy.controllers.CheckEmail</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>CargarDatos</servlet-name>
-    <url-pattern>/CargarDatos</url-pattern>
+    <servlet-name>CheckEmail</servlet-name>
+    <url-pattern>/CheckEmail</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AltaDeOfertaLaboral</display-name>
+    <servlet-name>AltaDeOfertaLaboral</servlet-name>
+    <servlet-class>com.trabajouy.controllers.AltaDeOfertaLaboral</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AltaDeOfertaLaboral</servlet-name>
+    <url-pattern>/AltaDeOfertaLaboral</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AgregarOfertaAFavorito</display-name>
+    <servlet-name>AgregarOfertaAFavorito</servlet-name>
+    <servlet-class>com.trabajouy.controllers.AgregarOfertaAFavorito</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AgregarOfertaAFavorito</servlet-name>
+    <url-pattern>/AgregarOfertaAFavorito</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -150,12 +160,23 @@
     <url-pattern>/Ofertas</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>Faces Servlet</servlet-name>
-    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
+    <description></description>
+    <display-name>PostulacionAOfertaLaboral</display-name>
+    <servlet-name>PostulacionAOfertaLaboral</servlet-name>
+    <servlet-class>com.trabajouy.controllers.PostulacionAOfertaLaboral</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>/faces/*</url-pattern>
+    <servlet-name>PostulacionAOfertaLaboral</servlet-name>
+    <url-pattern>/PostulacionAOfertaLaboral</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SeleccionarPostulacion</display-name>
+    <servlet-name>SeleccionarPostulacion</servlet-name>
+    <servlet-class>com.trabajouy.controllers.SeleccionarPostulacion</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SeleccionarPostulacion</servlet-name>
+    <url-pattern>/SeleccionarPostulacion</url-pattern>
   </servlet-mapping>
 </web-app>

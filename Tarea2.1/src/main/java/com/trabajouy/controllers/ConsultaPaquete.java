@@ -1,17 +1,13 @@
 package com.trabajouy.controllers;
 
 import java.io.IOException;
+import java.util.List;
 
-import excepciones.NoHayPaquetesException;
-import logica.DTPaquete;
-import logica.Factory;
-import logica.IOfertaLaboral;
-import logica.Keyword;
-import logica.ManejadorOfertaLaboral;
-import logica.ManejadorTipo;
-import logica.ManejadorUsuario;
-import logica.Paquete;
-import logica.Usuario;
+import publicar.DtKeyword;
+import publicar.DtKeywordWS;
+import publicar.DtUsuario;
+import publicar.DtEmpresa;
+import publicar.DtPaquete;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -34,46 +30,53 @@ public class ConsultaPaquete extends HttpServlet {
     private void processRequest(HttpServletRequest request, HttpServletResponse response) 
     		throws ServletException, IOException {
     	// Obtén el nickname del usuario que se consulta de alguna manera
-    	ManejadorTipo mtip = ManejadorTipo.getInstancia();
-    	Factory fac = Factory.getInstance();
-    	IOfertaLaboral col = fac.getIOfertaLaboral();
+
+		publicar.WebServicesService service = new publicar.WebServicesService();
+		publicar.WebServices port = service.getWebServicesPort();
+		
+		HttpSession session = request.getSession();
+		DtUsuario user = (DtUsuario) session.getAttribute("usuario_logueado");
+    	
     	String nombrePaq = request.getParameter("paqueteConsultado");
-    	ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
-		Keyword[] keys = mol.getKeywords();
-		request.setAttribute("keywords", keys);
+    	
+		DtKeywordWS keyss = port.getDTKeyword();
+		List<DtKeyword> key = keyss.getKeys();
+		request.setAttribute("keywords", key);
     	
     	request.setAttribute("paqComprado", false);
     	request.setAttribute("esEmpresa", false);
      	
-     	HttpSession session = request.getSession();
-     	Usuario user = (Usuario) session.getAttribute("usuario_logueado");
      	String nicknameEnSesion = null;
-     	ManejadorUsuario murs = ManejadorUsuario.getInstancia();
      	if(user != null) {
-     		nicknameEnSesion = user.getNickname();
-     		if (murs.existeEmpresa(nicknameEnSesion)) {
- 	            // Es una empresa, puede comprar
-     			request.setAttribute("esEmpresa", true);
- 	       }
-     
-     	}
+            nicknameEnSesion = user.getNickname();
+            DtEmpresa empresa = port.buscarEmpresa(nicknameEnSesion);
+            if (empresa.getNickname() != null) {
+                // Es una empresa, puede comprar
+                request.setAttribute("esEmpresa", true);
+                if (nombrePaq != null && !port.verificacionCompraPaq(nicknameEnSesion, nombrePaq)) {
+                    request.setAttribute("paqComprado", true);
+                    request.setAttribute("compraExitosa", false);
+                }
+
+           }
+
+        }
     	
     	if (nombrePaq == null) {
     	    // No se especificó un paquete para consultar, mostrar la página ListarPaquetes
-    		try {
-				String[] paqs = col.listarNomPaquetes();
+    		String[] paqs = port.listarNomPaquetes();
+    		if (paqs != null) {
 	    		request.setAttribute("paquetes", paqs);
 	    		request.setAttribute("hayPaqs", true);
-			} catch (NoHayPaquetesException e) {
+			} else {
 	    		request.setAttribute("hayPaqs", false);
 			}
 
-    	    request.getRequestDispatcher("/WEB-INF/listar/listarPaquetes.jsp").forward(request, response);
+    	    request.getRequestDispatcher("/WEB-INF/desktop/listar/listarPaquetes.jsp").forward(request, response);
     	} else {
-	        Paquete paq = mtip.buscarPaquete(nombrePaq);
-	        DTPaquete paquete = paq.getDataPaquete();
+	        DtPaquete paquete = port.buscarPaquete(nombrePaq);
 	        request.setAttribute("dataPaquete", paquete);
-	        request.getRequestDispatcher("/WEB-INF/consultas/consultaPaquete.jsp").forward(request, response);
+	        request.getRequestDispatcher("/WEB-INF/desktop/consultas/consultaPaquete.jsp").forward(request, response);
     	    
     	}
     }

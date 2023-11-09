@@ -5,15 +5,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 
-import excepciones.OfertasLaboralesNoExistenNingunaException;
-import logica.DTOfertaLaboral;
-import logica.Factory;
-import logica.IOfertaLaboral;
-import logica.Keyword;
-import logica.ManejadorOfertaLaboral;
-import logica.Usuario;
+import publicar.DtKeywordWS;
+import publicar.DtOfertaLaboralWS;
+import publicar.OfertasLaboralesNoExistenNingunaException_Exception;
 
 /**
  * Servlet implementation class Ofertas
@@ -30,10 +25,14 @@ public class Ofertas extends HttpServlet {
     }
     
     public static void aplicarFiltros(HttpServletRequest request) {
+		publicar.WebServicesService service = new publicar.WebServicesService();
+		publicar.WebServices port = service.getWebServicesPort();
+    	
     	String keywordFiltro = request.getParameter("filtro");
-    	ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
-		Keyword[] keys = mol.getKeywords();
-		request.setAttribute("keywords", keys);
+    	
+		DtKeywordWS keys = port.getDTKeyword();
+		request.setAttribute("keywords", keys.getKeys());
+		
     	if (keywordFiltro != null) {
     		request.setAttribute("filtro", keywordFiltro);
     	} else {
@@ -47,17 +46,18 @@ public class Ofertas extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		aplicarFiltros(request);
-		Factory fac = Factory.getInstance();
-		IOfertaLaboral iol = fac.getIOfertaLaboral();
+		publicar.WebServicesService service = new publicar.WebServicesService();
+		publicar.WebServices port = service.getWebServicesPort();
+		
 		try {
-			DTOfertaLaboral dtols[] = iol.listarTodasOfertasLaborales();
-			String filterType = request.getParameter("filterType");
-			request.getSession().setAttribute("filterType", filterType);
-			request.getSession().setAttribute("listaOfertasLaborales", dtols);
-		} catch (OfertasLaboralesNoExistenNingunaException e) {
+			DtOfertaLaboralWS dtols = port.getDTOfertasLaborales();
+			request.getSession().setAttribute("listaOfertasLaborales", dtols.getOfs());
+		} catch (OfertasLaboralesNoExistenNingunaException_Exception e) {
 			
 		}
-		request.getRequestDispatcher("/WEB-INF/template/index.jsp").forward(request, response);
+
+		request.getSession().setAttribute("filterType", request.getParameter("filterType"));
+		request.getRequestDispatcher("/WEB-INF/desktop/template/index.jsp").forward(request, response);
 	}
 
 	/**

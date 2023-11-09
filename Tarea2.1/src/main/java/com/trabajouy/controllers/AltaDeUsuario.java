@@ -1,28 +1,22 @@
 package com.trabajouy.controllers;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
-import excepciones.ExisteUnUsuarioYaRegistradoException;
-import logica.DTEmpresa;
-import logica.DTPostulante;
-import logica.DTUsuario;
-import logica.Empresa;
-import logica.Factory;
-import logica.IUsuario;
-import logica.ManejadorUsuario;
-import logica.Usuario;
-import logica.Postulante;	
+import publicar.DtEmpresa;
+import publicar.DtPostulante;
+import publicar.ExisteUnUsuarioYaRegistradoException_Exception;
+import publicar.DtUsuario;
 
 /**
  * Servlet implementation class AltaDeUsuario
  */
+@MultipartConfig
 public class AltaDeUsuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
    
@@ -33,7 +27,7 @@ public class AltaDeUsuario extends HttpServlet {
     
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-    	request.getRequestDispatcher("/WEB-INF/altas/altaDeUsuario.jsp").forward(request, response);
+    	request.getRequestDispatcher("/WEB-INF/desktop/altas/altaDeUsuario.jsp").forward(request, response);
     }
 
 	
@@ -41,14 +35,16 @@ public class AltaDeUsuario extends HttpServlet {
 		this.processRequest(request, response);
 	}
 
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Usuario usr = (Usuario) request.getSession().getAttribute("usuario_logueado");
+		DtUsuario usr = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
 		if (usr == null) {
 		
-			Factory fac = Factory.getInstance();
-			IUsuario icu = fac.getIUsuario();
+//			Factory fac = Factory.getInstance();
+//			IUsuario icu = fac.getIUsuario();
+			
+			publicar.WebServicesService service = new publicar.WebServicesService();
+			publicar.WebServices port = service.getWebServicesPort();
 			
 			String nickname, correo, nombre, apellido, contrasenia, tipoUsuario;
 			nickname = request.getParameter("nickname");
@@ -57,23 +53,23 @@ public class AltaDeUsuario extends HttpServlet {
 			apellido = request.getParameter("apellido");
 			contrasenia = request.getParameter("contrasenia");
 			tipoUsuario = request.getParameter("tipoUsuario");
-			/*Part filePart = request.getPart("imagen");
-			byte[] imagen = this.deImgAByte(filePart);*/
+			//Part filePart = request.getPart("imagen");
+			//InputStream fileContent = filePart.getInputStream();
+			//byte[] imageData = IOUtils.toByteArray(fileContent);
 			boolean seCumpleExcepcion = false;
+
 			
 			//Si es tipo empresa pido los datos de la empresa
 			if ("empresa".equals(tipoUsuario)) {
 				String descripcion, link;
 				descripcion = request.getParameter("descripcion");
 				link = request.getParameter("link");
-				DTEmpresa dtemp = new DTEmpresa(nickname, nombre, apellido, correo, null, descripcion, link, contrasenia, new byte[0]);
-				
+				DtEmpresa dtemp = port.crearDTEmpresa(nickname, nombre, apellido, correo, contrasenia, descripcion, link, new byte[0]);
 				try {
 					//Ingreso los datos de la empresa
-					icu.ingresarDatosEmpresa(dtemp);
-				} catch (ExisteUnUsuarioYaRegistradoException e) {
-					System.out.println("usuario repetido");
-					DTUsuario dtusr = dtemp;
+					port.ingresarDatosEmpresa(dtemp);
+				} catch (ExisteUnUsuarioYaRegistradoException_Exception e) {
+					DtUsuario dtusr = dtemp;
 					request.setAttribute("datosIngresados", dtusr);
 					request.setAttribute("tipoUsuario", tipoUsuario);
 					if (e.getMessage().equals("Existe un usuario ya registrado con ese mail")) {
@@ -89,15 +85,12 @@ public class AltaDeUsuario extends HttpServlet {
 				String nacionalidad, dateString;
 				nacionalidad = request.getParameter("nacionalidad");
 				dateString = request.getParameter("fechaNacimiento");
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Ajusta el formato según el formato de tu input date
-				LocalDate fechaNacimiento = LocalDate.parse(dateString, formatter);
-				DTPostulante dtpost = new DTPostulante(nickname, nombre, apellido, correo, fechaNacimiento, nacionalidad, contrasenia, new byte[0]);
-				
+				DtPostulante dtpost = port.crearDTPostulante(nickname, nombre, apellido, correo, contrasenia, nacionalidad, dateString, new byte[0]);
 				try {
 					//Ingreso los datos del postulante
-					icu.ingresarDatosPostulante(dtpost);
-				} catch (ExisteUnUsuarioYaRegistradoException e) {
-					DTUsuario dtusr = dtpost;
+					port.ingresarDatosPostulante(dtpost);
+				} catch (ExisteUnUsuarioYaRegistradoException_Exception e) {
+					DtUsuario dtusr = dtpost;
 					request.setAttribute("datosIngresados", dtusr);
 					request.setAttribute("tipoUsuario", tipoUsuario);
 					if (e.getMessage().equals("Existe un usuario ya registrado con ese mail")) {
@@ -110,38 +103,13 @@ public class AltaDeUsuario extends HttpServlet {
 			}
 			
 			if (seCumpleExcepcion) {
-				request.getRequestDispatcher("/WEB-INF/errores/altaDeUsuarioError.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/desktop/errores/altaDeUsuarioError.jsp").forward(request, response);
 			} else {
-				request.getRequestDispatcher("/WEB-INF/altas/altaDeUsuario.jsp").forward(request, response);
+				request.setAttribute("registroExitoso", true);
+				request.getRequestDispatcher("/WEB-INF/desktop/altas/altaDeUsuario.jsp").forward(request, response);
 			}
 		} else {
 			response.sendError(403);
 		}
 	}
-
-	/*private byte[] deImgAByte(Part filePart) throws IOException {
-		if(filePart != null && filePart.getSize() > 0) {
-			// Convierte el InputStream de la parte del archivo a un arreglo de bytes
-		    InputStream inputStream = filePart.getInputStream();
-		    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-		    byte[] buffer = new byte[1024];
-		    int bytesRead;
-		    
-		    while ((bytesRead = inputStream.read(buffer)) != -1) {
-		        outputStream.write(buffer, 0, bytesRead);
-		    }
-		    
-		    byte[] imageBytes = outputStream.toByteArray();
-		    
-		    // Ahora 'imageBytes' contiene los bytes de la imagen cargada
-		    // Puedes guardar 'imageBytes' en tu sistema o realizar otras operaciones con él
-
-		    // Cierra los flujos
-		    outputStream.close();
-		    inputStream.close();
-		    return imageBytes;
-		} else {
-			return new byte[0];
-		}
-	}*/
 }

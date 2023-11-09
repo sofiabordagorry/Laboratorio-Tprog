@@ -8,8 +8,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.List;
 
-import logica.*;
+import publicar.DtKeyword;
+import publicar.DtKeywordWS;
+import publicar.DtUsuario;
+import publicar.LoginEstado;
 
 /**
  * Servlet implementation class Login
@@ -24,7 +28,7 @@ public class Login extends HttpServlet {
     
     private void processRequest(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-				req.getRequestDispatcher("/WEB-INF/home/login.jsp").
+				req.getRequestDispatcher("/WEB-INF/desktop/home/login.jsp").
 				forward(req, resp);
     }
 
@@ -35,6 +39,13 @@ public class Login extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession objSesion = request.getSession();
+		
+		publicar.WebServicesService service = new publicar.WebServicesService();
+		publicar.WebServices port = service.getWebServicesPort();
+		
+//		Factory fac = Factory.getInstance();
+//		IOfertaLaboral col = fac.getIOfertaLaboral();
+		
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
 		LoginEstado nuevoEstado = LoginEstado.NO_LOGIN;
@@ -42,29 +53,32 @@ public class Login extends HttpServlet {
 		
 
 		// chequea contraseña
-		Usuario usr = ManejadorUsuario.getInstancia().buscarUsuario(login);
-		if (usr == null) {
-			usr = ManejadorUsuario.getInstancia().buscarUsuarioPorMail(login);
+//        IUsuario cu = fac.getIUsuario();
+//        DTUsuario usr = cu.buscarDTUsuario(login);
+		DtUsuario usr = port.buscarUsuario(login);
+		if (usr.getNickname() == null) {
+			usr = port.buscarUsuarioPorMail(login);
+//			usr = cu.buscarDTUsuarioPorMail(login);
 		}
-		//System.out.println(usr);
 		
-		
-		if (usr != null && !usr.getContrasenia().equals(password)) {
+		if (usr.getNickname() != null && !usr.getContrasenia().equals(password)) {
 			nuevoEstado = LoginEstado.LOGIN_INCORRECTO;
-			dispatcher = request.getRequestDispatcher("/WEB-INF/home/login.jsp");
-		} else if (usr != null && usr.getContrasenia().equals(password)) {
+			dispatcher = request.getRequestDispatcher("/WEB-INF/desktop/home/login.jsp");
+		} else if (usr.getNickname() != null && usr.getContrasenia().equals(password)) {
 			nuevoEstado = LoginEstado.LOGIN_CORRECTO;
 			// setea el usuario logueado
 			request.getSession().setAttribute("usuario_logueado", usr);
-			dispatcher = request.getRequestDispatcher("/WEB-INF/template/index.jsp");
+			dispatcher = request.getRequestDispatcher("/WEB-INF/desktop/template/index.jsp");
 		} else {
 			nuevoEstado = LoginEstado.LOGIN_INCORRECTO;
-			dispatcher = request.getRequestDispatcher("/WEB-INF/home/login.jsp");
+			dispatcher = request.getRequestDispatcher("/WEB-INF/desktop/home/login.jsp");
 		}
-
-		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
-		Keyword[] keys = mol.getKeywords();
-		request.setAttribute("keywords", keys);
+		
+//		DTKeyword[] keys = col.getDTKeywords(); 
+	//	DtKeywordArray keys = port.getDTKeyword();
+		DtKeywordWS k = port.getDTKeyword();
+		List<DtKeyword> dtk = k.getKeys();
+		request.setAttribute("keywords", dtk);
 		objSesion.setAttribute("estado_sesion", nuevoEstado);
 		dispatcher.forward(request, response);
 	}

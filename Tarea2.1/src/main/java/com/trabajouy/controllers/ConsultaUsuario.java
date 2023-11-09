@@ -2,9 +2,10 @@ package com.trabajouy.controllers;
 
 import java.io.IOException;
 
-import excepciones.UsuariosNoExistenException;
-import logica.*;
-
+import publicar.DtKeywordWS;
+import publicar.DtUsuario;
+import publicar.DtUsuarioWS;
+import publicar.UsuariosNoExistenException_Exception;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,55 +26,68 @@ public class ConsultaUsuario extends HttpServlet {
     private void processRequest(HttpServletRequest request, HttpServletResponse response) 
     		throws ServletException, IOException {
     	// Obtén el nickname del usuario que se consulta de alguna manera
-    	ManejadorUsuario murs = ManejadorUsuario.getInstancia();
-    	Factory fac = Factory.getInstance();
-    	IUsuario iurs = fac.getIUsuario();
+    	//esto hay que cambiarlo en todos por el publicador (web services)
+    	
+    	publicar.WebServicesService service = new publicar.WebServicesService();
+		publicar.WebServices port = service.getWebServicesPort();
     	String nicknameConsultado = request.getParameter("usuarioConsultado");
-    	ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
-		Keyword[] keys = mol.getKeywords();
-		request.setAttribute("keywords", keys);
+    	
+		DtKeywordWS keys = port.getDTKeyword();
+		request.setAttribute("keywords", keys.getKeys());
     	
     	// Obtén el nickname del usuario en sesión (si hay uno)
     	HttpSession session = request.getSession();
-    	Usuario user = (Usuario) session.getAttribute("usuario_logueado");
+    	//Usuario user = (Usuario) session.getAttribute("usuario_logueado");
+    	DtUsuario user = (DtUsuario) session.getAttribute("usuario_logueado");
     	String nicknameEnSesion = null;
+		request.setAttribute("logueado", false);
     	if(user != null) {
     		nicknameEnSesion = user.getNickname();
+    		
     	}
     	
     	if (nicknameConsultado == null) {
     	    // No se especificó un nickname para consultar, mostrar la página ListarUsuarios
     		try {
-				DTUsuario[] users = iurs.listarUsuarios();
-	    		request.setAttribute("SystemUsers", users);
+				//DTUsuario[] users = iurs.listarUsuarios();
+	    		DtUsuarioWS users = port.listarUsuarios();
+    			request.setAttribute("SystemUsers", users.getUsers());
 				request.setAttribute("NoUsersInSystem_Error", false);
-	    	    request.getRequestDispatcher("/WEB-INF/listar/listarUsuarios.jsp").forward(request, response);
-			} catch (UsuariosNoExistenException e) {
+	    	    request.getRequestDispatcher("/WEB-INF/desktop/listar/listarUsuarios.jsp").forward(request, response);
+			} catch (UsuariosNoExistenException_Exception e) {
 				request.setAttribute("NoUsersInSystem_Error", true);
-	    		request.getRequestDispatcher("/WEB-INF/listar/listarUsuarios.jsp").forward(request, response);
+	    		request.getRequestDispatcher("/WEB-INF/desktop/listar/listarUsuarios.jsp").forward(request, response);
 			}
 
 
     	} else {
-	        DTUsuario userInfo = iurs.mostrarInformacionUsuario(nicknameConsultado);
-	        //request.setAttribute("userInformation", userInfo);
+	        DtUsuario userInfo = port.mostrarInformacionUsuario(nicknameConsultado);
 	        request.setAttribute("userData", userInfo);
     	    if (nicknameEnSesion != null && nicknameEnSesion.equals(nicknameConsultado)) {
     	        // El usuario en sesión coincide con el usuario consultado
-    	        if (murs.existeEmpresa(nicknameConsultado)) {
+    	    	String[] seguidores = port.obtenerSeguidores(nicknameEnSesion);
+	        	String[] seguidos = port.obtenerSeguidos(nicknameEnSesion);
+	        	request.setAttribute("User_Followers", seguidores);
+	        	request.setAttribute("User_Following", seguidos);
+    	        if (port.existeEmpresa(nicknameConsultado)) {
     	            // Es una empresa, mostrar MiPerfilEmpresa
-    	            request.getRequestDispatcher("/WEB-INF/consultas/miPerfilEmpresa.jsp").forward(request, response);
-    	        } else if (murs.existePostulante(nicknameConsultado)) {
+    	            request.getRequestDispatcher("/WEB-INF/desktop/consultas/miPerfilEmpresa.jsp").forward(request, response);
+    	        } else if (port.existePostulante(nicknameConsultado)) {
     	            // Es un postulante, mostrar MiPerfilPostulante
-    	            request.getRequestDispatcher("/WEB-INF/consultas/miPerfilPostulante.jsp").forward(request, response);
+    	            request.getRequestDispatcher("/WEB-INF/desktop/consultas/miPerfilPostulante.jsp").forward(request, response);
     	        }
     	    } else {
-    	        if (murs.existeEmpresa(nicknameConsultado)) {
+    	    	if (nicknameEnSesion != null) {
+    	    		request.setAttribute("logueado", true);
+    	    		boolean sigue = port.estaSiguiendo(nicknameEnSesion, nicknameConsultado);
+    	    		request.setAttribute("siguiendo", sigue);
+    	    	}
+    	        if (port.existeEmpresa(nicknameConsultado)) {
     	            // Es una empresa, mostrar ConsultarEmpresa
-    	            request.getRequestDispatcher("/WEB-INF/consultas/consultarEmpresa.jsp").forward(request, response);
-    	        } else if (murs.existePostulante(nicknameConsultado)) {
+    	            request.getRequestDispatcher("/WEB-INF/desktop/consultas/consultarEmpresa.jsp").forward(request, response);
+    	        } else if (port.existePostulante(nicknameConsultado)) {
     	            // Es un postulante, mostrar ConsultarPostulante
-    	            request.getRequestDispatcher("/WEB-INF/consultas/consultarPostulante.jsp").forward(request, response);
+    	            request.getRequestDispatcher("/WEB-INF/desktop/consultas/consultarPostulante.jsp").forward(request, response);
     	        }
     	    }
     	}
@@ -84,8 +98,26 @@ public class ConsultaUsuario extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		publicar.WebServicesService service = new publicar.WebServicesService();
+		publicar.WebServices port = service.getWebServicesPort();
+    	
+		HttpSession session = request.getSession();
+    	DtUsuario user = (DtUsuario) session.getAttribute("usuario_logueado");
+    	
+    	if(user != null) {
+    		String nicknameEnSesion = user.getNickname();
+    		String nicknameConsultado = request.getParameter("seguidor");
+    		if (port.estaSiguiendo(nicknameEnSesion, nicknameConsultado)) {
+    			port.dejarSeguimiento(nicknameEnSesion, nicknameConsultado);
+    		}else {
+    			port.seguirUsuario(nicknameEnSesion, nicknameConsultado);
+    		}
+    		
+    		response.sendRedirect("ConsultaUsuario?usuarioConsultado=" + nicknameConsultado);
+    		
+    	}else {
+    		response.sendError(403);
+    	}
 	}
 
 }

@@ -5,29 +5,16 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import logica.DTKeyword;
-import logica.DTOfertaLaboral;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.List;
 
-import logica.ManejadorOfertaLaboral;
-import logica.ManejadorUsuario;
-import logica.OfertaLaboral;
-import logica.Tipo;
-import logica.ManejadorTipo;
-import logica.Empresa;
-import logica.Factory;
-import logica.IOfertaLaboral;
-import logica.Keyword;
-//import com.trabajouy.model.Usuario;
-import logica.Usuario;
-import excepciones.OfertaLaboralRepetidaException;
+import publicar.DtKeyword;
+import publicar.DtKeywordWS;
+import publicar.DtUsuario;
+import publicar.DtOfertaLaboral;
+import publicar.DtEmpresa;
  
-
-
 /**
  * Servlet implementation class AltaDeOL
  */
@@ -42,49 +29,45 @@ public class AltaDeOfertaLaboral extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-		Usuario usuario = (Usuario) session.getAttribute("usuario_logueado");
-		ManejadorTipo mtip = ManejadorTipo.getInstancia();
-		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
+		
+		publicar.WebServicesService service = new publicar.WebServicesService();
+		publicar.WebServices port = service.getWebServicesPort();
+		
+		DtUsuario usuario = (DtUsuario) session.getAttribute("usuario_logueado");
 		if (usuario != null) {
-			ManejadorUsuario musr = ManejadorUsuario.getInstancia();
-			Map<String, Empresa> emp = musr.getMapEmpresas();
-			Empresa empresa = emp.get(usuario.getNickname());
+			DtEmpresa empresa = port.buscarEmpresa(usuario.getNickname());
 			if (empresa != null) { // es una empresa
 				//obtengo los tipos
-				//ManejadorTipo mt = ManejadorTipo.getInstancia();
-				Tipo[] tipo = mtip.getTipos();
-				if (tipo == null) {
+			
+				String[] tipos = port.listarTipoPublicacionOfertaLaboral();
+				if (tipos != null) {
+				request.setAttribute("tiposOL", tipos);
+				request.setAttribute("hayTipos", true);
+					
+				}else{
+					
 					request.setAttribute("hayTipos", false);
-				}else {
-					String[] tipos = new String[tipo.length];
-					for (int i = 0; i < tipo.length; i++) {
-		                tipos[i] =  tipo[i].getNombre();
-		            }
-					request.setAttribute("tiposOL", tipos);
-					request.setAttribute("hayTipos", true);
-
 				}
 				
 				//obtengo las keywords
-				Keyword[] key = mol.getKeywords();
+				DtKeywordWS keys = port.getDTKeyword();
+				List<DtKeyword> key = keys.getKeys();
 				request.setAttribute("keywords", key);
-				if (key == null) {
+				if (key == null || key.size() == 0) {
 					request.setAttribute("hayKeys", false);
 				}else {
-					String[] keywords = new String[key.length];
-					for (int j = 0; j < key.length; j++) {
-						keywords[j] =  key[j].getNombre();
+					String[] keywords = new String[key.size()];
+					for (int j = 0; j < key.size(); j++) {
+						keywords[j] =  key.get(j).getNombre();
 		            }
-					request.setAttribute("nomKeywords", keywords);
+					request.setAttribute("keywordsNom", keywords);
 					request.setAttribute("hayKeys", true);
 
 				}
 				
 				//obtener los paquetes
-				Factory fac = Factory.getInstance();
-				IOfertaLaboral icol = fac.getIOfertaLaboral();
-				
-				request.getRequestDispatcher("/WEB-INF/altas/altaOfertaLaboral.jsp").forward(request, response);
+		
+				request.getRequestDispatcher("/WEB-INF/desktop/altas/altaOfertaLaboral.jsp").forward(request, response);
 			}else {
 				response.sendError(403);
 			}
@@ -96,15 +79,12 @@ public class AltaDeOfertaLaboral extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		Factory fac = Factory.getInstance();
-		IOfertaLaboral icol = fac.getIOfertaLaboral();
+		publicar.WebServicesService service = new publicar.WebServicesService();
+		publicar.WebServices port = service.getWebServicesPort();
 		
 		HttpSession session = request.getSession();
-		Usuario usuario = (Usuario) session.getAttribute("usuario_logueado");
-		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
-
-		ManejadorTipo mtip = ManejadorTipo.getInstancia();
-		
+		DtUsuario usuario = (DtUsuario) session.getAttribute("usuario_logueado");
+	
 		String nombre, horario, descripcion, tipo, ciudad, departamento;
 		nombre = request.getParameter("nombre");
 		horario = request.getParameter("horario");
@@ -113,56 +93,56 @@ public class AltaDeOfertaLaboral extends HttpServlet {
 		float remuneracion = Float.parseFloat(request.getParameter("remuneracion"));
 		ciudad = request.getParameter("ciudad");
 		departamento = request.getParameter("departamento");
-		System.out.println(nombre + " " + horario + " " + descripcion + " "  + remuneracion + " " + ciudad + " " + departamento + " " + tipo);
-		
 		String[] nombreKey = request.getParameterValues("keywords");
-		Map<String, DTKeyword> keys = new HashMap<>();
+		
+		DtKeyword[] keys = new DtKeyword[nombreKey.length];
 		for (int i =0; i < nombreKey.length; i++){
-			DTKeyword key = new DTKeyword(nombreKey[i]);
-			keys.put(nombreKey[i], key);
+			DtKeyword key = new DtKeyword();
+			key.setNombre(nombreKey[i]);
+			keys[i] = key;
 		}
 		
-		Tipo[] tipoSS = mtip.getTipos();
-		if (tipoSS == null) {
+		String[] tipos = port.listarTipoPublicacionOfertaLaboral();
+		if (tipos != null) {
+		request.setAttribute("tiposOL", tipos);
+		request.setAttribute("hayTipos", true);
+			
+		}else{
+			
 			request.setAttribute("hayTipos", false);
-		}else {
-			String[] tipos = new String[tipoSS.length];
-			for (int i = 0; i < tipoSS.length; i++) {
-                tipos[i] =  tipoSS[i].getNombre();
-            }
-			request.setAttribute("tiposOL", tipos);
-			request.setAttribute("hayTipos", true);
-
 		}
+		
+	
 		
 		//obtengo las keywords
-		Keyword[] key = mol.getKeywords();
-		if (key == null) {
+		DtKeywordWS keyss = port.getDTKeyword();
+		List<DtKeyword> key = keyss.getKeys();
+		request.setAttribute("keywords", key);
+		if (key == null || key.size() == 0) {
 			request.setAttribute("hayKeys", false);
 		}else {
-			String[] keywords = new String[key.length];
-			for (int j = 0; j < key.length; j++) {
-				keywords[j] =  key[j].getNombre();
+			String[] keywords = new String[key.size()];
+			for (int j = 0; j < key.size(); j++) {
+				keywords[j] =  key.get(j).getNombre();
             }
-			request.setAttribute("keywords", keywords);
+			request.setAttribute("keywordsNom", keywords);
 			request.setAttribute("hayKeys", true);
 
 		}
 		
-		LocalDate fechaDeAlta =  LocalDate.now();
 		
-		DTOfertaLaboral ofLab = new DTOfertaLaboral(nombre, descripcion, ciudad, departamento, horario, remuneracion, fechaDeAlta, keys);
+		DtOfertaLaboral ofLab = port.crearDTOfertaLaboral(nombre, descripcion, ciudad, departamento, horario, remuneracion, nombreKey);
 		
-		try {
-			icol.ingresarDatosOL(usuario.getNickname(), tipo, ofLab);
-			request.getRequestDispatcher("/WEB-INF/altas/altaOfertaLaboral.jsp").forward(request, response);
+		
+		if (port.ingresarDatosOL(usuario.getNickname(), tipo, ofLab)) {
+			request.getRequestDispatcher("/WEB-INF/desktop/altas/altaOfertaLaboral.jsp").forward(request, response);
 			
-		}catch (OfertaLaboralRepetidaException e) {
+		}else{
 			request.setAttribute("datosOferta", ofLab);
 			request.setAttribute("nombreTipo", tipo);
-			request.setAttribute("OLrepetida", e.getMessage());
+			request.setAttribute("OLrepetida", "oferta repetida");
 			
-			request.getRequestDispatcher("/WEB-INF/errores/altaOfertaLaboralError.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/desktop/errores/altaOfertaLaboralError.jsp").forward(request, response);
 
 		}
 	}

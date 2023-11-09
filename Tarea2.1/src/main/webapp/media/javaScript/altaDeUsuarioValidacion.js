@@ -48,27 +48,6 @@ formulario.addEventListener("submit", function(event) {
 //Funcion para mandar formulario
 function mandarForm() {
 	formulario.submit();
-	
-	/*document.getElementById('formulario__mensaje-exitoso').classList.add('formulario__mensaje-exitoso-activo');
-	setTimeout(() => {
-		document.getElementById('formulario__mensaje-exitoso').classList.remove('formulario__mensaje-exitoso-activo');
-	}, 5000);
-	
-	document.querySelectorAll('.formulario__grupo-correcto').forEach((icono) => {
-		icono.classList.remove('formulario__grupo-correcto');
-	});	
-
-	var empresaSelect = document.getElementById("grupo__desc_link");
-	var empresaEstado = document.querySelector('#grupo__desc_link .desc_link-estado');
-	
-	var postulanteSelect = document.getElementById("grupo__nacio_fech");
-	var postulanteEstado = document.querySelector('#grupo__nacio_fech .nacio_fech-estado');
-	
-	//Escondo los campos de empresa o postulante si se manda todo bien
-	empresaSelect.disabled = true;
-	empresaEstado.classList.remove('desc_link-estado-activo');
-	postulanteSelect.disabled = true;
-	postulanteEstado.classList.remove('nacio_fech-estado-activo');*/
 }
 
 

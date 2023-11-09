@@ -5,11 +5,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
-import logica.Keyword;
-import logica.LoginEstado;
-import logica.ManejadorOfertaLaboral;
-import logica.Usuario;
+import publicar.DtKeyword;
+import publicar.DtKeywordWS;
+import publicar.DtUsuario;
 
 /**
  * Servlet implementation class CerrarSession
@@ -23,15 +23,23 @@ public class CerrarSession extends HttpServlet {
     }
     
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	Usuario usrLogueado = (Usuario) request.getSession().getAttribute("usuario_logueado");
-    	ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
-		Keyword[] keys = mol.getKeywords();
-		request.setAttribute("keywords", keys);
+    	DtUsuario usrLogueado = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
+    	
+//    	Factory fac = Factory.getInstance();
+//    	IOfertaLaboral col = fac.getIOfertaLaboral();
+    	
+    	publicar.WebServicesService service = new publicar.WebServicesService();
+		publicar.WebServices port = service.getWebServicesPort();
+		
+		DtKeywordWS keys = port.getDTKeyword();
+		List<DtKeyword> dtkeys = keys.getKeys();
+		request.setAttribute("keywords", dtkeys);
+		
     	if (usrLogueado != null) {
     		request.getSession().setAttribute("usuario_logueado", null);
     		request.getSession().setAttribute("estado_sesion", null);
     		request.getSession().setAttribute("filterType", "AllOffers");
-    		request.getRequestDispatcher("/WEB-INF/template/index.jsp").forward(request, response);
+    		request.getRequestDispatcher("/WEB-INF/desktop/template/index.jsp").forward(request, response);
     	} else {
     		response.sendError(403);
     	}

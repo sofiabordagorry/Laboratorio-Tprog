@@ -5,21 +5,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-
-import logica.DTPaquete;
-import logica.Factory;
-import logica.IOfertaLaboral;
-import logica.Keyword;
-import logica.ManejadorOfertaLaboral;
-import logica.ManejadorTipo;
-import logica.Paquete;
-import logica.Usuario;
+import publicar.DtKeyword;
+import publicar.DtKeywordWS;
+import publicar.DtUsuario;
+import publicar.DtPaquete;
 
 import java.io.IOException;
-
-import excepciones.PaqueteYaCompradoException;
-
-
+import java.util.List;
 
 /**
  * Servlet implementation class CompraPaquete
@@ -40,28 +32,25 @@ public class CompraPaquete extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-    	Factory fac = Factory.getInstance();
-    	IOfertaLaboral col = fac.getIOfertaLaboral();
-    	ManejadorTipo mtip = ManejadorTipo.getInstancia();
-    	ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
-		Keyword[] keys = mol.getKeywords();
-		request.setAttribute("keywords", keys);
-    	
+		publicar.WebServicesService service = new publicar.WebServicesService();
+		publicar.WebServices port = service.getWebServicesPort();
+		
 		HttpSession session = request.getSession();
-     	Usuario user = (Usuario) session.getAttribute("usuario_logueado");
+		DtUsuario usuario = (DtUsuario) session.getAttribute("usuario_logueado");
+    	
+		DtKeywordWS keyss = port.getDTKeyword();
+		List<DtKeyword> key = keyss.getKeys();
+		request.setAttribute("keywords", key);
+    	
      	request.setAttribute("paqComprado", true);
      	String nombrePaq = request.getParameter("paquete");
-     	try {
-     		col.comprarPaquete(user.getNickname(),nombrePaq);
-     		request.getSession().setAttribute("compraExitosa", true);
-     	}catch (PaqueteYaCompradoException e) {
-     		request.getSession().setAttribute("compraExitosa", false);
-     	}
+     
+     	request.setAttribute("compraExitosa", port.comprarPaquete(usuario.getNickname(),nombrePaq));
      	
-     	Paquete paq = mtip.buscarPaquete(nombrePaq);
-        DTPaquete paquete = paq.getDataPaquete();
+     	
+     	DtPaquete paquete = port.buscarPaquete(nombrePaq);
         request.setAttribute("dataPaquete", paquete);
-        request.getRequestDispatcher("/WEB-INF/consultas/consultaPaquete.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/desktop/consultas/consultaPaquete.jsp").forward(request, response);
 	}
 
 }
