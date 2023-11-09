@@ -56,29 +56,15 @@ public class Home extends HttpServlet {
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
     	init(request);
-    	String userAgent = request.getHeader("User-Agent");
-
-    	if (userAgent != null && userAgent.toLowerCase().contains("mobile")) {
-    	    // Es un dispositivo móvil
-    		switch (getLoginEstado(request)) {
-    		case NO_LOGIN:
-    			request.getRequestDispatcher("/WEB-INF/mobile/template/index.jsp").forward(request, response);
-    		case LOGIN_INCORRECTO:
-    			break;
-    		case LOGIN_CORRECTO:
-    			request.getRequestDispatcher("/WEB-INF/mobile/template/index.jsp").forward(request, response);;
-    		}
-    	} else {
-    	    // Es un dispositivo de escritorio
-    		switch (getLoginEstado(request)) {
-    		case NO_LOGIN:
-    			request.getRequestDispatcher("/WEB-INF/desktop/template/index.jsp").forward(request, response);
-    		case LOGIN_INCORRECTO:
-    			break;
-    		case LOGIN_CORRECTO:
-    			request.getRequestDispatcher("/WEB-INF/desktop/template/index.jsp").forward(request, response);;
-    		}
-    	}
+	    // Es un dispositivo de escritorio
+		switch (getLoginEstado(request)) {
+		case NO_LOGIN:
+			request.getRequestDispatcher("/WEB-INF/desktop/template/index.jsp").forward(request, response);
+		case LOGIN_INCORRECTO:
+			break;
+		case LOGIN_CORRECTO:
+			request.getRequestDispatcher("/WEB-INF/desktop/template/index.jsp").forward(request, response);;
+		}
     }
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
