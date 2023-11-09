@@ -1,0 +1,54 @@
+#main-container{
+	min-height: 0%;
+	background-color: rgba(255, 255, 255, 0.808);
+	padding: 50px;
+	border-radius: 1em;
+	max-width: 95%;
+	min-width: 50%;
+	margin:auto;
+	font-family: 'Inter Tight', sans-serif;
+}
+
+tbody tr:hover {
+  cursor: pointer;
+  background-color: #f5f5f5;
+}
+
+tbody tr:active {
+  background-color: #ccc; 
+}
+
+#ofertas-laborales-consulta-empresa{
+	width: 100%;
+}
+
+#ofertas-laborales-consulta-empresa th,
+#ofertas-laborales-consulta-empresa td{
+	width: auto;
+}
+
+.table-container {
+    display: inline-block;
+    text-align: center; 
+    margin: 0 auto; 
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+li.listarPaq::before {
+    content: "•";
+    margin-right: 10px;
+    color: #007bff;
+}
+
+.alert {
+    color: red;
+    font-weight: bold;
+}
