@@ -199,7 +199,7 @@
                                 <div class="postulante">
                                     <img width="50" height="50" class="img-fluid img-thumbnail"
                                         src="media/imagenes/NoImageUser.png" />
-                                    <a href="ConsultaPostulacion?postulanteConsultado=<%=user.getNickname()%>&nombreOfertaConsultada=<%=ofertaConsultada.getNombre()%>">Mi Postulación</a>
+                                    <a href="ConsultaPostulacion?postulanteConsultado=<%=user.getNickname()%>&oferta_consultada=<%=ofertaConsultada.getNombre()%>">Mi Postulación</a>
                                 </div>
                             </div>
                             <%
