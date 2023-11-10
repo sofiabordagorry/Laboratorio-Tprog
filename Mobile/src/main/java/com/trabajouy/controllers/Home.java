@@ -34,6 +34,9 @@ public class Home extends HttpServlet {
 		publicar.WebServicesService service = new publicar.WebServicesService();
 		publicar.WebServices port = service.getWebServicesPort();
     	
+    	// Factory fac = Factory.getInstance();
+    	// IOfertaLaboral iol = fac.getIOfertaLaboral();
+    	
 		DtKeywordWS keys = port.getDTKeyword();
 		request.setAttribute("keywords", keys.getKeys());
     	request.getSession().setAttribute("filterType", "AllOffers");
@@ -56,11 +59,11 @@ public class Home extends HttpServlet {
 	    // Es un dispositivo de escritorio
 		switch (getLoginEstado(request)) {
 		case NO_LOGIN:
-			request.getRequestDispatcher("/WEB-INF/desktop/home/login.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/desktop/template/index.jsp").forward(request, response);
 		case LOGIN_INCORRECTO:
 			break;
 		case LOGIN_CORRECTO:
-			request.getRequestDispatcher("/WEB-INF/desktop/home/login.jsp").forward(request, response);;
+			request.getRequestDispatcher("/WEB-INF/desktop/template/index.jsp").forward(request, response);;
 		}
     }
 	
