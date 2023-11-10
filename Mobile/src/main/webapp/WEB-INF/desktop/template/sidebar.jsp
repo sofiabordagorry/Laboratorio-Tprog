@@ -57,24 +57,4 @@
 			<a class="list-group-item list-group-item-action" href="ConsultaPaquete"><i class="fa-solid fa-box-open"></i> Consultar paquetes</a>
 		</div>
 	</div>
-	<div class="list-group m-2">
-		<a href="#">
-			<div class="header d-flex" data-toggle="collapse" aria-controls="keywordList" href="#keywordList">
-				<h2 class="list-group-item-heading mr-auto p-2">Keywords</h2>
-				<img class="p-2" width="50" height="50" src="media/imagenes/collapse.png" />
-			</div>
-		</a>
-		<div id="keywordList" class="collapse">
-			<%
-				List<DtKeyword> keys = (List<DtKeyword>) request.getAttribute("keywords");
-				if (keys != null) {
-				for(int i = 0; i < keys.size(); i++) {
-			%>
-			<a class="list-group-item list-group-item-action" href="Ofertas?filtro=<%= keys.get(i).getNombre() %>&filterType=<%= request.getSession().getAttribute("filterType") %>"><%= keys.get(i).getNombre() %></a>
-			<%
-					}
-				}
-			%>
-		</div>
-	</div>
 </div>

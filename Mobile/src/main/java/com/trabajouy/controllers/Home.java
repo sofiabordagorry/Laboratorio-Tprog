@@ -26,8 +26,8 @@ public class Home extends HttpServlet {
     
     public static void init(HttpServletRequest request) {
     	HttpSession misesion = request.getSession();
-    	if (misesion.getAttribute("loginEstado") == null) {
-    		misesion.setAttribute("loginEstado", LoginEstado.NO_LOGIN);
+    	if (misesion.getAttribute("estado_sesion") == null) {
+    		misesion.setAttribute("estado_sesion", LoginEstado.NO_LOGIN);
     		misesion.setAttribute("filtro", null);
     	}
 		
@@ -50,7 +50,7 @@ public class Home extends HttpServlet {
     }
     
     public static LoginEstado getLoginEstado(HttpServletRequest request) {
-    	return (LoginEstado) request.getSession().getAttribute("loginEstado");
+    	return (LoginEstado) request.getSession().getAttribute("estado_sesion");
     }
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -59,7 +59,7 @@ public class Home extends HttpServlet {
 	    // Es un dispositivo de escritorio
 		switch (getLoginEstado(request)) {
 		case NO_LOGIN:
-			request.getRequestDispatcher("/WEB-INF/desktop/template/index.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/desktop/home/login.jsp").forward(request, response);
 		case LOGIN_INCORRECTO:
 			break;
 		case LOGIN_CORRECTO:

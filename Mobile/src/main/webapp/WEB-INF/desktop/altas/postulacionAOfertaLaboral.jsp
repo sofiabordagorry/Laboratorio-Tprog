@@ -10,14 +10,14 @@
 	
 		<title>Trabajo.uy</title>
 		<style>
-  .large-input {
-    height: 100px; /* Ajusta la altura según tus preferencias */
-    resize: none; /* Evita que el usuario pueda cambiar el tamaño */
-  }
-  
-  label {
-  padding: 10px;}
-</style>
+			.large-input {
+			  height: 100px; /* Ajusta la altura según tus preferencias */
+			  resize: none; /* Evita que el usuario pueda cambiar el tamaño */
+			}
+			
+			label {
+			padding: 10px;}
+		</style>
 	</head>
 <body>
 	<jsp:include page="../template/navbar.jsp" />

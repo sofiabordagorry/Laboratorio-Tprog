@@ -13,7 +13,6 @@
 		<jsp:include page="../template/navbar.jsp" />
 		<div class="container-fluid" id="web-content">
         	<div class="row justify-content-md-center">
-        		<jsp:include page="../template/sidebar.jsp" />
         		<div class="col col-md-9 col-sm-12" id="main-content">
 		            <div class="container-fluid" id="main-container">
 		            	<div class="row">

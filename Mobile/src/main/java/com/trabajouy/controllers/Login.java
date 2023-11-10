@@ -43,22 +43,15 @@ public class Login extends HttpServlet {
 		publicar.WebServicesService service = new publicar.WebServicesService();
 		publicar.WebServices port = service.getWebServicesPort();
 		
-//		Factory fac = Factory.getInstance();
-//		IOfertaLaboral col = fac.getIOfertaLaboral();
-		
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
 		LoginEstado nuevoEstado = LoginEstado.NO_LOGIN;
 		RequestDispatcher dispatcher;
 		
-
 		// chequea contraseña
-//        IUsuario cu = fac.getIUsuario();
-//        DTUsuario usr = cu.buscarDTUsuario(login);
 		DtUsuario usr = port.buscarUsuario(login);
 		if (usr.getNickname() == null) {
 			usr = port.buscarUsuarioPorMail(login);
-//			usr = cu.buscarDTUsuarioPorMail(login);
 		}
 		
 		if (usr.getNickname() != null && !usr.getContrasenia().equals(password)) {
@@ -74,8 +67,6 @@ public class Login extends HttpServlet {
 			dispatcher = request.getRequestDispatcher("/WEB-INF/desktop/home/login.jsp");
 		}
 		
-//		DTKeyword[] keys = col.getDTKeywords(); 
-	//	DtKeywordArray keys = port.getDTKeyword();
 		DtKeywordWS k = port.getDTKeyword();
 		List<DtKeyword> dtk = k.getKeys();
 		request.setAttribute("keywords", dtk);
