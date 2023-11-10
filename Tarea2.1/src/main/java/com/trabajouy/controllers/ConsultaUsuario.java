@@ -1,10 +1,16 @@
 package com.trabajouy.controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import publicar.DtKeywordWS;
 import publicar.DtUsuario;
+import publicar.DtPostulante;
+import publicar.DtPostulacion;
+import publicar.DtOfertaLaboral;
 import publicar.DtUsuarioWS;
+import publicar.EstadoOL;
 import publicar.UsuariosNoExistenException_Exception;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -74,6 +80,17 @@ public class ConsultaUsuario extends HttpServlet {
     	            request.getRequestDispatcher("/WEB-INF/desktop/consultas/miPerfilEmpresa.jsp").forward(request, response);
     	        } else if (port.existePostulante(nicknameConsultado)) {
     	            // Es un postulante, mostrar MiPerfilPostulante
+					DtPostulante pInfo = null;
+            		pInfo = (DtPostulante) userInfo;
+            		List<DtPostulacion> posts = pInfo.getPostulaciones();
+            		List<String> ofertasFinalizadas = new ArrayList<>();
+            		for(DtPostulacion p : posts) {
+            			DtOfertaLaboral ofLab = port.buscarOfertaLaboral(p.getOferta());
+            			if(ofLab.getEstado() == EstadoOL.FINALIZADA) {
+            				ofertasFinalizadas.add(p.getOferta());
+            			}
+            		}
+            		request.setAttribute("Ofertas_Finalizadas", ofertasFinalizadas);
     	            request.getRequestDispatcher("/WEB-INF/desktop/consultas/miPerfilPostulante.jsp").forward(request, response);
     	        }
     	    } else {

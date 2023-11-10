@@ -52,14 +52,25 @@
 									  	</thead>
 									<tbody>
 										<%
+											List<String> ofertasFinalizadas = (List<String>) request.getAttribute("Ofertas_Finalizadas");
 											for(DtPostulacion p : posts){
+												if(!ofertasFinalizadas.contains(p.getOferta())){
 										%>
 									    <tr>
 									      	<td><a href="ConsultaOfertaLaboral?oferta_consultada=<%=p.getOferta()%>"><%=p.getOferta() %></a></td>
 									      	<td><%=p.getFecha() %></td>
 									    </tr>
 										<%
-										  	}  
+										  		}else{
+										%>
+										  		
+								    	<tr>
+									      	<td><a><%=p.getOferta() %></a></td>
+									      	<td><%=p.getFecha() %></td>
+									    </tr>
+									    <%
+										  		}
+											}
 										%>
 									</tbody>
 									</table>
