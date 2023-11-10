@@ -33,7 +33,7 @@
 							<button type="submit" class="btn">Iniciar sesión</button>
 							<%
 		                      	LoginEstado error = (LoginEstado) session.getAttribute("estado_sesion");
-		                        if (error != null) {
+		                        if (error != null && error != LoginEstado.NO_LOGIN) {
 		                    %>
 		                    <div class="error-message">
 		                      	<%= error %>
