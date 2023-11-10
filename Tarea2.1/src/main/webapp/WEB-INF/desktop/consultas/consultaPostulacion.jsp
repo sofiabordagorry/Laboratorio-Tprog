@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="publicar.DtPostulacion"%>
 <%@ page import="publicar.DtPostulante"%>
+<%@ page import="publicar.DtOfertaLaboral"%>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -22,6 +23,7 @@
 	                        		DtPostulacion dtpostulacion = (DtPostulacion) request.getAttribute("dataPostulacion");
 	                        		DtPostulante post = (DtPostulante) request.getAttribute("usuarioPostulacion");
 	                        		String nombreOferta = (String) request.getAttribute("nombreOferta");
+	                        		DtOfertaLaboral oferta =(DtOfertaLaboral) request.getAttribute("oferta");
 	                        	%>
 	                          	<div class="col-md-3">
 	                            	<img src="media/imagenes/NoImageUser.png" class="card-img" alt="..." >
@@ -61,6 +63,18 @@
 										</div>
 		                            </div>
 								</div>
+								  <%		
+										    if ( oferta.getEstado().value() != "Finalizada"){
+				               
+										    %>
+											<div class="col-md-8">
+											<div class="card-body">
+												<button class="btn"><a href="ConsultaOfertaLaboral?oferta_consultada=<%=nombreOferta%>">Ver oferta</a></button>
+											</div>
+										</div>
+										 <%
+										  } 
+										 %>
 	                        </div>
 						</div>
 	                </div>
