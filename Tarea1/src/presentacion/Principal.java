@@ -283,14 +283,15 @@ public class Principal {
 		JMenuItem mntmNewMenuItem = new JMenuItem("Cargar datos");
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CargarDatos.ingresarUsuarios();
-				CargarDatos.ingresarPaquetes();
-				CargarDatos.ingresarTipos();
-				CargarDatos.ingresarPaqueteTipos();
-				CargarDatos.ingresarKeywords();
-				CargarDatos.ingresarOfertasLaborales();
-				CargarDatos.ingresarKeywordsOfertas();
-				CargarDatos.ingresarPostulaciones();
+				CargarDatos c = new CargarDatos();
+				c.ingresarUsuarios();
+				c.ingresarPaquetes();
+				c.ingresarTipos();
+				c.ingresarPaqueteTipos();
+				c.ingresarKeywords();
+				c.ingresarOfertasLaborales();
+				c.ingresarKeywordsOfertas();
+				c.ingresarPostulaciones();
         		JOptionPane.showMessageDialog(frmAdmTrabajo, "Datos cargados con éxito", "Administrador Trabajo.uy",
         				JOptionPane.INFORMATION_MESSAGE);
 			}
