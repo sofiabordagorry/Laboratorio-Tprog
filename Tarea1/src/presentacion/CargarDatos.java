@@ -39,7 +39,7 @@ public class CargarDatos {
 	public CargarDatos() {
 	}
 	
-    public static byte[] downloadImageAsByteArray(String imageUrl) throws IOException {
+    public byte[] downloadImageAsByteArray(String imageUrl) throws IOException {
         URL url = new URL(imageUrl);
         try (InputStream in = url.openStream();
              ByteArrayOutputStream out = new ByteArrayOutputStream()) {
@@ -52,12 +52,12 @@ public class CargarDatos {
         }
     }
 	
-	public static void ingresarPaquetes() {
+	public void ingresarPaquetes() {
 		ManejadorTipo m = ManejadorTipo.getInstancia();
 		String csvFilePath = "./CSV/Paquetes.csv";
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		
-		try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(csvFilePath), "UTF-8"))) {
 			String line;
 			boolean isFirstLine = true;
 			
@@ -76,12 +76,12 @@ public class CargarDatos {
 		}
 	}
 	
-	public static void ingresarTipos() {
+	public void ingresarTipos() {
 		ManejadorTipo m = ManejadorTipo.getInstancia();
 		String csvFilePath = "./CSV/TipoPublicacion.csv";
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		
-		try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(csvFilePath), "UTF-8"))) {
 			String line;
 			boolean isFirstLine = true;
 			
@@ -100,14 +100,14 @@ public class CargarDatos {
 		}
 	}
 	
-	public static void ingresarPaqueteTipos() {
+	public void ingresarPaqueteTipos() {
 		ManejadorTipo m = ManejadorTipo.getInstancia();
-		String csvFilePath = "./CSV/TiposPublicacionPaquetes.csv";
+		String csvFilePath = "/CSV/TiposPublicacionPaquetes.csv";
 		
 		Map<String, Paquete> paqs = m.getMapPaquete();
 		Map<String, Tipo> tipos = m.getMapTipo();
 		
-		try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(csvFilePath), "UTF-8"))) {
 			String line;
 			boolean isFirstLine = true;
 			
@@ -125,11 +125,11 @@ public class CargarDatos {
 		}
 	}
 	
-	public static List<Usuario> cargarUsuarios() {
-		String csvFilePath = "./CSV/Usuarios.csv";
+	public List<Usuario> cargarUsuarios() {
+		String csvFilePath = "/CSV/Usuarios.csv";
 		List<Usuario> usuarios = new ArrayList<>();
 		
-		try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(csvFilePath), "UTF-8"))) {
 			String line;
 			boolean isFirstLine = true;
 			
@@ -151,8 +151,8 @@ public class CargarDatos {
 		return usuarios;
 	}
 	
-	public static List<Postulante> cargarPostulantes() {
-		String csvFilePath = "./CSV/Usuarios-Postulantes.csv";
+	public List<Postulante> cargarPostulantes() {
+		String csvFilePath = "/CSV/Usuarios-Postulantes.csv";
 		List<Postulante> postulantes = new ArrayList<>();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		
@@ -160,7 +160,7 @@ public class CargarDatos {
 		Usuario[] usersArr = users.toArray(new Usuario[users.size()]);
 		int i = 0;
 		
-		try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(csvFilePath), "UTF-8"))) {
 			String line;
 			boolean isFirstLine = true;
 			
@@ -182,15 +182,15 @@ public class CargarDatos {
 		return postulantes;
 	}
 	
-	public static List<Empresa> cargarEmpresas() {
-		String csvFilePath = "./CSV/Usuarios-Empresas.csv";
+	public List<Empresa> cargarEmpresas() {
+		String csvFilePath = "/CSV/Usuarios-Empresas.csv";
 		List<Empresa> empresas = new ArrayList<>();
 		
 		List<Usuario> users = cargarUsuarios();
 		Usuario[] usersArr = users.toArray(new Usuario[users.size()]);
 		int i = 10;
 		
-		try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(csvFilePath), "UTF-8"))) {
 			String line;
 			boolean isFirstLine = true;
 			
@@ -212,7 +212,7 @@ public class CargarDatos {
 		return empresas;
 	}
 	
-	public static void ingresarUsuarios() {
+	public void ingresarUsuarios() {
 		List<Empresa> empresas = cargarEmpresas();
 		List<Postulante> postulantes = cargarPostulantes();
 		
@@ -226,11 +226,11 @@ public class CargarDatos {
 		}
 	}
 	
-	public static void ingresarKeywords() {
+	public void ingresarKeywords() {
 		ManejadorOfertaLaboral m = ManejadorOfertaLaboral.getInstance();
-		String csvFilePath = "./CSV/Keywords.csv";
+		String csvFilePath = "/CSV/Keywords.csv";
 		
-		try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(csvFilePath), "UTF-8"))) {
 			String line;
 			boolean isFirstLine = true;
 			
@@ -249,15 +249,15 @@ public class CargarDatos {
 		}
 	}
 	
-	public static void ingresarOfertasLaborales() {
+	public void ingresarOfertasLaborales() {
 		ManejadorTipo m = ManejadorTipo.getInstancia();
 		ManejadorOfertaLaboral mof = ManejadorOfertaLaboral.getInstance();
 		ManejadorUsuario mu = ManejadorUsuario.getInstancia();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		
-		String csvFilePath = "./CSV/OfertasLaborales.csv";
+		String csvFilePath = "/CSV/OfertasLaborales.csv";
 		
-		try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(csvFilePath), "UTF-8"))) {
 			String line;
 			boolean isFirstLine = true;
 			
@@ -282,7 +282,7 @@ public class CargarDatos {
 		}
 	}
 	
-	public static void ingresarKeywordsOfertas() {
+	public void ingresarKeywordsOfertas() {
 		ManejadorOfertaLaboral mof = ManejadorOfertaLaboral.getInstance();
 		Map<String, Keyword> keywords = mof.getMapKeywords();
 		
@@ -332,14 +332,14 @@ public class CargarDatos {
 		ofertasLaborales.get("Ingeniero de Calidad de Software").agregarKeyword(keywords.get("Contabilidad"));
 	}
 	
-	public static void ingresarPostulaciones() {
+	public void ingresarPostulaciones() {
 		ManejadorOfertaLaboral mof = ManejadorOfertaLaboral.getInstance();
 		ManejadorUsuario mu = ManejadorUsuario.getInstancia();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		
-		String csvFilePath = "./CSV/Postulaciones.csv";
+		String csvFilePath = "/CSV/Postulaciones.csv";
 		
-		try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(csvFilePath), "UTF-8"))) {
 			String line;
 			boolean isFirstLine = true;
 			
@@ -362,14 +362,14 @@ public class CargarDatos {
 		}
 	}
 	
-	public static void ingresarComprasPaquetes() {
+	public void ingresarComprasPaquetes() {
 		ManejadorTipo m = ManejadorTipo.getInstancia();
 		ManejadorUsuario mu = ManejadorUsuario.getInstancia();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		
-		String csvFilePath = "./CSV/PaquetesCompras.csv";
+		String csvFilePath = "/CSV/PaquetesCompras.csv";
 		
-		try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(csvFilePath), "UTF-8"))) {
 			String line;
 			boolean isFirstLine = true;
 			
@@ -401,12 +401,12 @@ public class CargarDatos {
 		}
 	}
 	
-	public static void cargarSeguidores() {
+	public void cargarSeguidores() {
 		ControladorUsuario cu = new ControladorUsuario();
 		
-		String csvFilePath = "./CSV/Usuarios-Seguidores.csv";
+		String csvFilePath = "/CSV/Usuarios-Seguidores.csv";
 		
-		try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(csvFilePath), "UTF-8"))) {
 			String line;
 			boolean isFirstLine = true;
 			
@@ -429,7 +429,7 @@ public class CargarDatos {
 		
 		String csvFilePath = ".src/CSV/PostulantesOfertasLaboralesFavoritas.csv";
 		
-		try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
+		try (BufferedReader br = new BufferedReader(getClass().getResourceAsStream(csvFilePath, "UTF-8")) {
 			String line;
 			boolean isFirstLine = true;
 			
