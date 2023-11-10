@@ -1,0 +1,54 @@
+
+#formularioPos {
+    background-color: rgba(255, 255, 255, 0.808);
+    padding: 50px;
+    border-radius: 1em;
+    max-width: 80%;
+    min-width: 50%;
+    margin: auto;
+    font-family: 'Inter Tight', sans-serif;
+}
+
+
+.btn {
+    background-color: #73a4b1;
+    color: white;
+}
+
+#descripcion {
+	height: 100px;
+	resize: none;
+}
+
+@media(max-width: 768px) {
+	#loginForm {
+		padding: 10px;
+		margin: 5px;
+	}
+}
+
+/* Estilo para mensajes de error */
+.formulario__input-error {
+  color: #bb2929; /* Color del texto de error */
+  font-size: 12px; /* Tamaño de fuente del mensaje de error */
+  margin-top: 5px; /* Espacio superior para separar el mensaje de error */
+  display: none; /* Ocultar el mensaje de error por defecto */
+}
+
+/* Estilo para mensajes de éxito */
+.formulario__mensaje-exitoso {
+  color: #119200; /* Color del texto de éxito */
+  font-size: 14px; /* Tamaño de fuente del mensaje de éxito */
+  margin-top: 5px; /* Espacio superior para separar el mensaje de éxito */
+  display: none; /* Ocultar el mensaje de éxito por defecto */
+}
+
+/* Estilo para campos incorrectos */
+.formulario__grupo-incorrecto .formulario__input-error {
+  display: block; /* Mostrar el mensaje de error en campos incorrectos */
+}
+
+/* Estilo para campos correctos */
+.formulario__grupo-correcto .formulario__mensaje-exitoso {
+  display: block; /* Mostrar el mensaje de éxito en campos correctos */
+}

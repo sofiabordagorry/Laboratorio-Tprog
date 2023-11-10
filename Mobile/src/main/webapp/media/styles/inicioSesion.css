@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@200&display=swap');
+
+#web-content {
+    background-image: url("../imagenes/gentepala.jpg") !important;
+    background-size: cover;
+}
+
+#loginForm {
+    background-color: rgba(255, 255, 255, 0.808);
+    padding: 50px;
+    border-radius: 1em;
+    max-width: 80%;
+    min-width: 50%;
+    margin: auto;
+    font-family: 'Inter Tight', sans-serif;
+}

@@ -1,0 +1,28 @@
+.imagenOferta {
+    height: 250px;
+    object-fit: cover;
+    border-radius: 2em;
+}
+
+#ofertaInfo {
+    padding: 20px;
+}
+
+#postulacionesPaquetesCol {
+    padding: 20px;
+    background-color: white;
+    border-radius: 2em;
+}
+
+#consultaOferta {
+    background-image: url("../imagenes/email-pattern.png");
+    border-radius: 2em;
+}
+
+.ranking {
+	margin-left: 10px;
+}
+
+.btn {
+	margin-top: 10px;
+}
