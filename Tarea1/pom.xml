@@ -5,6 +5,9 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>Servidor</name>
   <description>servidor central </description>
+  <properties>
+	  <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
   <build>
     <sourceDirectory>src</sourceDirectory>
     <resources>
@@ -13,6 +16,12 @@
         <excludes>
           <exclude>**/*.java</exclude>
         </excludes>
+      </resource>
+	  <resource>
+	    <directory>CSV</directory>
+	    <excludes>
+	      <exclude>**/*.java</exclude>
+	    </excludes>
       </resource>
     </resources>
     <plugins>
