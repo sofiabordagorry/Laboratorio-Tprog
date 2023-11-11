@@ -56,8 +56,57 @@
 	                            <%}
 	                        }%>
 							</div>
-                            
 	                    </div>
+	                    <div class = "col-md-3 text-center">
+		                        <div class="row container-fluid">
+		                    	<div class="" id="Siguiendo">
+		                    		<div class="table-container">
+		                    			<table class="table text-center" id="tablaSiguiendo">
+		                    				<thead>
+		                    					<tr>
+		                    						<th>Siguiendo</th>
+		                    					</tr>
+		                    				</thead>
+		                    				<tbody>
+               					        	<%
+		                    					String[] seguidos = (String[]) request.getAttribute("User_Following");
+               					        		String[] seguidores = (String[]) request.getAttribute("User_Followers");
+               					        		for(int i = 0; i < seguidos.length;i++){
+		                    				%>
+		                    					<tr>
+		                    						<td><a href="ConsultaUsuario?usuarioConsultado=<%=seguidos[i]%>"><%=seguidos[i]%></a></td>
+		                    					</tr>
+		                    				<%
+               					        		}
+		                    				%>
+		                    				</tbody>
+		                    			</table>
+		                    		</div>
+		                    	</div>
+		                    	<div class="" id="Seguidores">
+	         	                	<div class="table-container">
+	       	                	    	<table class="table text-center" id="tablaSeguidores">
+		                    				<thead>
+		                    					<tr>
+		                    						<th>Seguidores</th>
+		                    					</tr>
+		                    				</thead>
+		                    				<tbody>
+		                    				<%
+		                    					for(int i = 0; i < seguidores.length; i++){
+		                    				%>
+		                    					<tr>
+		                    						<td><a href="ConsultaUsuario?usuarioConsultado=<%=seguidores[i]%>"><%=seguidores[i] %></a></td>
+		                    					</tr>
+		                    				<%
+		                    					}
+		                    				%>
+		                    				</tbody>
+		                    			</table>
+		                    		</div>
+		                    	</div>
+		            		</div>
+							</div>
 	                </div>
 	        	</div>
 	    	</div>

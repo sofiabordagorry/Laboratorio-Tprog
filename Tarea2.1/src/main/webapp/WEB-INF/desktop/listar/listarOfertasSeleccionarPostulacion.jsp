@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="publicar.DtOfertaLaboral"%>
+<%@ page import="publicar.EstadoOL"%>
 <%@ page import="java.util.List"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,6 +21,7 @@
                        		List<DtOfertaLaboral> seleccionarPostulacion = (List<DtOfertaLaboral>) request.getAttribute("ofertasSeleccionarPostulante");
                      		if(seleccionarPostulacion.size() != 0) {
                        			for(int i = 0; i < seleccionarPostulacion.size(); i++) {
+                       				if (!seleccionarPostulacion.get(i).isRankeada() && seleccionarPostulacion.get(i).getEstado() != EstadoOL.FINALIZADA){
 						%>
 	                  	
 	                    <div class="card mb-3" style="max-width: 650px;">
@@ -33,11 +35,11 @@
 	                              		<p class="card-text"><%= seleccionarPostulacion.get(i).getDescripcion() %></p>
 	                              		<button class="btn"><a href="ConsultaOfertaLaboral?oferta_consultada=<%=seleccionarPostulacion.get(i).getNombre()%>&seleccionar_postulantes=<%=true%>">Ver oferta</a></button>
 	                            	</div>
-	                          	</div>
+	                          	</div> 
 	                        </div>
 						</div>
 						<%
-                       			}
+                       				}}
                      		} else {
                      			String error = (String) request.getAttribute("sinOfertasSeleccionarPostulante");
                        	%>
