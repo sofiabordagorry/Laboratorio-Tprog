@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+import publicar.DtEmpresa;
 import publicar.DtKeyword;
 import publicar.DtKeywordWS;
 import publicar.DtUsuario;
@@ -57,7 +58,7 @@ public class Login extends HttpServlet {
 		if (usr.getNickname() != null && !usr.getContrasenia().equals(password)) {
 			nuevoEstado = LoginEstado.LOGIN_INCORRECTO;
 			dispatcher = request.getRequestDispatcher("/WEB-INF/desktop/home/login.jsp");
-		} else if (usr.getNickname() != null && usr.getContrasenia().equals(password)) {
+		} else if (usr.getNickname() != null && usr.getContrasenia().equals(password) && !(usr instanceof DtEmpresa)) {
 			nuevoEstado = LoginEstado.LOGIN_CORRECTO;
 			// setea el usuario logueado
 			request.getSession().setAttribute("usuario_logueado", usr);

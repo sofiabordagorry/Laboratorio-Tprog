@@ -15,7 +15,7 @@
 			%>
 			
 			<li class="nav-item">
-				<a class="nav-link" href="ConsultaUsuario?usuarioConsultado=<%=usr.getNickname()%>"><i class="fa-solid fa-user" style="color: #dfe2e7;"></i> <%= usr.getNickname() %></a>
+				<p><%= usr.getNickname() %></p>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="ConsultaPostulacion"><i class="fa-solid fa-square-poll-vertical"></i>Mis Postulaciones</a>
