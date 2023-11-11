@@ -69,7 +69,6 @@ public class ConsultaPostulacion extends HttpServlet {
 				request.setAttribute("oferta", port.buscarOfertaLaboral(nombreOferta));
 				request.setAttribute("usuarioPostulacion", port.dataPostulante(nicknameConsultado));
 				request.setAttribute("dataPostulacion", dataPostulacion);
-				System.out.println(port.obtenerVideoPostulacion(nicknameConsultado, nombreOferta));
 				request.setAttribute("videoURL", port.obtenerVideoPostulacion(nicknameConsultado, nombreOferta));
 				request.getRequestDispatcher("/WEB-INF/desktop/consultas/consultaPostulacion.jsp").forward(request, response);
 			} else {

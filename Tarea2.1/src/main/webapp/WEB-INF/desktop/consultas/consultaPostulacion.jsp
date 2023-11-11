@@ -47,7 +47,7 @@
 										<h5 class="card-title">Video de la postulación:</h5>
 										<div class="card-text">
 										    <%
-										    if (dtpostulacion.getVideo() != "" && dtpostulacion.getVideo() != "SV"){
+										    if (dtpostulacion.getVideo() != "" && !dtpostulacion.getVideo().equals("SV")){
 				                        		String videoURL = (String) request.getAttribute("videoURL");
 										    
 										    	if(videoURL != null && !videoURL.isEmpty()) {
