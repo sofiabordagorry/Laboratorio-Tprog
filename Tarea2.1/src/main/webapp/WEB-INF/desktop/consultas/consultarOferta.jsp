@@ -128,7 +128,7 @@
                                     <div class="postulante">
                                         <img width="50" height="50" class="img-fluid img-thumbnail"
                                             src="media/imagenes/NoImageUser.png" />
-                                        <a href="ConsultaPostulacion?nombreOfertaConsultada=<%=ofertaConsultada.getNombre()%>&postulanteConsultado=<%=elem.getPostulante()%>"><%= elem.getPostulante() %></a>
+                                        <a href="ConsultaPostulacion?oferta_consultada=<%=ofertaConsultada.getNombre()%>&postulanteConsultado=<%=elem.getPostulante()%>"><%= elem.getPostulante() %></a>
                                     </div>
                                 <%
                                 				}

@@ -366,7 +366,7 @@ public class CargarDatos {
 				OfertaLaboral lof = mof.buscarOfertaLaboral(parts[5]);
 				Postulante upost = mu.buscarPostulante(parts[1]);
 				
-				Postulacion post = new Postulacion(LocalDate.parse(parts[4], formatter), parts[2], parts[3], upost, lof, parts[4]);
+				Postulacion post = new Postulacion(LocalDate.parse(parts[4], formatter), parts[2], parts[3], upost, lof, parts[6]);
 				upost.agregarPostulacion(post);
 				lof.agregarPostulacion(post);
 			}
