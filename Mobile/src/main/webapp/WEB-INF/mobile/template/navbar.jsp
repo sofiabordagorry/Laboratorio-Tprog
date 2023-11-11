@@ -18,16 +18,7 @@
 				<a class="nav-link" href="ConsultaUsuario?usuarioConsultado=<%=usr.getNickname()%>"><i class="fa-solid fa-user" style="color: #dfe2e7;"></i> <%= usr.getNickname() %></a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="ConsultaPostulacion"><i class="fa-solid fa-square-poll-vertical"></i> Mis Postulaciones</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="ConsultaUsuario"><i class="fa-solid fa-users"></i> Busqueda de usuarios</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="ConsultaTipo"><i class="fa-solid fa-square-poll-vertical"></i> Consultar tipos</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="ConsultaPaquete"><i class="fa-solid fa-box-open"></i> Consultar paquetes</a>
+				<a class="nav-link" href="ConsultaPostulacion"><i class="fa-solid fa-square-poll-vertical"></i>Mis Postulaciones</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="CerrarSession"><i class="fa-solid fa-right-from-bracket fa-flip-horizontal"></i> Cerrar Sesión</a>
