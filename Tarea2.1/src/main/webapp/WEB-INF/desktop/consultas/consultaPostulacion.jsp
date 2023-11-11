@@ -47,14 +47,15 @@
 										<h5 class="card-title">Video de la postulación:</h5>
 										<div class="card-text">
 										    <%
-										    if (dtpostulacion.getVideo() != ""){
+										    if (dtpostulacion.getVideo() != "" && dtpostulacion.getVideo() != "SV"){
 				                        		String videoURL = (String) request.getAttribute("videoURL");
 										    
 										    	if(videoURL != null && !videoURL.isEmpty()) {
 										    %>
 										        <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= videoURL %>" frameborder="0" allowfullscreen></iframe>
 										    <%
-										    } }else {
+										    	} 
+										    }else {
 										    %>
 										        <p>No hay video disponible para esta postulación.</p>
 										    <%

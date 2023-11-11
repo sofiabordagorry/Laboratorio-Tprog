@@ -85,7 +85,7 @@ public class DTPostulacion {
     	String videoURL = this.video;
         String videoID = null;
 
-        if (videoURL != null && !videoURL.isEmpty()) {
+        if (videoURL != null && videoURL != "SV" && !videoURL.isEmpty()) {
             String regex = "(?<=watch\\?v=|/videos/|embed\\/|youtu.be\\/|\\/v\\/|\\/e\\/|watch\\?v%3D|%2Fvideos%2F|%2Fv%2F|%2Fe%2F|%2F|%3Fv%3D|%26v%3D)[^#\\?\\&\\s]*";
             Pattern pattern = Pattern.compile(regex);
             Matcher matcher = pattern.matcher(videoURL);
