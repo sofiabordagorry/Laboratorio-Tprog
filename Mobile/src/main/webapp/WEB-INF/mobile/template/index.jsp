@@ -9,16 +9,9 @@
 	<body>
 		<jsp:include page="navbar.jsp" />
 		<div class="container-fluid" id="web-content">
+			<jsp:include page="../template/keywords.jsp" />
 			<div class="row justify-content-md-center">
-			<%
-				String of = (String) request.getSession().getAttribute("filterType");
-				if (of.equals("AllOffers")) {
-			%>
 				<jsp:include page="../listar/TodasLasOfertas.jsp" />
-				
-			<%
-				} 
-			%>
 			</div>
 		</div>
 	
