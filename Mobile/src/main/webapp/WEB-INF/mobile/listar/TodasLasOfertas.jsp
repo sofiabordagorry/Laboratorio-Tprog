@@ -11,16 +11,12 @@
 	<div class="col ofertaLaboral">
 		<h2>Todas las ofertas</h2>
 		<%
-			String of = (String) request.getAttribute("filterType");
 			DtUsuario user = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
 			List<DtOfertaLaboral> ols = (List<DtOfertaLaboral>) request.getSession().getAttribute("listaOfertasLaborales");
 			String keywordFiltro = (String) request.getAttribute("filtro");
-			String misOfertasBool = (String) request.getSession().getAttribute("filterType");
 			for(int i = 0; i < ols.size(); i++) {
-				if(misOfertasBool.equals("AllOffers")) {
 					if(ols.get(i).getEstado().equals(EstadoOL.CONFIRMADA)) {
 						boolean keywordFound = false;
-
 						if (keywordFiltro != null) {
 				            for (DtKeyword keyword : ols.get(i).getDataKeywords()) {
 				                if (keyword.getNombre().equals(keywordFiltro)) {
@@ -46,7 +42,6 @@
 			</div>
 		</div>
 		<%
-						}
 					}
 				}
 			}
