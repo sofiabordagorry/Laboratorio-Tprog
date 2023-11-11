@@ -46,5 +46,30 @@
 	 	<artifactId>tomcat-servlet-api</artifactId>
 	 	<version>10.1.11</version>
 	</dependency>
+	<dependency>
+	    <groupId>com.toedter</groupId>
+	    <artifactId>jcalendar</artifactId>
+	    <version>1.4</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.junit.platform</groupId>
+	    <artifactId>junit-platform-runner</artifactId>
+	    <version>1.10.1</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.glassfish.external</groupId>
+	    <artifactId>management-api</artifactId>
+	    <version>3.2.3</version>
+	</dependency>
+	<dependency>
+	    <groupId>com.sun.xml.ws</groupId>
+	    <artifactId>jaxws-tools</artifactId>
+	    <version>4.0.2</version>
+	</dependency>
+	<dependency>
+	    <groupId>com.sun.xml.fastinfoset</groupId>
+	    <artifactId>FastInfoset</artifactId>
+	    <version>2.1.1</version>
+	</dependency>
   </dependencies>
 </project>

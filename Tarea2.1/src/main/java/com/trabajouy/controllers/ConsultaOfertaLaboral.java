@@ -77,6 +77,7 @@ public class ConsultaOfertaLaboral extends HttpServlet {
         request.setAttribute("oferta_laboral", oferta);
         boolean ofertaVigente = port.estaVigenteOferta(ofertaConsultada);
         request.setAttribute("oferta_vigente", ofertaVigente);
+        request.setAttribute("oferta_consultada", oferta);;
         
         if (user instanceof DtPostulante) {
         	request.setAttribute("esfav", port.esFavorito(user.getNickname(), ofertaConsultada));
