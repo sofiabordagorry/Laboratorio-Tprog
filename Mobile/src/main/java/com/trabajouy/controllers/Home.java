@@ -39,7 +39,7 @@ public class Home extends HttpServlet {
     	
 		DtKeywordWS keys = port.getDTKeyword();
 		request.setAttribute("keywords", keys.getKeys());
-    	request.getSession().setAttribute("filterType", "AllOffers");
+    	//request.getSession().setAttribute("filterType", "AllOffers");
 		
 		try {
 			DtOfertaLaboralWS dtols = port.getDTOfertasLaborales();
