@@ -27,7 +27,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>Login</servlet-name>
-    <url-pattern>Login</url-pattern>
+    <url-pattern>/Login</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -37,7 +37,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>CerrarSession</servlet-name>
-    <url-pattern>CerrarSession</url-pattern>
+    <url-pattern>/CerrarSession</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -47,7 +47,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>ConsultaOfertaLaboral</servlet-name>
-    <url-pattern>ConsultaOfertaLaboral</url-pattern>
+    <url-pattern>/ConsultaOfertaLaboral</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -57,7 +57,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>ConsultaPostulacion</servlet-name>
-    <url-pattern>ConsultaPostulacion</url-pattern>
+    <url-pattern>/ConsultaPostulacion</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -67,7 +67,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>Ofertas</servlet-name>
-    <url-pattern>Ofertas</url-pattern>
+    <url-pattern>/Ofertas</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -77,6 +77,16 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>PostulacionAOfertaLaboral</servlet-name>
-    <url-pattern>PostulacionAOfertaLaboral</url-pattern>
+    <url-pattern>/PostulacionAOfertaLaboral</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Test</display-name>
+    <servlet-name>Test</servlet-name>
+    <servlet-class>com.trabajouy.controllers.Test</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Test</servlet-name>
+    <url-pattern>/Test</url-pattern>
   </servlet-mapping>
 </web-app>
