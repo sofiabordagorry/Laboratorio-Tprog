@@ -32,20 +32,16 @@
   </build>
   <dependencies>
   	<dependency>
-		<groupId>jakarta.xml.ws</groupId>
-		<artifactId>jakarta.xml.ws-api</artifactId>
+  		<groupId>jakarta.xml.ws</groupId>
+  		<artifactId>jakarta.xml.ws-api</artifactId>
+  		<version>4.0.0</version>
+	</dependency>
+	<dependency>
+		<groupId>com.sun.xml.ws</groupId>
+		<artifactId>jaxws-rt</artifactId>
 		<version>4.0.0</version>
-	</dependency>
-	<dependency>
-	 	<groupId>com.sun.xml.ws</groupId>
-	 	<artifactId>jaxws-rt</artifactId>
-	 	<version>4.0.0</version>
-	</dependency>
-	<dependency>
-	 	<groupId>org.apache.tomcat</groupId>
-	 	<artifactId>tomcat-servlet-api</artifactId>
-	 	<version>10.1.11</version>
-	</dependency>
+ 	</dependency>
+	 <!-- https://mvnrepository.com/artifact/com.toedter/jcalendar -->
 	<dependency>
 	    <groupId>com.toedter</groupId>
 	    <artifactId>jcalendar</artifactId>
@@ -70,6 +66,106 @@
 	    <groupId>com.sun.xml.fastinfoset</groupId>
 	    <artifactId>FastInfoset</artifactId>
 	    <version>2.1.1</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.eclipse.angus</groupId>
+	    <artifactId>angus-activation</artifactId>
+	    <version>2.0.1</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.eclipse.angus</groupId>
+	    <artifactId>angus-mail</artifactId>
+	    <version>2.0.2</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.glassfish.gmbal</groupId>
+	    <artifactId>gmbal-api-only</artifactId>
+	    <version>4.0.3</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.glassfish.ha</groupId>
+	    <artifactId>ha-api</artifactId>
+	    <version>3.1.13</version>
+	</dependency>
+	<dependency>
+	    <groupId>jakarta.activation</groupId>
+	    <artifactId>jakarta.activation-api</artifactId>
+	    <version>2.1.2</version>
+	</dependency>
+	<dependency>
+	    <groupId>jakarta.annotation</groupId>
+	    <artifactId>jakarta.annotation-api</artifactId>
+	    <version>3.0.0-M1</version>
+	</dependency>
+	<dependency>
+	    <groupId>jakarta.mail</groupId>
+	    <artifactId>jakarta.mail-api</artifactId>
+	    <version>2.1.2</version>
+	</dependency>
+	<dependency>
+	    <groupId>jakarta.xml.bind</groupId>
+	    <artifactId>jakarta.xml.bind-api</artifactId>
+	    <version>4.0.1</version>
+	</dependency>
+	<dependency>
+	    <groupId>jakarta.xml.soap</groupId>
+	    <artifactId>jakarta.xml.soap-api</artifactId>
+	    <version>3.0.1</version>
+	</dependency>
+	<dependency>
+	    <groupId>jakarta.xml.ws</groupId>
+	    <artifactId>jakarta.xml.ws-api</artifactId>
+	    <version>4.0.1</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.glassfish.jaxb</groupId>
+	    <artifactId>jaxb-core</artifactId>
+	    <version>4.0.4</version>
+	</dependency>
+	<dependency>
+	    <groupId>com.sun.xml.bind</groupId>
+	    <artifactId>jaxb-impl</artifactId>
+	    <version>4.0.4</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.glassfish.jaxb</groupId>
+	    <artifactId>jaxb-jxc</artifactId>
+	    <version>4.0.4</version>
+	</dependency>
+	<dependency>
+	    <groupId>com.sun.xml.bind</groupId>
+	    <artifactId>jaxb-xjc</artifactId>
+	    <version>4.0.4</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.jvnet.mimepull</groupId>
+	    <artifactId>mimepull</artifactId>
+	    <version>1.10.0</version>
+	</dependency>	
+	<dependency>
+	    <groupId>com.sun.xml.messaging.saaj</groupId>
+	    <artifactId>saaj-impl</artifactId>
+	    <version>3.0.3</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.codehaus.woodstox</groupId>
+	    <artifactId>stax2-api</artifactId>
+	    <version>4.2.2</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.jvnet.staxex</groupId>
+	    <artifactId>stax-ex</artifactId>
+	    <version>2.1.0</version>
+	</dependency>
+	<dependency>
+	    <groupId>com.sun.xml.stream.buffer</groupId>
+	    <artifactId>streambuffer</artifactId>
+	    <version>2.1.0</version>
+	</dependency>
+	<dependency>
+	    <groupId>com.fasterxml.woodstox</groupId>
+	    <artifactId>woodstox-core</artifactId>
+	    <version>6.5.1</version>
 	</dependency>
   </dependencies>
 </project>

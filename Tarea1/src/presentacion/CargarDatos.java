@@ -41,19 +41,6 @@ public class CargarDatos {
 	public CargarDatos() {
 	}
 	
-    public byte[] downloadImageAsByteArray(String imageUrl) throws IOException {
-        URL url = new URL(imageUrl);
-        try (InputStream in = url.openStream();
-             ByteArrayOutputStream out = new ByteArrayOutputStream()) {
-            byte[] buffer = new byte[1024];
-            int bytesRead;
-            while ((bytesRead = in.read(buffer)) != -1) {
-                out.write(buffer, 0, bytesRead);
-            }
-            return out.toByteArray();
-        }
-    }
-	
 	public void ingresarPaquetes() {
 		ManejadorTipo m = ManejadorTipo.getInstancia();
 		String csvFilePath = "/CSV/Paquetes.csv";
@@ -146,8 +133,8 @@ public class CargarDatos {
 						}
 						
 						String[] parts = line.split(";");
-						byte[] img = downloadImageAsByteArray(parts[7]);
-						Usuario user = new Usuario(parts[2], parts[3], parts[4], parts[5], parts[6], img);
+						//byte[] img = downloadImageAsByteArray(parts[7]);
+						Usuario user = new Usuario(parts[2], parts[3], parts[4], parts[5], parts[6], new byte[0]);
 						usuarios.add(user);
 					}
 				} catch (IOException e) {
@@ -429,7 +416,7 @@ public class CargarDatos {
 					continue;
 				}
 				
-				String[] parts = line.split(";");
+				String[] parts = line.split(";,");
 				cu.seguirUsuario(parts[1], parts[2]);
 			}
 		} catch (IOException e) {
