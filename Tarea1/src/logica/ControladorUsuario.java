@@ -433,6 +433,7 @@ public class ControladorUsuario implements IUsuario {
     	ManejadorUsuario murs = ManejadorUsuario.getInstancia();
     	return murs.existePostulante(nickname);
 	}
+	
 	public boolean existeEmpresa(String nickname) {
     	ManejadorUsuario murs = ManejadorUsuario.getInstancia();
     	return murs.existeEmpresa(nickname);

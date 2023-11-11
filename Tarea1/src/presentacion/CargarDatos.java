@@ -267,6 +267,7 @@ public class CargarDatos {
 		ManejadorOfertaLaboral mof = ManejadorOfertaLaboral.getInstance();
 		ManejadorUsuario mu = ManejadorUsuario.getInstancia();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		ControladorOfertaLaboral cof = new ControladorOfertaLaboral();
 		
 		String csvFilePath = "/CSV/OfertasLaborales.csv";
 		
@@ -285,7 +286,6 @@ public class CargarDatos {
 				Map<String, Tipo> tipos = m.getMapTipos();
 				Map<String, Keyword> keywords = new HashMap<>();
 				EstadoOL estado = EstadoOL.valueOf(parts[10]);
-				
 				OfertaLaboral of = new OfertaLaboral(parts[1], parts[2], parts[4], parts[3], parts[5], Float.parseFloat(parts[6]), LocalDate.parse(parts[9], formatter), 0.0f, tipos.get(parts[8]), keywords, estado, empresas.get(parts[7]), new byte[0], Integer.parseInt(parts[13]));
 				mof.agregarOfertaLaboral(of);
 				empresas.get(parts[7]).agregarOfertaLaboral(of);
@@ -460,5 +460,15 @@ public class CargarDatos {
 		}
 	} */
 	
-	
+	public void cargarResultadosPost() {
+		ControladorOfertaLaboral cof = new ControladorOfertaLaboral();
+		
+		String[] desarr = {"maro", "lgarcia"};
+		String[] est = {"lgarcia", "valen25", "matilo"};
+		
+		cof.realizarSeleccion("Desarrollador Frontend", desarr);
+		cof.buscarOfertaLaboral("Desarrollador Frontend").setRankeada(true);
+		cof.realizarSeleccion("Estratega de Negocios", est);
+		cof.buscarOfertaLaboral("Estratega de Negocios").setRankeada(true);
+	}
 }
