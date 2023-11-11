@@ -18,7 +18,7 @@
         </excludes>
       </resource>
 	  <resource>
-	    <directory>CSV</directory>
+	    <directory>resource</directory>
 	    <excludes>
 	      <exclude>**/*.java</exclude>
 	    </excludes>

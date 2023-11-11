@@ -1,8 +1,10 @@
 package presentacion;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.io.BufferedReader;
@@ -54,7 +56,7 @@ public class CargarDatos {
 	
 	public void ingresarPaquetes() {
 		ManejadorTipo m = ManejadorTipo.getInstancia();
-		String csvFilePath = "./CSV/Paquetes.csv";
+		String csvFilePath = "/CSV/Paquetes.csv";
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		
 		try (BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(csvFilePath), "UTF-8"))) {
@@ -78,7 +80,7 @@ public class CargarDatos {
 	
 	public void ingresarTipos() {
 		ManejadorTipo m = ManejadorTipo.getInstancia();
-		String csvFilePath = "./CSV/TipoPublicacion.csv";
+		String csvFilePath = "/CSV/TipoPublicacion.csv";
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		
 		try (BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(csvFilePath), "UTF-8"))) {
@@ -129,24 +131,35 @@ public class CargarDatos {
 		String csvFilePath = "/CSV/Usuarios.csv";
 		List<Usuario> usuarios = new ArrayList<>();
 		
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(csvFilePath), "UTF-8"))) {
-			String line;
-			boolean isFirstLine = true;
-			
-			while ((line = br.readLine()) != null) {
-				if (isFirstLine) {
-					isFirstLine = false;
-					continue;
+		InputStreamReader isr;
+		try {
+			isr = new InputStreamReader(getClass().getResourceAsStream(csvFilePath), "UTF-8");
+			try {
+				BufferedReader br = new BufferedReader(isr);
+				String line;
+					boolean isFirstLine = true;
+					
+					while ((line = br.readLine()) != null) {
+						if (isFirstLine) {
+							isFirstLine = false;
+							continue;
+						}
+						
+						String[] parts = line.split(";");
+						byte[] img = downloadImageAsByteArray(parts[7]);
+						Usuario user = new Usuario(parts[2], parts[3], parts[4], parts[5], parts[6], img);
+						usuarios.add(user);
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
-				
-				String[] parts = line.split(";");
-				byte[] img = downloadImageAsByteArray(parts[7]);
-				Usuario user = new Usuario(parts[2], parts[3], parts[4], parts[5], parts[6], img);
-				usuarios.add(user);
-			}
-		} catch (IOException e) {
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}catch(NullPointerException e) {
 			e.printStackTrace();
 		}
+		
+		
 		
 		return usuarios;
 	}
