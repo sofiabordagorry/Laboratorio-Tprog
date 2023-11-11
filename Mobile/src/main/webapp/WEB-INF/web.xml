@@ -27,7 +27,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>Login</servlet-name>
-    <url-pattern>/Login</url-pattern>
+    <url-pattern>Login</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -37,7 +37,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>CerrarSession</servlet-name>
-    <url-pattern>/CerrarSession</url-pattern>
+    <url-pattern>CerrarSession</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -47,17 +47,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>ConsultaOfertaLaboral</servlet-name>
-    <url-pattern>/ConsultaOfertaLaboral</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>ConsultaPaquete</display-name>
-    <servlet-name>ConsultaPaquete</servlet-name>
-    <servlet-class>com.trabajouy.controllers.ConsultaPaquete</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ConsultaPaquete</servlet-name>
-    <url-pattern>/ConsultaPaquete</url-pattern>
+    <url-pattern>ConsultaOfertaLaboral</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -67,27 +57,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>ConsultaPostulacion</servlet-name>
-    <url-pattern>/ConsultaPostulacion</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>ConsultaTipo</display-name>
-    <servlet-name>ConsultaTipo</servlet-name>
-    <servlet-class>com.trabajouy.controllers.ConsultaTipo</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ConsultaTipo</servlet-name>
-    <url-pattern>/ConsultaTipo</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>ConsultaUsuario</display-name>
-    <servlet-name>ConsultaUsuario</servlet-name>
-    <servlet-class>com.trabajouy.controllers.ConsultaUsuario</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ConsultaUsuario</servlet-name>
-    <url-pattern>/ConsultaUsuario</url-pattern>
+    <url-pattern>ConsultaPostulacion</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -97,7 +67,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>Ofertas</servlet-name>
-    <url-pattern>/Ofertas</url-pattern>
+    <url-pattern>Ofertas</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -107,6 +77,6 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>PostulacionAOfertaLaboral</servlet-name>
-    <url-pattern>/PostulacionAOfertaLaboral</url-pattern>
+    <url-pattern>PostulacionAOfertaLaboral</url-pattern>
   </servlet-mapping>
 </web-app>
