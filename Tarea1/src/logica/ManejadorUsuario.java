@@ -68,6 +68,9 @@ public class ManejadorUsuario {
 
 	
 	public Usuario buscarUsuario(String nickname) {//BUSCAR UN USUARIO
+		System.out.println(nickname);
+		System.out.println("cant empresas" + this.mapEmpresas.size());
+		System.out.println("cant postulantes" + this.mapPostulantes.size());
 		Usuario usr = mapEmpresas.get(nickname);
 		if (usr != null) {
 			return usr;

@@ -94,6 +94,10 @@ public class ConsultaUsuario extends HttpServlet {
     	            request.getRequestDispatcher("/WEB-INF/desktop/consultas/miPerfilPostulante.jsp").forward(request, response);
     	        }
     	    } else {
+    	    	String[] seguidores = port.obtenerSeguidores(nicknameConsultado);
+	        	String[] seguidos = port.obtenerSeguidos(nicknameConsultado);
+	        	request.setAttribute("User_Followers", seguidores);
+	        	request.setAttribute("User_Following", seguidos);
     	    	if (nicknameEnSesion != null) {
     	    		request.setAttribute("logueado", true);
     	    		boolean sigue = port.estaSiguiendo(nicknameEnSesion, nicknameConsultado);

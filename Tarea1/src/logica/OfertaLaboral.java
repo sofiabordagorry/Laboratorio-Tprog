@@ -262,8 +262,8 @@ public class OfertaLaboral {
 	
 	public void realizarSeleccion(String[] rankings) {
 		Postulacion post;
-		for (int i = 1; i < rankings.length; i++) {
-			post = this.getPostulacion(rankings[i]);
+		for (int i = 1; i <= rankings.length; i++) {
+			post = this.getPostulacion(rankings[i-1]);
 			post.setRank(i);
 		}
 		
