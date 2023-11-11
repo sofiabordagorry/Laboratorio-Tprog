@@ -28,7 +28,7 @@ public class Login extends HttpServlet {
     
     private void processRequest(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-				req.getRequestDispatcher("/WEB-INF/desktop/home/login.jsp").
+				req.getRequestDispatcher("/WEB-INF/mobile/home/login.jsp").
 				forward(req, resp);
     }
 
@@ -61,10 +61,10 @@ public class Login extends HttpServlet {
 			nuevoEstado = LoginEstado.LOGIN_CORRECTO;
 			// setea el usuario logueado
 			request.getSession().setAttribute("usuario_logueado", usr);
-			dispatcher = request.getRequestDispatcher("/WEB-INF/desktop/template/index.jsp");
+			dispatcher = request.getRequestDispatcher("/WEB-INF/mobile/template/index.jsp");
 		} else {
 			nuevoEstado = LoginEstado.LOGIN_INCORRECTO;
-			dispatcher = request.getRequestDispatcher("/WEB-INF/desktop/home/login.jsp");
+			dispatcher = request.getRequestDispatcher("/WEB-INF/mobile/home/login.jsp");
 		}
 		
 		DtKeywordWS k = port.getDTKeyword();

@@ -57,7 +57,7 @@ public class Ofertas extends HttpServlet {
 		}
 
 		request.getSession().setAttribute("filterType", request.getParameter("filterType"));
-		request.getRequestDispatcher("/WEB-INF/desktop/template/index.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/mobile/template/index.jsp").forward(request, response);
 	}
 
 	/**

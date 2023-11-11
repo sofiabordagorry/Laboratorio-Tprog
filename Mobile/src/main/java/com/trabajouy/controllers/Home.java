@@ -56,14 +56,14 @@ public class Home extends HttpServlet {
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
     	init(request);
-	    // Es un dispositivo de escritorio
+
 		switch (getLoginEstado(request)) {
 		case NO_LOGIN:
-			request.getRequestDispatcher("/WEB-INF/desktop/home/login.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/mobile/home/login.jsp").forward(request, response);
 		case LOGIN_INCORRECTO:
 			break;
 		case LOGIN_CORRECTO:
-			request.getRequestDispatcher("/WEB-INF/desktop/template/index.jsp").forward(request, response);;
+			request.getRequestDispatcher("/WEB-INF/mobile/template/index.jsp").forward(request, response);;
 		}
     }
 	

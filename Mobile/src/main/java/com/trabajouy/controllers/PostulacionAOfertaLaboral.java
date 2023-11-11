@@ -29,7 +29,7 @@ public class PostulacionAOfertaLaboral extends HttpServlet {
             throws ServletException, IOException {
     	String nomOL = (String) request.getParameter("oferta");
 		request.getSession().setAttribute("oferta", nomOL);
-    	request.getRequestDispatcher("/WEB-INF/desktop/altas/postulacionAOfertaLaboral.jsp").forward(request, response);
+    	request.getRequestDispatcher("/WEB-INF/mobile/altas/postulacionAOfertaLaboral.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -89,10 +89,10 @@ public class PostulacionAOfertaLaboral extends HttpServlet {
     		
     		
     		if(seCumpleExcepcion) {
-                request.getRequestDispatcher("/WEB-INF/desktop/errores/postulacionAOfertaLaboralError.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/mobile/errores/postulacionAOfertaLaboralError.jsp").forward(request, response);
     		} else {
 				request.setAttribute("postulacionExitosa", true);
-                request.getRequestDispatcher("/WEB-INF/desktop/altas/postulacionAOfertaLaboral.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/mobile/altas/postulacionAOfertaLaboral.jsp").forward(request, response);
     		}
 
                 

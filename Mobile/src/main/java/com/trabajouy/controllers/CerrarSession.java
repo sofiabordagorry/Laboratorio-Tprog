@@ -39,7 +39,7 @@ public class CerrarSession extends HttpServlet {
     		request.getSession().setAttribute("usuario_logueado", null);
     		request.getSession().setAttribute("estado_sesion", null);
     		request.getSession().setAttribute("filterType", "AllOffers");
-    		request.getRequestDispatcher("/WEB-INF/desktop/home/login.jsp").forward(request, response);
+    		request.getRequestDispatcher("/WEB-INF/mobile/home/login.jsp").forward(request, response);
     	} else {
     		response.sendError(403);
     	}

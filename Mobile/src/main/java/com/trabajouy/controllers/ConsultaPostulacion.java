@@ -56,7 +56,7 @@ public class ConsultaPostulacion extends HttpServlet {
 				} catch (UsuarioSinPostulacionesException_Exception e) {
 					e.printStackTrace();
 				}
-				request.getRequestDispatcher("/WEB-INF/desktop/listar/listarPostulaciones.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/mobile/listar/listarPostulaciones.jsp").forward(request, response);
 				
 			} else if(usr instanceof DtPostulante && nicknameConsultado.equals(usr.getNickname()) || 
 						usr instanceof DtEmpresa && port.verificacionDePostulantePostulacion(nicknameConsultado, nombreOferta, usr.getNickname())){ 
@@ -64,7 +64,7 @@ public class ConsultaPostulacion extends HttpServlet {
 				request.setAttribute("usuarioPostulacion", port.dataPostulante(nicknameConsultado));
 				request.setAttribute("dataPostulacion", dataPostulacion);
 				request.setAttribute("videoURL", port.obtenerVideoPostulacion(nicknameConsultado, nombreOferta));
-				request.getRequestDispatcher("/WEB-INF/desktop/consultas/consultaPostulacion.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/mobile/consultas/consultaPostulacion.jsp").forward(request, response);
 			} else {
 				response.sendError(403);
 			}
