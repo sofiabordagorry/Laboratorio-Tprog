@@ -159,6 +159,16 @@
     <servlet-name>Ofertas</servlet-name>
     <url-pattern>/Ofertas</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <description></description>
+    <display-name>RealizarBusqueda</display-name>
+    <servlet-name>RealizarBusqueda</servlet-name>
+    <servlet-class>com.trabajouy.controllers.RealizarBusqueda</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RealizarBusqueda</servlet-name>
+    <url-pattern>/RealizarBusqueda</url-pattern>
+  </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>PostulacionAOfertaLaboral</display-name>
