@@ -292,6 +292,7 @@ public class Principal {
 				c.ingresarOfertasLaborales();
 				c.ingresarKeywordsOfertas();
 				c.ingresarPostulaciones();
+				c.ingresarComprasPaquetes();
 				c.cargarSeguidores();
 				c.cargarResultadosPost();
         		JOptionPane.showMessageDialog(frmAdmTrabajo, "Datos cargados con éxito", "Administrador Trabajo.uy",

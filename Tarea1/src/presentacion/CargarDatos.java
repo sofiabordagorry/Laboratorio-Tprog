@@ -370,6 +370,8 @@ public class CargarDatos {
 		String csvFilePath = "/CSV/PaquetesCompras.csv";
 		
 		try (BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(csvFilePath), "UTF-8"))) {
+
+			
 			String line;
 			boolean isFirstLine = true;
 			
@@ -378,7 +380,7 @@ public class CargarDatos {
 					isFirstLine = false;
 					continue;
 				}
-				
+			
 				String[] parts = line.split(";");
 				Empresa emp = mu.buscarEmpresa(parts[1]);
 				Paquete paq = m.buscarPaquete(parts[2]);
@@ -395,6 +397,7 @@ public class CargarDatos {
 				Compra compra = new Compra(fecha, vencimiento, paq, emp, compTip);
 				emp.agregarCompra(compra);
 				paq.agregarCompra(compra);
+				
 				
 			}
 		} catch (IOException e) {
