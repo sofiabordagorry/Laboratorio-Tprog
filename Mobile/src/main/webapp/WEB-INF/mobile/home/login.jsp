@@ -23,7 +23,7 @@
 	                    <form action="Login" method="POST" id="loginForm">
 	                        <h3>Ingrese a su cuenta</h3>
 	                        <div class="form-group">
-	                          	<label for="InputNicknameEmail">Nickname o e-mail</label>
+	                          	<label for="InputNicknameEmail">Nickname o e-mail del postulante</label>
 	                          	<input type="nickname" class="form-control" name="login" id="InputNicknameEmailLogin" placeholder="Ingresar nickname o e-mail" required>
 	                        </div>
 	                        <div class="form-group">

@@ -9,7 +9,9 @@
 	<body>
 		<jsp:include page="navbar.jsp" />
 		<div class="container-fluid" id="web-content">
-			<jsp:include page="../template/keywords.jsp" />
+			<div class="row justify-content-md-center">
+				<jsp:include page="../template/keywords.jsp" />
+			</div>
 			<div class="row justify-content-md-center">
 				<jsp:include page="../listar/TodasLasOfertas.jsp" />
 			</div>
