@@ -14,8 +14,7 @@ import logica.DTEmpresa;
 import logica.DTOfertaLaboral;
 import logica.IOfertaLaboral;
 
-import java.util.Map;
-import java.util.HashMap;
+
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -45,7 +44,6 @@ import javax.swing.JList;
 import javax.swing.JSpinner;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import java.util.Date;
 import java.text.SimpleDateFormat;
 
 @SuppressWarnings("serial")
@@ -56,7 +54,6 @@ public class AltaOfertaLaboral extends JInternalFrame {
 	
 	private JTextField textFieldNombre;
 	private JTextArea textAreaDescripcion;
-    private JTextField textFieldHorario; // Cambiado a JTextField para mostrar el horario
 	private JSpinner spinnerHoraInicio;
 	private JSpinner spinnerHoraFin;
 	private JTextField textFieldRemuneracion;
@@ -66,6 +63,7 @@ public class AltaOfertaLaboral extends JInternalFrame {
 	private JComboBox<DTTipo> comboBoxTipPubOL;
 	private JList<String> listKeys;
 	private JDateChooser dateChooserFechaDeAlta;
+	private JTextField textFieldHorario;
 	
 	public AltaOfertaLaboral(IUsuario IU,IOfertaLaboral IOL) {
 	
@@ -213,72 +211,19 @@ public class AltaOfertaLaboral extends JInternalFrame {
         gbc_lblNewLabel_9.gridx = 0;
         gbc_lblNewLabel_9.gridy = 10;
         getContentPane().add(lblNewLabel_9, gbc_lblNewLabel_9);
-
-        // JSpinner para seleccionar la hora de inicio
-        spinnerHoraInicio = new JSpinner(new SpinnerDateModel());
-        JSpinner.DateEditor dateEditorInicio = new JSpinner.DateEditor(spinnerHoraInicio, "HH:mm");
-        spinnerHoraInicio.setEditor(dateEditorInicio);
-        GridBagConstraints gbc_spinnerHoraInicio = new GridBagConstraints();
-        gbc_spinnerHoraInicio.fill = GridBagConstraints.HORIZONTAL;
-        gbc_spinnerHoraInicio.insets = new Insets(0, 0, 5, 5);
-        gbc_spinnerHoraInicio.gridx = 3;
-        gbc_spinnerHoraInicio.gridy = 10;
-        getContentPane().add(spinnerHoraInicio, gbc_spinnerHoraInicio);
-
-        // JLabel para el separador "-"
-        JLabel lblSeparador = new JLabel(" - ");
-        GridBagConstraints gbc_lblSeparador = new GridBagConstraints();
-        gbc_lblSeparador.insets = new Insets(0, 0, 5, 5);
-        gbc_lblSeparador.gridx = 4;
-        gbc_lblSeparador.gridy = 10;
-        getContentPane().add(lblSeparador, gbc_lblSeparador);
-
-        // JSpinner para seleccionar la hora de fin
-        spinnerHoraFin = new JSpinner(new SpinnerDateModel());
-        JSpinner.DateEditor dateEditorFin = new JSpinner.DateEditor(spinnerHoraFin, "HH:mm");
-        spinnerHoraFin.setEditor(dateEditorFin);
-        GridBagConstraints gbc_spinnerHoraFin = new GridBagConstraints();
-        gbc_spinnerHoraFin.fill = GridBagConstraints.HORIZONTAL;
-        gbc_spinnerHoraFin.insets = new Insets(0, 0, 5, 5);
-        gbc_spinnerHoraFin.gridx = 5;
-        gbc_spinnerHoraFin.gridy = 10;
-        getContentPane().add(spinnerHoraFin, gbc_spinnerHoraFin);
-
-        // JTextField para mostrar el horario seleccionado
+        
         textFieldHorario = new JTextField();
-        textFieldHorario.setEditable(false); // Establece el JTextField como no editable
         GridBagConstraints gbc_textFieldHorario = new GridBagConstraints();
-        gbc_textFieldHorario.fill = GridBagConstraints.HORIZONTAL;
+        gbc_textFieldHorario.gridwidth = 6;
         gbc_textFieldHorario.insets = new Insets(0, 0, 5, 40);
-        gbc_textFieldHorario.gridx = 6; // Cambia el valor del gridx para colocarlo al lado de los JSpinner
+        gbc_textFieldHorario.fill = GridBagConstraints.HORIZONTAL;
+        gbc_textFieldHorario.gridx = 2;
         gbc_textFieldHorario.gridy = 10;
         getContentPane().add(textFieldHorario, gbc_textFieldHorario);
         textFieldHorario.setColumns(10);
+        
 
-     // Agrega un ChangeListener a los JSpinner para actualizar el JTextField y validar las horas
-        ChangeListener changeListener = new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                Date horaInicio = (Date) spinnerHoraInicio.getValue();
-                Date horaFin = (Date) spinnerHoraFin.getValue();
-
-                if (horaFin.before(horaInicio)) {
-                    // La hora final es menor que la hora inicial, muestra un mensaje de error
-                    JOptionPane.showMessageDialog(null, "La hora final debe ser mayor que la hora inicial", "Error", JOptionPane.ERROR_MESSAGE);
-                    
-                    // Restaura la hora final a la hora inicial y actualiza el JTextField
-                    spinnerHoraFin.setValue(horaInicio);
-                    horaFin = horaInicio;
-                }
-
-                SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
-                String horarioString = dateFormat.format(horaInicio) + " - " + dateFormat.format(horaFin);
-                textFieldHorario.setText(horarioString);
-            }
-        };
-
-        spinnerHoraInicio.addChangeListener(changeListener);
-        spinnerHoraFin.addChangeListener(changeListener);
+    
 
 
         JLabel lblNewLabel_6 = new JLabel("Remuneración: ");
@@ -318,7 +263,7 @@ public class AltaOfertaLaboral extends JInternalFrame {
         gbc_textFieldCiudad.gridy = 12;
         getContentPane().add(textFieldCiudad, gbc_textFieldCiudad);
         textFieldCiudad.setColumns(10);
-        
+       
         JLabel lblNewLabel_8 = new JLabel("Departamento:");
         lblNewLabel_8.setFont(new Font("Tahoma", Font.PLAIN, 12));
         GridBagConstraints gbc_lblNewLabel_8 = new GridBagConstraints();
@@ -484,6 +429,12 @@ public class AltaOfertaLaboral extends JInternalFrame {
 			return false;
 		}
 		
+		if (!esHorario(horarioU)) {
+			JOptionPane.showMessageDialog(this, "Se debe elegir un horario correcto ej: 09:00 - 12:00", "Alta de Oferta Laboral",
+					JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		
 //		if (!this.validar(nombreU)) {
 //			JOptionPane.showMessageDialog(this, "Debe ser un Nombre válido",
 //					"Alta de Oferta Laboral", JOptionPane.ERROR_MESSAGE);
@@ -539,6 +490,13 @@ public class AltaOfertaLaboral extends JInternalFrame {
         String regex = "^[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]*$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(s);
+        return matcher.matches();
+    }
+	
+	private boolean esHorario(String horario) {
+        String formatoRegExp = "^([01]\\d|2[0-3]):([0-5]\\d) - ([01]\\d|2[0-3]):([0-5]\\d)$";
+        Pattern pattern = Pattern.compile(formatoRegExp);
+        Matcher matcher = pattern.matcher(horario);
         return matcher.matches();
     }
 	
