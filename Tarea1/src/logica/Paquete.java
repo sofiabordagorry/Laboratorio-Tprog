@@ -105,7 +105,6 @@ public class Paquete {
 	        this.agregarPaqueteTipo(paqti);
 	        //arrglo del costoAsociado
 	        float costo = (tip.getCosto() * cantidad) *((100-this.descuento)/100);
-	        System.out.println("costo = " + costo);
 	        sumarACosto(costo);
 	        return true;
     	}

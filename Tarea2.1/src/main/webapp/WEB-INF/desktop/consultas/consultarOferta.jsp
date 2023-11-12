@@ -195,7 +195,7 @@
 	                                 if (existe_postulacion) {
                             %>
                             <div class="postulante">
-                                <h2>Postulacion</h2>
+                                <h2>Postulación</h2>
                                 <div class="postulante">
                                     <img width="50" height="50" class="img-fluid img-thumbnail"
                                         src="media/imagenes/NoImageUser.png" />
@@ -206,7 +206,7 @@
                                         } else {
                             %>
                             <div class="postulante">
-                                <h2>Postulacion</h2>
+                                <h2>Postulación</h2>
                                 <div class="postulante">
                                     <p>Aún no te has postulado a esta oferta laboral</p>
                                 </div>

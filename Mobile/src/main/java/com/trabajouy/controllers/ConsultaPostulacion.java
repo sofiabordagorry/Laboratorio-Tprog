@@ -32,9 +32,12 @@ public class ConsultaPostulacion extends HttpServlet {
     		throws ServletException, IOException {
     	
     	DtUsuario usr = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
-    	String nombreOferta = request.getParameter("nombreOfertaConsultada");
+    	String nombreOferta = request.getParameter("oferta_consultada");
     	request.setAttribute("nombreOferta", nombreOferta);
     	
+//    	Factory fac = Factory.getInstance();
+//		IUsuario cusr = fac.getIUsuario();
+//		IOfertaLaboral col = fac.getIOfertaLaboral();
     	publicar.WebServicesService service = new publicar.WebServicesService();
 		publicar.WebServices port = service.getWebServicesPort();
 		
@@ -44,7 +47,7 @@ public class ConsultaPostulacion extends HttpServlet {
 		request.setAttribute("keywords", keys);
     	
 		String nicknameConsultado = request.getParameter("postulanteConsultado");
-	
+
 		String nicknameEnSesion = null;
 		if (usr != null) {
 			nicknameEnSesion = usr.getNickname();
@@ -53,6 +56,8 @@ public class ConsultaPostulacion extends HttpServlet {
 					DtOfertaLaboralMisPostulacionesWS postulacionesWS = port.listarOfertasPostulado(nicknameEnSesion);
 					List<DtOfertaLaboral> misPostulaciones = postulacionesWS.getOfertas();
 					request.setAttribute("misPostulaciones", misPostulaciones);
+					request.setAttribute("nicknameConsultado", nicknameEnSesion);
+					request.setAttribute("oferta_consultada",nombreOferta);
 				} catch (UsuarioSinPostulacionesException_Exception e) {
 					e.printStackTrace();
 				}
@@ -61,6 +66,7 @@ public class ConsultaPostulacion extends HttpServlet {
 			} else if(usr instanceof DtPostulante && nicknameConsultado.equals(usr.getNickname()) || 
 						usr instanceof DtEmpresa && port.verificacionDePostulantePostulacion(nicknameConsultado, nombreOferta, usr.getNickname())){ 
 				DtPostulacion dataPostulacion = port.dataPostulacion(nicknameConsultado, nombreOferta);
+				request.setAttribute("oferta", port.buscarOfertaLaboral(nombreOferta));
 				request.setAttribute("usuarioPostulacion", port.dataPostulante(nicknameConsultado));
 				request.setAttribute("dataPostulacion", dataPostulacion);
 				request.setAttribute("videoURL", port.obtenerVideoPostulacion(nicknameConsultado, nombreOferta));

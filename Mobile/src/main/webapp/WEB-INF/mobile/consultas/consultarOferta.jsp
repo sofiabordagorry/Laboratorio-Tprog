@@ -38,7 +38,7 @@
                             <p class="text-center p-2"><%= ofertaConsultada.getDescripcion() %></p>
                         </div>
                         <div class="p-4">
-                            <p><i class="fa-solid fa-money-bills" style="color: #000000;"></i> <b>Remuneraci�n:</b> $<%= ofertaConsultada.getRemuneracion() %></p>
+                            <p><i class="fa-solid fa-money-bills" style="color: #000000;"></i> <b>Remuneración:</b> $<%= ofertaConsultada.getRemuneracion() %></p>
                             <p><i class="fa-solid fa-clock"></i> <b>Horario:</b> <%= ofertaConsultada.getHorario() %> </p>
                             <p><i class="fa-solid fa-location-crosshairs"></i> <b>Departamento: </b> <%= ofertaConsultada.getDepartamento() %></p>
                             <p><i class="fa-solid fa-location-crosshairs"></i> <b>Ciudad: </b> <%= ofertaConsultada.getCiudad() %></p>
@@ -89,11 +89,11 @@
 	                                 if (existe_postulacion) {
                             %>
                             <div class="postulante">
-                                <h2>Postulacion</h2>
+                                <h2>Postulación</h2>
                                 <div class="postulante">
                                     <img width="50" height="50" class="img-fluid img-thumbnail"
                                         src="media/imagenes/NoImageUser.png" />
-                                    <a href="ConsultaPostulacion?postulanteConsultado=<%=user.getNickname()%>&nombreOfertaConsultada=<%=ofertaConsultada.getNombre()%>">Mi Postulación</a>
+                                    <a href="ConsultaPostulacion?postulanteConsultado=<%=user.getNickname()%>&oferta_consultada=<%=ofertaConsultada.getNombre()%>">Mi Postulación</a>
                                 </div>
                             </div>
                             <%

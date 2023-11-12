@@ -417,8 +417,7 @@ public class CargarDatos {
 				}
 				
 				String[] parts = line.split(",");
-				System.out.println(parts[1].trim());
-				System.out.println(parts[2].trim());
+
 				cu.seguirUsuario(parts[1].trim(), parts[2].trim());
 			}
 		} catch (IOException e) {

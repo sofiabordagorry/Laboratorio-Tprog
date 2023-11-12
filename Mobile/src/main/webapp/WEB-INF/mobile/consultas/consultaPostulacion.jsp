@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="publicar.DtPostulacion"%>
 <%@ page import="publicar.DtPostulante"%>
+<%@ page import="publicar.DtOfertaLaboral"%>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -21,6 +22,7 @@
 	                        		DtPostulacion dtpostulacion = (DtPostulacion) request.getAttribute("dataPostulacion");
 	                        		DtPostulante post = (DtPostulante) request.getAttribute("usuarioPostulacion");
 	                        		String nombreOferta = (String) request.getAttribute("nombreOferta");
+	                        		DtOfertaLaboral oferta =(DtOfertaLaboral) request.getAttribute("oferta");
 	                        	%>
 	                          	<div class="col-md-3">
 	                            	<img src="media/imagenes/NoImageUser.png" class="card-img" alt="..." >
@@ -44,14 +46,15 @@
 										<h5 class="card-title">Video de la postulación:</h5>
 										<div class="card-text">
 										    <%
-										    if (dtpostulacion.getVideo() != ""){
+										    if (dtpostulacion.getVideo() != "" && !dtpostulacion.getVideo().equals("SV")){
 				                        		String videoURL = (String) request.getAttribute("videoURL");
 										    
 										    	if(videoURL != null && !videoURL.isEmpty()) {
 										    %>
-										        <iframe width="300" height="215" src="https://www.youtube.com/embed/<%= videoURL %>" frameborder="0" allowfullscreen></iframe>
+										        <iframe width="300" height="200" src="https://www.youtube.com/embed/<%= videoURL %>" frameborder="0" allowfullscreen></iframe>
 										    <%
-										    } }else {
+										    	} 
+										    }else {
 										    %>
 										        <p>No hay video disponible para esta postulación.</p>
 										    <%
@@ -60,6 +63,18 @@
 										</div>
 		                            </div>
 								</div>
+								  <%		
+										    if ( oferta.getEstado().value() != "Finalizada"){
+				               
+										    %>
+											<div class="col-md-8">
+											<div class="card-body">
+												<button class="btn"><a href="ConsultaOfertaLaboral?oferta_consultada=<%=nombreOferta%>">Ver oferta</a></button>
+											</div>
+										</div>
+										 <%
+										  } 
+										 %>
 	                        </div>
 						</div>
 	                </div>

@@ -36,7 +36,6 @@ public class ConsultaOfertaLaboral extends HttpServlet {
     	HttpSession session = request.getSession();
     	DtUsuario user = (DtUsuario) session.getAttribute("usuario_logueado");
     	String ofertaConsultada = (String) request.getParameter("oferta_consultada");
-    	System.out.println("OfertaConsultada 1: " +  ofertaConsultada);
     	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     	
 		publicar.WebServicesService service = new publicar.WebServicesService();
@@ -77,6 +76,7 @@ public class ConsultaOfertaLaboral extends HttpServlet {
         request.setAttribute("oferta_laboral", oferta);
         boolean ofertaVigente = port.estaVigenteOferta(ofertaConsultada);
         request.setAttribute("oferta_vigente", ofertaVigente);
+        request.setAttribute("oferta_consultada", oferta);;
         
         if (user instanceof DtPostulante) {
         	request.setAttribute("esfav", port.esFavorito(user.getNickname(), ofertaConsultada));

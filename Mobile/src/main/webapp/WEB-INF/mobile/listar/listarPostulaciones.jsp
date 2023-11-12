@@ -16,6 +16,7 @@
 	                 <div class="col ofertaLaboral">
 	                  	<h2>Mis Postulaciones</h2>
 	                  	<%
+	                  		String nick =  (String) request.getAttribute("nicknameConsultado");
                        		List<DtOfertaLaboral> postulaciones = (List<DtOfertaLaboral>) request.getAttribute("misPostulaciones");
                      		if(postulaciones.size() != 0) {
                        			for(int i = 0; i < postulaciones.size(); i++) {
@@ -30,7 +31,7 @@
 	                            	<div class="card-body">
 	                              		<h5 class="card-title"><%= postulaciones.get(i).getNombre() %></h5>
 	                              		<p class="card-text"><%= postulaciones.get(i).getDescripcion() %></p>
-	                              		<button class="btn"><a href="ConsultaOfertaLaboral?oferta_consultada=<%=postulaciones.get(i).getNombre()%>">Ver oferta/postulacion</a></button>
+	                              		<button class="btn"><a href="ConsultaPostulacion?oferta_consultada=<%=postulaciones.get(i).getNombre()%>&postulanteConsultado=<%=nick%>">Ver oferta/postulación</a></button>
 	                            	</div>
 	                          	</div>
 	                        </div>
