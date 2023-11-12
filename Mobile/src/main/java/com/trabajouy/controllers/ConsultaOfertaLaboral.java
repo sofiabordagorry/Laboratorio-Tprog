@@ -90,7 +90,11 @@ public class ConsultaOfertaLaboral extends HttpServlet {
         }
 
         // Forward the request to the JSP for rendering.
-        request.getRequestDispatcher("/WEB-INF/mobile/consultas/consultarOferta.jsp").forward(request, response);
+        if((user.getNickname()).equals(oferta.getDataEmpresa()) || (oferta.getEstado() != EstadoOL.FINALIZADA) ) {
+        	request.getRequestDispatcher("/WEB-INF/desktop/consultas/consultarOferta.jsp").forward(request, response);
+        }else {
+        	response.sendError(403);
+        }
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
