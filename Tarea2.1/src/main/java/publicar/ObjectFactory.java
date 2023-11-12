@@ -210,16 +210,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link DtUsuarioWS }
-     * 
-     * @return
-     *     the new instance of {@link DtUsuarioWS }
-     */
-    public DtUsuarioWS createDtUsuarioWS() {
-        return new DtUsuarioWS();
-    }
-
-    /**
      * Create an instance of {@link DtKeywordWS }
      * 
      * @return
@@ -227,6 +217,16 @@ public class ObjectFactory {
      */
     public DtKeywordWS createDtKeywordWS() {
         return new DtKeywordWS();
+    }
+
+    /**
+     * Create an instance of {@link DtUsuarioWS }
+     * 
+     * @return
+     *     the new instance of {@link DtUsuarioWS }
+     */
+    public DtUsuarioWS createDtUsuarioWS() {
+        return new DtUsuarioWS();
     }
 
     /**

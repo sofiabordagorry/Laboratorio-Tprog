@@ -16,6 +16,7 @@
 			List<DtOfertaLaboral> ols = (List<DtOfertaLaboral>) request.getSession().getAttribute("listaOfertasLaborales");
 			String keywordFiltro = (String) request.getAttribute("filtro");
 			String misOfertasBool = (String) request.getSession().getAttribute("filterType");
+			if(ols != null){
 			for(int i = 0; i < ols.size(); i++) {
 				if(misOfertasBool.equals("AllOffers")) {
 					if(ols.get(i).getEstado().equals(EstadoOL.CONFIRMADA)) {
@@ -49,6 +50,11 @@
 						}
 					}
 				}
+			}
+			}else{
+			%>
+				<h3>Lo sentimos, pero en este momento no hay ofertas</h3>
+			<% 
 			}
 		%>
 	</div>

@@ -159,9 +159,10 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 	public String[] listarNomPaquetes() throws NoHayPaquetesException{
 		ManejadorTipo mtTip = ManejadorTipo.getInstancia();
 		Map<String, Paquete> mapPaquetes = mtTip.getMapPaquete();
-		if (mapPaquetes.size() == 0)
+		if (mapPaquetes.size() == 0) {
 			throw new NoHayPaquetesException("No hay paquetes registrados");
-		
+		}
+				
 		String[] dpa = new String[mapPaquetes.size()];
 		int iter =0;
 		for (Map.Entry<String, Paquete> entry : mapPaquetes.entrySet()) {
@@ -296,10 +297,12 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 	public DTKeyword[] getDTKeywords(){
 		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
 		Keyword[] keys = mol.getKeywords();
-		DTKeyword[] dtkeys = new DTKeyword[keys.length];
+		DTKeyword[] dtkeys = new DTKeyword[0];
+		if (keys!=null) {
+		dtkeys = new DTKeyword[keys.length];
 		for(int i = 0; i < keys.length; i++)
 			dtkeys[i] = new DTKeyword(keys[i].getNombre());
-		
+		}
 		return dtkeys;
 	}
 	
