@@ -40,7 +40,7 @@ public class CargarDatos {
 	
 	public CargarDatos() {
 	}
-	
+
 	public void ingresarPaquetes() {
 		ManejadorTipo m = ManejadorTipo.getInstancia();
 		String csvFilePath = "/CSV/Paquetes.csv";
@@ -394,6 +394,7 @@ public class CargarDatos {
 				}
 				Compra compra = new Compra(fecha, vencimiento, paq, emp, compTip);
 				emp.agregarCompra(compra);
+				paq.agregarCompra(compra);
 				
 			}
 		} catch (IOException e) {

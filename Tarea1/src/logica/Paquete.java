@@ -14,7 +14,7 @@ public class Paquete {
 	private List<PaqueteTipo> paquetesTipos;
 	private LocalDate fechaDeAlta;
 	private byte[] imagen;
-	private List<Compra> compras;
+	private List<Compra> compras = new ArrayList<>();
 	
 	public Paquete(String nombre, String descripcion, int periodoDeValidez, float descuento, float costoAsociado, LocalDate fechaDeAlta) {
 		this.nombre = nombre;
@@ -127,5 +127,9 @@ public class Paquete {
 
 	public void setCompra(List<Compra> compra) {
 		this.compras = compra;
+	}
+	
+	public void agregarCompra(Compra compra) {
+		this.compras.add(compra);
 	}
 }

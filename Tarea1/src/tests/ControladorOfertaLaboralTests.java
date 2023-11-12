@@ -877,6 +877,55 @@ String nombreK = "nombreKeyword";
 	}
 	
 	@Test 
+	void testListarNomPaqNoComprados() {
+		//Datos tipo
+		String nombreT = "nombreT3";
+		String descripcionT = "descripcionT3";
+		 int exposicionT = 3;
+		 int duracionT = 300000;
+		 float costoT = 3;
+		 Tipo tip = new Tipo(nombreT, descripcionT, exposicionT, duracionT, costoT, LocalDate.now());
+		 
+		 //datos empresa
+		 String nicknameE ="nicke1";
+		 String nombreE ="nome1";
+		 String apellido= "ape1";
+		 String correo= "coe1";
+		 String descripcion = "dese1";
+		 String link = "linke1";
+	
+		//Datos paquetes
+		Paquete paq = new Paquete("paq", "desc", 100, 25, 200, LocalDate.now());
+		Paquete paq1 = new Paquete("paqe", "desc", 100, 25, 200, LocalDate.now());
+		mt = ManejadorTipo.getInstancia();
+		mu = ManejadorUsuario.getInstancia();
+		mt.agregarPaquete(paq);
+		mt.agregarPaquete(paq1);
+		mt.agregarTipo(tip);
+		Empresa emp = new Empresa(nicknameE, nombreE, apellido, correo, descripcion, link);
+		mu.agregarEmpresa(emp);
+		PaqueteTipo paqTip = new PaqueteTipo(3, tip);
+		paq.agregarPaqueteTipo(paqTip);
+		paq1.agregarPaqueteTipo(paqTip);
+		try {
+
+			String [] paqs = controladorOfertaLaboral.listarNomPaquetesNoComprados();
+			controladorOfertaLaboral.comprarPaquete(nicknameE, "paq");
+			String [] paqs2 = controladorOfertaLaboral.listarNomPaquetesNoComprados();
+			
+			assertEquals(paqs.length, 2);
+			assertEquals(paqs2.length, 1);
+			
+		} catch (NoHayPaquetesException e) {
+			fail(e.getMessage());
+			e.printStackTrace();
+		}catch (PaqueteYaCompradoException e) {
+			fail(e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	@Test 
 	void testComprarPaquetesRepetido() {
 		//Datos tipo
 		String nombreT = "nombreT3";

@@ -47,7 +47,7 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 			throw new NoHayPaquetesException("No hay paquetes registrados");
 		}
 	}
-	
+
     public String datosPaqueteAMostrar(DTPaquete paq) {
     	return "Nombre: " + paq.getNombre() + "\nDescripcion: " + paq.getDescripcion() + "\nPeriodo de validez: " + paq.getPeriodoDeValidez() + " días\nDescuento: " + paq.getDescuento() + "%\nCosto: $" + paq.getCostoAsociado();
     }
@@ -180,7 +180,6 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 			throw new NoHayPaquetesException("No hay paquetes registrados");
 		
 		List<String> dpa = new ArrayList<>();
-		int iter =0;
 		for (Map.Entry<String, Paquete> entry : mapPaquetes.entrySet()) {
 			if (entry.getValue().getCompra() == null || entry.getValue().getCompra().size() == 0) {
 				dpa.add(entry.getKey());
@@ -268,6 +267,7 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 			}
 			Compra compra = new Compra(fechaCompra, vencimiento, paqueteG, empresaG, compTip);
 			empresaG.agregarCompra(compra);
+			paqueteG.agregarCompra(compra);
 		}else {
 			throw new PaqueteYaCompradoException("Ya se ha comprado ese paquete");
 		}
