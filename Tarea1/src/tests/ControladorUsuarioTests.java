@@ -39,6 +39,7 @@ import logica.IOfertaLaboral;
 import logica.IUsuario;
 import logica.Keyword;
 import logica.ManejadorUsuario;
+import logica.OfertaLaboral;
 import logica.Tipo;
 import logica.DTPostulante;
 
@@ -240,6 +241,9 @@ class ControladorUsuarioTests {
 			cu.ingresarDatosEmpresa(emp);
 			col.ingresarTipo(nombreTipo, descripcionTipo, exposicionTipo, duracionTipo, costoTipo, fechaDeAltaTipo);
 			col.ingresarDatosOL(emp.getNickname(), nombreTipo, dtol);
+			mol = ManejadorOfertaLaboral.getInstance();
+			OfertaLaboral ol = mol.buscarOfertaLaboral(nombreOL);
+			ol.setEstado(EstadoOL.Confirmada);
 			DTOfertaLaboral[] o = cu.listarOfertasLaboralesVigentes(emp.getNickname());
 			assertEquals(o[0].getNombre(), nombreOL);
 			assertEquals(o[0].getDescripcion(), descripcionOL);
@@ -248,6 +252,7 @@ class ControladorUsuarioTests {
 			assertEquals(o[0].getHorario(), horario);
 			assertEquals(o[0].getRemuneracion(), remuneracion);
 			assertEquals(o[0].getFechaDeAlta(), "2023-08-01");
+			
 		} catch (EmpresaSinOfertasException e) {
 			fail(e.getMessage());
 		} catch (ExisteUnUsuarioYaRegistradoException ee) {

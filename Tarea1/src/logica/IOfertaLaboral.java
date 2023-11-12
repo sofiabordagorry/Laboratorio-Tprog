@@ -30,6 +30,7 @@ public interface IOfertaLaboral {
 	public abstract void ingresarKeyword(String nombre);
 	
 	public abstract String[] listarNomPaquetes() throws NoHayPaquetesException;
+	public abstract String[] listarNomPaquetesNoComprados() throws NoHayPaquetesException;
 	
 	public abstract String[] listarNomTipos() throws NoHayTiposException;
 	

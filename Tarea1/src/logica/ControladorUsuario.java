@@ -22,7 +22,7 @@ import excepciones.UsuariosNoExistenException;
 public class ControladorUsuario implements IUsuario {
 	public ControladorUsuario() {
 	}
-	
+
 	public boolean existeMail(String mail) {
 		ManejadorUsuario musr = ManejadorUsuario.getInstancia();
 		Postulante[] pos = musr.getPostulantes();
@@ -118,20 +118,17 @@ public class ControladorUsuario implements IUsuario {
     public  DTOfertaLaboral[] listarOfertasLaboralesVigentes(String empresa) throws EmpresaSinOfertasException{
     ManejadorUsuario musr = ManejadorUsuario.getInstancia();
         Empresa emp = musr.buscarEmpresa(empresa);
-        List<DTOfertaLaboral> ofertas = emp.obtenerOfertasVigentes();
+        List<DTOfertaLaboral> ofertas = emp.obtenerOfertasVigentesyConfirmadas();
       DTOfertaLaboral[] dtofertas;
-        if (ofertas != null) {
-        	 dtofertas = ofertas.toArray(new DTOfertaLaboral[ofertas.size()]);
+        if (ofertas != null && ofertas.size() != 0) {
+        	 return dtofertas = ofertas.toArray(new DTOfertaLaboral[ofertas.size()]);
         } else {
-        	dtofertas = null;
+
+        	throw new EmpresaSinOfertasException("La empresa seleccionada no tiene ofertas vigentes y confirmadas");
         }
-        if (dtofertas != null) { 
-        	return  dtofertas;
-        }
-        else {
-        	throw new EmpresaSinOfertasException("La empresa seleccionada no tiene ofertas vigentes");
-        	}
+       
     }
+    
     
    
     public  DTOfertaLaboral[] listarOfertasLaboralesIngresadas(String empresa) throws EmpresaSinOfertasException{

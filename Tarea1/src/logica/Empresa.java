@@ -108,6 +108,31 @@ public class Empresa extends Usuario {
 	    return dof;
 	}
 	
+	public List<DTOfertaLaboral> obtenerOfertasVigentesyConfirmadas() {
+        List<DTOfertaLaboral> dof = new ArrayList<>();
+		Map<String, OfertaLaboral> ofertasLaborales = this.ofertasLaborales;
+	    if (ofertasLaborales.isEmpty()) { //consigo el array
+	        dof= null;
+	    } else {
+	        Collection<OfertaLaboral> ofs = ofertasLaborales.values();
+	        Object[] ofertas = ofs.toArray();
+	        OfertaLaboral oferta;
+	        
+	        for (int i = 0; i < ofertas.length; i++) {
+	        	oferta = (OfertaLaboral) ofertas[i];
+	        	if (oferta.estaVigente() && oferta.getEstado() == EstadoOL.Confirmada) {
+	        	      // Crea un objeto DateTimeFormatter con el formato deseado
+	                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+	                // Convierte el LocalDate a una cadena
+	                String dateString = oferta.getFechaDeAlta().format(formatter);
+	                dof.add(new DTOfertaLaboral(oferta.getNombre(), oferta.getDescripcion(), oferta.getCiudad(), oferta.getDepartamento(), oferta.getHorario(), oferta.getRemuneracion(), dateString));
+	        	}
+	        }
+	    }
+	    return dof;
+	}
+	
 	public DTOfertaLaboral[] obtenerOfertasIngresadas() {
 		Map<String, OfertaLaboral> ofertasLaborales = this.ofertasLaborales;
 	    if (ofertasLaborales.isEmpty()) { //consigo el array
@@ -132,7 +157,7 @@ public class Empresa extends Usuario {
 	    		return null;
 	    	return dof;
 	    }
-	    
+	   
 	}
 	
 	public OfertaLaboral buscarOferta(String oferta) {

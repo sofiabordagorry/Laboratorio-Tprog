@@ -400,7 +400,7 @@ public class ModificarDatosUsuario extends JInternalFrame {
 		}
 	
 		if(u instanceof DTEmpresa) {
-			if(nombre.isEmpty() || apellido.isEmpty() || descripcion.isEmpty() || FechaNombreEmp.isEmpty()) {
+			if(nombre.isEmpty() || apellido.isEmpty() || descripcion.isEmpty()) {
 				JOptionPane.showMessageDialog(this, "No puede haber campos vacios", "Modificar Datos de Usuario", JOptionPane.ERROR_MESSAGE);
 				return false;
 			}

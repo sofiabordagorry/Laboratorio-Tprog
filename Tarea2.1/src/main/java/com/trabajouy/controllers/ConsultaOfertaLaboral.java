@@ -63,7 +63,7 @@ public class ConsultaOfertaLaboral extends HttpServlet {
                     			break;
                     		}
                     	}
-                        if (of != null && compras.get(i).getOfertasLaborales() != null) {
+                        if (of != null && compras.get(i).getOfertasLaborales() != null && existeOferta) {
                             request.setAttribute("paquete", compras.get(i).getPaqComprado());
                         }
                     }

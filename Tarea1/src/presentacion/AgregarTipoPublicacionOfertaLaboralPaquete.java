@@ -32,7 +32,7 @@ public class AgregarTipoPublicacionOfertaLaboralPaquete extends JInternalFrame {
 	private JTextField textFieldCantidad;
 	private JComboBox<String> comboBoxPaquete;
 	private JComboBox<String> comboBoxTipo;
-	
+
 
 	public AgregarTipoPublicacionOfertaLaboralPaquete(IOfertaLaboral iol) {
 		
@@ -218,7 +218,7 @@ public class AgregarTipoPublicacionOfertaLaboralPaquete extends JInternalFrame {
 	public boolean cargarPaquetes() {
         DefaultComboBoxModel<String> model;
         try {
-            model = new DefaultComboBoxModel<String>(IOL.listarNomPaquetes());
+            model = new DefaultComboBoxModel<String>(IOL.listarNomPaquetesNoComprados());
             comboBoxPaquete.setModel(model);
         } catch (NoHayPaquetesException e) {
         	JOptionPane.showMessageDialog(this, e.getMessage(), "Alta de Tipo de Publicacion de Oferta Laboral",

@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Date;
 
 import excepciones.NoHayPaquetesException;
@@ -27,7 +28,7 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 	public ControladorOfertaLaboral() {
 		
 	}
-
+	
 	public DTPaquete[] listarPaquetes() throws NoHayPaquetesException {
 		ManejadorTipo mtip = ManejadorTipo.getInstancia();
 		Paquete[] paquetes = mtip.getPaquetes();
@@ -170,6 +171,27 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 			//}
 		}
 		return dpa;
+	}
+	
+	public String[] listarNomPaquetesNoComprados() throws NoHayPaquetesException{
+		ManejadorTipo mtTip = ManejadorTipo.getInstancia();
+		Map<String, Paquete> mapPaquetes = mtTip.getMapPaquete();
+		if (mapPaquetes.size() == 0)
+			throw new NoHayPaquetesException("No hay paquetes registrados");
+		
+		List<String> dpa = new ArrayList<>();
+		int iter =0;
+		for (Map.Entry<String, Paquete> entry : mapPaquetes.entrySet()) {
+			if (entry.getValue().getCompra() == null || entry.getValue().getCompra().size() == 0) {
+				dpa.add(entry.getKey());
+			}
+		}
+		
+		if (dpa != null && dpa.size() != 0) {
+		   	 return dpa.toArray(new String[dpa.size()]);
+		}else {
+			throw new NoHayPaquetesException("No hay paquetes no comprados");
+		}
 	}
 	
 	public String[] listarNomTipos() throws NoHayTiposException{
