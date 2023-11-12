@@ -74,11 +74,11 @@ public class SeleccionarPostulacion extends HttpServlet {
 		DtOfertaLaboral oferta = port.buscarOfertaLaboral(ofertaConsultada);
 		List<DtPostulacion> postulaciones = oferta.getDataPostulaciones();
 		
-		String[] rankings = new String[postulaciones.size() + 1];
+		String[] rankings = new String[postulaciones.size()];
 		for(DtPostulacion elem : postulaciones) {
 			String numS = request.getParameter("ranking_" + elem.getPostulante());
 			int numero = Integer.parseInt(numS); 
-			rankings[numero] = elem.getPostulante();
+			rankings[numero - 1] = elem.getPostulante();
 		}
 		
 		port.realizarSeleccion(ofertaConsultada, rankings);

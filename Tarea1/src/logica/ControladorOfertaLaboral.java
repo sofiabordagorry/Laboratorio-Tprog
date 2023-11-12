@@ -271,10 +271,6 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 		return dtoferta;
 	}
 
-	public DTEmpresa buscarEmpresa(String nickname) {
-		return ManejadorUsuario.getInstancia().buscarEmpresa(nickname).getDataEmpresa();
-	}
-
 	public DTKeyword[] getDTKeywords(){
 		ManejadorOfertaLaboral mol = ManejadorOfertaLaboral.getInstance();
 		Keyword[] keys = mol.getKeywords();
@@ -336,7 +332,7 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
     	ManejadorTipo mti = ManejadorTipo.getInstancia();
     	return mti.buscarTipo(nombre).getDataTipo();
 	}
-	
+
 	public String obtenerVideoPostulacion(String nickname, String oferta) {
 		DTPostulacion pos = dataPostulacion(nickname, oferta);
 		return pos.obtenerIDDeVideo();
