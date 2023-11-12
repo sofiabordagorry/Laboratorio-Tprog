@@ -15,7 +15,7 @@
 			%>
 			
 			<li class="nav-item">
-				<p><%= usr.getNickname() %></p>
+				<p style="color: white"><%= usr.getNickname() %></p>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="ConsultaPostulacion"><i class="fa-solid fa-square-poll-vertical"></i>Mis Postulaciones</a>

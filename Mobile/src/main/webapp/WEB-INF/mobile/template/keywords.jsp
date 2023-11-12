@@ -8,7 +8,7 @@
 <%@ page import="jakarta.servlet.http.HttpServletResponse" %>
 <%@ page import="java.io.IOException" %>
 <%@ page import="java.util.List" %>
-<div class="row" id="sidebar">
+<div id="sidebar">
 	<div class="list-group m-2">
 		<a href="#">
 			<div class="header d-flex" data-toggle="collapse" aria-controls="keywordList" href="#keywordList">

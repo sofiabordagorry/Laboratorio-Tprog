@@ -79,8 +79,10 @@ public class ConsultaOfertaLaboral extends HttpServlet {
         request.setAttribute("oferta_consultada", oferta);;
         
         if (user instanceof DtPostulante) {
-        	request.setAttribute("esfav", port.esFavorito(user.getNickname(), ofertaConsultada));
-        	request.setAttribute("existe_post", port.verificacionDePostulantePostulacion(user.getNickname(), oferta.getNombre(), oferta.getDataEmpresa()));
+        		request.setAttribute("esfav", port.esFavorito(user.getNickname(), ofertaConsultada));
+        		request.setAttribute("existe_post", port.verificacionDePostulantePostulacion(user.getNickname(), oferta.getNombre(), oferta.getDataEmpresa()));
+
+        	
         } else if (user instanceof DtEmpresa) {
         	String seleccionarPostulacion = request.getParameter("seleccionar_postulantes");
         	if (seleccionarPostulacion != null)
@@ -90,7 +92,11 @@ public class ConsultaOfertaLaboral extends HttpServlet {
         }
 
         // Forward the request to the JSP for rendering.
-        request.getRequestDispatcher("/WEB-INF/desktop/consultas/consultarOferta.jsp").forward(request, response);
+        if((user.getNickname()).equals(oferta.getDataEmpresa()) || (oferta.getEstado() != EstadoOL.FINALIZADA) ) {
+        	request.getRequestDispatcher("/WEB-INF/desktop/consultas/consultarOferta.jsp").forward(request, response);
+        }else {
+        	response.sendError(403);
+        }
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
