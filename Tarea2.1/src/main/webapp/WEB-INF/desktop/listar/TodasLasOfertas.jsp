@@ -53,7 +53,7 @@
 			}
 			}else{
 			%>
-				<h3>Lo sentimos, pero en este momento no hay ofertas</h3>
+				<h3>Lo sentimos, en este momento no hay ofertas laborales disponibles</h3>
 			<% 
 			}
 		%>
