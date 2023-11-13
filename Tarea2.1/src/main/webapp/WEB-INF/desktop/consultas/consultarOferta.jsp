@@ -86,17 +86,18 @@
                                 		<p class="text-center">Esta oferta ya expiró</p>
                                 	<%
                                 	}
-                                	if ((Boolean) request.getAttribute("esfav")){%>	
-                               	<button class="btn mx-auto d-block">
+                         		//if ((Boolean) request.getAttribute("esfav")){
+                         	%>	
+                                     <!--     	<button class="btn mx-auto d-block">
                                    <a href="AgregarOfertaAFavorito?oferta=<%= ofertaConsultada.getNombre() %>">Sacar de Favoritos</a>
-                                </button>	
+                                </button>-->	
                                 	
-                              <%}else{%>
-                            	  <button class="btn mx-auto d-block">
+                              <%//}else{%>
+                            	    <!--    <button class="btn mx-auto d-block">
                                    <a href="AgregarOfertaAFavorito?oferta=<%= ofertaConsultada.getNombre() %>">Agregar a Favoritos</a>
-                                </button>
+                                </button>-->
                               
-                            	  <%	}
+                            	  <%	//}
                               }
                             %>
                         </div>

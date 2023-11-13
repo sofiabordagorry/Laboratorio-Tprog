@@ -36,7 +36,7 @@ public class WebServicesService
         WebServiceException e = null;
     	Properties prop = new Properties();
     	String userHome = System.getProperty("user.home");
-    	String propertyFilePath = userHome+"trabajoUy/conf.properties";
+    	String propertyFilePath = userHome+"/trabajoUy/conf.properties";
 
     	try {
     		InputStream inputStream = new FileInputStream(propertyFilePath);
