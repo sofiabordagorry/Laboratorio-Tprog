@@ -60,6 +60,7 @@ public class WebServices {
     @WebMethod(exclude = true)
     public void publicar(){
          //endpoint = Endpoint.publish("http://localhost:9127/webservices", this);
+    	System.out.println("http://"+prop.getProperty("host")+":"+prop.getProperty("port")+"/webservices");
     	endpoint =  Endpoint.publish("http://"+prop.getProperty("host")+":"+prop.getProperty("port")+"/webservices", this);
     }
 
