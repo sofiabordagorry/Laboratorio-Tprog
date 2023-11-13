@@ -14,6 +14,7 @@
 			List<DtOfertaLaboral> ols = (List<DtOfertaLaboral>) request.getSession().getAttribute("listaOfertasLaborales");
 			String keywordFiltro = (String) request.getSession().getAttribute("filtro");
 			String misOfertasBool = (String) request.getSession().getAttribute("filterType");
+			if(ols != null){
 			for(int i = 0; i < ols.size(); i++) {
 				if(misOfertasBool.equals("MyOffers")) {
 					if (ols.get(i).getDataEmpresa().equals(user.getNickname())) {
@@ -37,6 +38,11 @@
 						}
 					}
 				}
+			}
+			}else{
+		%>
+			<h3>Lo sentimos, no ha creado ninguna oferta laboral</h3>
+		<%
 			}
 		%>
 	</div>

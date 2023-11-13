@@ -215,9 +215,11 @@ public class WebServices {
     public String[] listarTipoPublicacionOfertaLaboral() {
     	Factory fac = Factory.getInstance();
 		IOfertaLaboral col = fac.getIOfertaLaboral();
+		String[] tipos = new String[0];
+
 		try {
 			DTTipo[] tipo = col.listarTipoPublicacionOfertaLaboral();
-			String[] tipos = new String[tipo.length];
+			tipos = new String[tipo.length];
 			for (int i = 0; i < tipo.length; i++) {
                 tipos[i] =  tipo[i].getNombre();
             }
@@ -225,7 +227,7 @@ public class WebServices {
 				
 		}catch(TipoPubNoExistenException e) {
 			
-			return null;
+			return tipos;
 		}
     }
     
@@ -282,12 +284,12 @@ public class WebServices {
     public String[] listarNomPaquetes() {
     	Factory fac = Factory.getInstance();
 		IOfertaLaboral col = fac.getIOfertaLaboral();
-    
+		String[] paqs = new String[0];
 	    try {
-			String[] paqs = col.listarNomPaquetes();
+			paqs = col.listarNomPaquetes();
 			return paqs;
 		} catch (NoHayPaquetesException e) {
-			return null;
+			return paqs;
 		}
     }
     

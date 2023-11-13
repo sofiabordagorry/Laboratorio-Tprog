@@ -14,6 +14,7 @@
 			DtUsuario user = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
 			List<DtOfertaLaboral> ols = (List<DtOfertaLaboral>) request.getSession().getAttribute("listaOfertasLaborales");
 			String keywordFiltro = (String) request.getAttribute("filtro");
+			if(ols != null){
 			for(int i = 0; i < ols.size(); i++) {
 					if(ols.get(i).getEstado().equals(EstadoOL.CONFIRMADA)) {
 						boolean keywordFound = false;
@@ -44,6 +45,11 @@
 		<%
 					}
 				}
+			}
+			}else{
+		%>
+			<h3>Lo sentimos, en este momento no hay ofertas laborales disponibles</h3>
+		<%
 			}
 		%>
 	</div>
