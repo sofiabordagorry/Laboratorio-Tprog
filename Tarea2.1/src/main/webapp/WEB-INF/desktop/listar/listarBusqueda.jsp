@@ -25,6 +25,7 @@
 						<div class="col">
 							<h1>Empresas</h1>
 							<%
+							if (usuariosFiltrada != null) {
 								for (DtUsuario user: usuariosFiltrada) {
 									DtEmpresa usuario = (DtEmpresa) user;
 									%>
@@ -47,12 +48,14 @@
 									</div>
 									<%
 								}
+							}
 							%>
 						</div>
 						
 						<div class="col">
 							<h1>Ofertas Laborales</h1>
 							<%
+							if (ofertasFiltradas != null) {
 								for (DtOfertaLaboral of: ofertasFiltradas) {
 									%>
 									<div class="card mb-3">
@@ -74,6 +77,7 @@
 									</div>
 									<% 
 								}
+							}
 							%>
 						</div>
 					</div>	
