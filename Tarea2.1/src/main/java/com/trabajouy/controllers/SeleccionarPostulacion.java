@@ -67,22 +67,31 @@ public class SeleccionarPostulacion extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		publicar.WebServicesService service = new publicar.WebServicesService();
-		publicar.WebServices port = service.getWebServicesPort();
-		
-		String ofertaConsultada = request.getParameter("nombreOferta");
-		DtOfertaLaboral oferta = port.buscarOfertaLaboral(ofertaConsultada);
-		List<DtPostulacion> postulaciones = oferta.getDataPostulaciones();
-		
-		String[] rankings = new String[postulaciones.size()];
-		for(DtPostulacion elem : postulaciones) {
-			String numS = request.getParameter("ranking_" + elem.getPostulante());
-			int numero = Integer.parseInt(numS); 
-			rankings[numero - 1] = elem.getPostulante();
+		DtUsuario usr = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
+		if (usr instanceof DtEmpresa) {
+			publicar.WebServicesService service = new publicar.WebServicesService();
+			publicar.WebServices port = service.getWebServicesPort();
+			
+			String ofertaConsultada = request.getParameter("nombreOferta");
+			DtOfertaLaboral oferta = port.buscarOfertaLaboral(ofertaConsultada);
+			if (oferta.getDataEmpresa().equals(usr.getNickname())) {
+				List<DtPostulacion> postulaciones = oferta.getDataPostulaciones();
+				
+				String[] rankings = new String[postulaciones.size()];
+				for(DtPostulacion elem : postulaciones) {
+					String numS = request.getParameter("ranking_" + elem.getPostulante());
+					int numero = Integer.parseInt(numS); 
+					rankings[numero - 1] = elem.getPostulante();
+				}
+				
+				port.realizarSeleccion(ofertaConsultada, rankings);
+				response.sendRedirect("ConsultaOfertaLaboral?oferta_consultada=" + ofertaConsultada);
+			} else {
+				response.sendError(403);
+			}
+		} else {
+			response.sendError(403);
 		}
-		
-		port.realizarSeleccion(ofertaConsultada, rankings);
-		response.sendRedirect("ConsultaOfertaLaboral?oferta_consultada=" + ofertaConsultada);
 	}
 
 }

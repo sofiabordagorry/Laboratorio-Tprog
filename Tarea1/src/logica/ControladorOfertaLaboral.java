@@ -313,7 +313,7 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 		Map<String, OfertaLaboral> ofertas = emp.getOfertasLaborales();
 		int cantOfertas = 0;
 		for(Map.Entry<String, OfertaLaboral> entry : ofertas.entrySet()) {
-			if(!entry.getValue().estaVigente() && entry.getValue().getEstado() == EstadoOL.Confirmada)
+			if(!entry.getValue().estaVigente() && entry.getValue().getEstado() == EstadoOL.Confirmada && !entry.getValue().getRankeada()) 
 				cantOfertas++;
 		}
 		if (cantOfertas == 0)
@@ -322,12 +322,12 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 			int i = 0;
 			DTOfertaLaboral[] dtsOL = new DTOfertaLaboral[cantOfertas];
 			for(Map.Entry<String, OfertaLaboral> entry : ofertas.entrySet()) {
-				if(!entry.getValue().estaVigente() && entry.getValue().getEstado() == EstadoOL.Confirmada) {
+				if(!entry.getValue().estaVigente() && entry.getValue().getEstado() == EstadoOL.Confirmada && !entry.getValue().getRankeada()) {
 					dtsOL[i] = entry.getValue().getDataOfertaLaboral();
 					i++;
 				}
 			}
-			
+		
 			return dtsOL;
 		}
 	}

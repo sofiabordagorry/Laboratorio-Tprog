@@ -68,8 +68,13 @@ public class ConsultaOfertaLaboral extends HttpServlet {
                         }
                     }
                 }
+            } else if (oferta.getEstado() == EstadoOL.FINALIZADA) {
+            	response.sendError(403);
             }
+        } else if (oferta.getEstado() == EstadoOL.FINALIZADA) {
+        	response.sendError(403);
         }
+        
         DtTipo tipo = oferta.getDataTipo();
         LocalDate fechaAlta = LocalDate.parse(oferta.getFechaDeAlta(), formatter);
         request.setAttribute("vigente", fechaAlta.plusDays(tipo.getDuracion()).isAfter(LocalDate.now()));
