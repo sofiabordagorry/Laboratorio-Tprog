@@ -6,7 +6,6 @@ mvn clean package
 
 # Ejecutar el JAR creado
 nombre_jar="Tarea1G18-1.0-jar-with-dependencies.jar"
-# java -jar target/$nombre_jar &
 
 # Esperar unos segundos para asegurarse de que la aplicación haya arrancado completamente
 sleep 10
@@ -30,8 +29,3 @@ cd "/ens/home01/j/joaquin.corbo/apache-tomcat-10.1.13/webapps"
 mv Tarea2.1-1.0.war Tarea2.1.war
 mv Mobile-1.0.war Mobile.war
 cd ..
-
-# Reiniciar Apache Tomcat
-apache_dir="/ens/home01/j/joaquin.corbo/apache-tomcat-10.1.13/bin"
-cd $apache_dir
-sh startup.sh
