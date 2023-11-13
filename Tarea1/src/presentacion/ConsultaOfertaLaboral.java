@@ -56,6 +56,7 @@ public class ConsultaOfertaLaboral extends JInternalFrame {
 	private JTextArea textAreaMotivacion;
 	private JTextArea textAreaCV;
 	private DefaultTableModel model;
+	private JTextField textFieldEstado;
 
 	public ConsultaOfertaLaboral(IUsuario IU, IOfertaLaboral IOL) { 
 		contUsuario = IU;
@@ -66,9 +67,9 @@ public class ConsultaOfertaLaboral extends JInternalFrame {
 		setBounds(100, 100, 550, 655);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 60, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
 		getContentPane().setLayout(gridBagLayout);
 		
 		JLabel lblNewLabel = new JLabel("Seleccione una Empresa:");
@@ -262,7 +263,6 @@ public class ConsultaOfertaLaboral extends JInternalFrame {
 		JLabel lblNewLabel_10 = new JLabel("Costo Asociado:");
 		lblNewLabel_10.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblNewLabel_10 = new GridBagConstraints();
-		gbc_lblNewLabel_10.gridwidth = 2;
 		gbc_lblNewLabel_10.anchor = GridBagConstraints.EAST;
 		gbc_lblNewLabel_10.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_10.gridx = 0;
@@ -279,9 +279,9 @@ public class ConsultaOfertaLaboral extends JInternalFrame {
 		getContentPane().add(textFieldCosto, gbc_textFieldCosto);
 		textFieldCosto.setColumns(10);
 		
-		JLabel lblKeywords = new JLabel("KeyWords");
+		JLabel lblKeywords = new JLabel("KeyWords:");
+		lblKeywords.setFont(new Font("Dialog", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblKeywords = new GridBagConstraints();
-		gbc_lblKeywords.gridwidth = 2;
 		gbc_lblKeywords.anchor = GridBagConstraints.EAST;
 		gbc_lblKeywords.insets = new Insets(0, 0, 5, 5);
 		gbc_lblKeywords.gridx = 0;
@@ -297,13 +297,32 @@ public class ConsultaOfertaLaboral extends JInternalFrame {
 		gbc_comboBoxKeywords.gridy = 10;
 		getContentPane().add(comboBoxKeywords, gbc_comboBoxKeywords);
 		
+		JLabel lblEstado = new JLabel("Estado:");
+		lblEstado.setFont(new Font("Dialog", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblEstado = new GridBagConstraints();
+		gbc_lblEstado.anchor = GridBagConstraints.EAST;
+		gbc_lblEstado.insets = new Insets(0, 0, 5, 5);
+		gbc_lblEstado.gridx = 0;
+		gbc_lblEstado.gridy = 11;
+		getContentPane().add(lblEstado, gbc_lblEstado);
+		
+		textFieldEstado = new JTextField();
+		textFieldEstado.setEditable(false);
+		GridBagConstraints gbc_textFieldEstado = new GridBagConstraints();
+		gbc_textFieldEstado.insets = new Insets(0, 0, 5, 10);
+		gbc_textFieldEstado.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldEstado.gridx = 2;
+		gbc_textFieldEstado.gridy = 11;
+		getContentPane().add(textFieldEstado, gbc_textFieldEstado);
+		textFieldEstado.setColumns(10);
+		
 		JLabel lblNewLabel_11 = new JLabel("Postulaciones");
 		lblNewLabel_11.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblNewLabel_11 = new GridBagConstraints();
 		gbc_lblNewLabel_11.gridwidth = 3;
 		gbc_lblNewLabel_11.insets = new Insets(0, 0, 5, 0);
 		gbc_lblNewLabel_11.gridx = 0;
-		gbc_lblNewLabel_11.gridy = 11;
+		gbc_lblNewLabel_11.gridy = 12;
 		getContentPane().add(lblNewLabel_11, gbc_lblNewLabel_11);
 		
 		JScrollPane scrollPanePostulaciones = new JScrollPane();
@@ -313,7 +332,7 @@ public class ConsultaOfertaLaboral extends JInternalFrame {
 		gbc_scrollPanePostulaciones.insets = new Insets(0, 10, 5, 10);
 		gbc_scrollPanePostulaciones.fill = GridBagConstraints.BOTH;
 		gbc_scrollPanePostulaciones.gridx = 0;
-		gbc_scrollPanePostulaciones.gridy = 12;
+		gbc_scrollPanePostulaciones.gridy = 13;
 		getContentPane().add(scrollPanePostulaciones, gbc_scrollPanePostulaciones);
 		
 		model = new DefaultTableModel();
@@ -354,7 +373,7 @@ public class ConsultaOfertaLaboral extends JInternalFrame {
 		gbc_scrollPaneCV.insets = new Insets(0, 0, 5, 10);
 		gbc_scrollPaneCV.fill = GridBagConstraints.BOTH;
 		gbc_scrollPaneCV.gridx = 2;
-		gbc_scrollPaneCV.gridy = 12;
+		gbc_scrollPaneCV.gridy = 13;
 		getContentPane().add(scrollPaneCV, gbc_scrollPaneCV);
 		
  
@@ -372,7 +391,7 @@ public class ConsultaOfertaLaboral extends JInternalFrame {
 		gbc_scrollPaneMotivacion.insets = new Insets(0, 0, 5, 10);
 		gbc_scrollPaneMotivacion.fill = GridBagConstraints.BOTH;
 		gbc_scrollPaneMotivacion.gridx = 2;
-		gbc_scrollPaneMotivacion.gridy = 13;
+		gbc_scrollPaneMotivacion.gridy = 14;
 		getContentPane().add(scrollPaneMotivacion, gbc_scrollPaneMotivacion);
 		
  
@@ -388,7 +407,7 @@ public class ConsultaOfertaLaboral extends JInternalFrame {
 		gbc_btnCancelar.gridwidth = 3;
 		gbc_btnCancelar.insets = new Insets(5, 40, 10, 40);
 		gbc_btnCancelar.gridx = 0;
-		gbc_btnCancelar.gridy = 14;
+		gbc_btnCancelar.gridy = 15;
 		getContentPane().add(btnCancelar, gbc_btnCancelar);
 		
         this.addInternalFrameListener(new InternalFrameAdapter() {
@@ -449,6 +468,7 @@ public class ConsultaOfertaLaboral extends JInternalFrame {
 		textFieldRemuneracion.setText(String.valueOf(datosOL.getRemuneracion()));
 		textFieldFechaDeAlta.setText(datosOL.getFechaDeAlta().toString());
 		textFieldCosto.setText(String.valueOf(datosOL.getCostoAsociado()));
+		textFieldEstado.setText(datosOL.getEstado().toString());
 		DTKeyword[] keys = datosOL.getKeywords();
 //		DTKeyword[] arrKeys = new DTKeyword[keys.size()];
 //		if(keys.size() > 0) {
@@ -478,6 +498,7 @@ public class ConsultaOfertaLaboral extends JInternalFrame {
 		textFieldCosto.setText("");
 		tablePostulaciones.removeAll();
 		textAreaDescripcion.setText("");
+		textFieldEstado.setText("");
 		comboBoxEmpresas.setSelectedIndex(-1);
 		comboBoxOL.setSelectedIndex(-1);
 	}
