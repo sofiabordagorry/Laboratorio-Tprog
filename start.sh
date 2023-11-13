@@ -6,7 +6,7 @@ mvn clean package
 
 # Ejecutar el JAR creado
 nombre_jar="Tarea1G18-1.0-jar-with-dependencies.jar"
-java -jar target/$nombre_jar &
+# java -jar target/$nombre_jar &
 
 # Esperar unos segundos para asegurarse de que la aplicación haya arrancado completamente
 sleep 10

@@ -1,8 +1,13 @@
 
 package publicar;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Properties;
+
 import javax.xml.namespace.QName;
 import jakarta.xml.ws.Service;
 import jakarta.xml.ws.WebEndpoint;
@@ -29,8 +34,20 @@ public class WebServicesService
     static {
         URL url = null;
         WebServiceException e = null;
+    	Properties prop = new Properties();
+    	String userHome = System.getProperty("user.home");
+    	String propertyFilePath = userHome+"trabajoUy/conf.properties";
+
+    	try {
+    		InputStream inputStream = new FileInputStream(propertyFilePath);
+    		prop.load(inputStream);
+    		
+    	}catch(IOException ex) {
+    		ex.printStackTrace();
+    	}
+    	
         try {
-            url = new URL("http://localhost:9217/webservices?wsdl");
+            url = new URL("http://"+prop.getProperty("host")+":"+prop.getProperty("port")+"/webservices?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
