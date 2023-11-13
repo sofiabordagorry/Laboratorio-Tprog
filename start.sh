@@ -7,9 +7,6 @@ mvn clean package
 # Ejecutar el JAR creado
 nombre_jar="Tarea1G18-1.0-jar-with-dependencies.jar"
 
-# Esperar unos segundos para asegurarse de que la aplicación haya arrancado completamente
-sleep 10
-
 # Instalar y desplegar la parte dinámica en Tomcat
 cd ../Tarea2.1
 mvn clean install
