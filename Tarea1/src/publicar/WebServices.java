@@ -13,8 +13,10 @@ import excepciones.NoHayTiposException;
 import excepciones.UsuariosNoExistenException;
 import excepciones.YaSePostuloException;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Properties;
 import java.time.format.DateTimeFormatter;
 
 import excepciones.NoHayPaquetesException;
@@ -28,19 +30,37 @@ import jakarta.jws.soap.SOAPBinding.ParameterStyle;
 import jakarta.jws.soap.SOAPBinding.Style;
 import jakarta.xml.ws.Endpoint;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 @WebService
 @SOAPBinding(style = Style.RPC, parameterStyle = ParameterStyle.WRAPPED)
 public class WebServices {
 
     private Endpoint endpoint = null;
+    Properties prop = null;
     //Constructor
-    public WebServices(){}
+    public WebServices(){
+    	prop = new Properties();
+    	String userHome = System.getProperty("user.home");
+    	String propertyFilePath = userHome+"/conf.properties";
+    	
+    	try {
+    		InputStream inputStream = new FileInputStream(propertyFilePath);
+    		prop.load(inputStream);
+    		
+    	}catch(IOException e) {
+    		e.printStackTrace();
+    	}
+    }
 
     //Operaciones las cuales quiero publicar
 
     @WebMethod(exclude = true)
     public void publicar(){
-         endpoint = Endpoint.publish("http://localhost:9127/webservices", this);
+         //endpoint = Endpoint.publish("http://localhost:9127/webservices", this);
+    	endpoint =  Endpoint.publish("http://"+prop.getProperty("host")+":"+prop.getProperty("port")+"/webservices", this);
     }
 
     @WebMethod(exclude = true)
