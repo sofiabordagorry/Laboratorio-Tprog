@@ -41,7 +41,7 @@ public class ControladorOfertaLaboral implements IOfertaLaboral {
 				paq = paquetes[i];
 				dtpaq[i] = paq.getDataPaquete();
 			}
-			
+		
 			return dtpaq;
 		} else {
 			throw new NoHayPaquetesException("No hay paquetes registrados");

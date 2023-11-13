@@ -22,7 +22,7 @@ import excepciones.UsuariosNoExistenException;
 public class ControladorUsuario implements IUsuario {
 	public ControladorUsuario() {
 	}
-
+	
 	public boolean existeMail(String mail) {
 		ManejadorUsuario musr = ManejadorUsuario.getInstancia();
 		Postulante[] pos = musr.getPostulantes();

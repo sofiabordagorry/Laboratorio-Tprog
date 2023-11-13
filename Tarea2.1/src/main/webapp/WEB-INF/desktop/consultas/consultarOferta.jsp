@@ -143,7 +143,7 @@
                                 	<div class="postulante">
                                         <img width="50" height="50" class="img-fluid img-thumbnail"
                                             src="media/imagenes/NoImageUser.png" />
-                                        <a href="ConsultaPostulacion?nombreOfertaConsultada=<%=ofertaConsultada.getNombre()%>&postulanteConsultado=<%=elem.getPostulante()%>"><%= elem.getPostulante() %></a>
+                                        <a href="ConsultaPostulacion?oferta_consultada=<%=ofertaConsultada.getNombre()%>&postulanteConsultado=<%=elem.getPostulante()%>"><%= elem.getPostulante() %></a>
                                        	<input type="number" class="raking" id="ranking_<%=elem.getPostulante()%>" name="ranking_<%=elem.getPostulante()%>" min="1" max="<%=postulaciones.size() %>">
     									<div id="error_<%=elem.getPostulante()%>" style="color: red;"></div>	
                                     </div>
@@ -160,7 +160,7 @@
                                 	<div class="postulante">
                                         <img width="50" height="50" class="img-fluid img-thumbnail"
                                             src="media/imagenes/NoImageUser.png" />
-                                        <a href="ConsultaPostulacion?nombreOfertaConsultada=<%=ofertaConsultada.getNombre()%>&postulanteConsultado=<%=elem.getPostulante()%>"><%= elem.getPostulante() %></a>
+                                        <a href="ConsultaPostulacion?oferta_consultada=<%=ofertaConsultada.getNombre()%>&postulanteConsultado=<%=elem.getPostulante()%>"><%= elem.getPostulante() %></a>
                                        	<input type="number" class="ranking" id="ranking_<%=elem.getPostulante()%>" value="<%=elem.getRank()%>" disabled>
     									<div id="error_<%=elem.getPostulante()%>" style="color: red;"></div>	
                                     </div>
