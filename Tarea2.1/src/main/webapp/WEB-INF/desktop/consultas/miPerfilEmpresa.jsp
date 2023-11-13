@@ -41,7 +41,7 @@
                                 <p><i class=""></i> <b>Apellido:</b><%=eInfo.getApellido() %></p>
                                 <p><i class=""></i> <b>Correo: </b><%=eInfo.getCorreo() %></p>
                                 <p><i class=""></i> <b>Descripcion: </b><%=eInfo.getDescripcion() %></p>
-                                <p><i class=""></i> <b>Link: </b> <a href="#"><%=eInfo.getLink() %></a></p>
+                                <p><i class=""></i> <b>Link: </b> <a href="<%=eInfo.getLink() %>"><%=eInfo.getLink() %></a></p>
 							</div>
 	                    </div>
 	                    <div class ="row" style="margin-top: 1%;">
