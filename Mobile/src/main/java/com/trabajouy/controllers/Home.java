@@ -8,11 +8,17 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
+import publicar.DtEmpresa;
 import publicar.DtKeywordWS;
 import publicar.DtOfertaLaboralWS;
+import publicar.DtUsuario;
+import publicar.DtUsuarioWS;
 import publicar.LoginEstado;
 import publicar.OfertasLaboralesNoExistenNingunaException_Exception;
+import publicar.UsuariosNoExistenException_Exception;
 
 @WebServlet ("/home")
 public class Home extends HttpServlet {
@@ -24,7 +30,7 @@ public class Home extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
     
-    public static void init(HttpServletRequest request) {
+    public static void init(HttpServletRequest request) throws UsuariosNoExistenException_Exception {
     	HttpSession misesion = request.getSession();
     	if (misesion.getAttribute("estado_sesion") == null) {
     		misesion.setAttribute("estado_sesion", LoginEstado.NO_LOGIN);
@@ -39,6 +45,15 @@ public class Home extends HttpServlet {
     	
 		DtKeywordWS keys = port.getDTKeyword();
 		request.setAttribute("keywords", keys.getKeys());
+		DtUsuarioWS usuarios = port.listarUsuarios();
+		List<DtEmpresa> emp = new ArrayList<>();
+		for (DtUsuario user: usuarios.getUsers()) {
+			if (user instanceof DtEmpresa) {
+				DtEmpresa e = (DtEmpresa) user;
+				emp.add(e);
+			}
+		}
+		request.setAttribute("empresas", emp);
     	//request.getSession().setAttribute("filterType", "AllOffers");
 		
 		try {
@@ -55,7 +70,11 @@ public class Home extends HttpServlet {
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-    	init(request);
+    	try {
+			init(request);
+		} catch (UsuariosNoExistenException_Exception e) {
+			e.printStackTrace();
+		}
 
 		switch (getLoginEstado(request)) {
 		case NO_LOGIN:

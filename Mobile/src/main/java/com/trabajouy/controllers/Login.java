@@ -8,13 +8,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import publicar.DtEmpresa;
 import publicar.DtKeyword;
 import publicar.DtKeywordWS;
 import publicar.DtUsuario;
+import publicar.DtUsuarioWS;
 import publicar.LoginEstado;
+import publicar.UsuariosNoExistenException_Exception;
 
 /**
  * Servlet implementation class Login
@@ -71,6 +74,23 @@ public class Login extends HttpServlet {
 		DtKeywordWS k = port.getDTKeyword();
 		List<DtKeyword> dtk = k.getKeys();
 		request.setAttribute("keywords", dtk);
+		DtUsuarioWS usuarios;
+		List<DtEmpresa> emp = null;
+		try {
+			usuarios = port.listarUsuarios();
+			emp = new ArrayList<>();
+			for (DtUsuario user: usuarios.getUsers()) {
+				if (user instanceof DtEmpresa) {
+					DtEmpresa e = (DtEmpresa) user;
+					emp.add(e);
+				}
+			}
+		} catch (UsuariosNoExistenException_Exception e) {
+			e.printStackTrace();
+		}
+		
+		request.setAttribute("empresas", emp);
+		
 		objSesion.setAttribute("estado_sesion", nuevoEstado);
 		dispatcher.forward(request, response);
 	}

@@ -14,10 +14,12 @@
 			DtUsuario user = (DtUsuario) request.getSession().getAttribute("usuario_logueado");
 			List<DtOfertaLaboral> ols = (List<DtOfertaLaboral>) request.getSession().getAttribute("listaOfertasLaborales");
 			String keywordFiltro = (String) request.getAttribute("filtro");
+			String empresaFiltro = (String) request.getAttribute("empresaFiltro");
 			if(ols != null){
 			for(int i = 0; i < ols.size(); i++) {
 					if(ols.get(i).getEstado().equals(EstadoOL.CONFIRMADA)) {
 						boolean keywordFound = false;
+						boolean empresaFound = false;
 						if (keywordFiltro != null) {
 				            for (DtKeyword keyword : ols.get(i).getDataKeywords()) {
 				                if (keyword.getNombre().equals(keywordFiltro)) {
@@ -25,8 +27,13 @@
 				                    break; // Keyword found, exit the loop
 				                }
 				            }
+						} else if (empresaFiltro != null) {
+							
+								if (ols.get(i).getDataEmpresa().equals(empresaFiltro)) {
+									empresaFound = true;
+								}
 						}
-						if (keywordFiltro == null || keywordFound) {	
+						if ((keywordFiltro == null && empresaFiltro == null) || (keywordFound || empresaFound)) {	
 		%>
 		<div class="card mb-3" style="max-width: 650px;">
 			<div class="row no-gutters">
